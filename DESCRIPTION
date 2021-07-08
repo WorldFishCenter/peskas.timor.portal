@@ -5,10 +5,6 @@ Authors@R: person('Fernando', 'Cagua', email = 'f.cagua@cgiar.org', role = c('cr
 Description: A shiny-app to display the data and insights for small scale fisheries reporting in East-Timor
 License: Apache License (>= 2)
 Imports: 
-    config (>= 0.3.1),
-    golem (>= 0.3.1),
-    pkgload,
-    processx,
     shiny (>= 1.6.0)
 Encoding: UTF-8
 LazyData: true
