@@ -1,0 +1,50 @@
+{
+    "reuse_sessions_for_project_links": true,
+    "load_workspace": false,
+    "always_save_history": false,
+    "highlight_selected_line": true,
+    "show_invisibles": true,
+    "show_indent_guides": true,
+    "scroll_past_end_of_document": true,
+    "highlight_r_function_calls": true,
+    "auto_append_newline": true,
+    "strip_trailing_whitespace": true,
+    "check_arguments_to_r_function_calls": true,
+    "check_unexpected_assignment_in_function_call": true,
+    "warn_variable_defined_but_not_used": true,
+    "style_diagnostics": true,
+    "font_size_points": 11,
+    "editor_theme": "Idle Fingers",
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "History",
+            "Connections",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Environment",
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Build",
+            "Viewer"
+        ],
+        "console_left_on_top": false,
+        "console_right_on_top": true
+    },
+    "rmd_chunk_output_inline": false,
+    "rmd_viewer_type": "pane",
+    "latex_preview_on_cursor_idle": "inline_only",
+    "knit_working_dir": "project",
+    "spelling_dictionary_language": "en_AU",
+    "posix_terminal_shell": "bash"
+}
