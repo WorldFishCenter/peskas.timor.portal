@@ -50,4 +50,4 @@ jobs:
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
 
       - name: Push to shinyapps.io
-        run: Rscript -e "rsconnect::deployApp(appDir = '.', appName = 'peskas', appTitle = 'peskas')"
+        run: Rscript -e "rsconnect::deployApp(appName = 'peskas', appTitle = 'peskas')"

@@ -10,10 +10,10 @@ tabler_page <- function(..., title = ""){
       ),
       tags$meta(charset = "utf-8"),
       tags$title(title),
-      tags$link(
-        rel = "stylesheet",
-        href = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/css/tabler.min.css"
-      ),
+      # tags$link(
+      #   rel = "stylesheet",
+      #   href = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/css/tabler.min.css"
+      # ),
       tags$link(
         rel = "stylesheet",
         href = "www/custom.css"
@@ -22,13 +22,13 @@ tabler_page <- function(..., title = ""){
     tags$div(
       class = "wrapper",
       ...
-    ),
-    tags$script(
-      src = "https://cdn.jsdelivr.net/npm/apexcharts@3.26.1"
-    ),
-    tags$script(
-      src = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js"
-    )
+    )#,
+    # tags$script(
+    #   src = "https://cdn.jsdelivr.net/npm/apexcharts@3.26.1"
+    # ),
+    # tags$script(
+    #   src = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js"
+    # )
   )
 
   do.call(tagList, args)
