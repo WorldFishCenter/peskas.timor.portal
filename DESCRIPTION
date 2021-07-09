@@ -13,6 +13,6 @@ URL: https://github.com/WorldFishCenter/peskas.timor.portal
 BugReports: https://github.com/WorldFishCenter/peskas.timor.portal/issues
 Suggests: 
     spelling,
-    testthat (>= 3.0.0)
+    devtools (>= 2.4.2)
 Config/testthat/edition: 3
 Language: en-US
