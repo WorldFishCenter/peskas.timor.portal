@@ -58,7 +58,7 @@ tab_menu <- function(...){
 tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
 
   icon <- if (!is.null(icon_svg)) {
-    htmltools::tags$span(
+    tags$span(
       class = "nav-link-icon d-md-none d-lg-inline-block",
       icon_svg
     )
@@ -66,10 +66,10 @@ tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
     list()
   }
 
-  htmltools::tags$li(
+  tags$li(
     class = "nav-item",
     role = "presentation",
-    htmltools::tags$a(
+    tags$a(
       class = "nav-link",
       id = paste0(id, "-menu"),
       `data-bs-toggle` = "tab",
@@ -77,7 +77,7 @@ tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
       `aria-controls` = id,
       href = paste0("#", id),
       icon,
-      htmltools::tags$span(
+      tags$span(
         class = "nav-link-title",
         label
       )
@@ -127,24 +127,24 @@ tab_panel <- function(..., id = ""){
 
 
 tabler_nav_dropdown <- function(..., label, icon = NULL){
-  htmltools::tags$li(
+  tags$li(
     class = "nav-item dropdown",
-    htmltools::tags$a(
+    tags$a(
       class = "nav-link dropdown-toggle",
       `data-bs-toggle` = "dropdown",
       href = "#",
       role = "button",
       `aria-expanded` = "false",
-      htmltools::tags$span(
+      tags$span(
         class = "nav-link-icon d-md-none d-lg-inline-block",
         icon
       ),
-      htmltools::tags$span(
+      tags$span(
         class = "nav-link-title",
         label
       )
     ),
-    htmltools::tags$div(
+    tags$div(
       class = "dropdown-menu",
       ...
     )
@@ -153,7 +153,7 @@ tabler_nav_dropdown <- function(..., label, icon = NULL){
 
 
 dropdown_item <- function(label, nav_target){
-  htmltools::tags$a(
+  tags$a(
     class = "dropdown-item",
     `data-bs-toggle` = "tab",
     `data-bs-target` =  paste0("#", nav_target),
