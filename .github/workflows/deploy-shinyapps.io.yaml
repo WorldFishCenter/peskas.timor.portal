@@ -38,6 +38,10 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
 
+      - name: Add rsconnect
+        shell: Rscript {0}
+        run: install.packages("rsconnect")
+
       - name: Set shinyapps.io account info
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
 
