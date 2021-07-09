@@ -1,0 +1,36 @@
+on:
+  branches:
+    - main
+    - master
+
+jobs:
+  deploy-shinyapps-io:
+    name: Deploy on shinyapps.io
+    runs-on: macos-10.15
+    env:
+      SHINYAPPS_TOKEN: ${{secrets.SHINYAPPS_TOKEN}}
+      SHINYAPPS_SECRET: ${{secrets.SHINYAPPS_SECRET}}
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.1.0'
+
+      # - name: Setup pandoc
+      #   uses: r-lib/actions/setup-pandoc@v1
+      #   with:
+      #       pandoc-version: '2.7.3'
+
+      - name: Install R-package dependencies
+        run: install.packages(c('shiny', 'rsconnect'))
+        shell: Rscript {0}
+
+      - name: Set shinyapps.io account info
+        run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
+
+      - name: Push to shinyapps.io
+        run: Rscript -e "rsconnect::deployApp(appDir = '.', appName = 'peskas', appTitle = 'peskas')"
