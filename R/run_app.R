@@ -21,4 +21,6 @@ run_app <- function(
       enableBookmarking = enableBookmarking,
       uiPattern = uiPattern
     )
+
+    runApp(app, ...)
 }
