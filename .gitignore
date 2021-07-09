@@ -4,3 +4,7 @@
 .Ruserdata
 
 /dev
+
+inst/app/www/tabler.min.css
+
+inst/app/www/tabler.min.js
