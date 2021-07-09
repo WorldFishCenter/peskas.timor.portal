@@ -4,7 +4,10 @@
   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
   <!-- badges: end -->
 
-A web portal displaying data and insights from small fisheries in East Timor 
+A web portal displaying data and insights from small fisheries in East Timor. 
+
+This app is structured as an R package and makes heavy use of the [golem](https://github.com/ThinkR-open/golem) framework to organise the package. 
+The user interface is heavily customised and relies on the open source dashboard template [tabler](https://tabler.io).
 
 ## Code of Conduct
   
