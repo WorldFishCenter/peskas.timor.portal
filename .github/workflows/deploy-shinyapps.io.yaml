@@ -45,7 +45,6 @@ jobs:
       - name: Remove unneded files
         run: |
           rm -r tests
-          rm -r renv
 
       - name: Set shinyapps.io account info
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
