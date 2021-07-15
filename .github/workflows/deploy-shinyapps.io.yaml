@@ -31,7 +31,7 @@ jobs:
 
       - name: Install packages
         shell: Rscript {0}
-        run: install.packages("shiny", "config", "golem", "pkgload", "processx")
+        run: install.packages(c("shiny", "config", "golem", "pkgload", "processx"))
 
       - name: Set shinyapps.io account info
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
