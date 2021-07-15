@@ -10,7 +10,8 @@ env:
 jobs:
   deploy-shinyapps-io:
     name: Deploy on shinyapps.io
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
+    container: rocker/verse:4.1.0
     env:
       SHINYAPPS_TOKEN: ${{secrets.SHINYAPPS_TOKEN}}
       SHINYAPPS_SECRET: ${{secrets.SHINYAPPS_SECRET}}
