@@ -24,30 +24,17 @@ jobs:
         with:
           r-version: '4.1.0'
 
-      - name: Cache packages
-        uses: actions/cache@v2
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v1
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
+            pandoc-version: '2.7.3'
 
-      - name: Restore packages
+      - name: Install packages
         shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
-
-      - name: Add rsconnect
-        shell: Rscript {0}
-        run: install.packages("rsconnect")
-
-      - name: Remove unneded files
-        run: |
-          rm -r tests
+        run: install.packages("shiny", "config", "golem", "pkgload", "processx")
 
       - name: Set shinyapps.io account info
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
 
       - name: Push to shinyapps.io
-        run: Rscript -e "rsconnect::deployApp(appName = 'peskas', appTitle = 'peskas')"
+        run: Rscript -e "rsconnect::deployApp(appName = 'peskas', appTitle = 'peskas', appFileManifest = 'appFileManifest')"
