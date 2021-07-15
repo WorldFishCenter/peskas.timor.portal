@@ -31,7 +31,7 @@ jobs:
       #       pandoc-version: '2.7.3'
 
       - name: Install packages
-        run: Rscript -e 'install.packages(c("shiny", "rsconnect", "config", "golem", "pkgload", "processx"))'
+        run: Rscript -e 'install.packages(c("shiny", "rsconnect", "config", "golem", "pkgload", "processx", "spelling"))'
 
       - name: Set shinyapps.io account info
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
