@@ -21,12 +21,12 @@ app_ui <- function(request) {
     tabset_panel(
       tab_panel(
         id = "home",
-        # page_header(pretitle = "Small scale fisheries", title = "Overview"),
+        page_heading(pretitle = "Small scale fisheries", title = "Overview"),
 
       ),
       tab_panel(
         id = "about",
-        # page_header(pretitle = "", title = "About")
+        page_heading(pretitle = "", title = "About")
       )
     )
   )
