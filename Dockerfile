@@ -10,7 +10,8 @@ RUN install2.r --error --skipinstalled \
     bslib \
     golem \
     shinyjs \
-    spelling
+    spelling \
+    apexcharter
 
 # Rstudio interface preferences
 COPY rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json
