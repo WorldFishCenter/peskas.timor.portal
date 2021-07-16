@@ -7,17 +7,6 @@
 #'
 #' @return a shiny tag
 #'
-#' @examples
-#' tagList(
-#'   tab_menu(
-#'     tab_menu_item("First item", "tab-1"),
-#'     tab_menu_item("Second item", "tab-2")
-#'   ),
-#'   tabset_panel(
-#'     tab_panel(id = "tab-1", tags$h1("Overview")),
-#'     tab_panel(id = "tab-2",tags$h1("Landings"))
-#'   )
-#' )
 tab_menu <- function(...){
   menu_items <- list(...)
 
@@ -52,7 +41,7 @@ tab_menu <- function(...){
 #'
 #' @param label Text to display
 #' @param id unique tab-name
-#' @param icon icon for the menu
+#' @param icon_svg icon for the menu
 #'
 #' @seealso tab_menu
 tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
