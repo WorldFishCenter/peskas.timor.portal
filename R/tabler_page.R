@@ -24,9 +24,6 @@ tabler_page <- function(..., title = ""){
       ...
     ),
     tags$script(
-      src = "https://cdn.jsdelivr.net/npm/apexcharts@3.26.1"
-    ),
-    tags$script(
       src = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js"
     )
   )

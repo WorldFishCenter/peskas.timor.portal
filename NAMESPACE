@@ -2,6 +2,7 @@
 
 export("%>%")
 export(run_app)
+import(apexcharter)
 import(shiny)
 importFrom(golem,activate_js)
 importFrom(golem,add_resource_path)

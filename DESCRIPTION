@@ -5,6 +5,7 @@ Authors@R: person('Fernando', 'Cagua', email = 'f.cagua@cgiar.org', role = c('cr
 Description: A web portal displaying data and insights from small fisheries in East Timor.
 License: Apache License (>= 2)
 Imports: 
+    apexcharter (>= 0.2.0),
     config (>= 0.3.1),
     golem (>= 0.3.1),
     magrittr,
