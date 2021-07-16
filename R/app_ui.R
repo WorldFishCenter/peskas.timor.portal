@@ -22,6 +22,38 @@ app_ui <- function(request) {
       tab_panel(
         id = "home",
         page_heading(pretitle = "Small scale fisheries", title = "Overview"),
+        page_cards(
+          summary_card(
+            heading = "1,200",
+            subheader = "Landing surveys",
+            top_right_element = tags$span("Last month", class = "text-muted"),
+            annotation = trend_annotation("10%", "up"),
+            in_body = tags$div(
+              class = "mt-3",
+              apexcharter::apexchartOutput("testchart1", height = "40px")),
+            card_class = "col-sm-12 col-md-4"
+          ),
+          summary_card(
+            heading = 15,
+            subheader = "Landing sites",
+            # top_right_element = tags$span("Last month", class = "text-muted"),
+            annotation = trend_annotation(),
+            off_body = tags$div(
+              class = "mt-0",
+              apexcharter::apexchartOutput("testchart2", height = "40px")),
+            card_class = "col-sm-12 col-md-4"
+          ),
+          summary_card(
+            heading = 184,
+            subheader = "Tracked boats",
+            # top_right_element = tags$span("Last month", class = "text-muted"),
+            annotation = trend_annotation("8%", "down"),
+            in_body = tags$div(
+              class = "mt-3",
+              apexcharter::apexchartOutput("testchart3", height = "40px")),
+            card_class = "col-sm-12 col-md-4"
+          )
+        )
 
       ),
       tab_panel(
