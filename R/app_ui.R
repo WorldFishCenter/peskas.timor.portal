@@ -15,8 +15,8 @@ app_ui <- function(request) {
       )
     ),
     tab_menu(
-      tab_menu_item("Home", "home"),
-      tab_menu_item("About", "about")
+      tab_menu_item("Home", "home", icon_home()),
+      tab_menu_item("About", "about", icon_info_circle())
     ),
     tabset_panel(
       tab_panel(
