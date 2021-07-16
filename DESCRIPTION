@@ -7,6 +7,7 @@ License: Apache License (>= 2)
 Imports: 
     config (>= 0.3.1),
     golem (>= 0.3.1),
+    magrittr,
     pkgload,
     shiny (>= 1.6.0)
 Encoding: UTF-8
