@@ -1,4 +1,5 @@
-summary_card <- function(heading = "Card heading",
+summary_card <- function(id = "",
+                         heading = "Card heading",
                          subheader = "Card subheader",
                          annotation = NULL,
                          top_right_element = NULL,
@@ -6,11 +7,12 @@ summary_card <- function(heading = "Card heading",
                          off_body = NULL,
                          card_class = "col-sm-6 col-lg-3"){
   tags$div(
+    id = id,
     class = card_class,
     tags$div(
       class = "card",
       tags$div(
-        class = "card-body",
+        class = "card-body pb-0",
         tags$div(
           class = "d-flex align-items-center",
           tags$div(
