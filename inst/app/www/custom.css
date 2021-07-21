@@ -24,3 +24,7 @@
 .navbar-brand {
     font-size: x-large;
 }
+
+.nav .nav-tabs {
+    border-bottom: none;
+}

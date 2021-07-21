@@ -4,7 +4,7 @@
 \alias{tabset_panel}
 \title{Create a tabset panel}
 \usage{
-tabset_panel(...)
+tabset_panel(..., menu_id = "")
 }
 \arguments{
 \item{...}{panels created with `tab_panel()`}

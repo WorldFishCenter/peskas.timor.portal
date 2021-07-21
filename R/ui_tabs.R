@@ -7,7 +7,7 @@
 #'
 #' @return a shiny tag
 #'
-tab_menu <- function(...){
+tab_menu <- function(..., id = ""){
   menu_items <- list(...)
 
   if (length(menu_items) >= 1) {
@@ -23,10 +23,11 @@ tab_menu <- function(...){
       tags$div(
         class = "navbar navbar-light",
         tags$div(
-          class = "container-xl",
+          class = "container-xl tabbable",
           tags$ul(
-            class = "nav navbar-nav",
-            id = "mainNav",
+            class = "nav navbar-nav shiny-tab-input nav-tabs",
+            id = id,
+            `data-tabsetid` = id,
             role = "tablist",
             menu_items
           )
@@ -64,6 +65,8 @@ tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
       `data-bs-toggle` = "tab",
       `data-bs-target` = paste0("#", id),
       `aria-controls` = id,
+      `data-value` = id,
+      `data-toggle` = "tab",
       href = paste0("#", id),
       icon,
       tags$span(
@@ -82,7 +85,7 @@ tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
 #'
 #' @return a shiny.tag object
 #' @seealso tab_menu
-tabset_panel <- function(...){
+tabset_panel <- function(..., menu_id = ""){
 
   panels <- list(...)
   if (length(panels) >= 1) {
@@ -91,6 +94,7 @@ tabset_panel <- function(...){
 
   tags$div(
     class = "tab-content page-wrapper",
+    `data-tabsetid` = menu_id,
     panels
   )
 }
@@ -108,6 +112,7 @@ tab_panel <- function(..., id = ""){
     class = "tab-pane fade",
     id = id,
     role = "tabpanel",
+    `data-value` = id,
     `aria-labelled-by` = paste0(id, "-menu"),
     ...
   )

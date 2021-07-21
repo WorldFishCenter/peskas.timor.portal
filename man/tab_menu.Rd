@@ -4,7 +4,7 @@
 \alias{tab_menu}
 \title{Create a navigation menu}
 \usage{
-tab_menu(...)
+tab_menu(..., id = "")
 }
 \arguments{
 \item{...}{Navigation menu items created with `navigation_menu_item()`}
