@@ -1,0 +1,6 @@
+n_landings:
+  short_name: "Surveyed landings"
+  description: "The number of landings that were"
+n_tracks:
+  short_name: "Tracked trips"
+  description: "Number of trips tracked by VPS boats installed"
