@@ -25,7 +25,7 @@ tab_menu <- function(..., id = ""){
         tags$div(
           class = "container-xl tabbable",
           tags$ul(
-            class = "nav navbar-nav shiny-tab-input nav-tabs",
+            class = "nav navbar-nav shiny-tab-input",
             id = id,
             `data-tabsetid` = id,
             role = "tablist",
