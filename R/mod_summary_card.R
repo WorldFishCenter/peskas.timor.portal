@@ -24,7 +24,7 @@ mod_summary_card_ui <- function(id, apex_height = "50px", ...){
 #'
 #' @noRd
 #' @import data.table
-mod_summary_card_server <- function(id, var, period = "month", n = 13, type = "area", sparkline.enabled = T){
+mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = "area", sparkline.enabled = T){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
