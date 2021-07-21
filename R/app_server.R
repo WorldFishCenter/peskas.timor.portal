@@ -6,11 +6,8 @@
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic
-
-  output$testchart1 <- renderApexchart(dummy_chart())
-  output$testchart2 <- renderApexchart(dummy_chart("area"))
-  output$testchart3 <- renderApexchart(dummy_chart("line"))
-
+  mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13)
+  mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13)
 }
 
 #' Dummy apex chart
@@ -32,4 +29,5 @@ dummy_chart <- function(type = "bar", sparkline.enabled = TRUE){
     ) %>%
     ax_colors("#206bc4") %>%
     ax_stroke(width = 1.5)
+
 }
