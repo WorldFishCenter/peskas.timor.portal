@@ -50,7 +50,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
     output$c <- apexcharter::renderApexchart({
 
       d <- card_data()
-      print(d)
+
       a <- apexcharter::apexchart() %>%
         ax_chart(
           type = type,
