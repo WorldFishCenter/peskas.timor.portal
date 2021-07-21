@@ -9,6 +9,7 @@ Imports:
     config (>= 0.3.1),
     golem (>= 0.3.1),
     magrittr,
+    data.table,
     pkgload,
     shiny (>= 1.6.0)
 Encoding: UTF-8
@@ -20,3 +21,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Language: en-US
+Depends: 
+    R (>= 2.10)
