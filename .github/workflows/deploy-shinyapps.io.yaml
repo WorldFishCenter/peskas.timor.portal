@@ -23,7 +23,7 @@ jobs:
       - name: Install packages
         run: |
           Rscript -e 'install.packages(c("devtools"))'
-          Rscript -e 'devtools::install_deps()'
+          Rscript -e 'devtools::install_deps(dependencies = TRUE, update = "never")'
 
       - name: Update data
         run: |
