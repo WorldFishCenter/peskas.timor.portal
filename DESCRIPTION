@@ -7,15 +7,19 @@ License: Apache License (>= 2)
 Imports: 
     apexcharter (>= 0.2.0),
     config (>= 0.3.1),
+    data.table,
     golem (>= 0.3.1),
     magrittr (>= 2.0.1),
-    data.table,
     pkgload,
     shiny (>= 1.6.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Suggests: 
+    dplyr, 
+    tidyr,
+    googleAuthR (>= 1.4.0),
+    googleCloudStorageR (>= 0.6.0),
     spelling,
     processx,
     testthat (>= 3.0.0)

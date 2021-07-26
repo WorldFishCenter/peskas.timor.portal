@@ -2,7 +2,18 @@ default:
   golem_name: peskas.timor.portal
   golem_version: 0.0.0.9000
   app_prod: no
+  storage:
+    google:
+      key: gcs
+      options:
+        project: peskas
+        bucket: public-timor-dev
+        service_account_key: !expr Sys.getenv('GCP_SA_KEY')
 production:
   app_prod: yes
 dev:
   golem_wd: !expr here::here()
+  storage:
+    google:
+      options:
+        service_account_key: !expr readLines("auth/gcp-sa-peskas_ingestion-key.json")
