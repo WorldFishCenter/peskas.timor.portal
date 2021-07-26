@@ -8,12 +8,13 @@ default:
       options:
         project: peskas
         bucket: public-timor-dev
-        service_account_key: !expr Sys.getenv('GCP_SA_KEY')
+        service_account_key: !expr readLines("auth/gcp-sa-peskas_ingestion-key.json")
 production:
   app_prod: yes
-dev:
-  golem_wd: !expr here::here()
   storage:
     google:
       options:
-        service_account_key: !expr readLines("auth/gcp-sa-peskas_ingestion-key.json")
+        service_account_key: !expr Sys.getenv('GCP_SA_KEY')
+dev:
+  golem_wd: !expr here::here()
+

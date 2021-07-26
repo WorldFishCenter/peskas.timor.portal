@@ -6,6 +6,8 @@ on:
 
 env:
   RENV_PATHS_ROOT: ~/.local/share/renv
+  R_CONFIG_ACTIVE: production
+  GCP_SA_KEY: ${{ secrets.PESKAS_DATAINGESTION_GCS_KEY }}
 
 jobs:
   deploy-shinyapps-io:
