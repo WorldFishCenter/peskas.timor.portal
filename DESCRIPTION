@@ -8,7 +8,7 @@ Imports:
     apexcharter (>= 0.2.0),
     config (>= 0.3.1),
     golem (>= 0.3.1),
-    magrittr,
+    magrittr (>= 2.0.1),
     data.table,
     pkgload,
     shiny (>= 1.6.0)
