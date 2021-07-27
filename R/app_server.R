@@ -8,6 +8,7 @@ app_server <- function( input, output, session ) {
   # Your application server logic
   mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13)
   mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13)
+  mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13)
 }
 
 #' Dummy apex chart

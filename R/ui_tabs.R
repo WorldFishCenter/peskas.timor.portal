@@ -157,3 +157,56 @@ dropdown_item <- function(label, nav_target){
     label
   )
 }
+
+footer_panel <- function(...) {
+  tags$footer(
+    class = "footer footer-transparent d-print-none",
+    tags$div(
+      class = "container",
+      tags$div(
+        class = "row text-center align-items-center flex-row-reverse",
+        tags$div(
+          class = "col-lg-auto ms-lg-auto",
+          tags$ul(
+            class = "list-inline list-inline-dots mb-0",
+            tags$li(
+              class = "list-inline-item",
+              tags$a(
+                href = "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760",
+                class = "link-secondary",
+                "The project"
+              )
+            ),
+            tags$li(
+              class = "list-inline-item",
+              tags$a(
+                href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md",
+                class = "link-secondary",
+                "License"
+              )
+            ),
+            tags$li(
+              class = "list-inline-item",
+              tags$a(
+                href = "https://github.com/WorldFishCenter/peskas.timor.portal",
+                target = "_blank",
+                class = "link-secondary",
+                "Source code"
+              )
+            )
+          ),
+          tags$div(
+            class = "col-12 col-lg-auto mt-3 mt-lg-0",
+            tags$ul(
+              class = "list-inline list-inline-dots mb-0",
+              tags$li(
+                class = "list-inline-item",
+                "Copyright © 2021 Peskaas. All rights reserved."
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+}

@@ -26,13 +26,15 @@ app_ui <- function(request) {
         page_heading(pretitle = "Small scale fisheries", title = "Overview"),
         page_cards(
           mod_summary_card_ui(id = "landings-card"),
-          mod_summary_card_ui(id = "tracks-card")
+          mod_summary_card_ui(id = "tracks-card"),
+          mod_summary_card_ui(id = "matched-card")
         )
       ),
       tab_panel(
         id = "about",
         page_heading(pretitle = "", title = "About")
-      )
+      ),
+      footer_panel()
     )
   )
 }
