@@ -33,9 +33,9 @@ app_ui <- function(request) {
       tab_panel(
         id = "about",
         page_heading(pretitle = "", title = "About")
-      ),
-      footer_panel()
-    )
+      )
+    ),
+    footer_panel()
   )
 }
 
