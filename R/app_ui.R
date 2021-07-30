@@ -35,7 +35,26 @@ app_ui <- function(request) {
         page_heading(pretitle = "", title = "About")
       )
     ),
-    footer_panel()
+    footer_panel(
+      left_side_elements = tags$li(
+        class = "list-inline-item",
+        "Copyright © 2021 Peskaas. All rights reserved."
+      ),
+      right_side_elements = tagList(
+        inline_li_link(
+          content = "The project",
+          href = "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760"
+        ),
+        inline_li_link(
+          content = "Licence",
+          href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md"
+        ),
+        inline_li_link(
+          content = "Source code",
+          href = "https://github.com/WorldFishCenter/peskas.timor.portal"
+        )
+      )
+    )
   )
 }
 
