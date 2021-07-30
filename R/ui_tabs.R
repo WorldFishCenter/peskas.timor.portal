@@ -194,15 +194,15 @@ footer_panel <- function(...) {
                 "Source code"
               )
             )
-          ),
-          tags$div(
-            class = "col-12 col-lg-auto mt-3 mt-lg-0",
-            tags$ul(
-              class = "list-inline list-inline-dots mb-0",
-              tags$li(
-                class = "list-inline-item",
-                "Copyright © 2021 Peskaas. All rights reserved."
-              )
+          )
+        ),
+        tags$div(
+          class = "col-12 col-lg-auto mt-3 mt-lg-0",
+          tags$ul(
+            class = "list-inline list-inline-dots mb-0",
+            tags$li(
+              class = "list-inline-item",
+              "Copyright © 2021 Peskaas. All rights reserved."
             )
           )
         )
