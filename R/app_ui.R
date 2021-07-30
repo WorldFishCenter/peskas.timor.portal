@@ -38,7 +38,7 @@ app_ui <- function(request) {
     footer_panel(
       left_side_elements = tags$li(
         class = "list-inline-item",
-        "Copyright © 2021 Peskaas. All rights reserved."
+        "Copyright © 2021 Peskas. All rights reserved."
       ),
       right_side_elements = tagList(
         inline_li_link(
