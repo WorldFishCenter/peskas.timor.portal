@@ -18,6 +18,6 @@ file.remove(aggregated_rds)
 aggregated <- lapply(aggregated, data.table::as.data.table)
 aggregated$day <- aggregated$day[, day := format(date_bin_start, format = "%d %b %y")]
 aggregated$week <- aggregated$week[, week := format(date_bin_start, format = "%d %b %y")]
-aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")]
+aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")][, year := format(date_bin_start, format = "%Y")]
 aggregated$year <- aggregated$year[, year := format(date_bin_start, format = "%Y")]
 usethis::use_data(aggregated, overwrite = TRUE)
