@@ -16,6 +16,7 @@ app_ui <- function(request) {
     ),
     tab_menu(
       tab_menu_item("Home", "home", icon_home()),
+      tab_menu_item("Revenue", "revenue", icon_currency_dollar()),
       tab_menu_item("About", "about", icon_info_circle()),
       id = "main_tabset"
     ),
@@ -23,11 +24,24 @@ app_ui <- function(request) {
       menu_id = "main_tabset",
       tab_panel(
         id = "home",
-        page_heading(pretitle = "Small scale fisheries", title = "Overview"),
+        page_heading(pretitle = "Small scale fisheries", title = "National overview"),
         page_cards(
-          mod_summary_card_ui(id = "landings-card"),
-          mod_summary_card_ui(id = "tracks-card"),
-          mod_summary_card_ui(id = "matched-card")
+          mod_summary_card_ui(id = "revenue-summary-card", card_class = "col-md-3"),
+          mod_summary_card_ui(id = "landings-card", card_class = "col-md-3"),
+          mod_summary_card_ui(id = "tracks-card", card_class = "col-md-3"),
+          mod_summary_card_ui(id = "matched-card", card_class = "col-md-3"),
+          # actionLink("link_to_tabpanel_b", "Link to panel B")
+        )
+      ),
+      tab_panel(
+        id = "revenue",
+        page_heading(pretitle = "Small scale fisheries", title = "Revenue"),
+        page_cards(
+          mod_highlight_card_ui(id = "revenue-card",
+                                card_class = "col-12"),
+          mod_summary_table_ui(id = "revenue-table",
+                               heading = "Summary",
+                               card_class = "col-12")
         )
       ),
       tab_panel(

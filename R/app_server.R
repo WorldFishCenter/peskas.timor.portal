@@ -6,9 +6,18 @@
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic
+  mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13)
   mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13)
   mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13)
   mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13)
+  mod_highlight_card_server(
+    id = "revenue-card", var = "revenue", period = "month", n = 25,
+    y_formatter = apexcharter::format_num("$,.2r", locale = "en-US"))
+  mod_summary_table_server(id = "revenue-table", var = "revenue")
+
+  # observeEvent(input$link_to_tabpanel_b, {
+  #   updateTabsetPanel(session, "main_tabset", "revenue")
+  # })
 }
 
 #' Dummy apex chart
