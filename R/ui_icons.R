@@ -123,3 +123,25 @@ icon_info_circle <- function(size = 24){
     tags$polyline(points = "11 12 12 12 12 16 13 16")
   )
 }
+
+icon_currency_dollar <- function(size = 24){
+  tags$svg(
+    xmlns = "http://www.w3.org/2000/svg",
+    class = "icon icon-tabler icon-tabler-currency-dollar",
+    width = size,
+    height = size,
+    viewbox = "0 0 24 24",
+    `stroke-width` = "1.5",
+    stroke = "currentColor",
+    fill = "none",
+    `stroke-linecap` = "round",
+    `stroke-linejoin` = "round",
+    tags$path(
+      stroke = "none",
+      d = "M0 0h24v24H0z",
+      fill = "none"
+    ),
+    tags$path(d = "M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"),
+    tags$path(d = "M12 3v3m0 12v3")
+  )
+}
