@@ -7,3 +7,6 @@ n_tracks:
 n_matched:
   short_name: "Matched tracks"
   description: "Number of matched tracks"
+revenue:
+  short_name: "Estimated revenue"
+  description: "Estimated total revenue from landings"
