@@ -32,7 +32,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
 
     output$h <- renderText({
       d <- card_data()
-      formatC(d$this_period_val, big.mark = ",")
+      d3.format::d3.format(d$format_specifier)(d$this_period_val)
     })
 
     output$t <- renderUI({
@@ -50,6 +50,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
     output$c <- apexcharter::renderApexchart({
 
       d <- card_data()
+      y_formatter = apexcharter::format_num(d$format_specifier)
 
       a <- apexcharter::apexchart() %>%
         ax_chart(
@@ -62,7 +63,12 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
           list(name = d$series_name,
                data = d$series_y)) %>%
         apexcharter::ax_xaxis(
-          categories = d$x_categories) %>%
+          categories = d$x_categories)%>%
+        apexcharter::ax_yaxis(
+          labels = list(formatter = y_formatter)) %>%
+        apexcharter::ax_tooltip(
+          x = list(format = "MMM yyyy"),
+          y = list(formatter = y_formatter)) %>%
         apexcharter::ax_plotOptions(
           bar = list(columnWidth = "50%")) %>%
         apexcharter::ax_colors("#206bc4", "#aaaaaa")
@@ -112,7 +118,8 @@ get_summary_info <- function(var, period = "month", n = NULL){
        series_description = var_dictionary[[var]]$description,
        this_period_val = data[nrow(data) - 1 , ..var][[1]],
        trend_direction = trend$direction,
-       trend_magnitude = trend$magnitude)
+       trend_magnitude = trend$magnitude,
+       format_specifier = specify_format(var))
 }
 
 get_trend <- function(this, previous){
@@ -128,6 +135,13 @@ get_trend <- function(this, previous){
   }
   list(magnitude = paste0(percentage_diff, "%"),
        direction = trend_direction)
+}
+
+
+specify_format <- function(var){
+  format_specifier <- var_dictionary[[var]]$format
+  if (is.null(format_specifier)) format_specifier <- ""
+  format_specifier
 }
 
 ## To be copied in the UI
