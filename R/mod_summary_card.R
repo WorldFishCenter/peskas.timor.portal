@@ -105,6 +105,7 @@ get_summary_info <- function(var, period = "month", n = NULL){
 
 
   list(x_categories = data[, ..period, ][[1]],
+       x_datetine = data[ , date_bin_start, ],
        series_y = data[, ..var][[1]],
        series_name = var_dictionary[[var]]$short_name,
        series_heading = heading,
