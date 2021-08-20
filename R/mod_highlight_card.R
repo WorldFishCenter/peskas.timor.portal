@@ -61,7 +61,7 @@ mod_highlight_card_server <- function(id, var,
                data = d$series_y)) %>%
         apexcharter::ax_xaxis(
           type = "datetime",
-          categories = d$x_categories,
+          categories = d$x_datetime,
           labels =  list(rotate = 0,
                          datetimeUTC = FALSE,
                          padding = 0),
