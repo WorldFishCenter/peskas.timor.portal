@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_summary_card_ui <- function(id, apex_height = "50px", ...){
+mod_summary_card_ui <- function(id, apex_height = "4rem", ...){
   ns <- NS(id)
   summary_card(
     id = id,
@@ -84,7 +84,7 @@ mod_summary_card_app <- function(){
     mod_summary_card_ui(id = "i")
   )
   server <- function(input, output, session) {
-    mod_summary_card_server("i", "n_landings")
+    mod_summary_card_server("i", "n_matched")
   }
   shinyApp(ui, server)
 }
