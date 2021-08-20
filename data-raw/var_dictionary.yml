@@ -1,12 +1,17 @@
 n_landings:
   short_name: "Surveyed landings"
   description: "The number of landings that were"
+  format: ","
 n_tracks:
   short_name: "Tracked trips"
   description: "Number of trips tracked by VPS boats installed"
+  format: ","
 n_matched:
   short_name: "Matched tracks"
   description: "Number of matched tracks"
+  format: ","
 revenue:
   short_name: "Estimated revenue"
   description: "Estimated total revenue from landings"
+  info: "The revenue is estimated by multiplying the average revenue of landing by the average number of landings within a period. Values are rounded to two significant digits."
+  format: "$,.2r"

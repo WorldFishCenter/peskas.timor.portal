@@ -7,6 +7,7 @@ License: Apache License (>= 2)
 Imports: 
     apexcharter (>= 0.2.0),
     config (>= 0.3.1),
+    d3.format,
     data.table,
     golem (>= 0.3.1),
     magrittr (>= 2.0.1),
@@ -25,5 +26,6 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Language: en-US
+Remotes: dreamRs/d3.format
 Depends: 
     R (>= 2.10)
