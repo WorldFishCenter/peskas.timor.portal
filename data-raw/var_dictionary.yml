@@ -18,3 +18,10 @@ revenue:
   description: "Estimated total revenue from landings"
   info: "The revenue is estimated by multiplying the average revenue of landing by the average number of landings within a period. Values are rounded to two significant digits."
   format: "$,.2r"
+landing_revenue:
+  short_name: "Average revenue per landing"
+  format: "$,.2r"
+n_landings_per_boat:
+  short_name: "Average landings per boat"
+  format: ",.3r"
+
