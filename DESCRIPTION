@@ -26,6 +26,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Language: en-US
-Remotes: dreamRs/d3.format
+Remotes: 
+    github::dreamRs/d3.format
 Depends: 
     R (>= 2.10)
