@@ -22,9 +22,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Update data
-      run: Rscript -e 'source("update_data.R")'
-
     - name: Setup Cloud SDK
       uses: google-github-actions/setup-gcloud@v0.2.0
       with:

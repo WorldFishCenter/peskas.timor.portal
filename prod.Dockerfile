@@ -28,6 +28,7 @@ RUN R -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
     ))'
 
+RUN Rscript update_data.R
 
 COPY shiny.config /etc/shiny-server/shiny-server.conf
 COPY app.R /srv/shiny-server/app.R
