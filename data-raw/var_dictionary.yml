@@ -6,6 +6,9 @@ n_tracks:
   short_name: "Tracked trips"
   description: "Number of trips tracked by VPS boats installed"
   format: ","
+n_boats:
+  short_name: "Number of boats"
+  format: ","
 n_matched:
   short_name: "Matched tracks"
   description: "Number of matched tracks"
