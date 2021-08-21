@@ -31,7 +31,7 @@ jobs:
       - name: Update data
         run: |
           Rscript -e 'install.packages(c("remotes"))'
-          Rscript -e 'remotes::install_cran(c("pkgload", "googleCloudStorageR", "data.table"), quick = TRUE)'
+          Rscript -e 'remotes::install_cran(c("config", "googleCloudStorageR", "data.table"), quick = TRUE)'
           Rscript -e 'source("update_data.R")'
 
       - name: Commit changes package data
