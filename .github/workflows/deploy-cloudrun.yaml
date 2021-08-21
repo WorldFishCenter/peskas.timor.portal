@@ -34,7 +34,7 @@ jobs:
 
     - name: Build and push API container
       run: |-
-        docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} -d prod.Dockerfile .
+        docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} -f prod.Dockerfile .
         docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }}
 
     - name: Deploy to Cloud Run
