@@ -8,4 +8,4 @@
 inst/app/www/tabler.min.css
 inst/app/www/tabler.min.js
 
-auth/gcp-sa-peskas_ingestion-key.json
+auth/**
