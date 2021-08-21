@@ -56,7 +56,7 @@ jobs:
       - name: Update data
         run: |
           Rscript -e 'install.packages(c("remotes"), repos = "https://packagemanager.rstudio.com/all/latest")'
-          Rscript -e 'remores::install_cran(c("pkgload", "googleCloudStorageR", "data.table"), quick = TRUE)'
+          Rscript -e 'remotes::install_cran(c("pkgload", "googleCloudStorageR", "data.table"), quick = TRUE)'
           Rscript -e 'source("update_data.R")'
 
       - name: Setup Cloud SDK
