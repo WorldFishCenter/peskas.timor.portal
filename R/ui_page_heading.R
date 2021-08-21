@@ -22,7 +22,7 @@ page_heading <- function(pretitle = "Page pretitle", title = "Page title", ...){
           tags$h2(
             class = "page-title",
             title
-          )
+          ),
         ),
         tags$div(
           class = "col-auto ms-auto d-print-none",

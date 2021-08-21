@@ -107,7 +107,7 @@ get_summary_info <- function(var, period = "month", n = NULL){
   previous_period_val = data[nrow(data) - 2 , ..var][[1]]
   trend <- get_trend(this_period_val, previous_period_val)
 
-  heading <- paste0(var_dictionary[[var]]$short_name, " (last ", period, ")")
+  heading <- paste0(var_dictionary[[var]]$short_name)
 
 
   list(x_categories = data[, ..period, ][[1]],

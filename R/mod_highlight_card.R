@@ -72,7 +72,7 @@ mod_highlight_card_server <- function(id, var,
           labels = list(padding = 4,
                         formatter = y_formatter)) %>%
         apexcharter::ax_tooltip(
-          x = list(format = "MMM yy"),
+          x = list(format = "MMM yyyy"),
           y = list(formatter = y_formatter)) %>%
         apexcharter::ax_grid(
           strokeDashArray = 4,
