@@ -37,11 +37,23 @@ app_ui <- function(request) {
         id = "revenue",
         page_heading(pretitle = "Small scale fisheries", title = "Revenue"),
         page_cards(
-          mod_highlight_card_ui(id = "revenue-card",
-                                card_class = "col-12"),
-          mod_summary_table_ui(id = "revenue-table",
-                               heading = "Summary",
-                               card_class = "col-12")
+          tags$div(
+            class = "col-md-8",
+            mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "22rem"),
+          ),
+          tags$div(
+            class = "col-md-4",
+            tags$div(
+              class = "row row-cards",
+              mod_summary_card_ui(id = "landing-revenue-card", card_class = "col-12"),
+              mod_summary_card_ui(id = "landing-per-boat-revenue-card", card_class = "col-12"),
+              mod_summary_card_ui(id = "n-boats-revenue-card", card_class = "col-12"),
+            )
+
+          ),
+
+          mod_summary_table_ui(id = "revenue-table", heading = "Summary", card_class = "col-12"),
+
         )
       ),
       tab_panel(
