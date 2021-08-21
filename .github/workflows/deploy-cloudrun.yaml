@@ -31,10 +31,10 @@ jobs:
       - name: Update data
         run: |
           Rscript -e 'install.packages(c("remotes"))'
-          Rscript -e 'remores::install_cran(c("pkgload", "googleCloudStorageR", "data.table"), quick = TRUE)'
+          Rscript -e 'remotes::install_cran(c("pkgload", "googleCloudStorageR", "data.table"), quick = TRUE)'
           Rscript -e 'source("update_data.R")'
 
-      - name: Commit changes to md report documents
+      - name: Commit changes package data
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: data/*
