@@ -8,21 +8,14 @@ on:
 
 name: Deploy Google Cloud Run
 
-env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  SERVICE: peskas-timor-shiny
-  REGION: asia-east1
-  CONTAINER_REGISTRY: asia.gcr.io
-
-
 jobs:
   update-data:
     name: Update dashboard data
     runs-on: ubuntu-latest
     container: rocker/verse:4.1.0
     env:
-      SHINYAPPS_TOKEN: ${{secrets.SHINYAPPS_TOKEN}}
-      SHINYAPPS_SECRET: ${{secrets.SHINYAPPS_SECRET}}
+      R_CONFIG_ACTIVE: production
+      GCP_SA_KEY: ${{ secrets.PESKAS_DATAINGESTION_GCS_KEY }}
     steps:
 
       - name: Checkout repository
@@ -43,6 +36,11 @@ jobs:
     name: Deploy shiny app
     needs: update-data
     runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      SERVICE: peskas-timor-shiny
+      REGION: asia-east1
+      CONTAINER_REGISTRY: asia.gcr.io
     steps:
 
       - name: Checkout
