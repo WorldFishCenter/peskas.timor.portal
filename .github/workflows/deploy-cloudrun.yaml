@@ -83,5 +83,5 @@ jobs:
           region: ${{ env.REGION }}
           flags: "--cpu=1 --memory=1Gi --concurrency=80 --max-instances=1"
 
-    - name: Show Output
-      run: echo ${{ steps.deploy.outputs.url }}
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
