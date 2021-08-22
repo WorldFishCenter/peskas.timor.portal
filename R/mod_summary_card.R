@@ -28,124 +28,171 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    card_data <- reactiveVal(get_summary_info(var, period, n))
+    card_data <- reactiveVal(get_series_info(var, period, n))
 
     output$h <- renderText({
       d <- card_data()
-      d3.format::d3.format(d$format_specifier)(d$this_period_val)
+      d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val)
     })
 
     output$t <- renderUI({
       d <- card_data()
-      trend_annotation(magnitude = d$trend_magnitude,
-                       direction = d$trend_direction)
+      trend_annotation(magnitude = d$series[[1]]$trend_magnitude,
+                       direction = d$series[[1]]$trend_direction)
     })
 
     output$s <- renderText({
       d <- card_data()
-      d$series_heading
+      d$series[[1]]$series_heading
 
     })
 
     output$c <- apexcharter::renderApexchart({
 
       d <- card_data()
-      y_formatter = apexcharter::format_num(d$format_specifier)
+      # We use the format of the first series overall
+      y_formatter = apexcharter::format_num(d$series[[1]]$series_format)
 
-      a <- apexcharter::apexchart() %>%
-        ax_chart(
-          type = type,
-          toolbar = list(show = FALSE),
-          sparkline = list(enabled = sparkline.enabled),
-          animations = list(enabled = FALSE),
-          stacked = FALSE) %>%
-        apexcharter::ax_series(
-          list(name = d$series_name,
-               data = d$series_y)) %>%
-        apexcharter::ax_xaxis(
-          categories = d$x_categories)%>%
-        apexcharter::ax_yaxis(
-          labels = list(formatter = y_formatter)) %>%
-        apexcharter::ax_tooltip(
-          x = list(format = "MMM yyyy"),
-          y = list(formatter = y_formatter)) %>%
-        apexcharter::ax_plotOptions(
-          bar = list(columnWidth = "50%")) %>%
-        apexcharter::ax_colors("#206bc4", "#aaaaaa")
+      series <- lapply(d$series, function(x) {
+        list(
+          name = x$series_name,
+          data = x$series_value
+        )
+      })
 
-      if (type != "bar") {
-        a <- a %>%
-        apexcharter::ax_stroke(curve = "smooth",
-                               width = "1.5")
-      }
-      a
+      plot_timeseries(
+        x_categories = d$x_datetime,
+        series = series[[1]],
+        y_formatter = y_formatter,
+        type = type,
+        sparkline = sparkline.enabled)
     })
-
 
   })
 }
 
 mod_summary_card_app <- function(){
   ui <- tabler_page(
-    mod_summary_card_ui(id = "i")
+    mod_summary_card_ui(id = "i", apex_height = "100px")
   )
   server <- function(input, output, session) {
-    mod_summary_card_server("i", "n_matched")
+    mod_summary_card_server("i", "n_matched", n = 13)
   }
   shinyApp(ui, server)
 }
 
-
-#' @import data.table
-get_summary_info <- function(var, period = "month", n = NULL){
-  data <- aggregated[[period]]
-  data <- data[order(date_bin_start),
-               ][!is.na(date_bin_start), ]
-  if (!is.null(n)) data <- data[(nrow(data) - n):nrow(data), ]
-
-  this_period_val = data[nrow(data) - 1 , ..var][[1]]
-  previous_period_val = data[nrow(data) - 2 , ..var][[1]]
-  trend <- get_trend(this_period_val, previous_period_val)
-
-  heading <- paste0(var_dictionary[[var]]$short_name)
-
-
-  list(x_categories = data[, ..period, ][[1]],
-       x_datetime = data[ , date_bin_start, ],
-       series_y = data[, ..var][[1]],
-       series_name = var_dictionary[[var]]$short_name,
-       series_heading = heading,
-       series_description = var_dictionary[[var]]$description,
-       this_period_val = data[nrow(data) - 1 , ..var][[1]],
-       trend_direction = trend$direction,
-       trend_magnitude = trend$magnitude,
-       format_specifier = specify_format(var))
+summary_card <- function(id = "",
+                         heading = "Card heading",
+                         subheader = "Card subheader",
+                         annotation = NULL,
+                         top_right_element = NULL,
+                         in_body = NULL,
+                         off_body = NULL,
+                         card_class = "col-sm-6 col-lg-3"){
+  tags$div(
+    id = id,
+    class = card_class,
+    tags$div(
+      class = "card",
+      tags$div(
+        class = "card-body pb-0",
+        tags$div(
+          class = "d-flex align-items-center",
+          tags$div(
+            class = "subheader",
+            subheader
+          ),
+          tags$div(
+            class = "ms-auto lh-1",
+            top_right_element
+          )
+        ),
+        tags$div(
+          class = "d-flex align-items-baseline",
+          tags$div(
+            class = "h1 mb-0",
+            heading
+          ),
+          tags$div(
+            class = "me-auto",
+            annotation
+          )
+        ),
+        tags$div(
+          class = "in-body",
+          in_body
+        )
+      ),
+      tags$div(
+        class = 'off-body',
+        off_body
+      )
+    )
+  )
 }
 
-get_trend <- function(this, previous){
-  percentage_diff <- round((this - previous) / previous * 100)
-  if (isTRUE(!is.na(percentage_diff)) & isTRUE(!is.null(percentage_diff))) {
-    if (sign(percentage_diff) == 0) {
-      trend_direction <- "none"
-    } else if (sign(percentage_diff) == 1) {
-      trend_direction <- "up"
-    } else if (sign(percentage_diff) == -1) {
-      trend_direction <- "down"
-    }
-  }
-  list(magnitude = paste0(percentage_diff, "%"),
-       direction = trend_direction)
+
+card_dropdown <- function(){
+  tags$div(
+    class = "dropdown",
+    tags$a(
+      class = "dropdown-toggle text-muted",
+      href = "#",
+      `data-bs-toggle` = "dropdown",
+      `aria-haspopup` = "true",
+      `aria-expanded` = "false",
+      "Last 7 days"
+    ),
+    tags$div(
+      class = "dropdown-menu dropdown-menu-end",
+      style = NA,
+      tags$a(
+        class = "dropdown-item active",
+        href = "#",
+        "Last 7 days"
+      ),
+      tags$a(
+        class = "dropdown-item",
+        href = "#",
+        "Last 30 days"
+      ),
+      tags$a(
+        class = "dropdown-item",
+        href = "#",
+        "Last 3 months"
+      )
+    )
+  )
 }
 
-
-specify_format <- function(var){
-  format_specifier <- var_dictionary[[var]]$format
-  if (is.null(format_specifier)) format_specifier <- ""
-  format_specifier
+unit_annotation <- function(unit = NULL){
+  div(
+    class = "text-muted mb-1",
+    unit
+  )
 }
 
-## To be copied in the UI
-# mod_summary_card_ui("summary_card_ui_1")
+trend_annotation <- function(magnitude = "0%", direction = c("none", "up","down")){
 
-## To be copied in the server
-# mod_summary_card_server("summary_card_ui_1")
+  icon <- switch(
+    direction[1],
+    "none" = icon_trend_none(),
+    "up" = icon_trend_up(),
+    "down" = icon_trend_down(),
+    NULL
+  )
+
+  colour_class <- switch(
+    direction[1],
+    "none" = "text-yellow",
+    "up" = "text-green",
+    "down" = "text-red",
+    "text-muted"
+  )
+
+  tags$span(
+    class = paste(colour_class,"ms-2 d-inline-flex align-items-center lh-1"),
+    magnitude,
+    icon
+  )
+}
