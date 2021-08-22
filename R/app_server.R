@@ -13,14 +13,11 @@ app_server <- function( input, output, session ) {
   mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13)
 
   # Revenue tab
-  mod_highlight_card_server(
-    id = "revenue-card", var = "revenue", period = "month", n = 25,
-    y_formatter = apexcharter::format_num("$,.2r", locale = "en-US"))
+  mod_highlight_card_server(id = "revenue-card", var = "revenue", period = "month", n = 25)
   mod_summary_card_server(id = "landing-revenue-card", var = "landing_revenue", period = "month", n = 13)
   mod_summary_card_server(id = "landing-per-boat-revenue-card", var = "n_landings_per_boat", period = "month", n = 13)
   mod_summary_card_server(id = "n-boats-revenue-card", var = "n_boats", period = "month", n = 13)
-
-  mod_summary_table_server(id = "revenue-table", var = "revenue")
+  mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"))
 
   # observeEvent(input$link_to_tabpanel_b, {
   #   updateTabsetPanel(session, "main_tabset", "revenue")
