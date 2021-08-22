@@ -7,12 +7,12 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_highlight_card_ui <- function(id, apex_height = "20rem", ...){
+mod_highlight_card_ui <- function(id, heading = NULL, apex_height = "20rem", ...){
   ns <- NS(id)
   tagList(
     highlight_card(
       id = id,
-      heading = textOutput(ns("h"), inline = TRUE),
+      heading = heading,
       in_body = tags$div(
         class = "mt-0",
         apexcharter::apexchartOutput(ns("c"), height = apex_height)),
@@ -61,7 +61,7 @@ mod_highlight_card_server <- function(id, var,
 
 mod_highlight_card_app <- function(){
   ui <- tabler_page(
-    mod_highlight_card_ui(id = "i")
+    mod_highlight_card_ui(id = "i", heading = "Estimated national revenue")
   )
   server <- function(input, output, session) {
     mod_highlight_card_server("i", "revenue", type = "bar", n = 25, y_formatter = apexcharter::format_num("$,.2r", locale = "en-US"))
