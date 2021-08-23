@@ -63,7 +63,8 @@ app_ui <- function(request) {
     footer_panel(
       left_side_elements = tags$li(
         class = "list-inline-item",
-        "Copyright © 2021 Peskas. All rights reserved."
+        paste("Data last updated", format(peskas.timor.portal::data_last_updated, "%c")),
+
       ),
       right_side_elements = tagList(
         inline_li_link(
@@ -78,7 +79,8 @@ app_ui <- function(request) {
           content = "Source code",
           href = "https://github.com/WorldFishCenter/peskas.timor.portal"
         )
-      )
+      ),
+      bottom = "Copyright © 2021 Peskas. All rights reserved."
     ),
     # shinyjs::useShinyjs()
   )

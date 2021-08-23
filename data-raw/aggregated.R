@@ -212,3 +212,6 @@ aggregated$week <- aggregated$week[, week := format(date_bin_start, format = "%d
 aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")][, year := format(date_bin_start, format = "%Y")]
 aggregated$year <- aggregated$year[, year := format(date_bin_start, format = "%Y")]
 usethis::use_data(aggregated, overwrite = TRUE)
+
+data_last_updated <- strptime(strsplit(aggregated_rds, "_")[[1]][4], format = "%Y%m%d%H%M")
+usethis::use_data(data_last_updated, overwrite = TRUE)

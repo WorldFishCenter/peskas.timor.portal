@@ -1,5 +1,5 @@
 
-footer_panel <- function(right_side_elements = tagList(), left_side_elements = tagList()) {
+footer_panel <- function(right_side_elements = tagList(), left_side_elements = tagList(), bottom = "") {
   tags$footer(
     class = "footer footer-transparent d-print-none",
     tags$div(
@@ -20,7 +20,16 @@ footer_panel <- function(right_side_elements = tagList(), left_side_elements = t
             left_side_elements
           )
         )
-      )
+      ),
+      tags$div(
+        class = "row text-center align-items-center flex-row-reverse mt-3",
+        tags$div(
+          class = "col-lg",
+          tags$p(
+            bottom
+          )
+        )
+      ),
     )
   )
 }
