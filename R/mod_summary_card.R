@@ -7,14 +7,14 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_summary_card_ui <- function(id, div_class = "col-md-3", style = "min-height: 8rem"){
+mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 8rem"){
   ns <- NS(id)
 
   tags$div(
     class = div_class,
-    style = style,
     tags$div(
       class = "card",
+      style = card_style,
       # summary_card_content_placeholder(ns("placeholder")),
       uiOutput(ns("o"))
     ),
