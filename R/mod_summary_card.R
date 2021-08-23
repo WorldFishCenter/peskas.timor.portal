@@ -100,7 +100,7 @@ summary_card_content <- function(id = "",
           )
         ),
         tags$div(
-          class = "d-flex align-items-baseline",
+          class = "d-flex align-items-center",
           tags$div(
             class = "h1 mb-0",
             heading
