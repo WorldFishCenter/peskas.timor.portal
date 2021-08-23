@@ -1,10 +1,5 @@
 on:
-  push:
-    branches:
-      - main
-      - master
-  schedule:
-    - cron:  '0 1 * * *'
+
 
 env:
   RENV_PATHS_ROOT: ~/.local/share/renv
