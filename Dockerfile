@@ -19,7 +19,8 @@ RUN install2.r --error --skipinstalled \
     googleCloudStorageR
 
 RUN installGithub.r \
-    RinteRface/charpente
+    RinteRface/charpente \
+    dreamRs/d3.format
 
 # Rstudio interface preferences
 COPY rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json
