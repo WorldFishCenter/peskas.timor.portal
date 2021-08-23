@@ -56,7 +56,7 @@ jobs:
       - name: Authorize Docker push
         run: gcloud auth configure-docker
 
-      - name: Build and push API container
+      - name: Build and push app container
         run: |-
           docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} -f prod.Dockerfile .
           docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }}
