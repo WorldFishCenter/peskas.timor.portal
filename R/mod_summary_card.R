@@ -9,7 +9,16 @@
 #' @importFrom shiny NS tagList
 mod_summary_card_ui <- function(id, div_class = "col-md-3"){
   ns <- NS(id)
-    uiOutput(ns("o"), class = div_class)
+
+  tags$div(
+    class = div_class,
+    tags$div(
+      class = "card",
+      summary_card_content_placeholder(ns("placeholder")),
+      uiOutput(ns("o"))
+    ),
+
+  )
 }
 
 #' summary_card Server Functions
@@ -23,7 +32,6 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
     data <- reactive(get_series_info(var, period, n))
 
     output$o <- renderUI({
-
       d <- data()
 
       # We use the format of the first series overall
@@ -43,7 +51,9 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
           sparkline = sparkline.enabled)
       })
 
-      summary_card(
+      shinyjs::hideElement("placeholder")
+
+      summary_card_content(
         id = id,
         subheader = d$series[[1]]$series_heading,
         heading = d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val),
@@ -66,7 +76,7 @@ mod_summary_card_app <- function(){
   shinyApp(ui, server)
 }
 
-summary_card <- function(id = "",
+summary_card_content <- function(id = "",
                          heading = "Card heading",
                          subheader = "Card subheader",
                          annotation = NULL,
@@ -74,8 +84,7 @@ summary_card <- function(id = "",
                          in_body = NULL,
                          off_body = NULL,
                          card_class = ""){
-    tags$div(
-      class = "card",
+    tagList(
       tags$div(
         class = "card-body pb-0",
         tags$div(
@@ -112,6 +121,25 @@ summary_card <- function(id = "",
     )
 }
 
+
+summary_card_content_placeholder <- function(id = ""){
+  tags$div(
+    id = id,
+    class = "card-body",
+    tags$div(
+      class = "skeleton-heading"
+    ),
+    tags$div(
+      class = "skeleton-line"
+    ),
+    tags$div(
+      class = "skeleton-line"
+    ),
+    tags$div(
+      class = "skeleton-line"
+    ),
+  )
+}
 
 card_dropdown <- function(){
   tags$div(
