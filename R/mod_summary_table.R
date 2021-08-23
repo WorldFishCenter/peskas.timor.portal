@@ -113,17 +113,3 @@ table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NUL
   )
 }
 
-
-get_yearly_tables <- function(var, digits = 2){
-  period <- "month"
-  data <- aggregated[[period]]
-  data <- data[order(-date_bin_start),]
-  data <- data[!is.na(date_bin_start), ]
-  data <- data[, period := month][]
-  data <- data[, (var) := lapply(.SD, signif, digits = digits), .SDcols = var]
-  data <- split(data, by = "year")
-  data <- lapply(data, function(x) x[, c(..period, ..var)])
-  data <- lapply(data, function(x) x[complete.cases(x), ])
-  data
-
-}
