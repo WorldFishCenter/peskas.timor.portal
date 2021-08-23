@@ -24,7 +24,8 @@ tabler_page <- function(..., title = ""){
       ...
     ),
     tags$script(
-      src = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js"
+      src = "https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js",
+      defer = "defer"
     )
   )
 
