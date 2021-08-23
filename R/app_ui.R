@@ -5,85 +5,91 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  tabler_page(
-    title = "Peskas | East Timor",
-    header(
-      logo = peskas_logo(),
-      version_flex(
-        heading = "Managment Dashboard",
-        subheading = "East Timor (v0.0.12-alpha)"
-      )
-    ),
-    tab_menu(
-      tab_menu_item("Home", "home", icon_home()),
-      tab_menu_item("Revenue", "revenue", icon_currency_dollar()),
-      tab_menu_item("About", "about", icon_info_circle()),
-      id = "main_tabset"
-    ),
-    tabset_panel(
-      menu_id = "main_tabset",
-      tab_panel(
-        id = "home",
-        page_heading(pretitle = "Small scale fisheries report", title = "National overview - July 2021"),
-        page_cards(
-          mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
-          mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
-          mod_summary_card_ui(id = "tracks-card", div_class = "col-md-3"),
-          mod_summary_card_ui(id = "matched-card", div_class = "col-md-3"),
+  tagList(
+    apexchart_dep(),
+    tabler_page(
+      title = "Peskas | East Timor",
+      header(
+        logo = peskas_logo(),
+        version_flex(
+          heading = "Managment Dashboard",
+          subheading = "East Timor (v0.0.12-alpha)"
         )
       ),
-      tab_panel(
-        id = "revenue",
-        page_heading(pretitle = "Small scale fisheries", title = "Revenue"),
-        page_cards(
-          tags$div(
-            class = "col-md-9",
-            mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "23rem"),
-          ),
-          tags$div(
-            class = "col-md-3",
+      tab_menu(
+        tab_menu_item("Home", "home", icon_home()),
+        tab_menu_item("Revenue", "revenue", icon_currency_dollar()),
+        tab_menu_item("About", "about", icon_info_circle()),
+        id = "main_tabset"
+      ),
+      tabset_panel(
+        menu_id = "main_tabset",
+        tab_panel(
+          id = "home",
+          page_heading(pretitle = "Small scale fisheries report", title = "National overview - July 2021"),
+          page_cards(
+            mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
+            mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
+            mod_summary_card_ui(id = "tracks-card", div_class = "col-md-3"),
+            mod_summary_card_ui(id = "matched-card", div_class = "col-md-3"),
+          )
+        ),
+        tab_panel(
+          id = "revenue",
+          page_heading(pretitle = "Small scale fisheries", title = "Revenue"),
+          page_cards(
             tags$div(
-              class = "row row-cards",
-              mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12"),
-              mod_summary_card_ui(id = "landing-per-boat-revenue-card", div_class = "col-12"),
-              mod_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12"),
-            )
+              class = "col-md-9",
+              mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "23rem"),
+            ),
+            tags$div(
+              class = "col-md-3",
+              tags$div(
+                class = "row row-cards",
+                mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12"),
+                mod_summary_card_ui(id = "landing-per-boat-revenue-card", div_class = "col-12"),
+                mod_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12"),
+              )
 
+            ),
+
+            mod_summary_table_ui(id = "revenue-table", heading = "Summary", card_class = "col-12"),
+
+          )
+        ),
+        tab_panel(
+          id = "about",
+          page_heading(pretitle = "", title = "About")
+        )
+      ),
+      footer_panel(
+        left_side_elements = tags$li(
+          class = "list-inline-item",
+          paste("Data last updated", format(peskas.timor.portal::data_last_updated, "%c")),
+
+        ),
+        right_side_elements = tagList(
+          inline_li_link(
+            content = "The project",
+            href = "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760"
           ),
-
-          mod_summary_table_ui(id = "revenue-table", heading = "Summary", card_class = "col-12"),
-
-        )
-      ),
-      tab_panel(
-        id = "about",
-        page_heading(pretitle = "", title = "About")
-      )
-    ),
-    footer_panel(
-      left_side_elements = tags$li(
-        class = "list-inline-item",
-        paste("Data last updated", format(peskas.timor.portal::data_last_updated, "%c")),
-
-      ),
-      right_side_elements = tagList(
-        inline_li_link(
-          content = "The project",
-          href = "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760"
+          inline_li_link(
+            content = "Licence",
+            href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md"
+          ),
+          inline_li_link(
+            content = "Source code",
+            href = "https://github.com/WorldFishCenter/peskas.timor.portal"
+          )
         ),
-        inline_li_link(
-          content = "Licence",
-          href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md"
-        ),
-        inline_li_link(
-          content = "Source code",
-          href = "https://github.com/WorldFishCenter/peskas.timor.portal"
-        )
+        bottom = "Copyright © 2021 Peskas. All rights reserved."
       ),
-      bottom = "Copyright © 2021 Peskas. All rights reserved."
-    ),
-    # shinyjs::useShinyjs()
+      # shinyjs::useShinyjs()
+      # htmltools::suppressDependencies("apexcharts"),
+      apexchart_dep()
+    )
   )
+
 }
 
 #' Add external Resources to the Application
@@ -111,3 +117,12 @@ golem_add_external_resources <- function(){
   )
 }
 
+
+apexchart_dep <- function(){
+  htmltools::htmlDependency(
+    name = "apexcharts",
+    version = "3.26.2",
+    src = c(href = "https://cdn.jsdelivr.net/npm/apexcharts@3.26.2/dist/"),
+    script = "apexcharts.min.js"
+  )
+}
