@@ -4,6 +4,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   nodejs \
   npm
 
+RUN wget https://github.com/rstudio/shinycannon/releases/download/v1.1.0/shinycannon_1.1.0-45731f0_amd64.deb && dpkg -i shinycannon_1.1.0-45731f0_amd64.deb && rm shinycannon_1.1.0-45731f0_amd64.deb
+
 # Extra R packages
 RUN install2.r --error --skipinstalled \
     renv	\
@@ -11,7 +13,13 @@ RUN install2.r --error --skipinstalled \
     golem \
     shinyjs \
     spelling \
-    apexcharter
+    apexcharter \
+    profvis \
+    shinyloadtest \
+    googleCloudStorageR
+
+RUN installGithub.r \
+    RinteRface/charpente
 
 # Rstudio interface preferences
 COPY rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json
