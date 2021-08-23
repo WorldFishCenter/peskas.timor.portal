@@ -7,76 +7,61 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_summary_card_ui <- function(id, apex_height = "4rem", ...){
+mod_summary_card_ui <- function(id, div_class = "col-md-3"){
   ns <- NS(id)
-  summary_card(
-    id = id,
-    subheader = textOutput(ns("s"), inline = TRUE),
-    heading = textOutput(ns("h"), inline = TRUE),
-    annotation = uiOutput(ns("t")),
-    off_body = tags$div(
-      class = "mt-0",
-      apexcharter::apexchartOutput(ns("c"), height = apex_height)),
-    ...)
+    uiOutput(ns("o"), class = div_class)
 }
 
 #' summary_card Server Functions
 #'
 #' @noRd
 #' @import data.table
-mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = "area", sparkline.enabled = T){
+mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = "area", sparkline.enabled = T, apex_height = "4rem"){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    card_data <- reactiveVal(get_series_info(var, period, n))
+    data <- reactive(get_series_info(var, period, n))
 
-    output$h <- renderText({
-      d <- card_data()
-      d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val)
-    })
+    output$o <- renderUI({
 
-    output$t <- renderUI({
-      d <- card_data()
-      trend_annotation(magnitude = d$series[[1]]$trend_magnitude,
-                       direction = d$series[[1]]$trend_direction)
-    })
+      d <- data()
 
-    output$s <- renderText({
-      d <- card_data()
-      d$series[[1]]$series_heading
-
-    })
-
-    output$c <- apexcharter::renderApexchart({
-
-      d <- card_data()
       # We use the format of the first series overall
       y_formatter = apexcharter::format_num(d$series[[1]]$series_format)
-
       series <- lapply(d$series, function(x) {
         list(
           name = x$series_name,
           data = x$series_value
-        )
+        )})
+
+      output$chart  <- renderApexchart({
+        plot_timeseries(
+          x_categories = d$x_datetime,
+          series = series[[1]],
+          y_formatter = y_formatter,
+          type = type,
+          sparkline = sparkline.enabled)
       })
 
-      plot_timeseries(
-        x_categories = d$x_datetime,
-        series = series[[1]],
-        y_formatter = y_formatter,
-        type = type,
-        sparkline = sparkline.enabled)
+      summary_card(
+        id = id,
+        subheader = d$series[[1]]$series_heading,
+        heading = d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val),
+        annotation = trend_annotation(magnitude = d$series[[1]]$trend_magnitude,
+                                      direction = d$series[[1]]$trend_direction),
+        off_body = tags$div(
+          class = "mt-0",
+          apexchartOutput(ns("chart"), height = apex_height)))
     })
-
   })
 }
 
 mod_summary_card_app <- function(){
   ui <- tabler_page(
-    mod_summary_card_ui(id = "i", apex_height = "100px")
+    mod_summary_card_ui(id = "i")
   )
   server <- function(input, output, session) {
-    mod_summary_card_server("i", "n_matched", n = 13)
+    mod_summary_card_server("i", "n_matched", n = 13, apex_height = "100px")
   }
   shinyApp(ui, server)
 }
@@ -88,10 +73,7 @@ summary_card <- function(id = "",
                          top_right_element = NULL,
                          in_body = NULL,
                          off_body = NULL,
-                         card_class = "col-sm-6 col-lg-3"){
-  tags$div(
-    id = id,
-    class = card_class,
+                         card_class = ""){
     tags$div(
       class = "card",
       tags$div(
@@ -128,7 +110,6 @@ summary_card <- function(id = "",
         off_body
       )
     )
-  )
 }
 
 

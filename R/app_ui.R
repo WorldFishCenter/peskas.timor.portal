@@ -26,11 +26,10 @@ app_ui <- function(request) {
         id = "home",
         page_heading(pretitle = "Small scale fisheries report", title = "National overview - July 2021"),
         page_cards(
-          mod_summary_card_ui(id = "revenue-summary-card", card_class = "col-md-3"),
-          mod_summary_card_ui(id = "landings-card", card_class = "col-md-3"),
-          mod_summary_card_ui(id = "tracks-card", card_class = "col-md-3"),
-          mod_summary_card_ui(id = "matched-card", card_class = "col-md-3"),
-          # actionLink("link_to_tabpanel_b", "Link to panel B")
+          mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
+          mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
+          mod_summary_card_ui(id = "tracks-card", div_class = "col-md-3"),
+          mod_summary_card_ui(id = "matched-card", div_class = "col-md-3"),
         )
       ),
       tab_panel(
@@ -45,9 +44,9 @@ app_ui <- function(request) {
             class = "col-md-4",
             tags$div(
               class = "row row-cards",
-              mod_summary_card_ui(id = "landing-revenue-card", card_class = "col-12"),
-              mod_summary_card_ui(id = "landing-per-boat-revenue-card", card_class = "col-12"),
-              mod_summary_card_ui(id = "n-boats-revenue-card", card_class = "col-12"),
+              mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12"),
+              mod_summary_card_ui(id = "landing-per-boat-revenue-card", div_class = "col-12"),
+              mod_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12"),
             )
 
           ),
