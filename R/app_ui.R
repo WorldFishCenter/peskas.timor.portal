@@ -7,6 +7,7 @@
 app_ui <- function(request) {
   tagList(
     apexchart_dep(),
+    jquery_dep(),
     tabler_page(
       title = "Peskas | East Timor",
       header(
@@ -86,7 +87,8 @@ app_ui <- function(request) {
       ),
       # shinyjs::useShinyjs()
       # htmltools::suppressDependencies("apexcharts"),
-      apexchart_dep()
+      # apexchart_dep(),
+      # jquery_dep()
     )
   )
 
@@ -124,5 +126,15 @@ apexchart_dep <- function(){
     version = "3.26.2",
     src = c(href = "https://cdn.jsdelivr.net/npm/apexcharts@3.26.2/dist/"),
     script = "apexcharts.min.js"
+  )
+}
+
+
+jquery_dep <- function(){
+  htmltools::htmlDependency(
+    name = "jquery",
+    version = "3.6.0",
+    src = c(href = "https://code.jquery.com/"),
+    script = "jquery-3.6.0.min.js"
   )
 }
