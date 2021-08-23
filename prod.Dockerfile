@@ -22,7 +22,6 @@ RUN install2.r --error --skipinstalled \
     data.table \
     golem \
     pkgload \
-    shinyjs \
     V8
 
 RUN Rscript -e 'remotes::install_github(c( \

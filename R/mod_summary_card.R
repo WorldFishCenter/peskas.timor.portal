@@ -7,14 +7,15 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_summary_card_ui <- function(id, div_class = "col-md-3"){
+mod_summary_card_ui <- function(id, div_class = "col-md-3", style = "min-height: 8rem"){
   ns <- NS(id)
 
   tags$div(
     class = div_class,
+    style = style,
     tags$div(
       class = "card",
-      summary_card_content_placeholder(ns("placeholder")),
+      # summary_card_content_placeholder(ns("placeholder")),
       uiOutput(ns("o"))
     ),
 
@@ -51,7 +52,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
           sparkline = sparkline.enabled)
       })
 
-      shinyjs::hideElement("placeholder")
+      # shinyjs::hideElement("placeholder")
 
       summary_card_content(
         id = id,

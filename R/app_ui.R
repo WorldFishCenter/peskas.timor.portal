@@ -79,7 +79,8 @@ app_ui <- function(request) {
           href = "https://github.com/WorldFishCenter/peskas.timor.portal"
         )
       )
-    )
+    ),
+    # shinyjs::useShinyjs()
   )
 }
 
