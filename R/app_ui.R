@@ -54,7 +54,7 @@ app_ui <- function(request) {
       footer_panel(
         left_side_elements = tags$li(
           class = "list-inline-item",
-          paste("Data last updated", format(peskas.timor.portal::data_last_updated, "%c")),
+          paste("Last updated", format(peskas.timor.portal::data_last_updated, "%c")),
 
         ),
         right_side_elements = tagList(
