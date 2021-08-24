@@ -1,0 +1,63 @@
+tab_revenue_content <- function(){
+  tagList(
+    page_heading(pretitle = "Small scale fisheries", title = "National revenue"),
+    page_cards(
+      tags$div(
+        class = "col-12 mt-0",
+        alert_ui(
+          heading = "Estimates are provisional",
+          icon = icon_alert_triangle(class = "alert-icon"),
+          content = "These estimates have not been validated and might be inaccurate. Use with caution.",
+          alert_class = "alert-warning alert-dismissible mb-0 mt-2",
+          bottom = tags$div(
+            class = "btn-list d-lg-none mt-3",
+            tags$a(
+              href = "#revenue-info",
+              class = "btn btn-warning",
+              "Learn more"
+            )
+          )
+        )
+      ),
+      tags$div(
+        class = "col-md-9",
+        mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "24rem"),
+      ),
+      tags$div(
+        class = "col-md-3",
+        tags$div(
+          class = "row row-cards",
+          mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12"),
+          mod_summary_card_ui(id = "landing-per-boat-revenue-card", div_class = "col-12"),
+          mod_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12"),
+        )
+      ),
+      mod_summary_table_ui(id = "revenue-table", heading = "Summary", card_class = "col-lg-auto order-lg-last"),
+      tags$div(
+        class = "col",
+        mod_var_descriptions_ui(
+          id = "revenue-info",
+          heading = "About the data",
+          subheading = "Possible caveats and data description",
+          intro =  tagList(
+            markdown(
+              "
+The revenue estimates have not been thoroughly validated and might be inaccurate.
+There is some uncertainty on all data used in the calculations.
+
+- Landing revenue data before 2019 is likely to contain errors.
+- Failures in the tracking system might over or underestimate the number of landings.
+- The number of boats used in small scale fisheries has not been updated since 2015.
+            "
+            ),
+            tags$div(
+              class = "hr-text",
+              "Variable descriptions"
+            )
+          )
+        )
+      ),
+
+    )
+  )
+}
