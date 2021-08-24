@@ -79,15 +79,18 @@ text_card_ui <- function(id = "", heading = "Card heading", subheading = "Card s
     tags$div(
       class = "card-body markdown",
       tags$h3(
-        class = "card-title",
+        class = "card-title mb-0",
         heading
       ),
       tags$div(
-        class = "card-subtitle",
+        class = "card-subtitle my-0",
         subheading
       ),
-      tagList(
-        ...
+      tags$div(
+        class = "mt-3",
+        tagList(
+          ...
+        )
       )
     )
   )
