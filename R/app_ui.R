@@ -19,7 +19,14 @@ app_ui <- function(request) {
       ),
       tab_menu(
         tab_menu_item("Home", "home", icon_home()),
-        tab_menu_item("Revenue", "revenue", icon_currency_dollar()),
+        tab_menu_item(
+          label = tagList(
+            "Revenue",
+            tags$span(
+              class = "badge bg-lime-lt",
+              "New"
+            )),
+          id = "revenue", icon_currency_dollar()),
         tab_menu_item("About", "about", icon_info_circle()),
         id = "main_tabset"
       ),
