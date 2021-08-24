@@ -25,7 +25,8 @@ app_ui <- function(request) {
             tags$span(
               class = "badge bg-lime-lt",
               "New"
-            )),
+            )
+          ),
           id = "revenue", icon_currency_dollar()),
         tab_menu_item("About", "about", icon_info_circle()),
         id = "main_tabset"
