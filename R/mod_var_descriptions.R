@@ -32,11 +32,29 @@ mod_var_descriptions_server <- function(id, vars){
 
       info <- lapply(vars, get_var_info)
       accordion_items <- lapply(info, function(x) {
+        bg <- get_bg_quality(x[[1]]$quality)
+
         accordion_item_ui(
           id = ns(paste0("accordion", "-", names(x))),
           id_parent = ns("accordion"),
-          heading = x[[1]]$short_name,
-          content = x[[1]]$info
+          heading =
+            tagList(
+              tags$span(
+                class = paste("badge badge-pill me-3", bg$normal)
+              ),
+              x[[1]]$short_name
+            ),
+          content = tagList(
+            tags$p(
+              class = "",
+              x[[1]]$info),
+            tags$p(
+              class = paste("badge mb-0", bg$light),
+              icon_check(),
+              "Data quality:",
+              get_quality_text(x[[1]]$quality)),
+
+          )
         )
       })
 
@@ -49,6 +67,28 @@ mod_var_descriptions_server <- function(id, vars){
     })
 
   })
+}
+
+get_bg_quality <- function(x){
+  if (is.null(x)) {
+    bg <- "secondary"
+  } else {
+    bg <- switch(x,
+      low = "red",
+      medium = "yellow",
+      high = "green",
+      "cyan"
+    )
+  }
+  list(
+    normal = paste("bg", bg, sep = "-"),
+    light = paste("bg", bg, "lt", sep = "-")
+  )
+}
+
+get_quality_text <- function(x){
+  if (!any(x %in% c("low", "medium","high"))) return("Not assessed")
+  x
 }
 
 mod_var_descriptions_app <- function(){
