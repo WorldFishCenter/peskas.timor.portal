@@ -32,13 +32,17 @@ tab_revenue_content <- function(){
           mod_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12"),
         )
       ),
-      mod_summary_table_ui(id = "revenue-table", heading = "Summary", card_class = "col-lg-auto order-lg-last"),
+      mod_summary_table_ui(
+        id = "revenue-table",
+        heading = "Summary",
+        card_class = "col-lg-auto order-lg-last"
+      ),
       tags$div(
         class = "col",
         mod_var_descriptions_ui(
           id = "revenue-info",
           heading = "About the data",
-          subheading = "Possible caveats and data description",
+          # subheading = "Possible caveats and data description",
           intro =  tagList(
             markdown(
               "
@@ -52,7 +56,7 @@ There is some uncertainty on all data used in the calculations.
             ),
             tags$div(
               class = "hr-text",
-              "Variable descriptions"
+              "Variable information"
             )
           )
         )
