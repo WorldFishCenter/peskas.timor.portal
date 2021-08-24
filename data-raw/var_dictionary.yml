@@ -7,21 +7,26 @@ n_tracks:
   description: "Number of trips tracked by VPS boats installed"
   format: ","
 n_boats:
-  short_name: "Number of boats"
+  short_name: Number of boats
   format: ","
+  info: "The number of boats is obtained from the 2015 census."
+  quality: low
 n_matched:
   short_name: "Matched tracks"
   description: "Number of matched tracks"
   format: ","
 revenue:
-  short_name: "Estimated revenue"
+  short_name: Estimated revenue
   description: "Estimated total revenue from landings"
   info: "The revenue is estimated by multiplying the average revenue of landing by the average number of landings within a period. Values are rounded to two significant digits."
   format: "$,.2r"
 landing_revenue:
-  short_name: "Average revenue per landing"
+  short_name: Revenue per landing
   format: "$,.2r"
+  info: "The revenue per landing is estimated as the average over the specified period using the landing surveys"
+  quality: medium
 n_landings_per_boat:
-  short_name: "Average landings per boat"
+  short_name: Landings per boat
   format: ",.3r"
-
+  quality: low
+  info: "The number of landings per boat is estimated using the Pelagic Data Tracking information. Some filtering is done to "
