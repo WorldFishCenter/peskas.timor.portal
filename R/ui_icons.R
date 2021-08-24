@@ -92,10 +92,11 @@ icon_home <- function(size = 24){
   )
 }
 
-icon_info_circle <- function(size = 24){
+icon_info_circle <- function(size = 24, class = ""){
+  class <- paste("icon icon-tabler icon-tabler-info-circle", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
-    class = "icon icon-tabler icon-tabler-info-circle",
+    class = class,
     width = size,
     height = size,
     viewbox = "0 0 24 24",
