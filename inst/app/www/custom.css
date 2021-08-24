@@ -28,3 +28,12 @@
 .nav .nav-tabs {
     border-bottom: none;
 }
+
+.accordion-item, .accordion-button {
+    background-color: #fff;
+    border: none;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
