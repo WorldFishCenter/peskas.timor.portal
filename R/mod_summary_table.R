@@ -62,7 +62,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
       table <- table()
       alignment <- c("l", rep("r", ncol(table) - 1))
       alignment <- paste(alignment, collapse = "")
-      output$table <- renderTable(table, spacing = "m", width = "100%", align = alignment)
+      output$table <- renderTable(table, spacing = "m", width = "100%", align = alignment, class = "table-responsive")
       tableOutput(ns('table'))
       })
 
