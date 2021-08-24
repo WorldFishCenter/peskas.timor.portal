@@ -37,3 +37,19 @@
 .accordion-button:not(.collapsed) {
     box-shadow: none;
 }
+
+.navbar .navbar-nav .nav-link .badge {
+    position: static;
+    top: .375rem;
+    right: .375rem;
+    transform: translate(0%,0%);
+}
+
+@media (min-width: 768px) {
+    .navbar .navbar-nav .nav-link .badge {
+    position: absolute;
+    top: .375rem;
+    right: .375rem;
+    transform: translate(50%,-50%);
+}
+}
