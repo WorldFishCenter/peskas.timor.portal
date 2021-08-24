@@ -15,7 +15,7 @@ get_series_info <- function(vars, period = "month", n = NULL, year = NULL){
       summary_frame[(nrow(summary_frame) - n):nrow(summary_frame), ]
   }
 
-  series_info <- lapply(vars, extract_series_info, summary_frame)
+  series_info <- lapply(vars, extract_series_info, summary_frame, period)
 
   list(
     x_categories = summary_frame[, ..period, ][[1]],
@@ -34,7 +34,7 @@ get_summary_frame_var <- function(var, period){
 }
 
 #' @import data.table
-extract_series_info <- function(var, data){
+extract_series_info <- function(var, data, period){
 
   this_period_val = data[nrow(data) - 1 , ..var][[1]]
   previous_period_val = data[nrow(data) - 2 , ..var][[1]]
@@ -47,6 +47,7 @@ extract_series_info <- function(var, data){
     series_heading = heading,
     series_description = peskas.timor.portal::var_dictionary[[var]]$description,
     last_period_val = data[nrow(data) - 1 , ..var][[1]],
+    last_period = data[nrow(data) - 1 , ..period][[1]],
     trend_direction = trend$direction,
     trend_magnitude = trend$magnitude,
     series_format = specify_format(var)

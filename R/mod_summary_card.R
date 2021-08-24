@@ -60,6 +60,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
         heading = d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val),
         annotation = trend_annotation(magnitude = d$series[[1]]$trend_magnitude,
                                       direction = d$series[[1]]$trend_direction),
+        top_right_element = d$series[[1]]$last_period,
         off_body = tags$div(
           class = "mt-0",
           apexchartOutput(ns("chart"), height = apex_height)))
@@ -91,11 +92,12 @@ summary_card_content <- function(id = "",
         tags$div(
           class = "d-flex align-items-center",
           tags$div(
-            class = "subheader",
+            class = "font-weight-medium",
             subheader
           ),
           tags$div(
-            class = "ms-auto lh-1",
+
+            class = "ms-auto lh-1 text-muted small",
             top_right_element
           )
         ),
