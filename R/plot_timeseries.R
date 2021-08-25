@@ -8,7 +8,7 @@ plot_timeseries <- function(x_categories, series, y_formatter, type = "bar", spa
       type = type,
       toolbar = list(show = FALSE),
       sparkline = list(enabled = sparkline),
-      animations = list(enabled = FALSE),
+      animations = list(enabled = TRUE),
       stacked = FALSE,
       selection = list(enabled = FALSE),
       zoom = list(enabled = FALSE)) %>%
