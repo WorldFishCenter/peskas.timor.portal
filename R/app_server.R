@@ -4,7 +4,7 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
-app_server <- function( input, output, session ) {
+app_server <- function( input, output, session ){
   # Your application server logic
   # Summary tab
   mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13)
@@ -20,9 +20,8 @@ app_server <- function( input, output, session ) {
   mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"))
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"))
 
-  # observeEvent(input$link_to_tabpanel_b, {
-  #   updateTabsetPanel(session, "main_tabset", "revenue")
-  # })
+  mod_inactivity_monitor_server(id = "time-out-monitor")
+
 }
 
 #' Dummy apex chart
