@@ -65,13 +65,16 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
       table <- table()
       alignment <- c("l", rep("r", ncol(table) - 1))
       alignment <- paste(alignment, collapse = "")
-      output$table <- renderTable(table, spacing = "m", width = "100%", align = alignment, class = "table-responsive")
+      output$table <- renderTable(table, spacing = "m", width = "100%",
+                                  align = alignment,
+                                  na = "–",
+                                  class = "table-responsive")
       tableOutput(ns('table'))
       })
 
     output$f <- renderText({
       info <- info()
-      total <- sum(info$series[[1]]$series_value)
+      total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       text <- paste0(info$series[[1]]$series_name, ":")
       paste(text, d3.format::d3.format(info$series[[1]]$series_format)(total))
     })
