@@ -1,32 +1,41 @@
 n_landings:
   short_name: "Surveyed landings"
-  description: "The number of landings that were"
+  long_name: "The number of landings that were"
   format: ","
 n_tracks:
   short_name: "Tracked trips"
-  description: "Number of trips tracked by VPS boats installed"
+  long_name: "Number of trips tracked by VPS boats installed"
   format: ","
-n_boats:
-  short_name: Number of boats
-  format: ","
-  info: "The number of boats is obtained from the 2015 census."
-  quality: low
+
 n_matched:
   short_name: "Matched tracks"
   description: "Number of matched tracks"
   format: ","
 revenue:
   short_name: Estimated revenue
-  description: "Estimated total revenue from landings"
-  info: "The revenue is estimated by multiplying the average revenue of landing by the average number of landings within a period. Values are rounded to two significant digits."
+  long_name: "Estimated total revenue from landings"
+  description: "The revenue is estimated by multiplying the average revenue of landing by the average number of landings within a period. Values are rounded to two significant digits."
   format: "$,.2r"
+
 landing_revenue:
   short_name: Revenue per landing
   format: "$,.2r"
-  info: "The revenue per landing is estimated as the average over the specified period using the landing surveys"
+  description: "The revenue per landing is obtained from landing surveys at multiple sites around the country. Fishers are asked for the selling price of the total catch when at least some of the catch is deemed for sale. We then obtain monthly estimates using a random-effect statistical model."
+  problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch."
+  methods: "Survey answers are filtered for outliers. We consider outliers those values that are beyond 3 times the median absolute deviation of the log-transformed landing selling prices."
   quality: medium
+
 n_landings_per_boat:
   short_name: Landings per boat
   format: ",.3r"
   quality: low
-  info: "The number of landings per boat is estimated using the Pelagic Data Tracking information. Some filtering is done to "
+  description: "The number of landings per boat is obtained from the [Pelagic Data Systems](https://www.pelagicdata.com/) tracking data. Boat movements are tracked, and a proprietary algorithm is used to determine when a trip occurs. Estimates are obtained by averaging the number of trips a boat makes over a month."
+  problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips (that result in a landing) from non-fishing trips."
+  methods: "Trips are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account trips where the presumed duration is longer than 18 hours or covers a distance over 60km."
+
+n_boats:
+  short_name: Number of boats
+  format: ","
+  description: "The number of boats is derived from information obtained in the 2015 East-Timor census. The number of boats in each municipality level is added together to form the national total."
+  problems: "Data has not been updated since 2015. However, the number of boats has likely changed considerably since then."
+  quality: low
