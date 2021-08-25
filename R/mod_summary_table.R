@@ -29,6 +29,7 @@ mod_summary_table_ui <- function(id, years = NULL, ...){
       # As an html output so we can tweak the alignment reactively
       table = htmlOutput(ns("t")),
       dropdown = s,
+      footer = textOutput(ns("f"), inline = T),
       ...
     )
 
@@ -42,8 +43,10 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
+    info <- reactive(get_series_info(vars, period, year = input$y))
+
     table <- reactive({
-      info <- get_series_info(vars, period, year = input$y)
+      info <- info()
       data_columns <- lapply(info$series, function(x) {
         vals <- data.table(d3.format::d3.format(x$series_format)(x$series_value))
         names(vals) <- x$series_name
@@ -66,6 +69,14 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
       tableOutput(ns('table'))
       })
 
+    output$f <- renderText({
+      info <- info()
+      total <- sum(info$series[[1]]$series_value)
+      text <- paste0(info$series[[1]]$series_name, ":")
+      paste(text, d3.format::d3.format(info$series[[1]]$series_format)(total))
+    })
+
+
   })
 }
 
@@ -80,13 +91,8 @@ mod_summary_table_app <- function(){
 }
 
 
-## To be copied in the UI
-# mod_summary_table_ui("summary_table_ui_1")
 
-## To be copied in the server
-# mod_summary_table_server("summary_table_ui_1")
-
-table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NULL, dropdown = NULL){
+table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NULL, dropdown = NULL, footer = NULL){
   tags$div(
     class = card_class,
     tags$div(
@@ -108,6 +114,13 @@ table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NUL
       tags$div(
         class = "card-table table-responsive",
         table
+      ),
+      tags$div(
+        class = "card-footer",
+        tags$div(
+          class = "d-flex justify-content-end",
+          footer
+        )
       )
     )
   )
