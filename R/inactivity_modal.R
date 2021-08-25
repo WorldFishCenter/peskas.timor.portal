@@ -1,5 +1,5 @@
-innactivity_modal <- function(timeout_seconds = 5*60){
-  innactivity_modal_ui(
+inactivity_modal <- function(timeout_seconds = 5*60){
+  inactivity_modal_ui(
     tags$div(
       class = "text-center py-4",
       icon_bed(class = "mb-2 text-primary icon-lg"),
@@ -17,7 +17,7 @@ innactivity_modal <- function(timeout_seconds = 5*60){
   )
 }
 
-innactivity_modal_ui <- function(..., header = NULL, footer = NULL, timeoutSeconds = 10){
+inactivity_modal_ui <- function(..., header = NULL, footer = NULL, timeoutSeconds = 10){
   tagList(
     modal_dialog_ui(
       ...,
