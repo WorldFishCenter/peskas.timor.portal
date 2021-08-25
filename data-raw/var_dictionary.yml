@@ -12,16 +12,16 @@ n_matched:
   description: "Number of matched tracks"
   format: ","
 revenue:
-  short_name: Estimated revenue
-  long_name: "Estimated total revenue from landings"
-  description: "The revenue is estimated by multiplying the average revenue of landing by the average number of landings within a period. Values are rounded to two significant digits."
+  short_name: Total revenue
+  description: "The estimated total revenue from fishing landings. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
+  methods: "The revenue is estimated by multiplying the estimated revenue per landing by the average number of landings per boat and by the number of boats."
   format: "$,.2r"
 
 landing_revenue:
   short_name: Revenue per landing
   format: "$,.2r"
   description: "The revenue per landing is obtained from landing surveys at multiple sites around the country. Fishers are asked for the selling price of the total catch when at least some of the catch is deemed for sale. We then obtain monthly estimates using a random-effect statistical model."
-  problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch."
+  problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch. There may be a delay of up to several weeks between the time a landing occurs and the time information enters the system."
   methods: "Survey answers are filtered for outliers. We consider outliers those values that are beyond 3 times the median absolute deviation of the log-transformed landing selling prices."
   quality: medium
 
