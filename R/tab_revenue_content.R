@@ -21,15 +21,15 @@ tab_revenue_content <- function(){
       ),
       tags$div(
         class = "col-lg-8 col-xl-9",
-        mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "24rem"),
+        mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "21rem"),
       ),
       tags$div(
         class = "col-lg-4 col-xl-3",
         tags$div(
           class = "row row-cards",
-          mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12 col-md-4 col-lg-12"),
-          mod_summary_card_ui(id = "landing-per-boat-revenue-card", div_class = "col-12 col-md-4 col-lg-12"),
-          mod_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12 col-md-4 col-lg-12"),
+          mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui(id = "landing-per-boat-revenue-card", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_simple_summary_card_ui(id = "n-boats-revenue-card", div_class = "col-12"),
         )
       ),
       mod_summary_table_ui(
