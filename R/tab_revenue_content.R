@@ -34,7 +34,7 @@ tab_revenue_content <- function(){
       ),
       mod_summary_table_ui(
         id = "revenue-table",
-        heading = "Summary",
+        heading = "Annual summary",
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
       tags$div(
@@ -48,15 +48,11 @@ tab_revenue_content <- function(){
               "
 The revenue estimates have not been thoroughly validated and might be inaccurate.
 There is some uncertainty on all data used in the calculations.
-
-- Landing revenue data before 2019 is likely to contain errors.
-- Failures in the tracking system might over or underestimate the number of landings.
-- The number of boats used in small scale fisheries has not been updated since 2015.
             "
             ),
             tags$div(
               class = "hr-text",
-              "Variable information"
+              "Indicator information"
             )
           )
         )
