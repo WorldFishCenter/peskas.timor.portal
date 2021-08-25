@@ -32,10 +32,11 @@ mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, yea
       simple_card_content_ui(
         icon_ui = simple_card_icon_ui(direction = info$series[[1]]$trend_direction),
         heading = d3.format::d3.format(info$series[[1]]$series_format)(info$series[[1]]$last_period_val),
-        subheading = paste(info$series[[1]]$series_name, info$series[[1]]$last_period),
+        subheading = info$series[[1]]$series_name,
         trend_ui = simple_card_trend_ui(
           trend = info$series[[1]]$trend_magnitude,
-          direction = info$series[[1]]$trend_direction)
+          direction = info$series[[1]]$trend_direction),
+        top_right_element = info$series[[1]]$last_period
       )
     })
 
@@ -62,7 +63,8 @@ mod_simple_summary_card_app <- function(){
 simple_card_content_ui <- function(icon_ui = simple_card_icon_ui(),
                                    heading = "Card heading",
                                    subheading = "Card subheading",
-                                   trend_ui = simple_card_trend_ui()){
+                                   trend_ui = simple_card_trend_ui(),
+                                   top_right_element = ""){
 
   tags$div(
     class = "card-body",
@@ -77,6 +79,17 @@ simple_card_content_ui <- function(icon_ui = simple_card_icon_ui(),
         tags$div(
           class = "d-flex align-items-center",
           tags$div(
+            class = "font-weight-medium",
+            subheading
+          ),
+          tags$div(
+            class = "ms-auto lh-1 text-muted small",
+            top_right_element
+          )
+        ),
+        tags$div(
+          class = "d-flex align-items-center",
+          tags$div(
             class = "h1 mb-0",
             heading
           ),
@@ -84,10 +97,6 @@ simple_card_content_ui <- function(icon_ui = simple_card_icon_ui(),
             class = "me-auto",
             trend_ui
           )
-        ),
-        tags$div(
-          class = "text-muted",
-          subheading
         )
       )
     )
