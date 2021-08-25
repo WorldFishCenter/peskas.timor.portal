@@ -48,6 +48,8 @@ tab_revenue_content <- function(){
               "
 The revenue estimates have not been thoroughly validated and might be inaccurate.
 There is some uncertainty on all data used in the calculations.
+
+Estimates, even from previous years, may be updated whenever new data is available.
             "
             ),
             tags$div(
