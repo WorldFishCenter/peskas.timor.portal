@@ -1,12 +1,17 @@
 inactivity_modal <- function(timeout_seconds = 5*60){
   inactivity_modal_ui(
     tags$div(
-      class = "text-center py-4",
+      class = "text-center pt-4 pb-3",
       icon_bed(class = "mb-2 text-primary icon-lg"),
       tags$h3("Peskas is having a nap"),
       tags$div(
         class = "text-muted",
-        "You have been inactive for some time. Reload the page to connect again."),
+        markdown("You have been inactive for some time. Reload the page to connect again.")
+        ),
+      tags$div(
+        class = "text-muted small",
+         markdown("Contact us at peskas.platform@gmail.com if you are experiencing problems")
+      )
     ),
     footer = tags$button(
       onclick = "location.reload()",
