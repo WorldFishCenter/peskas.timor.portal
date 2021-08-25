@@ -17,8 +17,7 @@ mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-he
       style = card_style,
       # summary_card_content_placeholder(ns("placeholder")),
       uiOutput(ns("o"))
-    ),
-
+    )
   )
 }
 
@@ -58,7 +57,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
         id = id,
         subheader = d$series[[1]]$series_heading,
         heading = d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val),
-        annotation = trend_annotation(magnitude = d$series[[1]]$trend_magnitude,
+        annotation = trend_annotation_summary_card(magnitude = d$series[[1]]$trend_magnitude,
                                       direction = d$series[[1]]$trend_direction),
         top_right_element = d$series[[1]]$last_period,
         off_body = tags$div(
@@ -184,27 +183,55 @@ unit_annotation <- function(unit = NULL){
   )
 }
 
-trend_annotation <- function(magnitude = "0%", direction = c("none", "up","down")){
+trend_annotation_summary_card <- function(magnitude = "0%", direction = c("none", "up","down")){
 
-  icon <- switch(
-    direction[1],
-    "none" = icon_trend_none(),
-    "up" = icon_trend_up(),
-    "down" = icon_trend_down(),
-    NULL
-  )
-
-  colour_class <- switch(
-    direction[1],
-    "none" = "text-yellow",
-    "up" = "text-green",
-    "down" = "text-red",
-    "text-muted"
-  )
+  icon <- trend_icon(direction, style = "trend")
+  colour_class <- trend_color(direction)$text
 
   tags$span(
     class = paste(colour_class,"ms-2 d-inline-flex align-items-center lh-1"),
     magnitude,
     icon
   )
+}
+
+trend_icon <- function(direction = c("none", "up","down"), style = c("trend", "arrow")){
+  if (style == "trend") {
+    switch(
+      direction[1],
+      "none" = icon_trend_none(),
+      "up" = icon_trend_up(),
+      "down" = icon_trend_down(),
+      NULL
+    )
+  } else {
+    switch(
+      direction[1],
+      "none" = icon_trend_none(),
+      "up" = icon_arrow_up(),
+      "down" = icon_arrow_down(),
+      NULL
+    )
+  }
+
+}
+
+trend_color <- function(direction = c("none", "up","down")){
+  list(
+    text = switch(
+      direction[1],
+      "none" = "text-yellow",
+      "up" = "text-green",
+      "down" = "text-red",
+      "text-muted"
+    ),
+    background = switch(
+      direction[1],
+      "none" = "bg-yellow-lt",
+      "up" = "bg-green-lt",
+      "down" = "bg-red-lt",
+      "bg-secondary-lt"
+    )
+  )
+
 }
