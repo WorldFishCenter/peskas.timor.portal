@@ -95,7 +95,6 @@ summary_card_content <- function(id = "",
             subheader
           ),
           tags$div(
-
             class = "ms-auto lh-1 text-muted small",
             top_right_element
           )
@@ -189,7 +188,7 @@ trend_annotation_summary_card <- function(magnitude = "0%", direction = c("none"
   colour_class <- trend_color(direction)$text
 
   tags$span(
-    class = paste(colour_class,"ms-2 d-inline-flex align-items-center lh-1"),
+    class = paste(colour_class,"ms-2 d-inline-flex align-items-center font-weight-medium lh-1"),
     magnitude,
     icon
   )
