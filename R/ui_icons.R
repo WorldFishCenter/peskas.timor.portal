@@ -192,3 +192,82 @@ icon_check <- function(size = 24, class = ""){
     tags$path(d = "M5 12l5 5l10 -10")
   )
 }
+
+icon_arrow_up <- function(size = 24, class = ""){
+  class <- paste("icon icon-tabler icon-tabler-arrow-up", class)
+  tags$svg(
+    xmlns = "http://www.w3.org/2000/svg",
+    class = class,
+    width = size,
+    height = size,
+    viewbox = "0 0 24 24",
+    `stroke-width` = "1.5",
+    stroke = "currentColor",
+    fill = "none",
+    `stroke-linecap` = "round",
+    `stroke-linejoin` = "round",
+    tags$path(
+      stroke = "none",
+      d = "M0 0h24v24H0z",
+      fill = "none"
+    ),
+    tags$line(
+      x1 = "12",
+      y1 = "5",
+      x2 = "12",
+      y2 = "19"
+    ),
+    tags$line(
+      x1 = "18",
+      y1 = "11",
+      x2 = "12",
+      y2 = "5"
+    ),
+    tags$line(
+      x1 = "6",
+      y1 = "11",
+      x2 = "12",
+      y2 = "5"
+    )
+  )
+}
+
+icon_arrow_down <- function(size = 24, class = ""){
+  class <- paste("icon icon-tabler icon-tabler-arrow-down", class)
+  tags$svg(
+    xmlns = "http://www.w3.org/2000/svg",
+    class = class,
+    width = size,
+    height = size,
+    viewbox = "0 0 24 24",
+    `stroke-width` = "1.5",
+    stroke = "currentColor",
+    fill = "none",
+    `stroke-linecap` = "round",
+    `stroke-linejoin` = "round",
+    tags$path(
+      stroke = "none",
+      d = "M0 0h24v24H0z",
+      fill = "none"
+    ),
+    tags$line(
+      x1 = "12",
+      y1 = "5",
+      x2 = "12",
+      y2 = "19"
+    ),
+    tags$line(
+      x1 = "18",
+      y1 = "13",
+      x2 = "12",
+      y2 = "19"
+    ),
+    tags$line(
+      x1 = "6",
+      y1 = "13",
+      x2 = "12",
+      y2 = "19"
+    )
+  )
+}
+
