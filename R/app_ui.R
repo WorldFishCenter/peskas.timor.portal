@@ -74,7 +74,7 @@ app_ui <- function(request) {
         ),
         bottom = "Copyright © 2021 Peskas. All rights reserved."
       ),
-      mod_inactivity_monitor_ui(id = "time-out-monitor", timeout_seconds = 60*5)
+      innactivity_modal(timeout_seconds = 5*60)
       # shinyjs::useShinyjs()
       # htmltools::suppressDependencies("apexcharts"),
       # apexchart_dep(),

@@ -20,8 +20,6 @@ app_server <- function( input, output, session ){
   mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"))
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"))
 
-  mod_inactivity_monitor_server(id = "time-out-monitor")
-
 }
 
 #' Dummy apex chart
