@@ -45,15 +45,21 @@ mod_var_descriptions_server <- function(id, vars){
               x[[1]]$short_name
             ),
           content = tagList(
+            markdown(
+              x[[1]]$description),
             tags$p(
-              class = "",
-              x[[1]]$info),
+              class = "small",
+              tags$strong("Data processing and validation:"),
+              get_text(x[[1]]$methods, "None.")
+            ),
+            tags$p(
+              class = "small",
+              tags$strong("Known problems and limitations:"),
+              get_text(x[[1]]$problems, "Not assessed.")
+            ),
             tags$p(
               class = paste("badge mb-0", bg$light),
-              icon_check(),
-              "Data quality:",
-              get_quality_text(x[[1]]$quality)),
-
+              icon_check(), "Data quality:", get_quality_text(x[[1]]$quality)),
           )
         )
       })
@@ -88,6 +94,13 @@ get_bg_quality <- function(x){
 
 get_quality_text <- function(x){
   if (!any(x %in% c("low", "medium","high"))) return("Not assessed")
+  x
+}
+
+get_text <- function(x, y = "Not assessed."){
+  if (is.null(x)) return(y)
+  if (is.na(x)) return(y)
+  if (x == "") return(y)
   x
 }
 
