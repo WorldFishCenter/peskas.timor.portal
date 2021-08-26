@@ -7,7 +7,7 @@ inactivity_modal <- function(timeout_seconds = 5*60){
       tags$p(
         class = "text-muted",
         tags$span(id = "modal-placeholder"),
-        "Reload the page to connect again."
+        "Reload the page to reconnect."
         ),
       tags$div(
         class = "text-muted small",
