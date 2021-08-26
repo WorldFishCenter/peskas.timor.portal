@@ -43,8 +43,11 @@ window.onscroll = resetTimer;    // catches scrolling
 window.onkeypress = resetTimer;  //catches keyboard actions
 
 function logout() {
-$('#modal-placeholder').text('You have been inactive for some time. ')
-Shiny.shinyapp.$socket.close()
+
+if (Shiny.shinyapp.$socket != null){
+  $('#modal-placeholder').text('You have been inactive for some time. ')
+  Shiny.shinyapp.$socket.close()
+}
 }
 
 function resetTimer() {
@@ -59,7 +62,6 @@ $( document ).on('shiny:sessioninitialized', function(event) {
   Shiny.shinyapp.shinyOnDisconnected = Shiny.shinyapp.onDisconnected;
     Shiny.shinyapp.onDisconnected = function() {
       Shiny.shinyapp.shinyOnDisconnected()
-      console.log('overlay on')
       $('#shiny-modal-inactivty').modal().show();
     }
 })"),
