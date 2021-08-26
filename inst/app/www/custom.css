@@ -54,5 +54,5 @@
 }
 
 #ss-connect-dialog {
-display: none;
+display: none !important;
 }
