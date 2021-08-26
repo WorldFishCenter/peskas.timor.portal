@@ -54,5 +54,16 @@
 }
 
 #ss-connect-dialog {
-display: none !important;
+    display: none !important;
+    width: 0px;
+    height: 0px;
+    padding: 0px;
+}
+
+#ss-connect-dialog label {
+    display: none;
+}
+
+#ss-connect-dialog a {
+    display: none;
 }
