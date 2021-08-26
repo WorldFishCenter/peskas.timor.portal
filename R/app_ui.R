@@ -74,8 +74,8 @@ app_ui <- function(request) {
         ),
         bottom = "Copyright © 2021 Peskas. All rights reserved."
       ),
-      inactivity_modal(timeout_seconds = 5*60)
-      # shinyjs::useShinyjs()
+      inactivity_modal(timeout_seconds = 5*60),
+      shinyjs::useShinyjs()
       # htmltools::suppressDependencies("apexcharts"),
       # apexchart_dep(),
       # jquery_dep()

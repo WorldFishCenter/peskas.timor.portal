@@ -15,7 +15,7 @@ mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-he
     tags$div(
       class = "card",
       style = card_style,
-      # summary_card_content_placeholder(ns("placeholder")),
+      summary_card_content_placeholder(ns("placeholder")),
       uiOutput(ns("o"))
     )
   )
@@ -51,7 +51,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
           sparkline = sparkline.enabled)
       })
 
-      # shinyjs::hideElement("placeholder")
+      shinyjs::hideElement("placeholder")
 
       summary_card_content(
         id = id,
@@ -69,6 +69,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
 
 mod_summary_card_app <- function(){
   ui <- tabler_page(
+    shinyjs::useShinyjs(),
     mod_summary_card_ui(id = "i")
   )
   server <- function(input, output, session) {
