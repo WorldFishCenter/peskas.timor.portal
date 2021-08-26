@@ -18,9 +18,9 @@ revenue:
   format: "$,.2r"
 
 landing_revenue:
-  short_name: Revenue per landing
+  short_name: Landing value
   format: "$,.2r"
-  description: "The revenue per landing is obtained from landing surveys at multiple sites around the country. Fishers are asked for the selling price of the total catch when at least some of the catch is deemed for sale. We then obtain monthly estimates using a random-effect statistical model."
+  description: "The landing value is obtained from landing surveys at multiple sites around the country. Fishers are asked for the estimated price of their catch at the landing site regardless of whether the catch is deemed for sale or consumption. Prices may change throughout the year and across landing sites. We then obtain monthly estimates using a random-effect statistical model."
   problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch. There may be a delay of up to several weeks between the time a landing occurs and the time information enters the system."
   methods: "Survey answers are filtered for outliers. We consider outliers those values that are beyond 3 times the median absolute deviation of the log-transformed landing selling prices."
   quality: medium
