@@ -1,28 +1,21 @@
 FROM rocker/shiny:4.1.0
 
 # install R package dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    libicu-dev \
-    libcurl4-openssl-dev \
-    libgit2-dev \
-    libssl-dev \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     libv8-dev \
-    libxml2-dev \
-    pandoc \
     ## clean up
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 # Extra R packages
-RUN install2.r --error --skipinstalled \
+RUN install2.r --error --skipinstalled -n 2 \
+    remotes \
     apexcharter \
     config \
     data.table \
-    golem \
-    pkgload \
-    V8
+    V8 \
+    shinyjs
 
 RUN Rscript -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
