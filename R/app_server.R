@@ -6,6 +6,9 @@
 #' @noRd
 app_server <- function( input, output, session ){
   # Your application server logic
+  observeEvent(input$selected_language, {
+    shiny.i18n::update_lang(session, input$selected_language)
+  })
   # Summary tab
   mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13)
   mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13)

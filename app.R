@@ -4,4 +4,5 @@
 
 # pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)
 options( "golem.app.prod" = TRUE)
+i18n <- shiny.i18n::Translator$new(translation_json_path = "data/translation.json")
 peskas.timor.portal::run_app() # add parameters here (if any)

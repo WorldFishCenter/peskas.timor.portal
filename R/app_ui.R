@@ -11,9 +11,16 @@ app_ui <- function(request) {
     tabler_page(
       title = "Peskas | East Timor",
       header(
+        shiny.i18n::usei18n(i18n),
         logo = peskas_logo(),
+        selectInput(
+          inputId='selected_language',
+          label=i18n$t('Select your language'),
+          choices = i18n$get_languages(),
+          selected = i18n$get_key_translation()
+        ),
         version_flex(
-          heading = "Managment Dashboard",
+          heading = i18n$t("Managment Dashboard"),
           subheading = "East Timor (v0.0.12-alpha)"
         )
       ),

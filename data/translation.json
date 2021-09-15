@@ -1,0 +1,6 @@
+{
+  "cultural_date_format": "%d-%m-%Y",
+  "languages": ["en", "it", "es"],
+  "translation": [
+      {"en": "Managment Dashboard", "it": "Controllo attività", "es": "Panel de administración"}    ]
+}
