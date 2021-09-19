@@ -1,6 +1,87 @@
 {
   "cultural_date_format": "%d-%m-%Y",
-  "languages": ["en", "it", "es"],
-  "translation": [
-      {"en": "Managment Dashboard", "it": "Controllo attività", "es": "Panel de administración"}    ]
+  "languages": ["English", "Italiano", "Español","Português"],
+  "translation":
+  [
+      {"English": "Managment Dashboard",
+      "Português": "Painel de Gestão",
+      "Español": "Panel de administración",
+      "Italiano": "Controllo attività"},
+
+      {"English": "Select your language",
+      "Português": "Selecione sua lingua",
+      "Español": "Elige tu idioma",
+      "Italiano": "Seleziona la tua lingua"},
+
+      {"English": "Home",
+      "Português": "Principal",
+      "Español": "Principal",
+      "Italiano": "Principale"},
+
+      {"English": "Revenue",
+      "Português": "Receita",
+      "Español": "Ingresos",
+      "Italiano": "Rendita"},
+
+      {"English": "About",
+      "Português": "Informação",
+      "Español": "Información",
+      "Italiano": "Info"},
+
+      {"English": "Small scale fisheries report",
+      "Português": "Relatório de pesca em pequena escala",
+      "Español": "Informe de pesca en pequeña escala",
+      "Italiano": "Rapporto sulla piccola pesca"},
+
+      {"English": "National overview - 07/2021",
+      "Português": "Visão geral nacional - 07/2021",
+      "Español": "Panorama nacional - 07/2021",
+      "Italiano": "Panoramica nazionale - 07/2021"},
+
+      {"English": "The project",
+      "Português": "O projeto",
+      "Español": "El proyecto",
+      "Italiano": "Il progetto"},
+
+      {"English": "Licence",
+      "Português": "Licencia",
+      "Español": "Licencia",
+      "Italiano": "Licensa"},
+
+      {"English": "Source code",
+      "Português": "Código fonte",
+      "Español": "Código fuente",
+      "Italiano": "Codice sorgente"},
+
+      {"English": "Copyright © 2021 Peskas. All rights reserved.",
+      "Português": "Copyright © 2021 Peskas. Todos os direitos reservados.",
+      "Español": "Copyright © 2021 Peskas. Todos los derechos reservados.",
+      "Italiano": "Copyright © 2021 Peskas. Tutti i diritti riservati."},
+
+      {"English": "National revenue",
+      "Português": "Receita nacional",
+      "Español": "Ingresos nacionales",
+      "Italiano": "Rendita nazionale"},
+
+      {"English": "Small scale fisheries",
+      "Português": "Pesca de pequena escala",
+      "Español": "Pesquerías en pequeña escala",
+      "Italiano": "Pesca a piccola scala"},
+
+      {"English": "Estimates are provisional",
+      "Português": "As estimativas são provisórias",
+      "Español": "Las estimaciones son provisionales",
+      "Italiano": "Le stime sono provvisorie"},
+
+      {"English": "Learn more",
+      "Português": "Saber mais",
+      "Español": "Aprende más",
+      "Italiano": "Scopri di più"},
+
+      {"English": "These estimates have not been validated and might be inaccurate. Use with caution.",
+      "Português": "Essas estimativas não foram validadas e podem ser imprecisas. Use com cuidado.",
+      "Español": "Estas estimaciones no se han validado y pueden ser inexactas. Úselo con precaución.",
+      "Italiano": "Queste stime non sono state convalidate e potrebbero essere imprecise. Usare con cautela."}
+
+      ]
 }

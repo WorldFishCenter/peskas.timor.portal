@@ -1,20 +1,20 @@
-tab_revenue_content <- function(){
+tab_revenue_content <- function(i18n){
   tagList(
-    page_heading(pretitle = "Small scale fisheries", title = "National revenue"),
+    page_heading(pretitle = i18n$t("Small scale fisheries"), title = i18n$t("National revenue")),
     page_cards(
       tags$div(
         class = "col-12 mt-0",
         alert_ui(
-          heading = "Estimates are provisional",
+          heading = i18n$t("Estimates are provisional"),
           icon = icon_alert_triangle(class = "alert-icon"),
-          content = "These estimates have not been validated and might be inaccurate. Use with caution.",
+          content = i18n$t("These estimates have not been validated and might be inaccurate. Use with caution."),
           alert_class = "alert-warning alert-dismissible mb-0 mt-2",
           bottom = tags$div(
             class = "btn-list d-lg-none mt-3",
             tags$a(
               href = "#revenue-info",
               class = "btn btn-warning",
-              "Learn more"
+              i18n$t("Learn more")
             )
           )
         )
