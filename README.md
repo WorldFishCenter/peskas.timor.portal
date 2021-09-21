@@ -9,7 +9,7 @@ A web portal displaying data and insights from small fisheries in East Timor.
 This app is structured as an R package and makes heavy use of the [golem](https://github.com/ThinkR-open/golem) framework to organise the package. 
 The user interface is heavily customised and relies on the open source dashboard template [tabler](https://tabler.io).
 
-Reproducibility is managed by combining docker and renv. 
+Reproducibility is managed by combining docker and renv. This app runs in Google Cloud Run. 
 
 ## Code of Conduct
   
