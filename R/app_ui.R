@@ -49,7 +49,7 @@ app_ui <- function(request) {
         ),
         tab_panel(
           id = "about",
-          page_heading(pretitle = "", title = "About")
+          page_text(content = peskas_timor_about())
         )
       ),
       footer_panel(
