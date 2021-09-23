@@ -3,7 +3,7 @@
   "languages": ["English", "Italiano", "Español","Português" , "Tetum"],
   "translation":
   [
-      {"English": "Managment Dashboard",
+      {"English": "Management Dashboard",
       "Português": "Painel de Gestão",
       "Tetum": "Panel Jestaun",
       "Español": "Panel de administración",
