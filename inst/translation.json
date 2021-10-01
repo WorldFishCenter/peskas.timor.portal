@@ -1,0 +1,36 @@
+{
+  "cultural_date_format": "%d-%m-%Y",
+  "languages": ["eng", "tet", "por"],
+  "translation": [
+    {
+      "eng": "Home",
+      "tet": "Prinsipal",
+      "por": "Principal"
+    },
+    {
+      "eng": "Revenue",
+      "tet": "Reseita",
+      "por": "Receita"
+    },
+    {
+      "eng": "About",
+      "tet": "Informasaun",
+      "por": "Informação"
+    },
+    {
+      "eng": "License",
+      "tet": "Lisensa",
+      "por": "Licencia"
+    },
+    {
+      "eng": "Source code",
+      "tet": "Fonte kódigu",
+      "por": "Código fonte"
+    },
+    {
+      "eng": "Copyright © 2021 Peskas. All rights reserved.",
+      "tet": "Copyright © 2021 Peskas. Direitu hotu rezervadu.",
+      "por": "Copyright © 2021 Peskas. Todos os direitos reservados."
+    }
+  ]
+}

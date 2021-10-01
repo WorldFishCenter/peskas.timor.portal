@@ -150,5 +150,5 @@ text_card_ui <- function(id = "", heading = "Card heading", subheading = "Card s
 }
 
 get_var_info <- function(var){
-  peskas.timor.portal::var_dictionary[var]
+  peskas.timor.portal::pars$vars[var]
 }
