@@ -6,16 +6,20 @@ names(languages) <- languages
 params <- lapply(languages, function(x) config::get(file = "data-raw/app_params.yml", config = x))
 unlisted_params <- lapply(params, unlist)
 
-merge_lang <- function(eng, tet, por){
-  list(eng = eng, tet = tet, por = por)
+to_df <- function(x){
+  lang <- names(unlisted_params[x])
+  x <- unlisted_params[[x]]
+  df <- data.frame(names(x), x)
+  names(df) <- c("par_name", lang)
+  df
 }
+params_as_df <- lapply(seq_along(unlisted_params), to_df)
 
-multilingual <- mapply(merge_lang,
-                       unlisted_params$eng,
-                       unlisted_params$tet,
-                       unlisted_params$por,
-                       SIMPLIFY = FALSE)
-names(multilingual) <- NULL
+
+multilingual <- Reduce(merge, params_as_df)
+multilingual <- apply(multilingual, 1, function(x) x[-1], simplify = F)
+multilingual <- lapply(multilingual, as.list)
+
 
 no_translation <- function(x){
   x$eng == x$tet & x$eng == x$por
