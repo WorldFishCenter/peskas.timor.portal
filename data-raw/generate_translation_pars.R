@@ -3,7 +3,7 @@
 
 languages <- c("eng", "tet", "por")
 names(languages) <- languages
-params <- lapply(languages, function(x) config::get(file = "data-raw/app_params.yml", config = x))
+params <- lapply(languages, function(x) config::get(file = "app_params.yml", config = x))
 unlisted_params <- lapply(params, unlist)
 
 to_df <- function(x){
