@@ -5,7 +5,6 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  i18n <- shiny.i18n::Translator$new(translation_json_path = "data/translation.json")
   tagList(
     apexchart_dep(),
     jquery_dep(),
