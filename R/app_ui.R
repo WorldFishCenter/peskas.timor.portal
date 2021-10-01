@@ -21,15 +21,15 @@ app_ui <- function(request) {
           width = '50%'
         ),
         version_flex(
-          heading = i18n$t("Management Dashboard"),
+          heading = i18n$t(pars$header$subtitle$text),
           subheading = "East Timor (v0.0.12-alpha)"
         )
       ),
       tab_menu(
-        tab_menu_item(i18n$t("Home"), "home", icon_home()),
+        tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
         tab_menu_item(
           label = tagList(
-            i18n$t("Revenue"),
+            i18n$t(pars$header$nav$revenue$text),
             tags$span(
               class = "badge bg-lime-lt",
               "New"
