@@ -14,14 +14,14 @@ app_ui <- function(request) {
         shiny.i18n::usei18n(i18n),
         logo = peskas_logo(),
         selectInput(
-          inputId='selected_language',
-          label=i18n$t('Select your language'),
+          inputId = 'selected_language',
+          label = i18n$t('Select your language'),
           choices = i18n$get_languages(),
           selected = i18n$get_key_translation(),
           width = '50%'
         ),
         version_flex(
-          heading = i18n$t("Managment Dashboard"),
+          heading = i18n$t("Management Dashboard"),
           subheading = "East Timor (v0.0.12-alpha)"
         )
       ),
@@ -44,7 +44,7 @@ app_ui <- function(request) {
         tab_panel(
           id = "home",
           page_heading(pretitle = i18n$t("Small scale fisheries report"),
-                       title = i18n$t("National overview - 07/2021")),
+                       title = i18n$t(peskas.timor.portal::pars$home$title$name)),
           page_cards(
             mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
             mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
