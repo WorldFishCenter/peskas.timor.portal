@@ -38,6 +38,8 @@ default:
       problems: "Data has not been updated since 2015. However, the number of boats has likely changed considerably since then."
       quality: low
   header:
+    subtitle:
+      name: Management Dashboard
     nav:
       home:
         name: Home
@@ -53,9 +55,24 @@ default:
         name: Source code
     copyright:
       text: "Copyright © 2021 Peskas. All rights reserved."
+  home:
+    title:
+      name: National overview
+    subtitle:
+      name: Small scale fisheries report
+  revenue:
+    title:
+      name: National revenue
+    subtitle:
+      name: Small scale fisheries
 
 tet:
+  vars:
+    n_tracks:
+      short_name: Tracked trips tetun
   header:
+    subtitle:
+      name: Panel Jestaun
     nav:
       home:
         name: Prinsipal
@@ -71,9 +88,24 @@ tet:
         name: Fonte kódigu
     copyright:
       text: "Copyright © 2021 Peskas. Direitu hotu rezervadu."
+  home:
+    title:
+      name: Panorama nasional
+    subtitle:
+      name: Relatóriu peska eskala ki'ik
+  revenue:
+    title:
+      name: Reseita nasional
+    subtitle:
+      name: Peska eskala ki'ik
  
 por:
+  vars:
+    n_tracks:
+      short_name: Tracked trips POR
   header:
+    subtitle:
+      name: Painel de Gestão
     nav:
       home:
         name: Principal
@@ -89,3 +121,13 @@ por:
         name: Código fonte
     copyright:
       text: "Copyright © 2021 Peskas. Todos os direitos reservados."
+  home:
+    title:
+      name: Visão geral nacional
+    subtitle:
+      name: Relatório de pesca em pequena escala
+  revenue:
+    title:
+      name: Receita nacional
+    subtitle:
+      name: Pesca de pequena escala
