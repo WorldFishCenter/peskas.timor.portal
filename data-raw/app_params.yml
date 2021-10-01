@@ -39,32 +39,38 @@ default:
       quality: low
   header:
     subtitle:
-      name: Management Dashboard
+      text: Management Dashboard
     nav:
       home:
-        name: Home
+        text: Home
       revenue:
-        name: Revenue
+        text: Revenue
       about:
-        name: About
+        text: About
   footer:
     nav:
       license:
-        name: License
+        text: License
       code:
-        name: Source code
+        text: Source code
     copyright:
       text: "Copyright © 2021 Peskas. All rights reserved."
   home:
     title:
-      name: National overview
+      text: National overview
     subtitle:
-      name: Small scale fisheries report
+      text: Small scale fisheries report
   revenue:
     title:
-      name: National revenue
+      text: National revenue
     subtitle:
-      name: Small scale fisheries
+      text: Small scale fisheries
+    warning_1:
+      heading:
+        text: Estimates are provisional
+      content:
+        text: These estimates have not been validated and might be inaccurate. Use with caution.
+
 
 tet:
   vars:
@@ -72,32 +78,37 @@ tet:
       short_name: Tracked trips tetun
   header:
     subtitle:
-      name: Panel Jestaun
+      text: Panel Jestaun
     nav:
       home:
-        name: Prinsipal
+        text: Prinsipal
       revenue:
-        name: Reseita
+        text: Reseita
       about:
-        name: Informasaun
+        text: Informasaun
   footer:
     nav:
       license:
-        name: Lisensa
+        text: Lisensa
       code:
-        name: Fonte kódigu
+        text: Fonte kódigu
     copyright:
       text: "Copyright © 2021 Peskas. Direitu hotu rezervadu."
   home:
     title:
-      name: Panorama nasional
+      text: Panorama nasional
     subtitle:
-      name: Relatóriu peska eskala ki'ik
+      text: Relatóriu peska eskala ki'ik
   revenue:
     title:
-      name: Reseita nasional
+      text: Reseita nasional
     subtitle:
-      name: Peska eskala ki'ik
+      text: Peska eskala ki'ik
+    warning_1:
+      heading:
+        text: Estimasaun provizória
+      content:
+        text: Estimasaun hirak ne'e seidauk hetan validasaun nune'e bele inexata. Uza ho kuidadu.
  
 por:
   vars:
@@ -105,29 +116,34 @@ por:
       short_name: Tracked trips POR
   header:
     subtitle:
-      name: Painel de Gestão
+      text: Painel de Gestão
     nav:
       home:
-        name: Principal
+        text: Principal
       revenue:
-        name: Receita
+        text: Receita
       about:
-        name: Informação
+        text: Informação
   footer:
     nav:
       license:
-        name: Licencia
+        text: Licencia
       code:
-        name: Código fonte
+        text: Código fonte
     copyright:
       text: "Copyright © 2021 Peskas. Todos os direitos reservados."
   home:
     title:
-      name: Visão geral nacional
+      text: Visão geral nacional
     subtitle:
-      name: Relatório de pesca em pequena escala
+      text: Relatório de pesca em pequena escala
   revenue:
     title:
-      name: Receita nacional
+      text: Receita nacional
     subtitle:
-      name: Pesca de pequena escala
+      text: Pesca de pequena escala
+    warning_1:
+      heading:
+        text: As estimativas são provisórias
+      content:
+        text: Essas estimativas não foram validadas e podem ser imprecisas. Use com cuidado.

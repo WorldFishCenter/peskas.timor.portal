@@ -3,6 +3,26 @@
   "languages": ["eng", "tet", "por"],
   "translation": [
     {
+      "eng": "Copyright © 2021 Peskas. All rights reserved.",
+      "tet": "Copyright © 2021 Peskas. Direitu hotu rezervadu.",
+      "por": "Copyright © 2021 Peskas. Todos os direitos reservados."
+    },
+    {
+      "eng": "Source code",
+      "tet": "Fonte kódigu",
+      "por": "Código fonte"
+    },
+    {
+      "eng": "License",
+      "tet": "Lisensa",
+      "por": "Licencia"
+    },
+    {
+      "eng": "About",
+      "tet": "Informasaun",
+      "por": "Informação"
+    },
+    {
       "eng": "Home",
       "tet": "Prinsipal",
       "por": "Principal"
@@ -13,24 +33,44 @@
       "por": "Receita"
     },
     {
-      "eng": "About",
-      "tet": "Informasaun",
-      "por": "Informação"
+      "eng": "Management Dashboard",
+      "tet": "Panel Jestaun",
+      "por": "Painel de Gestão"
     },
     {
-      "eng": "License",
-      "tet": "Lisensa",
-      "por": "Licencia"
+      "eng": "Small scale fisheries report",
+      "tet": "Relatóriu peska eskala ki'ik",
+      "por": "Relatório de pesca em pequena escala"
     },
     {
-      "eng": "Source code",
-      "tet": "Fonte kódigu",
-      "por": "Código fonte"
+      "eng": "National overview",
+      "tet": "Panorama nasional",
+      "por": "Visão geral nacional"
     },
     {
-      "eng": "Copyright © 2021 Peskas. All rights reserved.",
-      "tet": "Copyright © 2021 Peskas. Direitu hotu rezervadu.",
-      "por": "Copyright © 2021 Peskas. Todos os direitos reservados."
+      "eng": "Small scale fisheries",
+      "tet": "Peska eskala ki'ik",
+      "por": "Pesca de pequena escala"
+    },
+    {
+      "eng": "National revenue",
+      "tet": "Reseita nasional",
+      "por": "Receita nacional"
+    },
+    {
+      "eng": "These estimates have not been validated and might be inaccurate. Use with caution.",
+      "tet": "Estimasaun hirak ne'e seidauk hetan validasaun nune'e bele inexata. Uza ho kuidadu.",
+      "por": "Essas estimativas não foram validadas e podem ser imprecisas. Use com cuidado."
+    },
+    {
+      "eng": "Estimates are provisional",
+      "tet": "Estimasaun provizória",
+      "por": "As estimativas são provisórias"
+    },
+    {
+      "eng": "Tracked trips",
+      "tet": "Tracked trips tetun",
+      "por": "Tracked trips POR"
     }
   ]
 }
