@@ -25,7 +25,7 @@ mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-he
 #'
 #' @noRd
 #' @import data.table
-mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = "area", sparkline.enabled = T, apex_height = "4rem", i18n = list(t = function(x) x)){
+mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = "area", sparkline.enabled = T, apex_height = "4rem", i18n_r = reactive(list(t = function(x) x))){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -55,7 +55,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
 
       summary_card_content(
         id = id,
-        subheader = i18n$t(d$series[[1]]$series_heading),
+        subheader = i18n_r()$t(d$series[[1]]$series_heading),
         heading = d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val),
         annotation = trend_annotation_summary_card(magnitude = d$series[[1]]$trend_magnitude,
                                       direction = d$series[[1]]$trend_direction),
@@ -68,15 +68,31 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
 }
 
 mod_summary_card_app <- function(options = list()){
-  i18n <- shiny.i18n::Translator$new(translation_json_path = "data/translation.json")
-  i18n$set_translation_language("Italiano")
+  i18n <- shiny.i18n::Translator$new(
+    translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+
   ui <- tabler_page(
     shiny.i18n::usei18n(i18n),
     shinyjs::useShinyjs(),
+    selectInput(
+      inputId = 'selected_language',
+      label = i18n$t('Select your language'),
+      choices = i18n$get_languages(),
+      selected = i18n$get_key_translation()
+    ),
     mod_summary_card_ui(id = "i")
   )
   server <- function(input, output, session) {
-    mod_summary_card_server("i", "n_matched", n = 13, apex_height = "100px", i18n = i18n)
+
+    i18n_r <- reactive({
+      selected <- input$selected_language
+      if (length(selected) > 0 && selected %in% i18n$get_languages()) {
+        i18n$set_translation_language(selected)
+      }
+      i18n
+    })
+
+    mod_summary_card_server("i", "n_tracks", n = 13, apex_height = "100px", i18n_r = i18n_r)
   }
   shinyApp(ui, server, options = options)
 }

@@ -4,21 +4,30 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
-app_server <- function( input, output, session ){
-  # Your application server logic
+app_server <- function(input, output, session){
+  # For translation made in the UI
   observeEvent(input$selected_language, {
     shiny.i18n::update_lang(session, input$selected_language)
   })
+  # For translations made in the server (e.g. inside modules with reactive outputs)
+  i18n_r <- reactive({
+    selected <- input$selected_language
+    if (length(selected) > 0 && selected %in% i18n$get_languages()) {
+      i18n$set_translation_language(selected)
+    }
+    i18n
+  })
+
   # Summary tab
-  mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13)
-  mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13)
-  mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13)
-  mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13)
+  mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
 
   # Revenue tab
   mod_highlight_card_server(id = "revenue-card", var = "revenue", period = "month", n = 25)
-  mod_summary_card_server(id = "landing-revenue-card", var = "landing_revenue", period = "month", n = 13)
-  mod_summary_card_server(id = "landing-per-boat-revenue-card", var = "n_landings_per_boat", period = "month", n = 13)
+  mod_summary_card_server(id = "landing-revenue-card", var = "landing_revenue", period = "month", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "landing-per-boat-revenue-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "n-boats-revenue-card", var = "n_boats", period = "month")
   mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"))
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"))
