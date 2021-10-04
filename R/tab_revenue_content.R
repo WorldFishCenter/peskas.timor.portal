@@ -34,14 +34,14 @@ tab_revenue_content <- function(i18n){
       ),
       mod_summary_table_ui(
         id = "revenue-table",
-        heading = "Annual summary",
+        heading = i18n$t("Annual summary"),
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
       tags$div(
         class = "col",
         mod_var_descriptions_ui(
           id = "revenue-info",
-          heading = "About the data",
+          heading = i18n$t("About the data"),
           # subheading = "Possible caveats and data description",
           intro =  tagList(
             markdown(
@@ -54,7 +54,7 @@ Estimates, even from previous years, may be updated whenever new data is availab
             ),
             tags$div(
               class = "hr-text",
-              "Indicator information"
+              i18n$t("Indicator information")
             )
           )
         )

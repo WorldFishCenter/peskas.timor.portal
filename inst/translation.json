@@ -3,6 +3,11 @@
   "languages": ["eng", "tet", "por"],
   "translation": [
     {
+      "eng": "Select your language",
+      "tet": "Hili ita lian",
+      "por": "Selecione sua lingu"
+    },
+    {
       "eng": "Copyright © 2021 Peskas. All rights reserved.",
       "tet": "Copyright © 2021 Peskas. Direitu hotu rezervadu.",
       "por": "Copyright © 2021 Peskas. Todos os direitos reservados."
@@ -13,9 +18,14 @@
       "por": "Código fonte"
     },
     {
-      "eng": "License",
+      "eng": "Licence",
       "tet": "Lisensa",
       "por": "Licencia"
+    },
+    {
+      "eng": "The project",
+      "tet": "Projetu",
+      "por": "O projeto"
     },
     {
       "eng": "About",
@@ -58,6 +68,11 @@
       "por": "Receita nacional"
     },
     {
+      "eng": "Learn more",
+      "tet": "Hatene liu tan",
+      "por": "Saber mais"
+    },
+    {
       "eng": "These estimates have not been validated and might be inaccurate. Use with caution.",
       "tet": "Estimasaun hirak ne'e seidauk hetan validasaun nune'e bele inexata. Uza ho kuidadu.",
       "por": "Essas estimativas não foram validadas e podem ser imprecisas. Use com cuidado."
@@ -70,7 +85,57 @@
     {
       "eng": "Tracked trips",
       "tet": "Tracked trips tetun",
-      "por": "Tracked trips POR"
+      "por": "Viagens monitoradas"
+    },
+    {
+      "eng": "Surveyed landings",
+      "tet": "Tracked trips tetun",
+      "por": "Patamares pesquisados"
+    },
+    {
+      "eng": "Total revenue",
+      "tet": "Tracked trips tetun",
+      "por": "Receita total"
+    },
+    {
+      "eng": "Matched tracks",
+      "tet": "Tracked trips tetun",
+      "por": "Faixas combinadas"
+    },
+    {
+      "eng": "Landing value",
+      "tet": "Landing value tetun",
+      "por": "Valor de desembarque"
+    },
+    {
+      "eng": "Landings per boat",
+      "tet": "Landings per boat tetun",
+      "por": "Desembarques por barco"
+    },
+    {
+      "eng": "Number of boats",
+      "tet": "Number of boats tetun",
+      "por": "Número de barcos"
+    },
+    {
+      "eng": "period",
+      "tet": "period tetun",
+      "por": "período"
+    },
+    {
+      "eng": "Annual summary",
+      "tet": "Annual summary tetun",
+      "por": "Sumário anual"
+    },
+    {
+      "eng": "About the data",
+      "tet": "About the data tetun",
+      "por": "Sobre os dados"
+    },
+    {
+      "eng": "Indicator information",
+      "tet": "Indicator information tetun",
+      "por": "Informações do indicador"
     }
   ]
 }

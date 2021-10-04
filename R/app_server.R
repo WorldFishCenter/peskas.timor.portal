@@ -28,8 +28,8 @@ app_server <- function(input, output, session){
   mod_highlight_card_server(id = "revenue-card", var = "revenue", period = "month", n = 25)
   mod_summary_card_server(id = "landing-revenue-card", var = "landing_revenue", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landing-per-boat-revenue-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
-  mod_simple_summary_card_server(id = "n-boats-revenue-card", var = "n_boats", period = "month")
-  mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"))
+  mod_simple_summary_card_server(id = "n-boats-revenue-card", var = "n_boats", period = "month", i18n_r = i18n_r)
+  mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"),  i18n_r = i18n_r)
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"))
 
 }
