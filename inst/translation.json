@@ -3,11 +3,6 @@
   "languages": ["eng", "tet", "por"],
   "translation": [
     {
-      "eng": "Select your language",
-      "tet": "Hili ita lian",
-      "por": "Selecione sua lingu"
-    },
-    {
       "eng": "Copyright © 2021 Peskas. All rights reserved.",
       "tet": "Copyright © 2021 Peskas. Direitu hotu rezervadu.",
       "por": "Copyright © 2021 Peskas. Todos os direitos reservados."
@@ -18,7 +13,7 @@
       "por": "Código fonte"
     },
     {
-      "eng": "Licence",
+      "eng": "License",
       "tet": "Lisensa",
       "por": "Licencia"
     },
@@ -58,19 +53,54 @@
       "por": "Visão geral nacional"
     },
     {
+      "eng": "About the data",
+      "tet": "About the data",
+      "por": "Sobre os dados"
+    },
+    {
+      "eng": "Indicator information",
+      "tet": "Indicator information",
+      "por": "Informações do indicador"
+    },
+    {
       "eng": "Small scale fisheries",
       "tet": "Peska eskala ki'ik",
       "por": "Pesca de pequena escala"
     },
     {
+      "eng": "Total revenue",
+      "tet": "Total revenue",
+      "por": "Receita total"
+    },
+    {
+      "eng": "Annual summary",
+      "tet": "Annual summary",
+      "por": "Sumário anual"
+    },
+    {
+      "eng": "period",
+      "tet": "period",
+      "por": "período"
+    },
+    {
+      "eng": "Landings per boat",
+      "tet": "Landings per boat",
+      "por": "Desembarques por barco"
+    },
+    {
+      "eng": "Landing value",
+      "tet": "Landing value",
+      "por": "Valor de desembarque"
+    },
+    {
+      "eng": "Number of boats",
+      "tet": "Number of boats",
+      "por": "Número de barcos"
+    },
+    {
       "eng": "National revenue",
       "tet": "Reseita nasional",
       "por": "Receita nacional"
-    },
-    {
-      "eng": "Learn more",
-      "tet": "Hatene liu tan",
-      "por": "Saber mais"
     },
     {
       "eng": "These estimates have not been validated and might be inaccurate. Use with caution.",
@@ -83,59 +113,24 @@
       "por": "As estimativas são provisórias"
     },
     {
-      "eng": "Tracked trips",
-      "tet": "Tracked trips tetun",
-      "por": "Viagens monitoradas"
+      "eng": "Learn more",
+      "tet": "Learn more",
+      "por": "Saber mais"
     },
     {
       "eng": "Surveyed landings",
-      "tet": "Tracked trips tetun",
+      "tet": "Surveyed landings",
       "por": "Patamares pesquisados"
     },
     {
-      "eng": "Total revenue",
-      "tet": "Tracked trips tetun",
-      "por": "Receita total"
-    },
-    {
       "eng": "Matched tracks",
-      "tet": "Tracked trips tetun",
+      "tet": "Matched tracks",
       "por": "Faixas combinadas"
     },
     {
-      "eng": "Landing value",
-      "tet": "Landing value tetun",
-      "por": "Valor de desembarque"
-    },
-    {
-      "eng": "Landings per boat",
-      "tet": "Landings per boat tetun",
-      "por": "Desembarques por barco"
-    },
-    {
-      "eng": "Number of boats",
-      "tet": "Number of boats tetun",
-      "por": "Número de barcos"
-    },
-    {
-      "eng": "period",
-      "tet": "period tetun",
-      "por": "período"
-    },
-    {
-      "eng": "Annual summary",
-      "tet": "Annual summary tetun",
-      "por": "Sumário anual"
-    },
-    {
-      "eng": "About the data",
-      "tet": "About the data tetun",
-      "por": "Sobre os dados"
-    },
-    {
-      "eng": "Indicator information",
-      "tet": "Indicator information tetun",
-      "por": "Informações do indicador"
+      "eng": "Tracked trips",
+      "tet": "Tracked trips tetun",
+      "por": "Viagens monitoradas"
     }
   ]
 }

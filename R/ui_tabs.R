@@ -157,3 +157,55 @@ dropdown_item <- function(label, nav_target){
     label
   )
 }
+
+
+language_drop_item <- function(label = "", id = "", icon_svg = NULL){
+
+  icon <- if (!is.null(icon_svg)) {
+    tags$span(
+      class = "nav-link-icon d-md-none d-lg-inline-block",
+      icon_svg
+    )
+  } else {
+    list()
+  }
+
+  tags$li(
+    class = "nav-item dropdown",
+    role = "presentation",
+    tags$a(
+      class = "nav-link dropdown-toggle",
+      id = paste0(id, "-menu"),
+      `data-bs-toggle` = "dropdown",
+      `data-bs-target` = paste0("#", id),
+      `aria-controls` = id,
+      `data-value` = id,
+      href = paste0("#", id),
+      icon,
+      tags$span(
+        class = "nav-link-title"),
+      label
+    ),
+    tags$div(
+      class = "dropdown-menu",
+      tags$a(
+        class = "dropdown-item",
+        href = NA,
+        class="eng",
+        "English"
+      ),
+      tags$a(
+        class = "dropdown-item",
+        href = NA,
+        class="tet",
+        "Tetun"
+      ),
+      tags$a(
+        class = "dropdown-item",
+        href = NA,
+        class="por",
+        "Português"
+      )
+    )
+  )
+}

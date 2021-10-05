@@ -75,7 +75,7 @@ mod_summary_card_app <- function(options = list()){
     shiny.i18n::usei18n(i18n),
     shinyjs::useShinyjs(),
     selectInput(
-      inputId = 'selected_language',
+      inputId = 'language',
       label = i18n$t('Select your language'),
       choices = i18n$get_languages(),
       selected = i18n$get_key_translation()
@@ -85,7 +85,7 @@ mod_summary_card_app <- function(options = list()){
   server <- function(input, output, session) {
 
     i18n_r <- reactive({
-      selected <- input$selected_language
+      selected <- input$language
       if (length(selected) > 0 && selected %in% i18n$get_languages()) {
         i18n$set_translation_language(selected)
       }

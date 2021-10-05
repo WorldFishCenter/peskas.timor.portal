@@ -6,12 +6,12 @@
 #' @noRd
 app_server <- function(input, output, session){
   # For translation made in the UI
-  observeEvent(input$selected_language, {
-    shiny.i18n::update_lang(session, input$selected_language)
+  observeEvent(input$language, {
+    shiny.i18n::update_lang(session, input$language)
   })
   # For translations made in the server (e.g. inside modules with reactive outputs)
   i18n_r <- reactive({
-    selected <- input$selected_language
+    selected <- input$language
     if (length(selected) > 0 && selected %in% i18n$get_languages()) {
       i18n$set_translation_language(selected)
     }

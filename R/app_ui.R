@@ -16,7 +16,7 @@ app_ui <- function(request) {
         shiny.i18n::usei18n(i18n),
         logo = peskas_logo(),
         selectInput(
-          inputId = 'selected_language',
+          inputId = 'language',
           label = i18n$t('Select your language'),
           choices = i18n$get_languages(),
           selected = i18n$get_key_translation(),
@@ -38,14 +38,15 @@ app_ui <- function(request) {
             )
           ),
           id = "revenue", icon_currency_dollar()),
-        tab_menu_item(i18n$t("About"), "about", icon_info_circle()),
+        tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
+        language_drop_item(i18n$t("Language"), "language", icon_world()),
         id = "main_tabset"
       ),
       tabset_panel(
         menu_id = "main_tabset",
         tab_panel(
           id = "home",
-          page_heading(pretitle = i18n$t("Small scale fisheries report"),
+          page_heading(pretitle = i18n$t(pars$home$subtitle$text),
                        title = i18n$t(pars$home$title$text)),
           page_cards(
             mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
@@ -71,15 +72,15 @@ app_ui <- function(request) {
         ),
         right_side_elements = tagList(
           inline_li_link(
-            content = i18n$t("The project"),
+            content = i18n$t(pars$footer$nav$project$text),
             href = "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760"
           ),
           inline_li_link(
-            content = i18n$t("Licence"),
+            content = i18n$t(pars$footer$nav$license$text),
             href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md"
           ),
           inline_li_link(
-            content = i18n$t("Source code"),
+            content = i18n$t(pars$footer$nav$code$text),
             href = "https://github.com/WorldFishCenter/peskas.timor.portal"
           )
         ),

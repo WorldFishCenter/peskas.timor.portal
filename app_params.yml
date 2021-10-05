@@ -53,6 +53,8 @@ default:
         text: License
       code:
         text: Source code
+      project:
+        text: The project
     copyright:
       text: "Copyright © 2021 Peskas. All rights reserved."
   home:
@@ -70,7 +72,27 @@ default:
         text: Estimates are provisional
       content:
         text: These estimates have not been validated and might be inaccurate. Use with caution.
-
+      more:
+        text: Learn more
+    table:
+      vars:
+        landings_value:
+          text: Landing value
+        landings_boats:
+          text: Landings per boat
+        n_boats:
+          text: Number of boats
+      heading:
+        text: Annual summary
+      footer:
+        text: Total revenue
+      period_col:
+        text: period
+    decription:
+      heading:
+        text: About the data
+      subheading:
+        text: Indicator information
 
 tet:
   vars:
@@ -92,6 +114,8 @@ tet:
         text: Lisensa
       code:
         text: Fonte kódigu
+      project:
+        text: Projetu
     copyright:
       text: "Copyright © 2021 Peskas. Direitu hotu rezervadu."
   home:
@@ -113,7 +137,13 @@ tet:
 por:
   vars:
     n_tracks:
-      short_name: Tracked trips POR
+      short_name: Viagens monitoradas
+    n_landings:
+      short_name: Patamares pesquisados
+    n_matched:
+      short_name: Faixas combinadas
+    revenue:
+      short_name: Total revenue
   header:
     subtitle:
       text: Painel de Gestão
@@ -130,6 +160,8 @@ por:
         text: Licencia
       code:
         text: Código fonte
+      project:
+        text: O projeto
     copyright:
       text: "Copyright © 2021 Peskas. Todos os direitos reservados."
   home:
@@ -147,3 +179,24 @@ por:
         text: As estimativas são provisórias
       content:
         text: Essas estimativas não foram validadas e podem ser imprecisas. Use com cuidado.
+      more:
+        text: Saber mais
+    table:
+      vars:
+        landings_value:
+          text: Valor de desembarque
+        landings_boats:
+          text: Desembarques por barco
+        n_boats:
+          text: Número de barcos
+      heading:
+        text: Sumário anual
+      footer:
+        text: Receita total
+      period_col:
+        text: período
+    decription:
+      heading:
+        text: Sobre os dados
+      subheading:
+        text: Informações do indicador
