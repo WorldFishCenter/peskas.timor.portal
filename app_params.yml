@@ -158,7 +158,7 @@ por:
       short_name: Desembarques por barco
       format: ",.3r"
       quality: baixo
-      description: "O número de pousos por barco é obtido nos dados de rastreamento da [Pelagic Data Systems] (https://www.pelagicdata.com/). Os movimentos do barco são rastreados e um algoritmo proprietário é usado para determinar quando ocorre uma viagem. As estimativas são obtidas pela média do número de viagens que um barco faz ao longo de um mês."
+      description: "O número de pousos por barco é obtido nos dados de rastreamento da [Pelagic Data Systems](https://www.pelagicdata.com/). Os movimentos do barco são rastreados e um algoritmo proprietário é usado para determinar quando ocorre uma viagem. As estimativas são obtidas pela média do número de viagens que um barco faz ao longo de um mês."
       problems: "Existem problemas conhecidos com o algoritmo de sistemas de Dados Pelágicos. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede ruim pode atrasar ou impedir que as informações sejam transferidas dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Atualmente, não é possível distinguir as viagens de pesca (que resultam em um desembarque) das viagens que não são de pesca."
       methods: "As viagens são filtradas quanto a valores discrepantes e alguns erros de algoritmo em potencial. Especificamente, não levamos em consideração viagens em que a duração presumida seja superior a 18 horas ou cobre uma distância superior a 60 km."
     n_boats:
