@@ -41,20 +41,13 @@ tab_revenue_content <- function(i18n){
         class = "col",
         mod_var_descriptions_ui(
           id = "revenue-info",
-          heading = i18n$t("About the data"),
+          heading = i18n$t(pars$revenue$decription$heading$text),
           # subheading = "Possible caveats and data description",
           intro =  tagList(
-            markdown(
-              "
-The revenue estimates have not been thoroughly validated and might be inaccurate.
-There is some uncertainty on all data used in the calculations.
-
-Estimates, even from previous years, may be updated whenever new data is available.
-            "
-            ),
+            markdown(i18n$t(pars$revenue$decription$content$text)),
             tags$div(
               class = "hr-text",
-              i18n$t("Indicator information")
+              i18n$t(pars$revenue$decription$subheading$text)
             )
           )
         )
