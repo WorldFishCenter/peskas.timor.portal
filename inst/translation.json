@@ -145,7 +145,7 @@
     {
       "eng": "The number of landings per boat is obtained from the [Pelagic Data Systems](https://www.pelagicdata.com/) tracking data. Boat movements are tracked, and a proprietary algorithm is used to determine when a trip occurs. Estimates are obtained by averaging the number of trips a boat makes over a month.",
       "tet": "The number of landings per boat is obtained from the [Pelagic Data Systems](https://www.pelagicdata.com/) tracking data. Boat movements are tracked, and a proprietary algorithm is used to determine when a trip occurs. Estimates are obtained by averaging the number of trips a boat makes over a month.",
-      "por": "O número de pousos por barco é obtido nos dados de rastreamento da [Pelagic Data Systems] (https://www.pelagicdata.com/). Os movimentos do barco são rastreados e um algoritmo proprietário é usado para determinar quando ocorre uma viagem. As estimativas são obtidas pela média do número de viagens que um barco faz ao longo de um mês."
+      "por": "O número de pousos por barco é obtido nos dados de rastreamento da [Pelagic Data Systems](https://www.pelagicdata.com/). Os movimentos do barco são rastreados e um algoritmo proprietário é usado para determinar quando ocorre uma viagem. As estimativas são obtidas pela média do número de viagens que um barco faz ao longo de um mês."
     },
     {
       "eng": "Trips are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account trips where the presumed duration is longer than 18 hours or covers a distance over 60km.",
