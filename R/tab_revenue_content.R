@@ -1,6 +1,6 @@
 tab_revenue_content <- function(){
   tagList(
-    page_heading(pretitle = "Small scale fisheries", title = "National revenue"),
+    page_heading(pretitle = "Small scale fisheries", title = "National revenue", download_text = "Download report"),
     page_cards(
       tags$div(
         class = "col-12 mt-0",
