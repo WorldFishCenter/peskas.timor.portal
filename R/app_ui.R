@@ -35,7 +35,7 @@ app_ui <- function(request) {
         menu_id = "main_tabset",
         tab_panel(
           id = "home",
-          page_heading(pretitle = "Small scale fisheries report", title = "National overview - July 2021"),
+          page_heading(pretitle = "Small scale fisheries report", title = "National overview - July 2021", download_text = "Download report"),
           page_cards(
             mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
             mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
