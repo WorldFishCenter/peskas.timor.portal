@@ -103,6 +103,21 @@
       "por": "Saber mais"
     },
     {
+      "eng": "Close",
+      "tet": "Close",
+      "por": "Fechar"
+    },
+    {
+      "eng": "Language",
+      "tet": "Language",
+      "por": "Língua"
+    },
+    {
+      "eng": "Settings",
+      "tet": "Settings",
+      "por": "Configuração"
+    },
+    {
       "eng": "The landing value is obtained from landing surveys at multiple sites around the country. Fishers are asked for the estimated price of their catch at the landing site regardless of whether the catch is deemed for sale or consumption. Prices may change throughout the year and across landing sites. We then obtain monthly estimates using a random-effect statistical model.",
       "tet": "The landing value is obtained from landing surveys at multiple sites around the country. Fishers are asked for the estimated price of their catch at the landing site regardless of whether the catch is deemed for sale or consumption. Prices may change throughout the year and across landing sites. We then obtain monthly estimates using a random-effect statistical model.",
       "por": "O valor de pouso é obtido a partir de pesquisas de pouso em vários locais em todo o país. Os pescadores são questionados sobre o preço estimado de sua captura no local de desembarque, independentemente de a captura ser considerada para venda ou consumo. Os preços podem mudar ao longo do ano e nos locais de pouso. Em seguida, obtemos estimativas mensais usando um modelo estatístico de efeito aleatório."

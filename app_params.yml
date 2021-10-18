@@ -92,8 +92,15 @@ default:
         text: Indicator information
       content:
         text: The revenue estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available.
-
-
+  settings:
+    title:
+      text: Settings
+    language_select:
+      label:
+        text: Language
+    buttons:
+      close:
+        label: Close
 tet:
   vars:
     n_tracks:
@@ -217,4 +224,12 @@ por:
         text: Informações do indicador
       content:
         text: As estimativas de receita não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis.
-
+  settings:
+    title:
+      text: Configuração
+    language_select:
+      label:
+        text: Língua
+    buttons:
+      close:
+        label: Fechar
