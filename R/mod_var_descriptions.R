@@ -24,7 +24,7 @@ mod_var_descriptions_ui <- function(id, heading, subheading = NULL, intro = ""){
 #' var_descriptions Server Functions
 #'
 #' @noRd
-mod_var_descriptions_server <- function(id, vars){
+mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = function(x) x))){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -42,11 +42,11 @@ mod_var_descriptions_server <- function(id, vars){
               tags$span(
                 class = paste("badge badge-pill me-3", bg$normal)
               ),
-              x[[1]]$short_name
+              i18n_r()$t(x[[1]]$short_name)
             ),
           content = tagList(
             markdown(
-              x[[1]]$description),
+              i18n_r()$t(x[[1]]$description)),
             tags$p(
               class = "small",
               tags$strong("Data processing and validation:"),
@@ -150,5 +150,5 @@ text_card_ui <- function(id = "", heading = "Card heading", subheading = "Card s
 }
 
 get_var_info <- function(var){
-  peskas.timor.portal::var_dictionary[var]
+  peskas.timor.portal::pars$vars[var]
 }

@@ -15,13 +15,15 @@ RUN install2.r --error --skipinstalled -n 2 \
     config \
     data.table \
     V8 \
-    shinyjs
+    shinyjs \
+    shiny.i18n \
+    logger
 
 RUN Rscript -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
     ))'
 
-COPY inst/app /srv/shiny-server/inst/app
+COPY inst /srv/shiny-server/inst
 COPY R /srv/shiny-server/R
 COPY DESCRIPTION /srv/shiny-server/DESCRIPTION
 COPY NAMESPACE /srv/shiny-server/NAMESPACE

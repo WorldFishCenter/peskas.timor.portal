@@ -70,15 +70,28 @@ $( document ).on('shiny:sessioninitialized', function(event) {
 }
 
 
-modal_dialog_ui <- function(..., id = "", header = NULL, footer = NULL, z_index = NULL){
+modal_dialog_ui <- function(..., id = "", header = NULL, footer = NULL, z_index = NULL, close_icon = FALSE){
   style <- "display: none;"
+  close_x <- NULL
   if (!is.null(z_index)) style <- paste(style, "z-index:", z_index, ";")
+
+  if (isTRUE(close_icon)) {
+    close_x <- tags$button(
+      type = "button",
+      class = "btn-close",
+      `data-bs-dismiss` = "modal",
+      `aria-label` = "Close"
+    )
+  }
+
   if (!is.null(header)) {
     header <- tags$div(
       class = "modal-header",
-      header
+      tags$h5(class = "modal-title", header),
+      close_x
     )
   }
+
   tags$div(
     id = id,
     class = "modal modal-dialog-centered",
@@ -107,3 +120,4 @@ modal_dialog_ui <- function(..., id = "", header = NULL, footer = NULL, z_index 
     ),
   )
 }
+

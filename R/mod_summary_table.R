@@ -39,7 +39,7 @@ mod_summary_table_ui <- function(id, years = NULL, ...){
 #' summary_table Server Functions
 #'
 #' @noRd
-mod_summary_table_server <- function(id, vars, period = "month", format_fun = I){
+mod_summary_table_server <- function(id, vars, period = "month", format_fun = I, i18n_r = reactive(list(t = function(x) x))){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -49,7 +49,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
       info <- info()
       data_columns <- lapply(info$series, function(x) {
         vals <- data.table(d3.format::d3.format(x$series_format)(x$series_value))
-        names(vals) <- x$series_name
+        names(vals) <- i18n_r()$t(x$series_name)
         vals
       })
       if (period == "month"){
@@ -57,7 +57,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
       } else {
         period_col <- data.table(period = info$x_categories)
       }
-
+      names(period_col)[1] <- i18n_r()$t(names(period_col)[1])
       cbind(period_col, Reduce(cbind, data_columns))
     })
 
@@ -75,8 +75,8 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I)
     output$f <- renderText({
       info <- info()
       total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
-      text <- paste0(info$series[[1]]$series_name, ":")
-      paste(text, d3.format::d3.format(info$series[[1]]$series_format)(total))
+      text <- paste0(info$series[[1]]$series_name)
+      paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format)(total))
     })
 
 

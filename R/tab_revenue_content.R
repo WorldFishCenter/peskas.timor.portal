@@ -1,20 +1,22 @@
-tab_revenue_content <- function(){
+tab_revenue_content <- function(i18n){
   tagList(
-    page_heading(pretitle = "Small scale fisheries", title = "National revenue", download_text = "Download report"),
+    page_heading(pretitle = i18n$t(pars$revenue$subtitle$text),
+                 title = i18n$t(pars$revenue$subtitle$text),
+                 download_text = i18n$t(pars$home$report$text)),
     page_cards(
       tags$div(
         class = "col-12 mt-0",
         alert_ui(
-          heading = "Estimates are provisional",
+          heading = i18n$t(pars$revenue$warning_1$heading$text),
           icon = icon_alert_triangle(class = "alert-icon"),
-          content = "These estimates have not been validated and might be inaccurate. Use with caution.",
+          content = i18n$t(pars$revenue$warning_1$content$text),
           alert_class = "alert-warning alert-dismissible mb-0 mt-2",
           bottom = tags$div(
             class = "btn-list d-lg-none mt-3",
             tags$a(
               href = "#revenue-info",
               class = "btn btn-warning",
-              "Learn more"
+              i18n$t(pars$revenue$warning_1$more$text)
             )
           )
         )
@@ -34,27 +36,20 @@ tab_revenue_content <- function(){
       ),
       mod_summary_table_ui(
         id = "revenue-table",
-        heading = "Annual summary",
+        heading = i18n$t(pars$revenue$table$heading$text),
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
       tags$div(
         class = "col",
         mod_var_descriptions_ui(
           id = "revenue-info",
-          heading = "About the data",
+          heading = i18n$t(pars$revenue$decription$heading$text),
           # subheading = "Possible caveats and data description",
           intro =  tagList(
-            markdown(
-              "
-The revenue estimates have not been thoroughly validated and might be inaccurate.
-There is some uncertainty on all data used in the calculations.
-
-Estimates, even from previous years, may be updated whenever new data is available.
-            "
-            ),
+            markdown(i18n$t(pars$revenue$decription$content$text)),
             tags$div(
               class = "hr-text",
-              "Indicator information"
+              i18n$t(pars$revenue$decription$subheading$text)
             )
           )
         )

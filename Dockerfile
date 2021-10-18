@@ -16,7 +16,9 @@ RUN install2.r --error --skipinstalled \
     apexcharter \
     profvis \
     shinyloadtest \
-    googleCloudStorageR
+    googleCloudStorageR \
+    shiny.i18n \
+    logger
 
 RUN installGithub.r \
     RinteRface/charpente \
