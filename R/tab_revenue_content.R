@@ -34,7 +34,7 @@ tab_revenue_content <- function(i18n){
       ),
       mod_summary_table_ui(
         id = "revenue-table",
-        heading = i18n$t(pars$revenue$table$heading),
+        heading = i18n$t(pars$revenue$table$heading$text),
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
       tags$div(
