@@ -34,7 +34,7 @@ trans_json <- list(
   translation = multilingual
 )
 
-jsonlite::write_json(trans_json, "inst/translation.json", auto_unbox = T, pretty = T)
+jsonlite::write_json(trans_json, "inst/translation.json", auto_unbox = T, pretty = F)
 
 pars <- params$eng
 usethis::use_data(pars, overwrite = TRUE)
