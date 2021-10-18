@@ -44,6 +44,13 @@ with_golem_options <- function (app, golem_opts, print = FALSE)
   }
 }
 
+start_fun <- function(){
+  i18n <<- shiny.i18n::Translator$new(
+    translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+  i18n$set_translation_language("eng")
+  message("test message on start")
+}
+
 # set_golem_global <- function (name, val)
 # {
 #   .golem_globals[[name]] <- val

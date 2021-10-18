@@ -39,13 +39,13 @@ extract_series_info <- function(var, data, period){
   this_period_val = data[nrow(data) - 1 , ..var][[1]]
   previous_period_val = data[nrow(data) - 2 , ..var][[1]]
   trend <- get_trend(this_period_val, previous_period_val)
-  heading <- paste0(peskas.timor.portal::var_dictionary[[var]]$short_name)
+  heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
 
   list(
     series_value = data[, ..var][[1]],
-    series_name = peskas.timor.portal::var_dictionary[[var]]$short_name,
+    series_name = peskas.timor.portal::pars$vars[[var]]$short_name,
     series_heading = heading,
-    series_description = peskas.timor.portal::var_dictionary[[var]]$description,
+    series_description = peskas.timor.portal::pars$vars[[var]]$description,
     last_period_val = data[nrow(data) - 1 , ..var][[1]],
     last_period = data[nrow(data) - 1 , ..period][[1]],
     trend_direction = trend$direction,
@@ -72,7 +72,7 @@ get_trend <- function(this, previous){
 
 
 specify_format <- function(var){
-  format_specifier <- peskas.timor.portal::var_dictionary[[var]]$format
+  format_specifier <- peskas.timor.portal::pars$vars[[var]]$format
   if (is.null(format_specifier)) format_specifier <- ""
   format_specifier
 }

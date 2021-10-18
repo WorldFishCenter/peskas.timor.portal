@@ -32,7 +32,7 @@ jobs:
       - name: Update data
         run: |
           Rscript -e 'source("data-raw/aggregated.R")'
-          Rscript -e 'source("data-raw/var_dictionary.R")'
+          Rscript -e 'source("data-raw/generate_translation_pars.R")'
 
       - name: Set shinyapps.io account info
         run: Rscript -e "rsconnect::setAccountInfo(name='worldfish', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"

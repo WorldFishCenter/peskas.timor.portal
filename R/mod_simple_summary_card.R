@@ -23,7 +23,7 @@ mod_simple_summary_card_ui <- function(id, div_class = "col-md-3", card_style = 
 #' simple_summary_card Server Functions
 #'
 #' @noRd
-mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, year = NULL){
+mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, year = NULL,  i18n_r = reactive(list(t = function(x) x))){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -32,7 +32,7 @@ mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, yea
       simple_card_content_ui(
         icon_ui = simple_card_icon_ui(direction = info$series[[1]]$trend_direction),
         heading = d3.format::d3.format(info$series[[1]]$series_format)(info$series[[1]]$last_period_val),
-        subheading = info$series[[1]]$series_name,
+        subheading = i18n_r()$t(info$series[[1]]$series_name),
         trend_ui = simple_card_trend_ui(
           trend = info$series[[1]]$trend_magnitude,
           direction = info$series[[1]]$trend_direction),

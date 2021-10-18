@@ -5,37 +5,43 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
+  i18n <<- shiny.i18n::Translator$new(
+    translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+
   tagList(
     apexchart_dep(),
     jquery_dep(),
+    shiny.i18n::usei18n(i18n),
     tabler_page(
       title = "Peskas | East Timor",
       header(
         logo = peskas_logo(),
         version_flex(
-          heading = "Managment Dashboard",
+          heading = i18n$t(pars$header$subtitle$text),
           subheading = "East Timor (v0.0.12-alpha)"
-        )
+        ),
+        user_ui()
       ),
       tab_menu(
-        tab_menu_item("Home", "home", icon_home()),
+        tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
         tab_menu_item(
           label = tagList(
-            "Revenue",
+            i18n$t(pars$header$nav$revenue$text),
             tags$span(
               class = "badge bg-lime-lt",
               "New"
             )
           ),
           id = "revenue", icon_currency_dollar()),
-        tab_menu_item("About", "about", icon_info_circle()),
+        tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
         id = "main_tabset"
       ),
       tabset_panel(
         menu_id = "main_tabset",
         tab_panel(
           id = "home",
-          page_heading(pretitle = "Small scale fisheries report", title = "National overview - July 2021"),
+          page_heading(pretitle = i18n$t(pars$home$subtitle$text),
+                       title = i18n$t(pars$home$title$text)),
           page_cards(
             mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
             mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
@@ -45,7 +51,7 @@ app_ui <- function(request) {
         ),
         tab_panel(
           id = "revenue",
-          tab_revenue_content()
+          tab_revenue_content(i18n)
         ),
         tab_panel(
           id = "about",
@@ -64,13 +70,14 @@ app_ui <- function(request) {
             href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md"
           ),
           inline_li_link(
-            content = "Source code",
+            content = i18n$t(pars$footer$nav$code$text),
             href = "https://github.com/WorldFishCenter/peskas.timor.portal"
           )
         ),
-        bottom = "Copyright © 2021 Peskas. All rights reserved."
+        bottom = i18n$t("Copyright © 2021 Peskas. All rights reserved.")
       ),
       inactivity_modal(timeout_seconds = 5*60),
+      settings_modal(i18n),
       shinyjs::useShinyjs()
       # htmltools::suppressDependencies("apexcharts"),
       # apexchart_dep(),
