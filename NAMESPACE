@@ -2,6 +2,7 @@
 
 export("%>%")
 export(run_app)
+export(start_fun)
 import(apexcharter)
 import(data.table)
 import(shiny)

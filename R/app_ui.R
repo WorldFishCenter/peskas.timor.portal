@@ -5,8 +5,6 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  i18n <<- shiny.i18n::Translator$new(
-    translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
 
   tagList(
     apexchart_dep(),
@@ -77,11 +75,8 @@ app_ui <- function(request) {
         bottom = i18n$t("Copyright © 2021 Peskas. All rights reserved.")
       ),
       inactivity_modal(timeout_seconds = 5*60),
-      settings_modal(i18n),
+      settings_modal(),
       shinyjs::useShinyjs()
-      # htmltools::suppressDependencies("apexcharts"),
-      # apexchart_dep(),
-      # jquery_dep()
     )
   )
 

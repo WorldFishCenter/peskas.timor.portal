@@ -13,7 +13,8 @@ Imports:
     shiny (>= 1.6.0), 
     shinyjs,
     magrittr, 
-    shiny.i18n
+    shiny.i18n,
+    logger
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
