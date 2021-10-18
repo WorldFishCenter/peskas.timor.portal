@@ -55,7 +55,7 @@ app_ui <- function(request) {
         ),
         tab_panel(
           id = "about",
-          page_heading(pretitle = "", title = "About")
+          page_text(content = peskas_timor_about())
         )
       ),
       footer_panel(
@@ -66,11 +66,7 @@ app_ui <- function(request) {
         ),
         right_side_elements = tagList(
           inline_li_link(
-            content = i18n$t(pars$footer$nav$project$text),
-            href = "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760"
-          ),
-          inline_li_link(
-            content = i18n$t(pars$footer$nav$license$text),
+            content = "Licence",
             href = "https://github.com/WorldFishCenter/peskas.timor.portal/blob/main/LICENSE.md"
           ),
           inline_li_link(
