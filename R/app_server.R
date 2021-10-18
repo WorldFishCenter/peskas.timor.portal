@@ -5,18 +5,8 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session){
+  i18n_r <- mod_language_server("lang", session)
   # For translation made in the UI
-  observeEvent(input$language, {
-    shiny.i18n::update_lang(session, input$language)
-  })
-  # For translations made in the server (e.g. inside modules with reactive outputs)
-  i18n_r <- reactive({
-    selected <- input$language
-    if (length(selected) > 0 && selected %in% i18n$get_languages()) {
-      i18n$set_translation_language(selected)
-    }
-    i18n
-  })
 
   # Summary tab
   mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)

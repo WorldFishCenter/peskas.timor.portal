@@ -7,25 +7,20 @@
 app_ui <- function(request) {
   i18n <<- shiny.i18n::Translator$new(
     translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+
   tagList(
     apexchart_dep(),
     jquery_dep(),
+    shiny.i18n::usei18n(i18n),
     tabler_page(
       title = "Peskas | East Timor",
       header(
-        shiny.i18n::usei18n(i18n),
         logo = peskas_logo(),
-        selectInput(
-          inputId = 'language',
-          label = i18n$t('Select your language'),
-          choices = i18n$get_languages(),
-          selected = i18n$get_key_translation(),
-          width = '50%'
-        ),
         version_flex(
           heading = i18n$t(pars$header$subtitle$text),
           subheading = "East Timor (v0.0.12-alpha)"
-        )
+        ),
+        user_ui()
       ),
       tab_menu(
         tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
@@ -39,7 +34,6 @@ app_ui <- function(request) {
           ),
           id = "revenue", icon_currency_dollar()),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
-        language_drop_item(i18n$t("Language"), "language", icon_world()),
         id = "main_tabset"
       ),
       tabset_panel(
@@ -87,6 +81,7 @@ app_ui <- function(request) {
         bottom = i18n$t("Copyright © 2021 Peskas. All rights reserved.")
       ),
       inactivity_modal(timeout_seconds = 5*60),
+      settings_modal(i18n),
       shinyjs::useShinyjs()
       # htmltools::suppressDependencies("apexcharts"),
       # apexchart_dep(),
