@@ -15,7 +15,7 @@ user_ui <- function(){
   )
 }
 
-settings_modal <- function(i18n){
+settings_modal <- function(){
   modal_dialog_ui(
     id = "settings-modal", header = i18n$t(pars$settings$title$text), close_icon = TRUE,
     mod_language_ui("lang"),
