@@ -26,6 +26,7 @@ jobs:
           Rscript -e 'install.packages(c("remotes"))'
           Rscript -e 'remotes::install_cran(c("config", "googleCloudStorageR", "data.table"), quick = TRUE)'
           Rscript -e 'source("update_data.R")'
+          Rscript -e 'source("generate_translation_pars.R")'
 
       - name: Commit changes package data
         uses: stefanzweifel/git-auto-commit-action@v4
