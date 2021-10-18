@@ -17,7 +17,8 @@ RUN install2.r --error --skipinstalled \
     profvis \
     shinyloadtest \
     googleCloudStorageR \
-    shiny.i18n
+    shiny.i18n \
+    logger
 
 RUN installGithub.r \
     RinteRface/charpente \

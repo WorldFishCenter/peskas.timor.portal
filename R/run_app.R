@@ -13,6 +13,7 @@ run_app <- function(
   uiPattern = "/",
   ...
 ) {
+  logger::log_info("Running app in run_app()")
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
@@ -46,10 +47,13 @@ with_golem_options <- function (app, golem_opts, print = FALSE)
 
 #' @export
 start_fun <- function(){
+  logger::log_info("Running start_fun")
+  logger::log_info("Creating translator object")
   i18n <<- shiny.i18n::Translator$new(
     translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+  logger::log_info("Setting default language to english")
   i18n$set_translation_language("eng")
-  message("test message on start")
+  logger::log_info("Finished instructions in start_fun")
 }
 
 # set_golem_global <- function (name, val)
