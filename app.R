@@ -4,4 +4,4 @@
 
 # pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)
 options( "golem.app.prod" = TRUE)
-peskas.timor.portal::run_app(onStart = start_fun) # add parameters here (if any)
+peskas.timor.portal::run_app(onStart = peskas.timor.portal::start_fun) # add parameters here (if any)
