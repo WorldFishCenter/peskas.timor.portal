@@ -19,7 +19,11 @@ mod_language_ui <- function(id){
   tagList(
     selectInput(
       inputId = ns('language'),
-      label = tags$span(icon_world(), i18n$t(pars$settings$language_select$label$text), class = "form-label"),
+      label = tags$span(
+        icon_world(),
+        i18n$t(pars$settings$language_select$label$text),
+        tags$span(class = "badge bg-red-lt ms-2", "Experimental"),
+        class = "form-label"),
       choices = c("English" = "eng", "Português" = "por", "Tetun" = "tet"),
       selected = i18n$get_key_translation(), width = "100%"
     )
