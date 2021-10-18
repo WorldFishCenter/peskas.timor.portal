@@ -12,7 +12,8 @@ Imports:
     magrittr,
     shiny (>= 1.6.0), 
     shinyjs,
-    magrittr
+    magrittr, 
+    shiny.i18n
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
