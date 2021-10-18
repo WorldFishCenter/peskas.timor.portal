@@ -48,6 +48,10 @@ with_golem_options <- function (app, golem_opts, print = FALSE)
 #' @export
 start_fun <- function(){
   logger::log_info("Running start_fun")
+  translation_file <- system.file("translation.json", package = "peskas.timor.portal")
+  logger::log_info("Reading translation file in ", translation_file)
+  tjson <- jsonlite::read_json(translation_file)
+  logger::log_info("Found languages: ", paste(tjson$languages, collapse = " "))
   logger::log_info("Creating translator object")
   i18n <<- shiny.i18n::Translator$new(
     translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
