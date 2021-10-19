@@ -5,8 +5,6 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  i18n <<- shiny.i18n::Translator$new(
-    translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
   tagList(
     apexchart_dep(),
     jquery_dep(),
@@ -41,7 +39,7 @@ app_ui <- function(request) {
           id = "home",
           page_heading(pretitle = i18n$t(pars$home$subtitle$text),
                        title = i18n$t(pars$home$title$text),
-                       download_text = i18n$t(pars$home$report$text)),
+                       download_report_button(text=i18n$t(pars$home$report$text), icon_download())),
         page_cards(
             mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
             mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),

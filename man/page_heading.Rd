@@ -4,12 +4,7 @@
 \alias{page_heading}
 \title{Page heading for the}
 \usage{
-page_heading(
-  pretitle = "Page pretitle",
-  title = "Page title",
-  download_text = "Download text",
-  ...
-)
+page_heading(pretitle = "Page pretitle", title = "Page title", ...)
 }
 \arguments{
 \item{pretitle}{Text to appear on top of title}

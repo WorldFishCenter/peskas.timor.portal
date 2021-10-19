@@ -1,8 +1,7 @@
 tab_revenue_content <- function(i18n){
   tagList(
     page_heading(pretitle = i18n$t(pars$revenue$subtitle$text),
-                 title = i18n$t(pars$revenue$subtitle$text),
-                 download_text = i18n$t(pars$home$report$text)),
+                 title = i18n$t(pars$revenue$subtitle$text)),
     page_cards(
       tags$div(
         class = "col-12 mt-0",
