@@ -46,7 +46,7 @@ with_golem_options <- function (app, golem_opts, print = FALSE)
 }
 
 #' @export
-start_fun <- function(){
+start_fun <- function(global_pars = TRUE){
   logger::log_info("Running start_fun")
   translation_file <- system.file("translation.json", package = "peskas.timor.portal")
   logger::log_info("Creating translator object")
@@ -54,8 +54,10 @@ start_fun <- function(){
     translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
   logger::log_info("Setting default language to english")
   i18n$set_translation_language("eng")
-  logger::log_info("Setting up pars as a global variable")
-  pars <<- peskas.timor.portal::pars
+  if (isTRUE(global_pars)){
+    logger::log_info("Setting up pars as a global variable")
+    pars <<- peskas.timor.portal::pars
+  }
   logger::log_info("Finished instructions in start_fun")
 }
 
