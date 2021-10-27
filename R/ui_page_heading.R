@@ -6,7 +6,7 @@
 #'
 #' @return a shiny tag
 #'
-page_heading <- function(pretitle = "Page pretitle", title = "Page title", ...){
+page_heading <- function(pretitle = "Page pretitle", title = "Page title", ...) {
   tags$div(
     class = "container-xl",
     tags$div(
@@ -22,12 +22,26 @@ page_heading <- function(pretitle = "Page pretitle", title = "Page title", ...){
           tags$h2(
             class = "page-title",
             title
-          ),
+          )
         ),
-        tags$div(
-          class = "col-auto ms-auto d-print-none",
-          ...
-        )
+        ...
+      )
+    )
+  )
+}
+
+
+download_report_button <- function(text = NULL, icon = NULL) {
+  tags$div(
+    class = "col-auto ms-auto d-print-none",
+    tags$div(
+      class = "btn-list",
+      tags$a(
+        href = "https://storage.googleapis.com/public-timor-dev/data_report.pdf",
+        target = "_blank",
+        class = "btn btn-primary d-none d-sm-inline-block",
+        icon,
+        text
       )
     )
   )

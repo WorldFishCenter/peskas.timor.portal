@@ -61,6 +61,8 @@ default:
       text: National overview
     subtitle:
       text: Small scale fisheries report
+    report:
+      text: Download report
   revenue:
     title:
       text: National revenue
@@ -199,6 +201,8 @@ por:
       text: Visão geral nacional
     subtitle:
       text: Relatório de pesca em pequena escala
+    report:
+      text: Baixe o relatório
   revenue:
     title:
       text: Receita nacional
