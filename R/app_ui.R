@@ -23,11 +23,16 @@ app_ui <- function(request) {
         tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$revenue$text),
+            i18n$t(pars$header$nav$catch$text),
             tags$span(
               class = "badge bg-lime-lt",
               "New"
             )
+          ),
+          id = "catch", icon_scale()),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$revenue$text)
           ),
           id = "revenue", icon_currency_dollar()),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
