@@ -29,7 +29,7 @@ tab_revenue_content <- function(i18n){
           heading = pars$vars$revenue$short_name),
       ),
       tags$div(
-        class = "col-lg-4 col-xl-3",
+        class = "col-lg-4 col-xl-4",
         tags$div(
           class = "row row-cards",
           mod_summary_card_ui(id = "landing-revenue-card", div_class = "col-12 col-md-6 col-lg-12"),
