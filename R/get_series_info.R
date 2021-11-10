@@ -67,6 +67,12 @@ get_trend <- function(this, previous){
     } else if (sign(percentage_diff) == -1) {
       trend_direction <- "down"
     }
+    if (is.infinite(percentage_diff)) {
+      percentage_diff <- "-"
+    }
+  } else {
+    trend_direction <- "none"
+    percentage_diff <- "-"
   }
   list(magnitude = paste0(percentage_diff, "%"),
        direction = trend_direction)
