@@ -21,8 +21,12 @@ tab_revenue_content <- function(i18n){
         )
       ),
       tags$div(
-        class = "col-lg-8 col-xl-9",
-        mod_highlight_card_ui(id = "revenue-card", card_class = "col", apex_height = "21rem"),
+        class = "col-lg-8 col-xl-8",
+        mod_highlight_card_ui(
+          id = "revenue-card",
+          card_class = "col",
+          apex_height = "21rem",
+          heading = pars$vars$revenue$short_name),
       ),
       tags$div(
         class = "col-lg-4 col-xl-3",
