@@ -39,12 +39,12 @@ mod_highlight_card_server <- function(id, var,
 
       d <- card_data()
       # We use the format of the first series overall
-      y_formatter = apexcharter::format_num(d$series[[1]]$series_format)
+      y_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
 
       series <- lapply(d$series, function(x) {
         list(
           name = x$series_name,
-          data = x$series_value
+          data = x$series_value * d$series[[1]]$series_multiplier
         )
       })
 

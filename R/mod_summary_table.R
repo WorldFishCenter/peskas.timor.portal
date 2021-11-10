@@ -48,7 +48,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
     table <- reactive({
       info <- info()
       data_columns <- lapply(info$series, function(x) {
-        vals <- data.table(d3.format::d3.format(x$series_format)(x$series_value))
+        vals <- data.table(d3.format::d3.format(x$series_format, suffix = x$series_suffix)(x$series_value * x$series_multiplier))
         names(vals) <- i18n_r()$t(x$series_name)
         vals
       })
@@ -76,7 +76,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
       info <- info()
       total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       text <- paste0(info$series[[1]]$series_name)
-      paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format)(total))
+      paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total * info$series[[1]]$series_multiplier))
     })
 
 

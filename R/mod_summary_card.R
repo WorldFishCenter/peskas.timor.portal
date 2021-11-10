@@ -35,11 +35,11 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
       d <- data()
 
       # We use the format of the first series overall
-      y_formatter = apexcharter::format_num(d$series[[1]]$series_format)
+      y_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
       series <- lapply(d$series, function(x) {
         list(
           name = x$series_name,
-          data = x$series_value
+          data = x$series_value * d$series[[1]]$series_multiplier
         )})
 
       output$chart  <- renderApexchart({
@@ -56,7 +56,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
       summary_card_content(
         id = id,
         subheader = i18n_r()$t(d$series[[1]]$series_heading),
-        heading = d3.format::d3.format(d$series[[1]]$series_format)(d$series[[1]]$last_period_val),
+        heading = d3.format::d3.format(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)(d$series[[1]]$last_period_val * d$series[[1]]$series_multiplier),
         annotation = trend_annotation_summary_card(magnitude = d$series[[1]]$trend_magnitude,
                                       direction = d$series[[1]]$trend_direction),
         top_right_element = d$series[[1]]$last_period,
