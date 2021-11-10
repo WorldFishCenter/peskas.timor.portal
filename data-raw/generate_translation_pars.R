@@ -15,6 +15,9 @@ to_df <- function(x){
 }
 params_as_df <- lapply(seq_along(unlisted_params), to_df)
 
+no_translation <- function(x){
+  x$eng == x$tet & x$eng == x$por
+}
 
 multilingual <- Reduce(merge, params_as_df)
 multilingual <- multilingual %>%
@@ -25,10 +28,6 @@ multilingual <- multilingual %>%
 multilingual <- apply(multilingual, 1, function(x) x[-1], simplify = F)
 multilingual <- lapply(multilingual, as.list)
 
-
-no_translation <- function(x){
-  x$eng == x$tet & x$eng == x$por
-}
 
 # remove elements where all are the same (no translation available)
 multilingual <- multilingual[!unlist(lapply(multilingual, no_translation))]
