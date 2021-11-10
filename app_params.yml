@@ -94,13 +94,6 @@ default:
       more:
         text: Learn more
     table:
-      vars:
-        landings_value:
-          text: Landing value
-        landings_boats:
-          text: Landings per boat
-        n_boats:
-          text: Number of boats
       heading:
         text: Annual summary
       period_col:
