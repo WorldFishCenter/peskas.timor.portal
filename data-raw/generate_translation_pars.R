@@ -17,6 +17,11 @@ params_as_df <- lapply(seq_along(unlisted_params), to_df)
 
 
 multilingual <- Reduce(merge, params_as_df)
+multilingual <- multilingual %>%
+  dplyr::group_by(par_name) %>%
+  dplyr::filter(!no_translation(data.frame(eng, tet, por))) %>%
+  dplyr::ungroup() %>%
+  dplyr::distinct(eng, tet, por, .keep_all = T)
 multilingual <- apply(multilingual, 1, function(x) x[-1], simplify = F)
 multilingual <- lapply(multilingual, as.list)
 
