@@ -10,6 +10,7 @@ app_server <- function(input, output, session){
 
   # Summary tab
   mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "catch-summary-card", var = "catch", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)

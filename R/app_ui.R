@@ -46,10 +46,11 @@ app_ui <- function(request) {
                        title = i18n$t(pars$home$title$text),
                        download_report_button(text=i18n$t(pars$home$report$text), icon_download())),
         page_cards(
-            mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-3"),
-            mod_summary_card_ui(id = "landings-card", div_class = "col-md-3"),
-            mod_summary_card_ui(id = "tracks-card", div_class = "col-md-3"),
-            mod_summary_card_ui(id = "matched-card", div_class = "col-md-3"),
+            mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-6"),
+            mod_summary_card_ui(id = "catch-summary-card", div_class = "col-md-6"),
+            mod_summary_card_ui(id = "landings-card", div_class = "col-md-4"),
+            mod_summary_card_ui(id = "tracks-card", div_class = "col-md-4"),
+            mod_summary_card_ui(id = "matched-card", div_class = "col-md-4"),
           )
         ),
         tab_panel(
