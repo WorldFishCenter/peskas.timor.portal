@@ -57,6 +57,10 @@ app_ui <- function(request) {
           tab_revenue_content(i18n)
         ),
         tab_panel(
+          id = "catch",
+          tab_catch_content(i18n)
+        ),
+        tab_panel(
           id = "about",
           page_text(content = peskas_timor_about())
         )

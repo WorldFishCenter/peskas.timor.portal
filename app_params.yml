@@ -17,6 +17,13 @@ default:
       description: "The estimated total revenue from fishing landings. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
       methods: "The revenue is estimated by multiplying the estimated revenue per landing by the average number of landings per boat and by the number of boats."
       format: "$,.2r"
+    catch:
+      short_name: Total catch
+      format: ",.2r"
+      description: "The estimated total catch from fishing trips. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      methods: "The total catch is estimated by multiplying the estimated catch per trip by the average number of trips per boat and by the number of boats."
+      multiplier: 0.001
+      suffix: "\u00A0t"
     landing_revenue:
       short_name: Landing value
       format: "$,.2r"
@@ -24,6 +31,14 @@ default:
       problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch. There may be a delay of up to several weeks between the time a landing occurs and the time information enters the system."
       methods: "Survey answers are filtered for outliers. We consider outliers those values that are beyond 3 times the median absolute deviation of the log-transformed landing selling prices."
       quality: medium
+    landing_weight:
+      short_name: Average catch per trip
+      format: ",.3r"
+      description: "The average catch per trip is obtained from landing surveys at multiple sites around the country. Enumerators observe the catch and record the length distribution for each taxon caught. We then use the length data to estimate the equivalent weight using publicly available length-weight relationship coefficients. Finally, we obtain monthly estimates using a random-effect statistical model."
+      problems: "The length and number of caught individuals can be imprecise. Taxa are not always correctly identified by enumerators. In addition, taxa are generally grouped at the family or genus level whereas length-weight coefficients are generally available at the species level. This greatly reduces the accuracy of the species-based length-weight coefficients used."
+      methods: "Catch lengths and the number of individuals are filtered for outliers. We consider outliers those values that are beyond 3 and 7 times the median absolute deviation of the log-transformed lengths and number of individuals respectively. Length-weight relationships are obtained from [FishBase](https://www.fishbase.de/). For each taxon, we use the average for all species present in East Timor or Indonesia."
+      quality: medium
+      suffix: "\u00A0kg"
     n_landings_per_boat:
       short_name: Landings per boat
       format: ",.3r"
@@ -96,6 +111,11 @@ default:
         text: Indicator information
       content:
         text: The revenue estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available.
+  catch:
+    title:
+      text: National catch
+    subtitle:
+      text: Small scale fisheries
   settings:
     title:
       text: Settings
