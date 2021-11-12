@@ -1,6 +1,8 @@
 ## Takes params and compiles them into default parameters used throughout the
 ## app and also generates the translation file
 
+library(magrittr)
+
 languages <- c("eng", "tet", "por")
 names(languages) <- languages
 params <- lapply(languages, function(x) config::get(file = "app_params.yml", config = x))
