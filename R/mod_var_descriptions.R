@@ -47,15 +47,15 @@ mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = fun
           content = tagList(
             markdown(
               i18n_r()$t(x[[1]]$description)),
-            tags$p(
+            tags$div(
               class = "small",
               tags$strong("Data processing and validation:"),
-              get_text(x[[1]]$methods, "None.")
+              get_text(x[[1]]$methods, tags$p("None."))
             ),
-            tags$p(
+            tags$div(
               class = "small",
               tags$strong("Known problems and limitations:"),
-              get_text(x[[1]]$problems, "Not assessed.")
+              get_text(x[[1]]$problems, tags$p("Not assessed."))
             ),
             tags$p(
               class = paste("badge mb-0", bg$light),
@@ -63,6 +63,10 @@ mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = fun
           )
         )
       })
+
+      last_accordion <- accordion_items[[length(accordion_items)]]
+      last_accordion$children[[2]] <- tagAppendAttributes(last_accordion$children[[2]], class = "show")
+      accordion_items[[length(accordion_items)]] <- last_accordion
 
       tagList(
         accordion_ui(
@@ -101,7 +105,7 @@ get_text <- function(x, y = "Not assessed."){
   if (is.null(x)) return(y)
   if (is.na(x)) return(y)
   if (x == "") return(y)
-  x
+  markdown(x)
 }
 
 mod_var_descriptions_app <- function(){

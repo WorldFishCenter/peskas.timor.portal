@@ -50,7 +50,9 @@ extract_series_info <- function(var, data, period){
     last_period = data[nrow(data) - 1 , ..period][[1]],
     trend_direction = trend$direction,
     trend_magnitude = trend$magnitude,
-    series_format = specify_format(var)
+    series_format = specify_format(var),
+    series_multiplier = specify_multiplier(var),
+    series_suffix = specify_suffix(var)
   )
 
 }
@@ -65,6 +67,12 @@ get_trend <- function(this, previous){
     } else if (sign(percentage_diff) == -1) {
       trend_direction <- "down"
     }
+    if (is.infinite(percentage_diff)) {
+      percentage_diff <- "-"
+    }
+  } else {
+    trend_direction <- "none"
+    percentage_diff <- "-"
   }
   list(magnitude = paste0(percentage_diff, "%"),
        direction = trend_direction)
@@ -73,6 +81,21 @@ get_trend <- function(this, previous){
 
 specify_format <- function(var){
   format_specifier <- peskas.timor.portal::pars$vars[[var]]$format
-  if (is.null(format_specifier)) format_specifier <- ""
-  format_specifier
+  null_default(format_specifier, "")
+}
+
+specify_suffix <- function(var){
+  prefix <- peskas.timor.portal::pars$vars[[var]]$suffix
+  null_default(prefix, "")
+}
+
+specify_multiplier <- function(var){
+  multiplier <- peskas.timor.portal::pars$vars[[var]]$multiplier
+  null_default(multiplier, 1)
+}
+
+# returns the default if value is null
+null_default <- function(value, default){
+  if (is.null(value)) return(default)
+  value
 }
