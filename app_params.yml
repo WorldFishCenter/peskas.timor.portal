@@ -21,7 +21,7 @@ default:
       short_name: Total catch
       format: ",.2r"
       description: "The estimated total catch from fishing trips. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      methods: "The total catch is estimated by multiplying the estimated catch per trip by the average number of trips per boat and by the number of boats."
+      methods: "The total catch is estimated by multiplying the estimated catch per trip (nationally or per taxa) by the average number of trips per boat and by the number of boats."
       multiplier: 0.001
       suffix: "\u00A0t"
     landing_revenue:
@@ -144,7 +144,7 @@ default:
       subheading:
         text: Indicator information
       content:
-        text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available.
+        text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
   catch:
     title:
       text: National catch
