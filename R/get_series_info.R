@@ -1,7 +1,7 @@
 #' @import data.table
-get_series_info <- function(vars, period = "month", n = NULL, year = NULL){
+get_series_info <- function(vars, period = "month", n = NULL, year = NULL, ...){
   # Get a clean frame with only the variables required and relevant time-frames
-  x <- lapply(vars, get_summary_frame_var, period)
+  x <- lapply(vars, get_summary_frame_var, period, ...)
   full_merge <- function(x, y) merge(x, y, all.y = TRUE)
   summary_frame <- Reduce(full_merge, x)
 
@@ -15,7 +15,7 @@ get_series_info <- function(vars, period = "month", n = NULL, year = NULL){
       summary_frame[(nrow(summary_frame) - n):nrow(summary_frame), ]
   }
 
-  series_info <- lapply(vars, extract_series_info, summary_frame, period)
+  series_info <- lapply(vars, extract_series_info, summary_frame, period, ...)
 
   list(
     x_categories = summary_frame[, ..period, ][[1]],
@@ -25,8 +25,18 @@ get_series_info <- function(vars, period = "month", n = NULL, year = NULL){
 }
 
 #' @import data.table
-get_summary_frame_var <- function(var, period){
-  data <- peskas.timor.portal::aggregated[[period]]
+get_summary_frame_var <- function(var, period, ...){
+
+  filters <- list(...)
+
+  if (length(filters) > 0){
+    if (names(filters) == "taxa"){
+      data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa == filters$taxa]
+    }
+  } else {
+    data <- peskas.timor.portal::aggregated[[period]]
+  }
+
   data <- data[order(date_bin_start), ]
   data <- data[!is.na(date_bin_start), ]
   cols <- c("date_bin_start", period, var)
@@ -34,12 +44,22 @@ get_summary_frame_var <- function(var, period){
 }
 
 #' @import data.table
-extract_series_info <- function(var, data, period){
+extract_series_info <- function(var, data, period, ...){
 
+  filters <- list(...)
+
+  if (length(filters) > 0) {
+    if (names(filters) == "taxa") {
+      taxa_name <- peskas.timor.portal::pars$taxa$taxa[[filters$taxa]]$short_name
+      heading <- paste0(taxa_name)
+    }
+  } else {
+    heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
+  }
   this_period_val = data[nrow(data) - 1 , ..var][[1]]
   previous_period_val = data[nrow(data) - 2 , ..var][[1]]
   trend <- get_trend(this_period_val, previous_period_val)
-  heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
+
 
   list(
     series_value = data[, ..var][[1]],
