@@ -74,7 +74,7 @@ get_trend <- function(this, previous){
     trend_direction <- "none"
     percentage_diff <- "-"
   }
-  list(magnitude = paste0(percentage_diff, "%"),
+  list(magnitude = d3.format::d3_format(",.0%")(percentage_diff/100),
        direction = trend_direction)
 }
 
