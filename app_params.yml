@@ -98,7 +98,7 @@ default:
         text: Annual summary
       period_col:
         text: period
-    decription:
+    description:
       heading:
         text: About the data
       subheading:
@@ -237,7 +237,7 @@ por:
         text: Sumário anual
       period_col:
         text: período
-    decription:
+    description:
       heading:
         text: Sobre os dados
       subheading:
