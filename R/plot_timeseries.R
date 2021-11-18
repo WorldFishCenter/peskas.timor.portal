@@ -2,7 +2,10 @@
 
 #' Plot series using apexcharter
 #'
-plot_timeseries <- function(x_categories, series, y_formatter, type = "bar", sparkline = F){
+plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function(x) {return x}"), type = "bar", sparkline = F, colors = NULL){
+
+  if (is.null(colors)) colors <- c("#206bc4", "#aaaaaa")
+
   a <- apexcharter::apexchart() %>%
     apexcharter::ax_chart(
       type = type,
@@ -40,7 +43,7 @@ plot_timeseries <- function(x_categories, series, y_formatter, type = "bar", spa
       breakpoint = 576,
       options = list(
         yaxis = list(show = FALSE)))) %>%
-    apexcharter::ax_colors("#206bc4", "#aaaaaa")
+    apexcharter::ax_colors(colors)
 
   if (type != "bar") {
     a <- a %>%
