@@ -17,4 +17,7 @@ production:
         service_account_key: !expr Sys.getenv('GCP_SA_KEY')
 dev:
   golem_wd: !expr here::here()
-
+  storage:
+    google:
+      options:
+        bucket: public-timor-dev
