@@ -35,6 +35,7 @@ app_ui <- function(request) {
             i18n$t(pars$header$nav$revenue$text)
           ),
           id = "revenue", icon_currency_dollar()),
+        tab_menu_item(i18n$t(pars$header$nav$composition$text), "catch-composition", icon_chart_pie()),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
         id = "main_tabset"
       ),
@@ -60,6 +61,10 @@ app_ui <- function(request) {
         tab_panel(
           id = "catch",
           tab_catch_content(i18n)
+        ),
+        tab_panel(
+          id = "catch-composition",
+          tab_catch_composition(i18n)
         ),
         tab_panel(
           id = "about",

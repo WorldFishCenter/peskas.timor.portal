@@ -31,6 +31,16 @@ app_server <- function(input, output, session){
   mod_summary_table_server(id = "catch-table", vars = c("catch", "landing_weight", "n_landings_per_boat", "n_boats"),  i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
 
+  # Composition tab
+  taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>%
+    strtrim(width = 7)
+  mod_taxa_bar_highlight_server("taxa-highlight", var = "catch", colors = taxa_colors)
+  mapply(pars$taxa$to_display, taxa_colors, FUN = function(x, y){
+    mod_summary_card_server(id = paste(x, "catch-card", sep = "-"), var = "catch", taxa = x, n = 25, colors = y)
+  })
+  mod_composition_table_server("taxa-table")
+  mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
+
 }
 
 #' Dummy apex chart
