@@ -204,6 +204,9 @@ get_file <- function(prefix){
 
   x <- readRDS(filename)
   file.remove(filename)
+  date_modified <- strptime(strsplit(filename, "_")[[1]][4], format = "%Y%m%d%H%M")
+
+  attr(x, "data_last_updated") <- date_modified
   x
 }
 
@@ -220,6 +223,8 @@ format_aggregated_data <- function(aggregated){
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
 aggregated <- get_file("timor_aggregated")
+data_last_updated <- attr(aggregated, "data_last_updated")
+
 taxa_aggregated <- get_file("timor_taxa_aggregated")
 
 aggregated <- format_aggregated_data(aggregated)
@@ -228,5 +233,4 @@ taxa_aggregated <- format_aggregated_data(taxa_aggregated)
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
 
-data_last_updated <- strptime(strsplit(aggregated_rds, "_")[[1]][4], format = "%Y%m%d%H%M")
 usethis::use_data(data_last_updated, overwrite = TRUE)
