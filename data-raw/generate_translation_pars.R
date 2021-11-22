@@ -45,3 +45,14 @@ jsonlite::write_json(trans_json, "inst/translation.json", auto_unbox = T, pretty
 pars <- params$eng
 usethis::use_data(pars, overwrite = TRUE)
 
+# taxa names
+pars$taxa$to_display
+n <- lapply(pars$taxa$taxa, function(x){x$short_name}) %>% unlist()
+
+taxa_names <- data.table(
+  grouped_taxa = names(n),
+  grouped_taxa_names = n
+)
+
+taxa_names[, grouped_taxa := factor(grouped_taxa, pars$taxa$to_display)]
+usethis::use_data(taxa_names, overwrite = TRUE)

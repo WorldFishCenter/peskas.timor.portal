@@ -191,27 +191,42 @@ download_cloud_file <- function(name, provider, options, file = name){
   file
 }
 
+get_file <- function(prefix){
+  filename <- cloud_object_name(
+    prefix = prefix,
+    provider = pars$storage$google$key,
+    extension = "rds",
+    options = pars$storage$google$options,
+    exact_match = TRUE)
+  download_cloud_file(name = filename,
+                      provider = pars$storage$google$key,
+                      options = pars$storage$google$options)
+
+  x <- readRDS(filename)
+  file.remove(filename)
+  x
+}
+
+format_aggregated_data <- function(aggregated){
+  aggregated <- lapply(aggregated, data.table::as.data.table)
+  aggregated <- lapply(aggregated, function(x) x[, n_boats := 2334])
+  aggregated$day <- aggregated$day[, day := format(date_bin_start, format = "%d %b %y")]
+  aggregated$week <- aggregated$week[, week := format(date_bin_start, format = "%d %b %y")]
+  aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")][, year := format(date_bin_start, format = "%Y")]
+  aggregated$year <- aggregated$year[, year := format(date_bin_start, format = "%Y")]
+  aggregated
+}
+
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
-aggregated_rds <- cloud_object_name(
-  prefix = "timor_aggregated",
-  provider = pars$storage$google$key,
-  extension = "rds",
-  options = pars$storage$google$options,
-  exact_match = TRUE)
-download_cloud_file(name = aggregated_rds,
-                    provider = pars$storage$google$key,
-                    options = pars$storage$google$options)
-aggregated <- readRDS(aggregated_rds)
-file.remove(aggregated_rds)
+aggregated <- get_file("timor_aggregated")
+taxa_aggregated <- get_file("timor_taxa_aggregated")
 
-aggregated <- lapply(aggregated, data.table::as.data.table)
-aggregated <- lapply(aggregated, function(x) x[, n_boats := 2334])
-aggregated$day <- aggregated$day[, day := format(date_bin_start, format = "%d %b %y")]
-aggregated$week <- aggregated$week[, week := format(date_bin_start, format = "%d %b %y")]
-aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")][, year := format(date_bin_start, format = "%Y")]
-aggregated$year <- aggregated$year[, year := format(date_bin_start, format = "%Y")]
+aggregated <- format_aggregated_data(aggregated)
+taxa_aggregated <- format_aggregated_data(taxa_aggregated)
+
 usethis::use_data(aggregated, overwrite = TRUE)
+usethis::use_data(taxa_aggregated, overwrite = TRUE)
 
 data_last_updated <- strptime(strsplit(aggregated_rds, "_")[[1]][4], format = "%Y%m%d%H%M")
 usethis::use_data(data_last_updated, overwrite = TRUE)

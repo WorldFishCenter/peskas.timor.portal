@@ -73,18 +73,29 @@ mod_highlight_card_app <- function(){
 highlight_card <- function(id = "",
                            card_class = "col-lg-6",
                            heading = "Card heading",
-                           in_body = NULL){
+                           in_body = NULL,
+                           top_right = NULL){
   tags$div(
     class = card_class,
     tags$div(
       class = "card",
       tags$div(
+        class = "card-header mb-3",
+        tags$div(
+          tags$h3(
+            class = "card-title",
+            heading
+          )
+        ),
+        tags$div(
+          class = "ms-auto lh1",
+          style = "line-height:0px;",
+          top_right
+        )
+      ),
+      tags$div(
         class = "card-body",
         style = "position: relative;",
-        tags$h3(
-          class = "card-title",
-          heading
-        ),
         tags$div(
           class = "in-body",
           in_body

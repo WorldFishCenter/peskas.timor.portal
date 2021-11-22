@@ -21,7 +21,7 @@ default:
       short_name: Total catch
       format: ",.2r"
       description: "The estimated total catch from fishing trips. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      methods: "The total catch is estimated by multiplying the estimated catch per trip by the average number of trips per boat and by the number of boats."
+      methods: "The total catch is estimated by multiplying the estimated catch per trip (nationally or per taxa) by the average number of trips per boat and by the number of boats."
       multiplier: 0.001
       suffix: "\u00A0t"
     landing_revenue:
@@ -52,6 +52,42 @@ default:
       quality: low
       description: "The number of boats is derived from information obtained in the 2015 East-Timor census. The number of boats in each municipality level is added together to form the national total."
       problems: "Data has not been updated since 2015. However, the number of boats has likely changed considerably since then."
+    taxa:
+      short_name: Taxa (species)
+      format: ""
+      quality: medium
+      description: "The taxa (species or groups of species) are recorded by enumerators at the landing point."
+      problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to species families or genus. It is not known how this change might affect the estimates."
+      methods: "We calculate national catch for the eleven most common taxa by weight. "
+
+  taxa:
+    to_display: [CLP, OCZ, CJX, SDX, BEN, EMP, FLY, SNA, RAX, CGX, TUN, MZZ]
+    taxa:
+      CLP:
+        short_name: Sardines and herrings
+      OCZ:
+        short_name: Octopuses
+      CJX:
+        short_name: Fusiliers
+      SDX:
+        short_name: Mackerel scad
+      BEN:
+        short_name: Needlefishes
+      EMP:
+        short_name: Emperors
+      FLY:
+        short_name: Flying fishes
+      SNA:
+        short_name: Snappers and seaperches
+      RAX:
+        short_name: Short bodied mackerel
+      CGX:
+        short_name: Jacks and trevalies
+      TUN:
+        short_name: Tunas
+      MZZ:
+        short_name: Other
+
   header:
     subtitle:
       text: Management Dashboard
@@ -62,8 +98,11 @@ default:
         text: Catch
       revenue:
         text: Revenue
+      composition:
+        text: Composition
       about:
         text: About
+
   footer:
     nav:
       license:
@@ -81,6 +120,7 @@ default:
       text: Small scale fisheries report
     report:
       text: Download report
+
   revenue:
     title:
       text: National revenue
@@ -98,18 +138,19 @@ default:
         text: Annual summary
       period_col:
         text: period
-    decription:
+    description:
       heading:
         text: About the data
       subheading:
         text: Indicator information
       content:
-        text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available.
+        text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
   catch:
     title:
       text: National catch
     subtitle:
       text: Small scale fisheries
+
   settings:
     title:
       text: Settings
@@ -119,6 +160,18 @@ default:
     buttons:
       close:
         label: Close
+
+  composition:
+    title:
+      text: Catch composition
+    subtitle:
+      text: Small scale fisheries
+    highlight:
+      heading:
+        text: Total catch
+    table:
+      heading:
+        text: Total catch
 tet:
   vars:
     n_tracks:
@@ -237,7 +290,7 @@ por:
         text: Sumário anual
       period_col:
         text: período
-    decription:
+    description:
       heading:
         text: Sobre os dados
       subheading:
