@@ -35,7 +35,13 @@ app_ui <- function(request) {
             i18n$t(pars$header$nav$revenue$text)
           ),
           id = "revenue", icon_currency_dollar()),
-        tab_menu_item(i18n$t(pars$header$nav$composition$text), "catch-composition", icon_chart_pie()),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$composition$text),
+            tags$span(
+              class = "badge bg-lime-lt",
+              "New"
+            )), "catch-composition", icon_chart_pie()),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
         id = "main_tabset"
       ),
