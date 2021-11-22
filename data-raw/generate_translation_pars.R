@@ -49,6 +49,8 @@ usethis::use_data(pars, overwrite = TRUE)
 pars$taxa$to_display
 n <- lapply(pars$taxa$taxa, function(x){x$short_name}) %>% unlist()
 
+library(data.table)
+
 taxa_names <- data.table(
   grouped_taxa = names(n),
   grouped_taxa_names = n
