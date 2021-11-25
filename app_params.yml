@@ -20,7 +20,7 @@ default:
     catch:
       short_name: Total catch
       format: ",.2r"
-      description: "The estimated total catch from fishing trips. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      description: "The estimated total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       methods: "The total catch is estimated by multiplying the estimated catch per trip (nationally or per taxa) by the average number of trips per boat and by the number of boats."
       multiplier: 0.001
       suffix: "\u00A0t"
