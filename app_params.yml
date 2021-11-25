@@ -25,7 +25,7 @@ default:
       multiplier: 0.001
       suffix: "\u00A0t"
     landing_revenue:
-      short_name: Agerage trip value
+      short_name: Average trip value
       format: "$,.2r"
       description: "The average trip value is obtained from landing surveys at multiple sites around the country. Fishers are asked for the estimated price of their catch at the landing site regardless of whether the catch is deemed for sale or consumption. Prices may change throughout the year and across landing sites. We then obtain monthly estimates using a random-effect statistical model."
       problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch. There may be a delay of up to several weeks between the time a landing occurs and the time information enters the system."
