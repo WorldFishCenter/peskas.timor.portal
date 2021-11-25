@@ -14,7 +14,7 @@ default:
       format: ","
     revenue:
       short_name: Total value
-      description: "The estimated total value from fishing trips. To ilustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      description: "The estimated total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       methods: "The total value is estimated by multiplying the estimated value per trip by the average number of trips per boat and by the number of boats."
       format: "$,.2r"
     catch:
@@ -28,8 +28,8 @@ default:
       short_name: Average trip value
       format: "$,.2r"
       description: "The average trip value is obtained from landing surveys at multiple sites around the country. Fishers are asked for the estimated price of their catch at the landing site regardless of whether the catch is deemed for sale or consumption. Prices may change throughout the year and across landing sites. We then obtain monthly estimates using a random-effect statistical model."
-      problems: "Occasionally, and especially before 2019, the total selling price of the catch is recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch. There may be a delay of up to several weeks between the time a landing occurs and the time information enters the system."
-      methods: "Survey answers are filtered for outliers. We consider outliers those values that are beyond 3 times the median absolute deviation of the log-transformed landing selling prices."
+      problems: "Occasionally, and especially before 2019, the total selling price of the catch has been recorded incorrectly. This problem is likely to occur when the price is entered per fish or only for part of the catch. There may be a delay of up to several weeks between the time a landing occurs and the time information enters the system."
+      methods: "Survey answers are filtered for outliers. We consider outliers to be those values that are beyond 3 times the median absolute deviation of the log-transformed landing selling prices."
       quality: medium
     landing_weight:
       short_name: Average catch per trip
@@ -51,13 +51,13 @@ default:
       format: ","
       quality: low
       description: "The number of boats is derived from information obtained in the 2015 East-Timor census. The number of boats in each municipality level is added together to form the national total."
-      problems: "Data has not been updated since 2015. However, the number of boats has likely changed considerably since then."
+      problems: "Data have not been updated since 2015. The data are currently unreliable. DGP are currently registering fishing vessels. This process should be complete in early 2022."
     taxa:
       short_name: Taxa (species)
       format: ""
       quality: medium
-      description: "The taxa (species or groups of species) are recorded by enumerators at the landing point."
-      problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to species families or genus. It is not known how this change might affect the estimates."
+      description: "The taxa (species or groups of species) are recorded by enumerators at the landing site."
+      problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to the species family or genus. It is not known how this change might affect the estimates."
       methods: "We calculate national catch for the eleven most common taxa by weight. "
 
   taxa:
