@@ -6,7 +6,7 @@ default:
       format: ","
     n_tracks:
       short_name: "Tracked trips"
-      long_name: "Number of trips tracked by VPS boats installed"
+      long_name: "Number of trips tracked by boats installed with vessel trackers"
       format: ","
     n_matched:
       short_name: "Matched tracks"
