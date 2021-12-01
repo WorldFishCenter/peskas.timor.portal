@@ -104,7 +104,7 @@ default:
 tet:
   vars:
     n_tracks:
-      short_name: Tracked trips tetun
+      short_name: Viajen monitorida
   header:
     subtitle:
       text: Panel Jestaun
