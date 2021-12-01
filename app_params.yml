@@ -61,7 +61,7 @@ default:
       methods: "We calculate national catch for the eleven most common taxa by weight. "
 
   taxa:
-    to_display: [CLP, OCZ, CJX, SDX, BEN, EMP, FLY, SNA, RAX, CGX, TUN, MZZ]
+    to_display: [CLP, CJX, SDX, BEN, TUN, EMP, FLY, SNA, RAX, CGX, MOO, MZZ]
     taxa:
       CLP:
         short_name: Sardines and herrings
@@ -85,6 +85,8 @@ default:
         short_name: Jacks and trevalies
       TUN:
         short_name: Tunas
+      MOO:
+        short_name: Moonfish
       MZZ:
         short_name: Other
 

@@ -56,5 +56,17 @@ taxa_names <- data.table(
   grouped_taxa_names = n
 )
 
-taxa_names[, grouped_taxa := factor(grouped_taxa, pars$taxa$to_display)]
+get_taxa_descending_order <- function(){
+  # beginning of current year
+  start <- as.Date(paste0(format(Sys.Date(), "%Y"), "-01-01"))
+  # specific taxa (without other)
+  taxa <- pars$taxa$to_display[pars$taxa$to_display != "MZZ"]
+  x <- peskas.timor.portal::taxa_aggregated$month[date_bin_start >= start]
+  x <- x[grouped_taxa %in% taxa]
+  x <- x[, .(catch = sum(catch)), by = "grouped_taxa"]
+  c(x[order(-catch), grouped_taxa], "MZZ")
+}
+taxa_names <- taxa_names[grouped_taxa %in% get_taxa_descending_order()]
+taxa_names <- taxa_names[, grouped_taxa := factor(grouped_taxa, get_taxa_descending_order())]
+taxa_names <- taxa_names[order(grouped_taxa)]
 usethis::use_data(taxa_names, overwrite = TRUE)

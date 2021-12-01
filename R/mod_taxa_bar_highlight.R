@@ -50,9 +50,9 @@ mod_taxa_bar_highlight_server <- function(id, var, colors){
       from <- as.Date(paste0(input$y, "-01-01"))
       to <- as.Date(paste0(input$y, "-12-01"))
       x <- peskas.timor.portal::taxa_aggregated$month[date_bin_start >= from & date_bin_start <= to]
-      x <- x[grouped_taxa %in% pars$taxa$to_display]
+      x <- x[grouped_taxa %in% peskas.timor.portal::taxa_names$grouped_taxa]
       x <- x[, .(catch = sum(catch)), by = "grouped_taxa"]
-      x <- x[, grouped_taxa := factor(grouped_taxa, pars$taxa$to_display)]
+      x <- x[, grouped_taxa := factor(grouped_taxa, peskas.timor.portal::taxa_names$grouped_taxa)]
       merge(x[order(grouped_taxa)], peskas.timor.portal::taxa_names)
     })
 
