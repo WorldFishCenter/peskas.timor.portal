@@ -8,6 +8,7 @@ app_ui <- function(request) {
   tagList(
     apexchart_dep(),
     jquery_dep(),
+    google_analytics(),
     shiny.i18n::usei18n(i18n),
     tabler_page(
       title = "Peskas | East Timor",
