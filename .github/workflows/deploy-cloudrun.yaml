@@ -25,7 +25,6 @@ jobs:
         run: |
           Rscript -e 'install.packages(c("remotes"))'
           Rscript -e 'remotes::install_cran(c("config", "googleCloudStorageR", "data.table"), quick = TRUE)'
-          Rscript -e 'remotes::install_local()'
           Rscript -e 'source("update_data.R")'
           Rscript -e 'source("data-raw/generate_translation_pars.R")'
 
