@@ -59,6 +59,10 @@ default:
       description: "The taxa (species or groups of species) are recorded by enumerators at the landing site."
       problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to the species family or genus. It is not known how this change might affect the estimates."
       methods: "We calculate national catch for the eleven most common taxa by weight. "
+    prop_landings_woman:
+      short_name: "Trips with women"
+      format: ".1%"
+      quality: high
 
   taxa:
     to_display: [CLP, CJX, SDX, BEN, TUN, EMP, FLY, SNA, RAX, CGX, MOO, MZZ]
