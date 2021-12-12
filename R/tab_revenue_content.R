@@ -26,7 +26,7 @@ tab_revenue_content <- function(i18n){
           id = "revenue-card",
           card_class = "col",
           apex_height = "21rem",
-          heading = pars$vars$revenue$short_name),
+          heading = i18n$t(pars$vars$revenue$short_name)),
       ),
       tags$div(
         class = "col-lg-4 col-xl-4",
