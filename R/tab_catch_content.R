@@ -26,7 +26,7 @@ tab_catch_content <- function(i18n){
           id = "catch-card",
           card_class = "col",
           apex_height = "21rem",
-          heading = pars$vars$catch$short_name),
+          heading = i18n$t(pars$vars$catch$short_name)),
       ),
       tags$div(
         class = "col-lg-4 col-xl-4",
