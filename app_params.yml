@@ -63,6 +63,13 @@ default:
       short_name: "Trips with women"
       format: ".1%"
       quality: high
+    pds_tracks:
+      short_name: PDS Tracks
+      format: ",.3r"
+      quality: low
+      description: "Boat movements are tracked by [Pelagic Data Systems](https://www.pelagicdata.com/) tracking system, and a proprietary algorithm is used to determine when a trip occurs."
+      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips (that result in a landing) from non-fishing trips."
+      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time traveled."
 
   taxa:
     to_display: [CLP, CJX, SDX, BEN, TUN, EMP, FLY, SNA, RAX, CGX, MOO, MZZ]
@@ -106,6 +113,8 @@ default:
         text: Revenue
       composition:
         text: Composition
+      pds_tracks:
+        text: Tracks
       about:
         text: About
 
@@ -178,6 +187,15 @@ default:
     table:
       heading:
         text: Total catch
+
+  pds_tracks:
+    title:
+      text: Timor boat tracks
+    subtitle:
+      text: Small scale fisheries
+    description:
+      content:
+        text: "Data refer to the number of boat trips along the Timor coast with a grid resolution of 10 x 10 meters."
 tet:
   vars:
     n_tracks:

@@ -56,8 +56,7 @@ tab_catch_content <- function(i18n){
             )
           )
         )
-      ),
-
+      )
     )
   )
 }

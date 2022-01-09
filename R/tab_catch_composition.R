@@ -39,7 +39,7 @@ tab_catch_composition <- function(i18n){
             )
           )
         )
-      ),
+      )
     )
   )
 }
