@@ -44,6 +44,9 @@ app_server <- function(input, output, session){
   mod_composition_table_server("taxa-table")
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
+  # Tracks tab
+  mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
+
 }
 
 #' Dummy apex chart

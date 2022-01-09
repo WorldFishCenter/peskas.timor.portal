@@ -24,12 +24,8 @@ app_ui <- function(request) {
         tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$catch$text),
-            tags$span(
-              class = "badge bg-lime-lt",
-              "New"
-            )
-          ),
+            i18n$t(pars$header$nav$catch$text)
+            ),
           id = "catch", icon_scale()),
         tab_menu_item(
           label = tagList(
@@ -38,11 +34,18 @@ app_ui <- function(request) {
           id = "revenue", icon_currency_dollar()),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$composition$text),
+            i18n$t(pars$header$nav$composition$text)
+          ),
+          "catch-composition", icon_chart_pie()),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$pds_tracks$text),
             tags$span(
               class = "badge bg-lime-lt",
               "New"
-            )), "catch-composition", icon_chart_pie()),
+            )
+          ),
+          id = "pds_tracks", icon_boat()),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
         id = "main_tabset"
       ),
@@ -73,6 +76,10 @@ app_ui <- function(request) {
         tab_panel(
           id = "catch-composition",
           tab_catch_composition(i18n)
+        ),
+        tab_panel(
+          id = "pds_tracks",
+          tab_tracks_content(i18n)
         ),
         tab_panel(
           id = "about",

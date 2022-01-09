@@ -476,3 +476,33 @@ icon_chart_pie <- function(size = 24, class = ""){
     tags$path(d = "M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5")
   )
 }
+
+icon_boat <- function(size = 24, class = ""){
+  class <- "icon"
+  tags$svg(
+    xmlns = "http://www.w3.org/2000/svg",
+    class = class,
+    width = "24",
+    height = "24",
+    viewbox = "0 0 24 24",
+    `stroke-width` = "2",
+    stroke = "currentColor",
+    fill = "none",
+    `stroke-linecap` = "round",
+    `stroke-linejoin` = "round",
+    tags$path(
+      stroke = "none",
+      d = "M0 0h24v24H0z",
+      fill = "none"
+    ),
+    tags$path(d = "M2 20a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1"),
+    tags$path(d = "M4 18l-1 -3h18l-1 3"),
+    tags$path(d = "M11 12h7l-7 -9v9"),
+    tags$line(
+      x1 = "8",
+      y1 = "7",
+      x2 = "6",
+      y2 = "12"
+    )
+  )
+}
