@@ -195,7 +195,7 @@ default:
       text: Small scale fisheries
     description:
       content:
-        text: "Tracks are recorded by GPS devices mounted on the boats. Data refer to the number of boat trips along the Timor coast with a grid resolution of 10 x 10 meters. Some tracks may be inaccurate."
+        text: "Tracks are recorded by GPS devices mounted on the boats. Data refer to the boats' movements tracked along the Timor coast with a grid resolution of 10 x 10 meters. Some tracks may be inaccurate."
 tet:
   vars:
     n_tracks:
@@ -400,4 +400,4 @@ por:
       text: Small scale fisheries
     description:
       content:
-        text: "As trilhas são gravadas por dispositivos GPS montados nos barcos. Os dados referem-se ao número de viagens de barco ao longo da costa de Timor com resolução de grelha de 10 x 10 metros. Algumas faixas podem ser imprecisas."
+        text: "As trilhas são registradas por dispositivos GPS montados nos barcos. Os dados referem-se aos movimentos dos barcos rastreados ao longo da costa de Timor com uma resolução de grelha de 10 x 10 metros. Algumas faixas podem ser imprecisas."
