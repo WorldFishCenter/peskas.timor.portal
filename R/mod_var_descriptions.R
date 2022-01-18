@@ -49,17 +49,18 @@ mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = fun
               i18n_r()$t(x[[1]]$description)),
             tags$div(
               class = "small",
-              tags$strong("Data processing and validation:"),
-              get_text(x[[1]]$methods, tags$p("None."))
+              tags$strong(i18n_r()$t(pars$indicators$processing$text)),
+              markdown(i18n_r()$t(x[[1]]$methods))
             ),
             tags$div(
               class = "small",
-              tags$strong("Known problems and limitations:"),
-              get_text(x[[1]]$problems, tags$p("Not assessed."))
+              tags$strong(i18n_r()$t(pars$indicators$limitations$text)),
+              markdown(i18n_r()$t(x[[1]]$problems))
             ),
             tags$p(
               class = paste("badge mb-0", bg$light),
-              icon_check(), "Data quality:", get_quality_text(x[[1]]$quality)),
+              icon_check(), i18n_r()$t(pars$indicators$quality$text),
+              i18n_r()$t(x[[1]]$quality)),
           )
         )
       })
@@ -87,7 +88,7 @@ get_bg_quality <- function(x){
       low = "red",
       medium = "yellow",
       high = "green",
-      "cyan"
+      "secondary"
     )
   }
   list(

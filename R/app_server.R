@@ -26,7 +26,7 @@ app_server <- function(input, output, session){
   mod_summary_table_server(id = "revenue-table", vars = c("revenue", "landing_revenue", "n_landings_per_boat", "n_boats"),  i18n_r = i18n_r)
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"), i18n_r = i18n_r)
 
-  # Revenue tab
+  # Catch tab
   mod_highlight_card_server(id = "catch-card", var = "catch", period = "month", n = 25)
   mod_summary_card_server(id = "landing-catch-card", var = "landing_weight", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landing-per-boat-catch-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
@@ -46,6 +46,10 @@ app_server <- function(input, output, session){
 
   # Tracks tab
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
+
+  # About tab
+  #timor_about_server(id = "about-text", i18n_r = i18n_r)
+
 
 }
 
