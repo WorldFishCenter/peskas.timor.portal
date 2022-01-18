@@ -81,14 +81,14 @@ app_ui <- function(request) {
           id = "pds_tracks",
           tab_tracks_content(i18n)
         ),
-        #tab_panel(
-        #  id = "about",
-        #  peskas_timor_about()
-        #)
         tab_panel(
           id = "about",
-          page_text(content = peskas_timor_about())
+          peskas_timor_about_ui(id = "about-text")
         )
+        #tab_panel(
+        #  id = "about",
+        #  page_text(content = peskas_timor_about())
+        #)
       ),
       footer_panel(
         left_side_elements = tags$li(

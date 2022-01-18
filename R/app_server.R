@@ -48,7 +48,7 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 
   # About tab
-  #timor_about_server(id = "about-text", i18n_r = i18n_r)
+  timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
 
 
 }
