@@ -289,7 +289,7 @@ por:
       format: "$,.2r"
       description: "A receita total estimada dos desembarques de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
       problems: Não avaliado.
-      methods: "The revenue is estimated by multiplying the estimated revenue per landing by the average number of landings per boat and by the number of boats."
+      methods: "O valor total é estimado multiplicando o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
       quality: não avaliado
     catch:
       short_name: Captura total
