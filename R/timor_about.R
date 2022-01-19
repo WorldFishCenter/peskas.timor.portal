@@ -1,22 +1,28 @@
-#peskas_timor_about <- function(){
-#  markdown(pars$about$text)
-#}
-
-
+#' text_panel UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd
+#'
+#' @importFrom shiny NS tagList
 peskas_timor_about_ui <- function(id) {
   ns <- NS(id)
   tags$div(
-    class = "col-lg-9",
+    class = "page-body",
     tags$div(
-      class = "card card-lg",
+      class = "container-xl",
       tags$div(
-        class = "card-body",
+        class = "row justify-content-center",
         tags$div(
-          class = "markdown",
-          tags$div(tags$div(
-            class = "d-flex mb-3",
-            htmlOutput(ns("about"))
-           )
+          class = "col-lg-10 col-xl-9",
+          tags$div(
+            class = "card card-lg",
+            tags$div(
+              class = "card-body markdown",
+              htmlOutput(ns("about"))
+            )
           )
         )
       )
@@ -24,15 +30,9 @@ peskas_timor_about_ui <- function(id) {
   )
 }
 
-#peskas_timor_about <- function(){
-#  page_text(content = timor_about_ui(id = "about-text"))
-#}
-
-#timor_about_ui <- function(id){
-#  ns <- NS(id)
-#  htmlOutput(ns("about-text"))
-#}
-
+#' text_panel Server Functions
+#'
+#' @noRd
 timor_about_server <- function(id, content, i18n_r = reactive(list(t = function(x) x))) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
