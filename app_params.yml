@@ -133,6 +133,8 @@ default:
         text: The project
     copyright:
       text: "Copyright © 2021 Peskas. All rights reserved."
+    update_time:
+      text: "Last update"
 
   home:
     title:
@@ -202,6 +204,8 @@ default:
     table:
       heading:
         text: Total catch
+      footer:
+        text: "* All values in metric tonnes. Totals only include data after April 2018."
 
   pds_tracks:
     title:
@@ -446,6 +450,8 @@ por:
     table:
       heading:
         text: Captura total
+      footer:
+        text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após Abril de 2018."
 
   pds_tracks:
     title:

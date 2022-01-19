@@ -15,7 +15,7 @@ mod_composition_table_ui <- function(id, ...){
       # As an html output so we can tweak the alignment reactively
       table = htmlOutput(ns("t")),
       # dropdown = s,
-      footer = "* All values in metric tonnes. Totals only include data after April 2018.",
+      footer = i18n$t(pars$composition$table$footer$text),
       ...
     )
 
