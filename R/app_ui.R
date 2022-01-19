@@ -83,8 +83,12 @@ app_ui <- function(request) {
         ),
         tab_panel(
           id = "about",
-          page_text(content = peskas_timor_about())
+          peskas_timor_about_ui(id = "about-text")
         )
+        #tab_panel(
+        #  id = "about",
+        #  page_text(content = peskas_timor_about())
+        #)
       ),
       footer_panel(
         left_side_elements = tags$li(

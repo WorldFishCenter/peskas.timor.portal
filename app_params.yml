@@ -15,15 +15,19 @@ default:
     revenue:
       short_name: Total value
       description: "The estimated total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      problems: Not assessed.
       methods: "The total value is estimated by multiplying the estimated value per trip by the average number of trips per boat and by the number of boats."
       format: "$,.2r"
+      quality: not assessed
     catch:
       short_name: Total catch
       format: ",.2r"
       description: "The estimated total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      problems: Not assessed.
       methods: "The total catch is estimated by multiplying the estimated catch per trip (nationally or per taxa) by the average number of trips per boat and by the number of boats."
       multiplier: 0.001
       suffix: "\u00A0t"
+      quality: not assessed
     landing_revenue:
       short_name: Average trip value
       format: "$,.2r"
@@ -52,6 +56,7 @@ default:
       quality: low
       description: "The number of boats is derived from information obtained in the 2015 East-Timor census. The number of boats in each municipality level is added together to form the national total."
       problems: "Data have not been updated since 2015. The data are currently unreliable. DGP are currently registering fishing vessels. This process should be complete in early 2022."
+      methods: None.
     taxa:
       short_name: "Taxa (species)"
       format: ""
@@ -128,6 +133,7 @@ default:
         text: The project
     copyright:
       text: "Copyright © 2021 Peskas. All rights reserved."
+
   home:
     title:
       text: National overview
@@ -160,11 +166,20 @@ default:
         text: Indicator information
       content:
         text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
+
   catch:
     title:
       text: National catch
     subtitle:
       text: Small scale fisheries
+
+  indicators:
+    processing:
+      text: "Data processing and validation:"
+    limitations:
+      text: "Known problems and limitations:"
+    quality:
+      text: "Data quality:"
 
   settings:
     title:
@@ -196,6 +211,31 @@ default:
     description:
       content:
         text: "Tracks are recorded by GPS devices mounted on the boats. Data refer to the boats' movements tracked along the Timor coast with a grid resolution of 10 x 10 meters. Some tracks may be inaccurate."
+
+  about:
+    text: |
+      # About Peskas
+
+      Peskas is a web portal displaying data and insights on the fisheries of Timor-Leste. It is the official fisheries national monitoring system of Timor-Leste.
+
+      Peskas relies on a team of Timorese enumerators collecting catch data from fishers around Timor-Leste. Catch data are matched with vessel tracking data to show fishing trends over time and space.
+
+      Peskas was built with the objectives of being low cost, open source, open access and near-real time.
+
+      Peskas is the result of an ongoing partnership between WorldFish and the Timor-Leste Ministry of Agriculture and Fisheries' Department of Fisheries, Aquaculture and Marine Resources since 2016.
+
+      Peskas was made possible with the generous donations of The Royal Norwegian Embassy in Jakarta, The Minderoo Foundation, The CGIAR Big Data Platform and the Schmidt Foundation.
+
+      Peskas is funded by the Government of Timor-Leste since 2021 with technical support from WorldFish and Pelagic Data Systems Inc.
+
+      Information about the process and user-centred design of the Peskas pipeline and initial analytics, and its application in fisheries research & management can be found in the following publications:
+
+      - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
+      - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
+      - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
+
+
+
 tet:
   vars:
     n_tracks:
@@ -248,12 +288,16 @@ por:
       short_name: Receita total
       format: "$,.2r"
       description: "A receita total estimada dos desembarques de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
-      methods: "The revenue is estimated by multiplying the estimated revenue per landing by the average number of landings per boat and by the number of boats."
+      problems: Não avaliado.
+      methods: "O valor total é estimado multiplicando o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
+      quality: não avaliado
     catch:
       short_name: Captura total
       format: ",.2r"
       description: "A captura total estimada em viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
+      problems: Não avaliado.
       methods: "A captura total é estimada multiplicando a captura estimada por viagem (nacionalmente ou por taxa) pelo número médio de viagens por barco e pelo número de barcos."
+      quality: não avaliado
     landing_revenue:
       short_name: Valor de desembarque
       format: "$,.2r"
@@ -279,6 +323,7 @@ por:
       format: ","
       description: "O número de barcos é calculado a partir de informações obtidas no censo 2015 de Timor-Leste. O número de barcos em cada nível de município é somado para formar o total nacional."
       problems: "Os dados não são atualizados desde 2015. No entanto, o número de barcos provavelmente mudou consideravelmente desde então."
+      methods: Nenhum.
       quality: baixo
     taxa:
       short_name: "Taxa (espécie)"
@@ -371,6 +416,15 @@ por:
         text: Informações do indicador
       content:
         text: As estimativas de receita não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis.
+
+  indicators:
+    processing:
+      text: "Processamento e validação de dados:"
+    limitations:
+      text: "Problemas e limitações conhecidos:"
+    quality:
+      text: "Qualidade dos dados:"
+
   settings:
     title:
       text: Configuração
@@ -401,3 +455,25 @@ por:
     description:
       content:
         text: "As trilhas são registradas por dispositivos GPS montados nos barcos. Os dados referem-se aos movimentos dos barcos rastreados ao longo da costa de Timor com uma resolução de grelha de 10 x 10 metros. Algumas faixas podem ser imprecisas."
+
+  about:
+    text: |
+      # Sobre Peskas
+
+      Peskas é um portal web que apresenta dados e insights sobre as pescas de Timor-Leste. É o sistema oficial de monitorização nacional das pescas de Timor-Leste.
+
+      Peskas conta com uma equipe de recenseadores timorenses que coletam dados de captura de pescadores em Timor-Leste. Os dados de captura são combinados com os dados de rastreamento da embarcação para mostrar as tendências de pesca ao longo do tempo e do espaço.
+
+      Peskas foi construído com o objetivo de ser de baixo custo, código aberto, acesso aberto e tempo quase real.
+
+      Peskas é o resultado de uma parceria contínua entre a WorldFish e o Departamento de Pescas, Aquicultura e Recursos Marinhos do Ministério da Agricultura e Pescas de Timor-Leste desde 2016.
+
+      Peskas foi possível com as doações generosas da Embaixada Real da Noruega em Jacarta, da Fundação Minderoo, da Plataforma de Big Data CGIAR e da Fundação Schmidt.
+
+      A Peskas é financiada pelo Governo de Timor-Leste desde 2021 com apoio técnico da WorldFish e Pelagic Data Systems Inc.
+
+      Informações sobre o processo e design centrado no usuário do gasoduto Peskas e análise inicial, e sua aplicação na pesquisa e gestão pesqueira podem ser encontradas nas seguintes publicações:
+
+      - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
+      - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
+      - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."

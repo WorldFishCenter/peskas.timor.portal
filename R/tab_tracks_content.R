@@ -1,9 +1,11 @@
-tab_tracks_content <- function(i18n){
+tab_tracks_content <- function(i18n) {
   tagList(
-    page_heading(pretitle = i18n$t(pars$pds_tracks$subtitle),
-                 title = i18n$t(pars$pds_tracks$title)),
+    page_heading(
+      pretitle = i18n$t(pars$pds_tracks$subtitle),
+      title = i18n$t(pars$pds_tracks$title)
+    ),
     tags$img(
-      src = "https://storage.googleapis.com/public-timor-dev/tracks-map.png",# png
+      src = "https://storage.googleapis.com/public-timor-dev/tracks-map.png", # png
       width = "900",
       height = "500"
     ),
@@ -13,7 +15,7 @@ tab_tracks_content <- function(i18n){
         id = "tracks-info",
         heading = i18n$t(pars$revenue$description$heading$text),
         # subheading = "Possible caveats and data description",
-        intro =  tagList(
+        intro = tagList(
           markdown(i18n$t(pars$pds_tracks$description$content$text)),
           tags$div(
             class = "hr-text",
@@ -24,4 +26,3 @@ tab_tracks_content <- function(i18n){
     )
   )
 }
-
