@@ -37,7 +37,7 @@ download_report_button <- function(text = NULL, icon = NULL) {
     tags$div(
       class = "btn-list",
       tags$a(
-        href = "https://storage.googleapis.com/public-timor-dev/data_report.pdf",
+        href = "https://storage.googleapis.com/public-timor/data_report.pdf",
         target = "_blank",
         class = "btn btn-primary d-none d-sm-inline-block",
         icon,
