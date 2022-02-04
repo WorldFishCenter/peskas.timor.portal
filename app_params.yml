@@ -13,14 +13,14 @@ default:
       description: "Number of matched tracks"
       format: ","
     revenue:
-      short_name: Total value
+      short_name: Estimated national revenue
       description: "The estimated total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
       methods: "The total value is estimated by multiplying the estimated value per trip by the average number of trips per boat and by the number of boats."
       format: "$,.2r"
       quality: not assessed
     catch:
-      short_name: Total catch
+      short_name: Estimated national catch
       format: ",.2r"
       description: "The estimated total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
@@ -289,14 +289,14 @@ por:
     n_matched:
       short_name: Faixas combinadas
     revenue:
-      short_name: Receita total
+      short_name: Receita nacional estimada
       format: "$,.2r"
       description: "A receita total estimada dos desembarques de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
       problems: Não avaliado.
       methods: "O valor total é estimado multiplicando o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
       quality: não avaliado
     catch:
-      short_name: Captura total
+      short_name: Captura nacional estimada
       format: ",.2r"
       description: "A captura total estimada em viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
       problems: Não avaliado.
