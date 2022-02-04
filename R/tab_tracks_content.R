@@ -6,7 +6,7 @@ tab_tracks_content <- function(i18n) {
     ),
     page_cards(
       tags$img(
-        src = "https://storage.googleapis.com/public-timor-dev/tracks-map.png", # png
+        src = "https://storage.googleapis.com/public-timor-dev/tracks-map.png",
         width = "100%"
       ),
       tags$div(

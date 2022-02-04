@@ -46,6 +46,15 @@ app_ui <- function(request) {
             )
           ),
           id = "pds_tracks", icon_boat()),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$nutrients$text),
+            tags$span(
+              class = "badge bg-lime-lt",
+              "New"
+            )
+          ),
+          id = "nutrients", icon_nutrients()),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
         id = "main_tabset"
       ),
@@ -80,6 +89,10 @@ app_ui <- function(request) {
         tab_panel(
           id = "pds_tracks",
           tab_tracks_content(i18n)
+        ),
+        tab_panel(
+          id = "nutrients",
+          tab_nutrients_content(i18n)
         ),
         tab_panel(
           id = "about",

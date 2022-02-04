@@ -120,6 +120,8 @@ default:
         text: Composition
       pds_tracks:
         text: Tracks
+      nutrients:
+        text: Nutrients
       about:
         text: About
 
@@ -172,6 +174,12 @@ default:
   catch:
     title:
       text: National catch
+    subtitle:
+      text: Small scale fisheries
+
+  nutrients:
+    title:
+      text: Nutritional properties
     subtitle:
       text: Small scale fisheries
 
@@ -347,6 +355,7 @@ por:
       description: "Os movimentos do barco são rastreados pelo sistema de rastreamento [Pelagic Data Systems](https://www.pelagicdata.com/), e um algoritmo proprietário é usado para determinar quando ocorre uma viagem."
       problems: "Existem problemas conhecidos com o algoritmo de sistemas Pelagic Data. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede ruim pode atrasar ou impedir que as informações sejam transferidas dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Actualmente, não é possível distinguir as viagens de pesca (que resultam num desembarque) das viagens de não pesca."
       methods: "As faixas são filtradas para valores discrepantes e alguns possíveis erros de algoritmo. Especificamente, não levamos em consideração trilhas georreferenciadas caracterizadas por grandes anomalias na qualidade do rastreamento, na velocidade das embarcações, na distância e no tempo percorrido."
+
   header:
     subtitle:
       text: Painel de Gestão
@@ -359,8 +368,11 @@ por:
         text: Captura
       composition:
         text: Composição
+      nutrients:
+        text: Nutrientes
       about:
         text: Informação
+
   footer:
     nav:
       license:
@@ -373,6 +385,7 @@ por:
       text: "Copyright © 2021 Peskas. Todos os direitos reservados."
     update_time:
       text: Ultima atualização
+
   home:
     title:
       text: Visão geral nacional
@@ -380,6 +393,7 @@ por:
       text: Relatório de pesca em pequena escala
     report:
       text: Baixe o relatório
+
   revenue:
     title:
       text: Receita nacional
@@ -404,6 +418,7 @@ por:
         text: Informação do indicador
       content:
         text: Essas estimativas não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis. Os indicadores incluem apenas dados da pesca artesanal e de subsistência.
+
   catch:
     title:
       text: Captura nacional
@@ -420,6 +435,10 @@ por:
         text: Informações do indicador
       content:
         text: As estimativas de receita não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis.
+
+  nutrients:
+    title:
+      text: Propriedades nutritivas
 
   indicators:
     processing:
