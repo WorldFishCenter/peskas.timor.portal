@@ -119,7 +119,7 @@ default:
       composition:
         text: Composition
       pds_tracks:
-        text: Tracks
+        text: GPS Tracks
       about:
         text: About
 
@@ -359,6 +359,8 @@ por:
         text: Captura
       composition:
         text: Composição
+      pds_tracks:
+        text: Trilhas GPS
       about:
         text: Informação
   footer:
