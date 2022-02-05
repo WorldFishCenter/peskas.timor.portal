@@ -84,7 +84,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
       paste(
         paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total * info$series[[1]]$series_multiplier)),
         paste(i18n_r()$t(text_recorded), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total_recorded * info$series[[1]]$series_multiplier)),
-        sep = " - ")
+        sep = " ; ")
     })
   })
 }
