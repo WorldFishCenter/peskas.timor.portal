@@ -23,7 +23,7 @@ app_server <- function(input, output, session){
   mod_summary_card_server(id = "landing-revenue-card", var = "landing_revenue", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landing-per-boat-revenue-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "n-boats-revenue-card", var = "n_boats", period = "month", i18n_r = i18n_r)
-  mod_summary_table_server(id = "revenue-table", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat", "n_boats"),  i18n_r = i18n_r)
+  mod_summary_table_server(id = "revenue-table", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat"),  i18n_r = i18n_r)
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"), i18n_r = i18n_r)
 
   # Catch tab
@@ -31,7 +31,7 @@ app_server <- function(input, output, session){
   mod_summary_card_server(id = "landing-catch-card", var = "landing_weight", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landing-per-boat-catch-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "n-boats-catch-card", var = "n_boats", period = "month", i18n_r = i18n_r)
-  mod_summary_table_server(id = "catch-table", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat", "n_boats"),  i18n_r = i18n_r)
+  mod_summary_table_server(id = "catch-table", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat"),  i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
 
   # Composition tab
