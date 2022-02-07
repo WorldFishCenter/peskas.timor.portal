@@ -378,7 +378,7 @@ por:
       composition:
         text: Composição
       pds_tracks:
-        text: GPS Trilhas
+        text: Trilhas GPS
       about:
         text: Informação
   footer:
