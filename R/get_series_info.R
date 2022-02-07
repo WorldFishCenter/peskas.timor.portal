@@ -25,13 +25,14 @@ get_series_info <- function(vars, period = "month", n = NULL, year = NULL, ...){
 }
 
 #' @import data.table
-get_summary_frame_var <- function(var, period, ...){
-
+get_summary_frame_var <- function(var, period, ...) {
   filters <- list(...)
 
-  if (length(filters) > 0){
-    if (names(filters) == "taxa"){
+  if (length(filters) > 0) {
+    if (names(filters) == "taxa") {
       data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa == filters$taxa]
+    } else if (names(filters) == "nutrients") {
+      data <- peskas.timor.portal::nutrients_aggregated[[period]]
     }
   } else {
     data <- peskas.timor.portal::aggregated[[period]]
@@ -52,6 +53,8 @@ extract_series_info <- function(var, data, period, ...){
     if (names(filters) == "taxa") {
       taxa_name <- peskas.timor.portal::pars$taxa$taxa[[filters$taxa]]$short_name
       heading <- paste0(taxa_name)
+    } else if (names(filters) == "nutrients") {
+      heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
     }
   } else {
     heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)

@@ -21,6 +21,27 @@ tab_nutrients_content <- function(i18n) {
             )
           )
         )
+      ),
+      tags$div(
+        class = "col-lg-8 col-xl-8",
+        mod_highlight_card_ui(
+          id = "vitaminA-card",
+          card_class = "col",
+          apex_height = "21rem",
+          heading = i18n$t(pars$vars$vitaminA$short_name)
+        ),
+      ),
+      tags$div(
+        class = "col-lg-4 col-xl-4",
+        tags$div(
+          class = "row row-cards",
+          mod_summary_card_ui(id = "nutrients-selenium", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui(id = "nutrients-iron", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui(id = "nutrients-calcium", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui(id = "nutrients-zinc", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui(id = "nutrients-vitaminA", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui(id = "nutrients-omega3", div_class = "col-12 col-md-6 col-lg-12")
+        )
       )
     )
   )

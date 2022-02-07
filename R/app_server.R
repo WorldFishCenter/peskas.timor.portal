@@ -48,7 +48,13 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 
   # Nutrition tab
-  #mod_highlight_card_server(id = "selenium-card", var = "Selenium", period = "month", n = 25)
+  mod_highlight_card_server(id = "vitaminA-card", var = "vitaminA", period = "month", nutrients = "nutrients", n = 25)
+  mod_summary_card_server(id = "nutrients-selenium", var = "selenium", period = "month", nutrients = "nutrients", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "nutrients-calcium", var = "calcium", period = "month", nutrients = "nutrients", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "nutrients-zinc", var = "zinc", period = "month", nutrients = "nutrients", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "nutrients-iron", var = "iron", period = "month", nutrients = "nutrients", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "nutrients-vitaminA", var = "vitaminA", period = "month", nutrients = "nutrients", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "nutrients-omega3", var = "omega3", period = "month", nutrients = "nutrients", n = 13, i18n_r = i18n_r)
 
 
   # About tab
