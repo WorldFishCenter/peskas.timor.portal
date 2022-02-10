@@ -50,8 +50,8 @@ app_ui <- function(request) {
           label = tagList(
             i18n$t(pars$header$nav$nutrients$text),
             tags$span(
-              class = "badge bg-lime-lt",
-              "New"
+              class = "badge bg-red-lt ms-2",
+              "Experimental"
             )
           ),
           id = "nutrients", icon_nutrients()),

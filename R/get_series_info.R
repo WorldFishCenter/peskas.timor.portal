@@ -30,9 +30,9 @@ get_summary_frame_var <- function(var, period, ...) {
 
   if (length(filters) > 0) {
     if (names(filters) == "taxa") {
-      data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa == filters$taxa]
+      data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa %in%  filters$taxa]
     } else if (names(filters) == "nutrients") {
-      data <- peskas.timor.portal::nutrients_aggregated[[period]]
+      data <- peskas.timor.portal::nutrients_aggregated[[period]][nutrient %in% filters$nutrients]
     }
   } else {
     data <- peskas.timor.portal::aggregated[[period]]
@@ -54,7 +54,8 @@ extract_series_info <- function(var, data, period, ...){
       taxa_name <- peskas.timor.portal::pars$taxa$taxa[[filters$taxa]]$short_name
       heading <- paste0(taxa_name)
     } else if (names(filters) == "nutrients") {
-      heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
+      nutrient_name <- peskas.timor.portal::pars$nutrients$nutrients[[filters$nutrients]]$short_name
+      heading <- paste0(nutrient_name)
     }
   } else {
     heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)

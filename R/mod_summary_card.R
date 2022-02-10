@@ -51,7 +51,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL,
       output$chart  <- renderApexchart({
         plot_timeseries(
           x_categories = d$x_datetime,
-          series = series[[1]],
+          series = series,
           y_formatter = y_formatter,
           type = type,
           sparkline = sparkline.enabled,

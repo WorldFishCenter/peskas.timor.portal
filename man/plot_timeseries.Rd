@@ -10,7 +10,8 @@ plot_timeseries(
   y_formatter = V8::JS("function(x) {return x}"),
   type = "bar",
   sparkline = F,
-  colors = NULL
+  colors = NULL,
+  stacked = F
 )
 }
 \description{
