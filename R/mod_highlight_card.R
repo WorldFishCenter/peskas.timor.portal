@@ -24,16 +24,15 @@ mod_highlight_card_ui <- function(id, heading = NULL, apex_height = "20rem", ...
 #' highlight_card Server Functions
 #'
 #' @noRd
-mod_highlight_card_server <- function(id, var,
-                                      period = "month",
-                                      n = NULL,
+mod_highlight_card_server <- function(id, var, period = "month",n = NULL,
                                       type = "bar",
                                       sparkline.enabled = F,
-                                      y_formatter = apexcharter::format_num("")){
+                                      y_formatter = apexcharter::format_num(""),
+                                      ...){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    card_data <- reactiveVal(get_series_info(var, period, n))
+    card_data <- reactiveVal(get_series_info(var, period, n, ...))
 
     output$c <- apexcharter::renderApexchart({
 
@@ -50,7 +49,7 @@ mod_highlight_card_server <- function(id, var,
 
       plot_timeseries(
         x_categories = d$x_datetime,
-        series = series[[1]],
+        series = series,
         y_formatter = y_formatter,
         type = type,
         sparkline = sparkline.enabled)

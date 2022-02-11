@@ -25,7 +25,13 @@ mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-he
 #'
 #' @noRd
 #' @import data.table
-mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = "area", sparkline.enabled = T, apex_height = "4rem", i18n_r = reactive(list(t = function(x) x)), colors = NULL, ...){
+mod_summary_card_server <- function(id, var, period = "month", n = NULL,
+                                    type = "area",
+                                    sparkline.enabled = T,
+                                    apex_height = "4rem",
+                                    i18n_r = reactive(list(t = function(x) x)),
+                                    colors = NULL,
+                                    ...){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -45,7 +51,7 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL, type = 
       output$chart  <- renderApexchart({
         plot_timeseries(
           x_categories = d$x_datetime,
-          series = series[[1]],
+          series = series,
           y_formatter = y_formatter,
           type = type,
           sparkline = sparkline.enabled,

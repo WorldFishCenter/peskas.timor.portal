@@ -84,6 +84,24 @@ default:
       description: "Boat movements are tracked by [Pelagic Data Systems](https://www.pelagicdata.com/) tracking system, and a proprietary algorithm is used to determine when a trip occurs."
       problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
       methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+    nut_supply:
+      short_name: "Nutrients supply"
+      format: ",.3r"
+      multiplier: 0.001
+      quality: medium
+      suffix: "\u00A0Kg"
+      description: "Nutritional values are obtained by integrating the weight estimates for each fish-group with modelled concentrations of seven nutrients according to [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
+      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+    nut_rdi:
+      short_name: "People fed"
+      format: ",.2r"
+      multiplier: 0.000001
+      quality: medium
+      suffix: "\u00A0MM"
+      description: "The number of people fed for the seven nutrients is calculated based on the Recommended Daily Intake (RDI) tables conforming to [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). We obtained these  estimates by integrating the weight estimates for each group of fish with the associated nutritional values obtained from [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      problems: "The nutrient concentrations for each group of fish are the result of a model, this reduces the accuracy of the estimates."
+      methods: "The estimations were calculated referring to the RDI of a woman between 30 and 50 years old."
 
   taxa:
     to_display: [CLP, CJX, SDX, BEN, TUN, EMP, FLY, SNA, RAX, CGX, GZP, MZZ]
@@ -129,6 +147,8 @@ default:
         text: Composition
       pds_tracks:
         text: GPS Tracks
+      nutrients:
+        text: Nutrients
       about:
         text: About
 
@@ -184,24 +204,6 @@ default:
     subtitle:
       text: Small scale fisheries
 
-  indicators:
-    processing:
-      text: "Data processing and validation:"
-    limitations:
-      text: "Known problems and limitations:"
-    quality:
-      text: "Data quality:"
-
-  settings:
-    title:
-      text: Settings
-    language_select:
-      label:
-        text: Language
-    buttons:
-      close:
-        label: Close
-
   composition:
     title:
       text: Catch composition
@@ -225,6 +227,45 @@ default:
       content:
         text: "Tracks are recorded by GPS devices mounted on the boats. Data refer to the boats' movements tracked along the Timor coast with a grid resolution of 10 x 10 meters. Some tracks may be inaccurate."
 
+  nutrients:
+    to_display: [selenium, zinc, protein, omega3, calcium, iron, vitaminA]
+    nutrients:
+      selenium:
+        short_name: Selenium
+      zinc:
+        short_name: Zinc
+      protein:
+        short_name: Protein
+      omega3:
+        short_name: "Omega-3"
+      calcium:
+        short_name: Calcium
+      iron:
+        short_name: Iron
+      vitaminA:
+        short_name: "Vitamin A"
+    title:
+      text: Nutritional metrics
+    subtitle:
+      text: Small scale fisheries
+
+  indicators:
+    processing:
+      text: "Data processing and validation:"
+    limitations:
+      text: "Known problems and limitations:"
+    quality:
+      text: "Data quality:"
+
+  settings:
+    title:
+      text: Settings
+    language_select:
+      label:
+        text: Language
+    buttons:
+      close:
+        label: Close
   about:
     text: |
       # About Peskas
@@ -365,6 +406,25 @@ por:
       description: "Os movimentos do barco são rastreados pelo sistema de rastreamento [Pelagic Data Systems](https://www.pelagicdata.com/), e um algoritmo proprietário é usado para determinar quando ocorre uma viagem."
       problems: "Existem problemas conhecidos com o algoritmo de sistemas Pelagic Data. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede ruim pode atrasar ou impedir que as informações sejam transferidas dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Actualmente, não é possível distinguir as viagens de pesca (que resultam num desembarque) das viagens de não pesca."
       methods: "As faixas são filtradas para valores discrepantes e alguns possíveis erros de algoritmo. Especificamente, não levamos em consideração trilhas georreferenciadas caracterizadas por grandes anomalias na qualidade do rastreamento, na velocidade das embarcações, na distância e no tempo percorrido."
+    nut_supply:
+      short_name: "Suprimento de Nutrientes"
+      format: ",.3r"
+      multiplier: 0.001
+      quality: medium
+      suffix: "\u00A0Kg"
+      description: "Nutritional values are obtained by integrating the weight estimates for each fish-group with modelled concentrations of seven nutrients according to [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
+      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+    nut_rdi:
+      short_name: "Pessoas alimentadas"
+      format: ",.2r"
+      multiplier: 0.000001
+      quality: medium
+      suffix: "\u00A0MM"
+      description: "TO número de pessoas alimentadas com os sete nutrientes é calculado com base nas tabelas de Ingestão Diária Recomendada (RDI) de acordo com [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). Obtivemos essas estimativas integrando as estimativas de peso para cada grupo de peixes com os valores nutricionais associados obtidos de [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      problems: "As concentrações de nutrientes para cada grupo de peixes são resultado de um modelo, o que reduz a precisão das estimativas."
+      methods: "As estimativas foram calculadas referentes ao RDI de uma mulher entre 30 e 50 anos."
+
   header:
     subtitle:
       text: Painel de Gestão
@@ -379,8 +439,11 @@ por:
         text: Composição
       pds_tracks:
         text: Trilhas GPS
+      nutrients:
+        text: Nutrientes
       about:
         text: Informação
+
   footer:
     nav:
       license:
@@ -393,6 +456,7 @@ por:
       text: "Copyright © 2021 Peskas. Todos os direitos reservados."
     update_time:
       text: Ultima atualização
+
   home:
     title:
       text: Visão geral nacional
@@ -400,6 +464,7 @@ por:
       text: Relatório de pesca em pequena escala
     report:
       text: Baixe o relatório
+
   revenue:
     title:
       text: Receita nacional
@@ -424,6 +489,7 @@ por:
         text: Informação do indicador
       content:
         text: Essas estimativas não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis. Os indicadores incluem apenas dados da pesca artesanal e de subsistência.
+
   catch:
     title:
       text: Captura nacional
@@ -440,6 +506,10 @@ por:
         text: Informações do indicador
       content:
         text: As estimativas de receita não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis.
+
+  nutrients:
+    title:
+      text: Métricas nutricionais
 
   indicators:
     processing:

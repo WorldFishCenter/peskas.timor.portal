@@ -35,8 +35,7 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
 
   # Composition tab
-  taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>%
-    strtrim(width = 7)
+  taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>% strtrim(width = 7)
   mod_taxa_bar_highlight_server("taxa-highlight", var = "catch", colors = taxa_colors)
   mapply(pars$taxa$to_display, taxa_colors, FUN = function(x, y){
     mod_summary_card_server(id = paste(x, "catch-card", sep = "-"), var = "catch", taxa = x, n = 25, colors = y)
@@ -47,11 +46,21 @@ app_server <- function(input, output, session){
   # Tracks tab
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 
+  # Nutrition tab
+  nutrients_colors <- c("#7ea0b7", "#376280", "#3d405b", "#81b29a", "#969695","#d1681d", "#fed766")
+  mod_nutrients_highlight_card_server("nutrients-highlight", var = "nut_rdi", period = "month", n = 25, colors = nutrients_colors)
+  mapply(pars$nutrients$to_display, nutrients_colors, FUN = function(x, y){
+    mod_summary_card_server(id = paste(x, "nutrient-card", sep = "-"), var = "nut_rdi", nutrients = x, n = 25, colors = y)
+  })
+
+
   # About tab
   timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
+  mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
 
 
 }
+
 
 #' Dummy apex chart
 #'
