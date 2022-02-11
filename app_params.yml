@@ -13,18 +13,27 @@ default:
       description: "Number of matched tracks"
       format: ","
     revenue:
-      short_name: Total value
+      short_name: Estimated revenue
       description: "The estimated total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
       methods: "The total value is estimated by multiplying the estimated value per trip by the average number of trips per boat and by the number of boats."
       format: "$,.2r"
       quality: not assessed
+    recorded_revenue:
+      short_name: Recorded revenue
+      format: "$,.2r"
     catch:
-      short_name: Total catch
+      short_name: Estimated catch
       format: ",.2r"
       description: "The estimated total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
       methods: "The total catch is estimated by multiplying the estimated catch per trip (nationally or per taxa) by the average number of trips per boat and by the number of boats."
+      multiplier: 0.001
+      suffix: "\u00A0t"
+      quality: not assessed
+    recorded_catch:
+      short_name: Recorded catch
+      format: ",.2r"
       multiplier: 0.001
       suffix: "\u00A0t"
       quality: not assessed
@@ -137,7 +146,7 @@ default:
       composition:
         text: Composition
       pds_tracks:
-        text: Tracks
+        text: GPS Tracks
       nutrients:
         text: Nutrients
       about:
@@ -178,7 +187,7 @@ default:
         text: Learn more
     table:
       heading:
-        text: Annual summary
+        text: Annual national summary
       period_col:
         text: period
     description:
@@ -330,19 +339,28 @@ por:
     n_matched:
       short_name: Faixas combinadas
     revenue:
-      short_name: Receita total
+      short_name: Receita estimada
       format: "$,.2r"
       description: "A receita total estimada dos desembarques de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
       problems: Não avaliado.
       methods: "O valor total é estimado multiplicando o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
       quality: não avaliado
+    recorded_revenue:
+      short_name: Receita registrada
+      format: "$,.2r"
     catch:
-      short_name: Captura total
+      short_name: Captura estimada
       format: ",.2r"
       description: "A captura total estimada em viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
       problems: Não avaliado.
       methods: "A captura total é estimada multiplicando a captura estimada por viagem (nacionalmente ou por taxa) pelo número médio de viagens por barco e pelo número de barcos."
       quality: não avaliado
+    recorded_catch:
+      short_name: Captura registrada
+      format: ",.2r"
+      multiplier: 0.001
+      suffix: "\u00A0t"
+      quality: not assessed
     landing_revenue:
       short_name: Valor de desembarque
       format: "$,.2r"
@@ -419,6 +437,8 @@ por:
         text: Captura
       composition:
         text: Composição
+      pds_tracks:
+        text: Trilhas GPS
       nutrients:
         text: Nutrientes
       about:
@@ -459,7 +479,7 @@ por:
         text: Saber mais
     table:
       heading:
-        text: Sumário anual
+        text: Resumo nacional anual
       period_col:
         text: período
     description:

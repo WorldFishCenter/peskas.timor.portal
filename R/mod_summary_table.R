@@ -39,8 +39,8 @@ mod_summary_table_ui <- function(id, years = NULL, ...){
 #' summary_table Server Functions
 #'
 #' @noRd
-mod_summary_table_server <- function(id, vars, period = "month", format_fun = I, i18n_r = reactive(list(t = function(x) x))){
-  moduleServer( id, function(input, output, session){
+mod_summary_table_server <- function(id, vars, period = "month", format_fun = I, i18n_r = reactive(list(t = function(x) x))) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     info <- reactive(get_series_info(vars, period, year = input$y))
@@ -52,7 +52,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
         names(vals) <- i18n_r()$t(x$series_name)
         vals
       })
-      if (period == "month"){
+      if (period == "month") {
         period_col <- data.table(period = format(as.Date(info$x_datetime), "%B"))
       } else {
         period_col <- data.table(period = info$x_categories)
@@ -65,21 +65,27 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
       table <- table()
       alignment <- c("l", rep("r", ncol(table) - 1))
       alignment <- paste(alignment, collapse = "")
-      output$table <- renderTable(table, spacing = "m", width = "100%",
-                                  align = alignment,
-                                  na = "–",
-                                  class = "table-responsive")
-      tableOutput(ns('table'))
-      })
+      output$table <- renderTable(table,
+        spacing = "m", width = "100%",
+        align = alignment,
+        na = "–",
+        class = "table-responsive"
+      )
+      tableOutput(ns("table"))
+    })
 
     output$f <- renderText({
       info <- info()
       total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       text <- paste0(info$series[[1]]$series_name)
-      paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total * info$series[[1]]$series_multiplier))
+      total_recorded <- sum(info$series[[2]]$series_value, na.rm = TRUE)
+      text_recorded <- paste0(info$series[[2]]$series_name)
+
+      paste(
+        paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total * info$series[[1]]$series_multiplier)),
+        paste(i18n_r()$t(text_recorded), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total_recorded * info$series[[1]]$series_multiplier)),
+        sep = " ; ")
     })
-
-
   })
 }
 
