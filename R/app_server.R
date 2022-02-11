@@ -47,7 +47,7 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 
   # Nutrition tab
-  nutrients_colors <- viridisLite::viridis(7) %>% strtrim(width = 7)
+  nutrients_colors <- c("#7ea0b7", "#376280", "#3d405b", "#81b29a", "#969695","#d1681d", "#fed766")
   mod_nutrients_highlight_card_server("nutrients-highlight", var = "nut_rdi", period = "month", n = 25, colors = nutrients_colors)
   mapply(pars$nutrients$to_display, nutrients_colors, FUN = function(x, y){
     mod_summary_card_server(id = paste(x, "nutrient-card", sep = "-"), var = "nut_rdi", nutrients = x, n = 25, colors = y)
