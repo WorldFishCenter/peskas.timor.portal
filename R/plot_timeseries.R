@@ -44,7 +44,8 @@ plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function
       options = list(
         yaxis = list(show = FALSE)))) %>%
     apexcharter::ax_colors(colors) %>%
-    ax_legend(position="right")
+    ax_legend(position="top",
+              fontSize = 15)
 
   a
   if (type != "bar") {
