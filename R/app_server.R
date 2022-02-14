@@ -52,6 +52,9 @@ app_server <- function(input, output, session){
   mapply(pars$nutrients$to_display, nutrients_colors, FUN = function(x, y){
     mod_summary_card_server(id = paste(x, "nutrient-card", sep = "-"), var = "nut_rdi", nutrients = x, n = 25, colors = y)
   })
+  mod_nutrient_treemap_server(id="nutrient-tree", var="nut_rdi", period = "month", n = NULL,
+                                      type = "treemap", sparkline.enabled = F, y_formatter = apexcharter::format_num(""),
+                                      colors = nutrients_colors)
 
 
   # About tab
