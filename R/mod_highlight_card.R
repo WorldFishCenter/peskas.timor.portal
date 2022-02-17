@@ -103,3 +103,34 @@ highlight_card <- function(id = "",
     )
   )
 }
+
+
+highlight_card_narrow <- function(id = "",
+                            card_class = "col-lg-6",
+                            heading = "Card heading",
+                            in_body = NULL,
+                            top_right = NULL){
+  tags$div(
+    class = card_class,
+    tags$div(
+      class = "card",
+      tags$div(
+        class = "card-header mb-1",
+        tags$div(
+          tags$h3(
+            class = "card-title",
+            heading
+          )
+        )
+      ),
+      tags$div(
+        class = "card-body",
+        style = "position: relative;",
+        tags$div(
+          class = "in-body",
+          in_body
+        )
+      )
+    )
+  )
+}
