@@ -228,24 +228,33 @@ default:
         text: "Tracks are recorded by GPS devices mounted on the boats. Data refer to the boats' movements tracked along the Timor coast with a grid resolution of 10 x 10 meters. Some tracks may be inaccurate."
 
   nutrients:
-    to_display: [selenium, zinc, protein, omega3, calcium, iron, vitaminA]
+    to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
     nutrients:
       selenium:
         short_name: Selenium
-      zinc:
-        short_name: Zinc
+        conversion_fact: 0.000055
       protein:
         short_name: Protein
+        conversion_fact: 46.000000
       omega3:
         short_name: "Omega-3"
+        conversion_fact: 1.100000
       calcium:
         short_name: Calcium
+        conversion_fact: 1
+      zinc:
+        short_name: Zinc
+        conversion_fact: 0.008000
       iron:
         short_name: Iron
+        conversion_fact: 0.018000
       vitaminA:
         short_name: "Vitamin A"
+        conversion_fact: 0.000700
     title:
       text: Nutritional metrics
+    tree_map:
+      text: People fed by average catch
     subtitle:
       text: Small scale fisheries
 
@@ -507,10 +516,6 @@ por:
       content:
         text: As estimativas de receita não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis.
 
-  nutrients:
-    title:
-      text: Métricas nutricionais
-
   indicators:
     processing:
       text: "Processamento e validação de dados:"
@@ -551,6 +556,12 @@ por:
     description:
       content:
         text: "As trilhas são registradas por dispositivos GPS montados nos barcos. Os dados referem-se aos movimentos dos barcos rastreados ao longo da costa de Timor com uma resolução de grelha de 10 x 10 metros. Algumas faixas podem ser imprecisas."
+
+  nutrients:
+    title:
+      text: Métricas nutricionais
+    tree_map:
+      text: Pessoas alimentadas por captura média
 
   about:
     text: |

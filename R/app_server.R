@@ -47,11 +47,15 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 
   # Nutrition tab
-  nutrients_colors <- c("#7ea0b7", "#376280", "#3d405b", "#81b29a", "#969695","#d1681d", "#fed766")
+  nutrients_colors <- c("#7ea0b7", "#376280", "#3d405b", "#969695", "#81b29a","#945183", "#a98600")
+  #nutrients_colors <- viridisLite::viridis(length(pars$nutrients$to_display)) %>% strtrim(width = 7)
   mod_nutrients_highlight_card_server("nutrients-highlight", var = "nut_rdi", period = "month", n = 25, colors = nutrients_colors)
   mapply(pars$nutrients$to_display, nutrients_colors, FUN = function(x, y){
     mod_summary_card_server(id = paste(x, "nutrient-card", sep = "-"), var = "nut_rdi", nutrients = x, n = 25, colors = y)
   })
+  mod_nutrient_treemap_server(id="nutrient-tree", var="nut_rdi", period = "month", n = NULL,
+                                      type = "treemap", sparkline.enabled = F, y_formatter = apexcharter::format_num(""),
+                                      colors = nutrients_colors)
 
 
   # About tab
