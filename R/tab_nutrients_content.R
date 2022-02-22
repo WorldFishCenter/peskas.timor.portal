@@ -26,21 +26,16 @@ tab_nutrients_content <- function(i18n) {
       mod_nutrient_treemap_ui(id = "nutrient-tree", i18n$t(pars$nutrients$tree_map$text) ,card_class = "col-12", apex_height = "8rem"),
         lapply(factor(unique(peskas.timor.portal::nutrients_aggregated$month$nutrient)), function(x) {
           mod_summary_card_ui(id = paste(x, "nutrient-card", sep = "-"), div_class = "col-12 col-md-6 col-lg-4")
-        })
-    ),
-    page_cards(
-      tags$div(
-        class = "col",
-        mod_var_descriptions_ui(
-          id = "nutrients-info",
-          heading = i18n$t(pars$revenue$description$heading$text),
-          # subheading = "Possible caveats and data description",
-          intro = tagList(
-            markdown(i18n$t(pars$revenue$description$content$text)),
-            tags$div(
-              class = "hr-text",
-              i18n$t(pars$revenue$description$subheading$text)
-            )
+        }),
+      mod_var_descriptions_ui(
+        id = "nutrients-info",
+        heading = i18n$t(pars$revenue$description$heading$text),
+        # subheading = "Possible caveats and data description",
+        intro = tagList(
+          markdown(i18n$t(pars$revenue$description$content$text)),
+          tags$div(
+            class = "hr-text",
+            i18n$t(pars$revenue$description$subheading$text)
           )
         )
       )

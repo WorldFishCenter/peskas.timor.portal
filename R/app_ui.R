@@ -40,18 +40,14 @@ app_ui <- function(request) {
         tab_menu_item(
           label = tagList(
             i18n$t(pars$header$nav$pds_tracks$text),
-            tags$span(
-              class = "badge bg-lime-lt",
-              "New"
-            )
           ),
           id = "pds_tracks", icon_boat()),
         tab_menu_item(
           label = tagList(
             i18n$t(pars$header$nav$nutrients$text),
             tags$span(
-              class = "badge bg-red-lt ms-2",
-              "Experimental"
+              class = "badge bg-lime-lt",
+              "New"
             )
           ),
           id = "nutrients", icon_nutrients()),
