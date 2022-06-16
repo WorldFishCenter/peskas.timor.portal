@@ -14,7 +14,8 @@ Imports:
     shinyjs,
     magrittr, 
     shiny.i18n,
-    logger
+    logger,
+    leaflet
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2

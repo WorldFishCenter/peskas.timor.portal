@@ -44,6 +44,7 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
   # Tracks tab
+  leaflet_map_server(id = "map")
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 
   # Nutrition tab
@@ -61,7 +62,6 @@ app_server <- function(input, output, session){
   # About tab
   timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
   mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
-
 
 }
 

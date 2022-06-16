@@ -18,7 +18,8 @@ RUN install2.r --error --skipinstalled \
     shinyloadtest \
     googleCloudStorageR \
     shiny.i18n \
-    logger
+    logger \
+    leaflet
 
 RUN installGithub.r \
     RinteRface/charpente \
