@@ -79,3 +79,28 @@ print_map <- function() {
 
   map
 }
+
+
+tab_map_leaflet <- function(id, ns, ...) {
+  tags$div(
+    class = "card",
+    tags$div(
+      class = "card-body",
+      tags$div(
+        class = "ratio ratio-21x9",
+        tags$div(
+          id = id,
+          class = "w-100 h-100 jvm-container",
+          style = "background-color: transparent;",
+          tagList(
+            leaflet::leafletOutput(ns(id), width = "100%", height = "100%"),
+            absolutePanel(
+              top = 10, right = 10,
+              select
+            )
+          )
+        )
+      )
+    )
+  )
+}

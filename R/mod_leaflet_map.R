@@ -11,9 +11,9 @@ leaflet_map_ui <- function(id) {
   ns <- NS(id)
 
   indicators <- c(
-    "Catch per unit effort",
-    "Number of trips",
-    "Revenue per unit effort"
+    "Catch per unit effort (Kg)",
+    "Revenue per unit effort (USD)",
+    "Number of trips"
   )
 
   select <- selectInput(
@@ -30,16 +30,14 @@ leaflet_map_ui <- function(id) {
       tags$div(
         class = "ratio ratio-21x9",
         tags$div(
-          tags$div(
-            id = id,
-            class = "w-100 h-100 jvm-container",
-            style = "background-color: transparent;",
-            tagList(
-              leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
-              absolutePanel(
-                top = 10, right = 10,
-                select
-              )
+          id = id,
+          class = "w-100 h-100 jvm-container",
+          style = "background-color: transparent;",
+          tagList(
+            leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
+            absolutePanel(
+              top = 10, right = 10,
+              select
             )
           )
         )
@@ -51,45 +49,55 @@ leaflet_map_ui <- function(id) {
 #' leaflet_map Server Functions
 #'
 #' @noRd
-leaflet_map_server <- function(id) {
+leaflet_map_server <- function(id,
+                               provider_tiles = "CartoDB.Positron",
+                               radius = 6,
+                               fill_marker_alpha = 0.5,
+                               legend_bins = 5,
+                               scale_markers_trips = FALSE) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    tracks_grid <- peskas.timor.portal::indicators_gridded
+    dat <- peskas.timor.portal::indicators_grid
 
+    if (isTRUE(scale_markers_trips)) {
+      radius <- ~ log(dat$trips) * 2
+    } else {
+      radius <- radius
+    }
 
     output$map <- leaflet::renderLeaflet({
       # Use leaflet() here, and only include aspects of the map that
       # won't need to change dynamically (at least, not unless the
       # entire map is being torn down and recreated).
-      leaflet::leaflet(tracks_grid, options = leaflet::leafletOptions(minZoom = 5)) %>%
+      leaflet::leaflet(dat, options = leaflet::leafletOptions(minZoom = 5)) %>%
         leaflet::setView(lat = -8.75, lng = 125.6, zoom = 8.5) %>%
-        leaflet::addProviderTiles("CartoDB.Positron")
+        leaflet::addProviderTiles(provider_tiles)
     })
 
     outputOptions(output, "map", suspendWhenHidden = FALSE)
 
     observe({
       # observe any change in user selections and set leaflet parameters accordingly
-      if (input$param == "Catch per unit effort") {
-        var <- tracks_grid$CPE_log
+      if (input$param == "Catch per unit effort (Kg)") {
+        var <- dat$CPE_log
         leg_title <- "Catch per </br> unit effort (Kg)"
         label_format <- leaflet::labelFormat(transform = function(x) exp(x), digits = 1)
-      } else if (input$param == "Revenue per unit effort") {
-        var <- tracks_grid$RPE
+      } else if (input$param == "Revenue per unit effort (USD)") {
+        var <- dat$RPE_log
         leg_title <- "Revenue per </br> unit effort (USD)"
-        label_format <- leaflet::labelFormat(digits = 1)
+        label_format <- leaflet::labelFormat(transform = function(x) exp(x), digits = 1)
       } else if (input$param == "Number of trips") {
-        var <- tracks_grid$trips
+        var <- dat$trips_log
         leg_title <- "N. trips"
-        label_format <- leaflet::labelFormat(digits = 1)
+        label_format <- leaflet::labelFormat(transform = function(x) exp(x), digits = 0)
       }
 
       ##
       ## Leaflet map settings
       ##
 
-      proxy <- leaflet::leafletProxy("map", data = tracks_grid)
+      proxy <- leaflet::leafletProxy("map", data = dat)
 
       mypalette <- leaflet::colorNumeric(
         palette = "viridis",
@@ -100,12 +108,12 @@ leaflet_map_server <- function(id) {
 
       # Prepare the text for the tooltip:
       mytext <- paste(
-        paste0("<B>", tracks_grid$region, "</B>"), "<br/>",
-        "Mean CPE: ", tracks_grid$region_cpe, "<br/>",
-        "Mean RPE: ", tracks_grid$region_rpe, "<br/>",
-        "CPE: ", tracks_grid$CPE, "<br/>",
-        "RPE: ", tracks_grid$RPE, "<br/>",
-        "N. trips: ", tracks_grid$trips,
+        paste0("<B>", dat$region, "</B>"), "<br/>",
+        "Mean CPE: ", dat$region_cpe, "<br/>",
+        "Mean RPE: ", dat$region_rpe, "<br/>",
+        "CPE: ", dat$CPE, "<br/>",
+        "RPE: ", dat$RPE, "<br/>",
+        "N. trips: ", dat$trips,
         sep = ""
       ) %>%
         lapply(htmltools::HTML)
@@ -115,9 +123,9 @@ leaflet_map_server <- function(id) {
         leaflet::clearMarkers() %>%
         leaflet::addCircleMarkers(~Lng, ~Lat,
           fillColor = ~ mypalette(var),
-          fillOpacity = 0.5,
+          fillOpacity = fill_marker_alpha,
           color = "white",
-          radius = 6,
+          radius = radius,
           stroke = FALSE,
           label = mytext,
           labelOptions = leaflet::labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px")
@@ -125,7 +133,7 @@ leaflet_map_server <- function(id) {
         leaflet::addLegend(
           pal = mypalette,
           labFormat = label_format,
-          bins = 5,
+          bins = legend_bins,
           values = ~var,
           className = "panel panel-default",
           title = leg_title,
@@ -141,7 +149,7 @@ leaflet_map_app <- function() {
   )
 
   server <- function(input, output, session) {
-    leaflet_map_server("map")
+    leaflet_map_server("map", scale_markers_trips = T)
   }
   shinyApp(ui, server)
 }
