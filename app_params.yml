@@ -146,7 +146,7 @@ default:
       composition:
         text: Composition
       pds_tracks:
-        text: GPS Tracks
+        text: Dynamic map
       nutrients:
         text: Nutrients
       about:
@@ -447,7 +447,7 @@ por:
       composition:
         text: Composição
       pds_tracks:
-        text: Trilhas GPS
+        text: Mapa dinâmico
       nutrients:
         text: Nutrientes
       about:

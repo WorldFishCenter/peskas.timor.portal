@@ -44,7 +44,7 @@ app_server <- function(input, output, session){
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
   # Tracks tab
-  leaflet_map_server(id = "map", radius = 5.5, scale_markers_trips = F,
+  leaflet_map_server(id = "map", radius = 5.5, scale_markers_trips = T,
                      fill_marker_alpha = 0.7, legend_bins = 6)
   mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
 

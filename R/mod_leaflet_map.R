@@ -23,34 +23,26 @@ leaflet_map_ui <- function(id) {
     selected = "Catch per unit effort"
   )
 
-  tags$div(
-    class = "card",
-    tags$div(
-      class = "card-body",
-      tags$div(
-        class = "ratio ratio-21x9",
-        tags$div(
-          id = id,
-          class = "w-100 h-100 jvm-container",
-          style = "background-color: transparent;",
-          tagList(
-            leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
-            absolutePanel(
-              top = 10, right = 10,
-              select
-            )
-          )
-        )
+  tab_map_leaflet(
+    id = id,
+    in_body = tagList(
+      leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
+      absolutePanel(
+        top = 10, right = 10,
+        select
       )
     )
   )
 }
+
+
 
 #' leaflet_map Server Functions
 #'
 #' @noRd
 leaflet_map_server <- function(id,
                                provider_tiles = "CartoDB.Positron",
+                               zoom = 8,
                                radius = 6,
                                fill_marker_alpha = 0.5,
                                legend_bins = 5,
@@ -71,7 +63,7 @@ leaflet_map_server <- function(id,
       # won't need to change dynamically (at least, not unless the
       # entire map is being torn down and recreated).
       leaflet::leaflet(dat, options = leaflet::leafletOptions(minZoom = 5)) %>%
-        leaflet::setView(lat = -8.75, lng = 125.6, zoom = 8.5) %>%
+        leaflet::setView(lat = -8.75, lng = 125.6, zoom = zoom) %>%
         leaflet::addProviderTiles(provider_tiles)
     })
 
@@ -154,4 +146,4 @@ leaflet_map_app <- function() {
   shinyApp(ui, server)
 }
 
-#leaflet_map_app()
+# leaflet_map_app()
