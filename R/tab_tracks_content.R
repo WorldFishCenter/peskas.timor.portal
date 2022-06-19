@@ -11,7 +11,7 @@ tab_tracks_content <- function(i18n) {
       tags$div(
         class = "col",
         mod_var_descriptions_ui(
-          id = "tracks-info",
+          id = "map-info",
           heading = i18n$t(pars$revenue$description$heading$text),
           # subheading = "Possible caveats and data description",
           intro = tagList(

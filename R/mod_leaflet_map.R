@@ -11,16 +11,16 @@ leaflet_map_ui <- function(id) {
   ns <- NS(id)
 
   indicators <- c(
+    "Number of trips",
     "Catch per unit effort (Kg)",
-    "Revenue per unit effort (USD)",
-    "Number of trips"
+    "Revenue per unit effort (USD)"
   )
 
   select <- selectInput(
     inputId = ns("param"),
     label = tags$div(style = c("font-weight: bolder"), "Parameter"),
     choices = indicators,
-    selected = "Catch per unit effort"
+    selected = "Number of trips"
   )
 
   tab_map_leaflet(

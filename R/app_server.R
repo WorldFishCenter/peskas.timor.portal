@@ -46,7 +46,7 @@ app_server <- function(input, output, session){
   # Tracks tab
   leaflet_map_server(id = "map", radius = 5.5, scale_markers_trips = T,
                      fill_marker_alpha = 0.7, legend_bins = 6)
-  mod_var_descriptions_server(id = "tracks-info", vars = c("pds_tracks"), i18n_r = i18n_r)
+  mod_var_descriptions_server(id = "map-info", vars = c("pds_tracks_trips", "pds_tracks_cpe", "pds_tracks_rpe"), i18n_r = i18n_r)
 
   # Nutrition tab
   nutrients_colors <- c("#7ea0b7", "#376280", "#3d405b", "#969695", "#81b29a","#945183", "#a98600")
