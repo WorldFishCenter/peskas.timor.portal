@@ -1,6 +1,6 @@
 Package: peskas.timor.portal
 Title: Peskas timor portal
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: person('Fernando', 'Cagua', email = 'f.cagua@cgiar.org', role = c('cre', 'aut'))
 Description: A web portal displaying data and insights from small fisheries in East Timor.
 License: Apache License (>= 2)

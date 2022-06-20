@@ -18,7 +18,7 @@ leaflet_map_ui <- function(id) {
 
   select <- selectInput(
     inputId = ns("param"),
-    label = tags$div(style = c("font-weight: bolder"), "Parameter"),
+    label = tags$div(style = c("font-weight: bolder"), "Indicator"),
     choices = indicators,
     selected = "Number of trips"
   )
@@ -101,12 +101,11 @@ leaflet_map_server <- function(id,
       # Prepare the text for the tooltip:
       mytext <- paste(
         paste0("<B>", dat$region, "</B>"), "<br/>",
-        "Mean CPE: ", dat$region_cpe, "<br/>",
-        "Mean RPE: ", dat$region_rpe, "<br/>",
+        "Mean region CPE: ", dat$region_cpe, "<br/>",
+        "Mean region RPE: ", dat$region_rpe, "<br/>",
+        "N. trips: ", dat$trips, "<br/>",
         "CPE: ", dat$CPE, "<br/>",
-        "RPE: ", dat$RPE, "<br/>",
-        "N. trips: ", dat$trips,
-        sep = ""
+        "RPE: ", dat$RPE, sep = ""
       ) %>%
         lapply(htmltools::HTML)
 

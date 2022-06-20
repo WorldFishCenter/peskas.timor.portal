@@ -87,17 +87,17 @@ default:
     pds_tracks_cpe:
       short_name: Catch per unit effort
       format: ",.3r"
-      quality: low
+      quality: medium
       description: "The catch per unit effort (CPE) indicates the average catch in Kg per fishing unit (fisherman) by fishing trip. The CPE is standardised one on trip hour."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+      problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to the species family or genus. Both the categorization itself and its change result in estimates with a certain margin of error that is not entirely defined."
+      methods: "Catch weights are subjected to a validation process. Outliers are recognized based on the overall catch-weight statistical distribution and on the quality of linear models relating the catch-weight and number of individuals for each fish group."
     pds_tracks_rpe:
       short_name: Revenue per unit effort
       format: ",.3r"
-      quality: low
+      quality: high
       description: "The revenue per unit effort (RPE) indicates the average revenue in USD per fishing unit (fisherman) by fishing trip. The RPE is standardised one on trip hour."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+      problems: No known limitations.
+      methods: "The catch revenue associated to each trip is subjected to a validation process based on the recognition of anomalous revenue values from the overall statistical distribution."
     nut_supply:
       short_name: "Nutrients supply"
       format: ",.3r"
@@ -426,32 +426,23 @@ por:
       short_name: Número de viagens
       format: ",.3r"
       quality: baixo
-      description: "The number of trips indicates the total number of fishing trips recorded in a specific area."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+      description: "O número de viagens indica o número total de viagens de pesca registradas em uma área específica."
+      problems: "Existem problemas conhecidos com o algoritmo de sistemas Pelagic Data. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede ruim pode atrasar ou impedir que as informações sejam transferidas dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Actualmente, não é possível distinguir as viagens de pesca (que resultam num desembarque) das viagens de não pesca."
+      methods: "As faixas são filtradas para valores discrepantes e alguns possíveis erros de algoritmo. Especificamente, não levamos em consideração trilhas georreferenciadas caracterizadas por grandes anomalias na qualidade do rastreamento, na velocidade das embarcações, na distância e no tempo percorrido."
     pds_tracks_cpe:
       short_name: Captura por unidade de esforço
       format: ",.3r"
-      quality: baixo
+      quality: médio
       description: "A captura por unidade de esforço (CPE) indica a captura média em Kg por unidade de pesca (pescador) por viagem de pesca. O CPE é padronizado em uma hora de viagem."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+      problems: "A classificação dos táxons mudou ao longo do tempo. Antes de abril de 2019, os táxons foram registrados em nível de espécie. Mais tarde, os táxons foram agrupados em cerca de 60 categorias que correspondem vagamente à família ou gênero da espécie. Tanto a própria categorização quanto sua alteração resultam em estimativas com certa margem de erro que não é totalmente definida."
+      methods: "Os pesos de captura são submetidos a um processo de validação. Os outliers são reconhecidos com base na distribuição estatística geral do peso de captura e na qualidade dos modelos lineares que relacionam o peso de captura e o número de indivíduos para cada grupo de peixes."
     pds_tracks_rpe:
       short_name: Receita por unidade de esforço
       format: ",.3r"
-      quality: baixo
+      quality: alta
       description: "A receita por unidade de esforço (RPE) indica a receita média em USD por unidade de pesca (pescador) por viagem de pesca. O RPE é padronizado por hora de viagem."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
-    nut_supply:
-      short_name: "Suprimento de Nutrientes"
-      format: ",.3r"
-      multiplier: 0.001
-      quality: medium
-      suffix: "\u00A0Kg"
-      description: "Nutritional values are obtained by integrating the weight estimates for each fish-group with modelled concentrations of seven nutrients according to [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+      problems: "Nenhuma limitação conhecida."
+      methods: "A receita de captura associada a cada viagem é submetida a um processo de validação baseado no reconhecimento de valores anormais de receita da distribuição estatística geral."
     nut_rdi:
       short_name: "Pessoas alimentadas"
       format: ",.2r"
