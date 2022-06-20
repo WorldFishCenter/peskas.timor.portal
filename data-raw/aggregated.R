@@ -223,12 +223,14 @@ format_aggregated_data <- function(aggregated){
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
 aggregated <- get_file("timor_aggregated")
-data_last_updated <- attr(aggregated, "data_last_updated")
 
 taxa_aggregated <- get_file("timor_taxa_aggregated")
 nutrients_aggregated <- get_file("timor_nutrients_aggregated")
 
+indicators_grid <- get_file("indicators_gridded")
+indicators_grid <- data.table::as.data.table(indicators_grid)
 
+data_last_updated <- attr(aggregated, "data_last_updated")
 aggregated <- format_aggregated_data(aggregated)
 taxa_aggregated <- format_aggregated_data(taxa_aggregated)
 nutrients_aggregated <- format_aggregated_data(nutrients_aggregated)
@@ -238,3 +240,5 @@ usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
 usethis::use_data(nutrients_aggregated, overwrite = TRUE)
 usethis::use_data(data_last_updated, overwrite = TRUE)
+usethis::use_data(indicators_grid, overwrite = TRUE)
+

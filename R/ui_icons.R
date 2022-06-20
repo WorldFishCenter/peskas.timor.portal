@@ -1,5 +1,5 @@
 
-icon_trend_none <- function(class = "icon ms-1"){
+icon_trend_none <- function(class = "icon ms-1") {
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
     class = class,
@@ -25,7 +25,7 @@ icon_trend_none <- function(class = "icon ms-1"){
   )
 }
 
-icon_trend_up <- function(class = "icon ms-1"){
+icon_trend_up <- function(class = "icon ms-1") {
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
     class = paste("icon-tabler-trending-up", class),
@@ -47,7 +47,7 @@ icon_trend_up <- function(class = "icon ms-1"){
   )
 }
 
-icon_trend_down <- function(class = "icon ms-1"){
+icon_trend_down <- function(class = "icon ms-1") {
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
     class = paste("icon-tabler-trending-down", class),
@@ -69,7 +69,7 @@ icon_trend_down <- function(class = "icon ms-1"){
   )
 }
 
-icon_home <- function(size = 24){
+icon_home <- function(size = 24) {
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
     class = "icon icon-tabler icon-tabler-home",
@@ -92,7 +92,7 @@ icon_home <- function(size = 24){
   )
 }
 
-icon_info_circle <- function(size = 24, class = ""){
+icon_info_circle <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-info-circle", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -125,7 +125,7 @@ icon_info_circle <- function(size = 24, class = ""){
   )
 }
 
-icon_currency_dollar <- function(size = 24){
+icon_currency_dollar <- function(size = 24) {
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
     class = "icon icon-tabler icon-tabler-currency-dollar",
@@ -147,7 +147,7 @@ icon_currency_dollar <- function(size = 24){
   )
 }
 
-icon_alert_triangle <- function(size = 24, class = ""){
+icon_alert_triangle <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-alert-triangle", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -171,7 +171,7 @@ icon_alert_triangle <- function(size = 24, class = ""){
 }
 
 
-icon_check <- function(size = 24, class = ""){
+icon_check <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-check", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -193,7 +193,7 @@ icon_check <- function(size = 24, class = ""){
   )
 }
 
-icon_arrow_up <- function(size = 24, class = ""){
+icon_arrow_up <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-arrow-up", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -232,7 +232,7 @@ icon_arrow_up <- function(size = 24, class = ""){
   )
 }
 
-icon_arrow_down <- function(size = 24, class = ""){
+icon_arrow_down <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-arrow-down", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -271,7 +271,7 @@ icon_arrow_down <- function(size = 24, class = ""){
   )
 }
 
-icon_moon <- function(size = 24, class = ""){
+icon_moon <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-moon", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -294,7 +294,7 @@ icon_moon <- function(size = 24, class = ""){
 }
 
 
-icon_bed <- function(size = 24, class = ""){
+icon_bed <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-bed", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -362,7 +362,7 @@ icon_world <- function(width = 24) {
 }
 
 
-icon_gear <- function(size = 24, class = ""){
+icon_gear <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-bed", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -389,7 +389,7 @@ icon_gear <- function(size = 24, class = ""){
   )
 }
 
-icon_download <- function(size = 24, class = ""){
+icon_download <- function(size = 24, class = "") {
   class <- "icon"
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -418,7 +418,7 @@ icon_download <- function(size = 24, class = ""){
   )
 }
 
-icon_scale <- function(size = 24, class = ""){
+icon_scale <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-scale", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -454,7 +454,7 @@ icon_scale <- function(size = 24, class = ""){
   )
 }
 
-icon_chart_pie <- function(size = 24, class = ""){
+icon_chart_pie <- function(size = 24, class = "") {
   class <- paste("icon icon-tabler icon-tabler-chart-pie", class)
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -477,7 +477,7 @@ icon_chart_pie <- function(size = 24, class = ""){
   )
 }
 
-icon_boat <- function(size = 24, class = ""){
+icon_map <- function(size = 24, class = "") {
   class <- "icon"
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -495,19 +495,30 @@ icon_boat <- function(size = 24, class = ""){
       d = "M0 0h24v24H0z",
       fill = "none"
     ),
-    tags$path(d = "M2 20a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1"),
-    tags$path(d = "M4 18l-1 -3h18l-1 3"),
-    tags$path(d = "M11 12h7l-7 -9v9"),
     tags$line(
-      x1 = "8",
-      y1 = "7",
-      x2 = "6",
-      y2 = "12"
+      x1 = "18",
+      y1 = "6",
+      x2 = "18",
+      y2 = "6.01"
+    ),
+    tags$path(d = "M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5"),
+    tags$polyline(points = "10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15"),
+    tags$line(
+      x1 = "9",
+      y1 = "4",
+      x2 = "9",
+      y2 = "17"
+    ),
+    tags$line(
+      x1 = "15",
+      y1 = "15",
+      x2 = "15",
+      y2 = "20"
     )
   )
 }
 
-icon_nutrients <- function(size = 24, class = ""){
+icon_nutrients <- function(size = 24, class = "") {
   class <- "icon"
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",
@@ -529,6 +540,5 @@ icon_nutrients <- function(size = 24, class = ""){
     tags$path(d = "M2 9.504c7.715 8.647 14.75 10.265 20 2.498c-5.25 -7.761 -12.285 -6.142 -20 2.504"),
     tags$path(d = "M18 11v.01"),
     tags$path(d = "M11.5 10.5c-.667 1 -.667 2 0 3")
-    )
+  )
 }
-

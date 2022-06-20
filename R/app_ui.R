@@ -24,33 +24,38 @@ app_ui <- function(request) {
         tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$catch$text)
-            ),
-          id = "catch", icon_scale()),
-        tab_menu_item(
-          label = tagList(
-            i18n$t(pars$header$nav$revenue$text)
-          ),
-          id = "revenue", icon_currency_dollar()),
-        tab_menu_item(
-          label = tagList(
-            i18n$t(pars$header$nav$composition$text)
-          ),
-          "catch-composition", icon_chart_pie()),
-        tab_menu_item(
-          label = tagList(
             i18n$t(pars$header$nav$pds_tracks$text),
-          ),
-          id = "pds_tracks", icon_boat()),
-        tab_menu_item(
-          label = tagList(
-            i18n$t(pars$header$nav$nutrients$text),
             tags$span(
               class = "badge bg-lime-lt",
               "New"
             )
           ),
-          id = "nutrients", icon_nutrients()),
+          id = "pds_tracks", icon_map()
+        ),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$catch$text)
+          ),
+          id = "catch", icon_scale()
+        ),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$revenue$text)
+          ),
+          id = "revenue", icon_currency_dollar()
+        ),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$composition$text)
+          ),
+          "catch-composition", icon_chart_pie()
+        ),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$nutrients$text),
+          ),
+          id = "nutrients", icon_nutrients()
+        ),
         tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
         id = "main_tabset"
       ),
@@ -58,10 +63,12 @@ app_ui <- function(request) {
         menu_id = "main_tabset",
         tab_panel(
           id = "home",
-          page_heading(pretitle = i18n$t(pars$home$subtitle$text),
-                       title = i18n$t(pars$home$title$text),
-                       download_report_button(text=i18n$t(pars$home$report$text), icon_download())),
-        page_cards(
+          page_heading(
+            pretitle = i18n$t(pars$home$subtitle$text),
+            title = i18n$t(pars$home$title$text),
+            download_report_button(text = i18n$t(pars$home$report$text), icon_download())
+          ),
+          page_cards(
             mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-4"),
             mod_summary_card_ui(id = "catch-summary-card", div_class = "col-md-4"),
             mod_summary_card_ui(id = "women-prop-summary-card", div_class = "col-md-4"),
@@ -113,12 +120,11 @@ app_ui <- function(request) {
         ),
         bottom = i18n$t("Copyright © 2021 Peskas. All rights reserved.")
       ),
-      inactivity_modal(timeout_seconds = 5*60),
+      inactivity_modal(timeout_seconds = 5 * 60),
       settings_modal(),
       shinyjs::useShinyjs()
     )
   )
-
 }
 
 #' Add external Resources to the Application
@@ -128,18 +134,17 @@ app_ui <- function(request) {
 #'
 #' @import shiny
 #' @noRd
-golem_add_external_resources <- function(){
-
+golem_add_external_resources <- function() {
   shiny::addResourcePath(
-    'www', app_sys('app/www')
+    "www", app_sys("app/www")
   )
 
   tags$head(
     # avoiding some overhead so that we don't need to use golem in production
     # favicon(),
     # bundle_resources(
-      # path = app_sys('app/www'),
-      # app_title = 'peskas.timor.portal'
+    # path = app_sys('app/www'),
+    # app_title = 'peskas.timor.portal'
     # )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
@@ -147,7 +152,7 @@ golem_add_external_resources <- function(){
 }
 
 
-apexchart_dep <- function(){
+apexchart_dep <- function() {
   htmltools::htmlDependency(
     name = "apexcharts",
     version = "3.26.2",
@@ -157,7 +162,7 @@ apexchart_dep <- function(){
 }
 
 
-jquery_dep <- function(){
+jquery_dep <- function() {
   htmltools::htmlDependency(
     name = "jquery",
     version = "3.6.0",
