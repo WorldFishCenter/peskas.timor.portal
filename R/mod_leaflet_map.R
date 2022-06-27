@@ -69,26 +69,24 @@ leaflet_map_ui <- function(id) {
 leaflet_map_server <- function(id,
                                provider_tiles = "CartoDB.Positron",
                                zoom = 8,
-                               radius = 6,
-                               fill_marker_alpha = 0.5,
-                               legend_bins = 5,
-                               scale_markers_trips = FALSE) {
+                               marker_radius = 7,
+                               fill_marker_alpha = 0.6,
+                               legend_bins = 8,
+                               scale_markers = TRUE) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    # dat <- peskas.timor.portal::indicators_grid
-    full_dat <-
-      readr::read_rds("/Users/lore/Desktop/indicators_gridded__20220623183740_be0a11e__.rds") %>%
-      dplyr::mutate(
-        month_date = as.Date(.data$month_date, tz = "Asia/Dili"),
-        gear_type = stringr::str_to_sentence(.data$gear_type)
-      )
+    # Load map data
+    full_dat <- peskas.timor.portal::indicators_grid
+    # Collects map zoom value to scale markers size when zooming
+    mapzoom <- reactive({
+      input$map_zoom
+    })
 
-    # Reactive expression for the data subsetted to what the user selected
+    # Reactive expression to user filtering options
     dat <- reactive({
       if (input$gear == "All gears") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
-        # il pezzo sotto deve diventare una funzione con base R
         res <- aggregate_reactive(res, package = "dplyr")
       } else {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
@@ -97,27 +95,17 @@ leaflet_map_server <- function(id,
       }
     })
 
-    if (isTRUE(scale_markers_trips)) {
-      radius <- ~ log(dat()$trips) * 2
-    } else {
-      radius <- radius
-    }
-
+    # Include aspects of the map that won't need to change dynamically
     output$map <- leaflet::renderLeaflet({
-      # Use leaflet() here, and only include aspects of the map that
-      # won't need to change dynamically (at least, not unless the
-      # entire map is being torn down and recreated).
       leaflet::leaflet(full_dat, options = leaflet::leafletOptions(minZoom = 5)) %>%
         leaflet::setView(lat = -8.75, lng = 125.7, zoom = zoom) %>%
-        leaflet::addProviderTiles(provider_tiles,
-          options = leaflet::providerTileOptions(noWrap = TRUE)
-        )
+        leaflet::addProviderTiles(provider_tiles)
     })
 
     outputOptions(output, "map", suspendWhenHidden = FALSE)
 
+    # Observe changes in user indicators selection and set legends and text accordingly
     observe({
-      # observe any change in user selections and set leaflet parameters accordingly
       if (input$param == "Catch per unit effort (Kg)") {
         var <- dat()$CPE_log
         leg_title <- "Catch per </br> unit effort (Kg)"
@@ -136,6 +124,7 @@ leaflet_map_server <- function(id,
       ## Leaflet map settings
       ##
 
+      # Set colors
       mypalette <- leaflet::colorNumeric(
         palette = "viridis",
         domain = var,
@@ -143,7 +132,7 @@ leaflet_map_server <- function(id,
         reverse = F
       )
 
-      # Prepare the text for the tooltip:
+      # Set text for the tooltip:
       mytext <- paste(
         paste0("<B>", dat()$region, "</B>"), "<br/>",
         "Mean region CPE: ", dat()$region_cpe, "<br/>",
@@ -155,7 +144,12 @@ leaflet_map_server <- function(id,
       ) %>%
         lapply(htmltools::HTML)
 
-
+      # Set markers radius
+      if (isTRUE(scale_markers)) {
+        radius <- mapzoom()
+      } else {
+        radius <- marker_radius
+      }
 
       leaflet::leafletProxy("map", data = dat()) %>%
         leaflet::clearControls() %>%
@@ -164,7 +158,7 @@ leaflet_map_server <- function(id,
           fillColor = ~ mypalette(var),
           fillOpacity = fill_marker_alpha,
           color = "white",
-          radius = radius,
+          radius = ~radius,
           stroke = FALSE,
           label = mytext,
           labelOptions = leaflet::labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px")
