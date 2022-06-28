@@ -33,12 +33,14 @@ leaflet_map_ui <- function(id) {
     selected = "all gears"
   )
 
+  max_date <- as.Date((format(Sys.Date() - 30, "%Y-%m-01")))
+
   time_slide <- sliderInput(
     inputId = ns("time"),
     label = tags$div(style = c("font-weight: bolder"), "Time range"),
     min = as.Date("2019-05-01"),
-    max = as.Date("2022-05-01"),
-    value = c(as.Date("2019-05-01"), as.Date("2022-05-01")),
+    max = max_date,
+    value = c(as.Date("2019-05-01"), max_date),
     timeFormat = "%b %Y",
     ticks = T,
     step = 31
