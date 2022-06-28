@@ -120,7 +120,7 @@ app_ui <- function(request) {
         ),
         bottom = i18n$t("Copyright © 2021 Peskas. All rights reserved.")
       ),
-      inactivity_modal(timeout_seconds = 5 * 60),
+      #inactivity_modal(timeout_seconds = 5 * 60),
       settings_modal(),
       shinyjs::useShinyjs()
     )
