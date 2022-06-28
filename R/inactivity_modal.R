@@ -1,4 +1,4 @@
-inactivity_modal <- function(timeout_seconds = 5*60){
+inactivity_modal <- function(timeout_seconds = 20*60){
   inactivity_modal_ui(
     tags$div(
       class = "text-center pt-4 pb-3",
