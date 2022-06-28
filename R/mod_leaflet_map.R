@@ -53,7 +53,7 @@ leaflet_map_ui <- function(id) {
       absolutePanel(
         left = 65,
         top = 10,
-        draggable = TRUE,
+        #draggable = TRUE,
         width = 330,
         sel_indicator,
         sel_gear,
@@ -89,11 +89,11 @@ leaflet_map_server <- function(id,
     dat <- reactive({
       if (input$gear == "All gears") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
-        res <- aggregate_reactive(res, package = "dplyr")
+        res <- aggregate_reactive(res, package = "data.table")
       } else {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
         res <- res[res$gear_type == input$gear, ]
-        res <- aggregate_reactive(res, package = "dplyr")
+        res <- aggregate_reactive(res, package = "data.table")
       }
     })
 
