@@ -220,6 +220,16 @@ format_aggregated_data <- function(aggregated){
   aggregated
 }
 
+label_taxa_groups <- function(x) {
+  label_groups <- data.table::data.table(
+    taxa = x$catch_taxon,
+    group = x$fish_group
+  )
+  label_groups <- label_groups[, .(taxa = unique(taxa)), by = "group"]
+  label_groups_list <- split(as.list(label_groups$taxa), label_groups$group)
+  label_groups_list
+}
+
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
 aggregated <- get_file("timor_aggregated")
@@ -229,6 +239,7 @@ nutrients_aggregated <- get_file("timor_nutrients_aggregated")
 
 indicators_grid <- get_file("indicators_gridded")
 indicators_grid <- data.table::as.data.table(indicators_grid)
+label_groups_list <- label_taxa_groups(indicators_grid)
 
 data_last_updated <- attr(aggregated, "data_last_updated")
 aggregated <- format_aggregated_data(aggregated)
@@ -241,4 +252,5 @@ usethis::use_data(taxa_aggregated, overwrite = TRUE)
 usethis::use_data(nutrients_aggregated, overwrite = TRUE)
 usethis::use_data(data_last_updated, overwrite = TRUE)
 usethis::use_data(indicators_grid, overwrite = TRUE)
+usethis::use_data(label_groups_list, overwrite = TRUE)
 

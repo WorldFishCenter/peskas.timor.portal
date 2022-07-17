@@ -33,6 +33,15 @@ leaflet_map_ui <- function(id) {
     selected = "all gears"
   )
 
+  sel_taxa <- selectizeInput(
+    inputId = ns("taxa"),
+    label = tags$div(style = c("font-weight: bolder"), "Fish group"),
+    choices = c("All groups", peskas.timor.portal::label_groups_list),
+    selected = "All groups",
+    multiple = TRUE,
+    options = list(plugins = list("drag_drop", "remove_button"))
+  )
+
   max_date <- as.Date((format(Sys.Date() - 30, "%Y-%m-01")))
 
   time_slide <- sliderInput(
@@ -53,10 +62,11 @@ leaflet_map_ui <- function(id) {
       absolutePanel(
         left = 65,
         top = 10,
-        #draggable = TRUE,
+        draggable = TRUE,
         width = 330,
         sel_indicator,
         sel_gear,
+        sel_taxa,
         time_slide
       )
     )
@@ -73,26 +83,49 @@ leaflet_map_server <- function(id,
                                zoom = 8,
                                marker_radius = 7,
                                fill_marker_alpha = 0.6,
-                               legend_bins = 8,
+                               legend_bins = 5,
                                scale_markers = TRUE) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     # Load map data
     full_dat <- peskas.timor.portal::indicators_grid
+
     # Collects map zoom value to scale markers size when zooming
     mapzoom <- reactive({
       input$map_zoom
     })
 
+    taxa_in <- reactive({
+      req(input$taxa)
+    })
+
     # Reactive expression to user filtering options
     dat <- reactive({
-      if (input$gear == "All gears") {
+      if (input$gear == "All gears" & taxa_in() == "All groups") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
-        res <- aggregate_reactive(res, package = "data.table")
+        res <- aggregate_reactive(res)
+      } else if (input$gear == "All gears" & !taxa_in() == "All groups") {
+        res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
+        res <- res[res$catch_taxon %in% c(taxa_in()), ]
+        res <- aggregate_reactive(res)
+      } else if (!input$gear == "All gears" & taxa_in() == "All groups") {
+        res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
+        res <- res[res$gear_type == input$gear, ]
+        res <- aggregate_reactive(res)
+        #
+      } else if (input$gear == "All gears" & is.null(taxa_in())) {
+        res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
+        res <- aggregate_reactive(res)
+      } else if (!input$gear == "All gears" & is.null(taxa_in())) {
+        res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
+        res <- res[res$gear_type == input$gear, ]
+        res <- aggregate_reactive(res)
+        #
       } else {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
         res <- res[res$gear_type == input$gear, ]
+        res <- res[res$catch_taxon %in% c(taxa_in()), ]
         res <- aggregate_reactive(res, package = "data.table")
       }
     })
@@ -184,12 +217,12 @@ leaflet_map_app <- function() {
   )
 
   server <- function(input, output, session) {
-    leaflet_map_server("map", scale_markers_trips = F)
+    leaflet_map_server("map", scale_markers = F)
   }
   shinyApp(ui, server)
 }
 
-# leaflet_map_app()
+#leaflet_map_app()
 
 
 aggregate_reactive <- function(x, package = "data.table") {
@@ -203,8 +236,8 @@ aggregate_reactive <- function(x, package = "data.table") {
         trips = sum(trips),
         region_cpe = data.table::first(region_cpe),
         region_rpe = data.table::first(region_rpe),
-        CPE = stats::median(CPE, na.rm = T),
-        RPE = stats::median(RPE, na.rm = T)
+        CPE = round(mean(CPE, na.rm = T), 2),
+        RPE = round(mean(RPE, na.rm = T), 2)
       ), by = "cell"]
 
     x[, ":="(
@@ -224,8 +257,8 @@ aggregate_reactive <- function(x, package = "data.table") {
         trips_log = log(trips + 1),
         region_cpe = dplyr::first(region_cpe),
         region_rpe = dplyr::first(region_rpe),
-        CPE = median(CPE, na.rm = T),
-        RPE = median(RPE, na.rm = T),
+        CPE = round(mean(CPE, na.rm = T), 2),
+        RPE = round(mean(RPE, na.rm = T), 2),
         CPE_log = log(CPE + 1),
         RPE_log = log(RPE + 1)
       ) %>%
@@ -234,4 +267,21 @@ aggregate_reactive <- function(x, package = "data.table") {
     stop("you must choose one of data.table or dplyr packages to aggregate data")
   }
   x
+}
+
+
+format_hexbin_data <- function(data, input = NULL) {
+  if (input == "Catch per unit effort (Kg)") {
+    res <- data[, .(Lat, Lng, CPE)]
+    res <- res[, CPE := CPE * 10]
+    res <- setDT(res)[, .(CPE = 1:CPE), by = .(Lat, Lng)]
+  } else if (input == "Revenue per unit effort (USD)") {
+    res <- data[, .(Lat, Lng, RPE)]
+    res <- res[, RPE := RPE * 10]
+    res <- setDT(res)[, .(RPE = 1:RPE), by = .(Lat, Lng)]
+  } else if (input == "Number of trips") {
+    res <- data[, .(Lat, Lng, trips)]
+    res <- setDT(res)[, .(trips = 1:trips), by = .(Lat, Lng)]
+  }
+  res
 }
