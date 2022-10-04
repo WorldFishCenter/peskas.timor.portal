@@ -1,4 +1,4 @@
-FROM rocker/shiny:4.1.0
+FROM rocker/shiny:4
 
 # install R package dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
