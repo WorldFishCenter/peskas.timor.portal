@@ -19,7 +19,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
         uses: actions/checkout@v3
-          with:
+        with:
           node-version: 16
       - uses: r-lib/actions/setup-r@v1
       - name: Install dependencies

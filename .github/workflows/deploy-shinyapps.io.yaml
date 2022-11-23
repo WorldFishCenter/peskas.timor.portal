@@ -23,7 +23,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
-          with:
+        with:
           node-version: 16
 
       - name: Install packages

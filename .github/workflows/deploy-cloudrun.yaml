@@ -20,7 +20,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
-          with:
+        with:
           node-version: 16
 
       - name: Update data
@@ -48,7 +48,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-          with:
+        with:
           node-version: 16
 
       - name: Setup Cloud SDK
