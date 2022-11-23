@@ -20,6 +20,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+          with:
+          node-version: 16
 
       - name: Update data
         run: |
@@ -46,6 +48,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+          with:
+          node-version: 16
 
       - name: Setup Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.0
