@@ -231,8 +231,7 @@ label_taxa_groups <- function(x) {
 }
 
 # Download file
-pars <- config::get(file = "inst/golem-config.yml",
-                    config = Sys.getenv("R_CONFIG_ACTIVE", "dev"))
+pars <- config::get(file = "inst/golem-config.yml")
 
 aggregated <- get_file("timor_aggregated")
 #municipal_aggregated <- get_file("timor_municipal_taxa")
