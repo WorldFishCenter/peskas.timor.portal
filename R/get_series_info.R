@@ -60,8 +60,8 @@ extract_series_info <- function(var, data, period, ...){
   } else {
     heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
   }
-  this_period_val = data[nrow(data) - 1 , ..var][[1]]
-  previous_period_val = data[nrow(data) - 2 , ..var][[1]]
+  this_period_val = data[nrow(data), ..var][[1]]
+  previous_period_val = data[nrow(data) - 1 , ..var][[1]]
   trend <- get_trend(this_period_val, previous_period_val)
 
 
@@ -70,8 +70,8 @@ extract_series_info <- function(var, data, period, ...){
     series_name = peskas.timor.portal::pars$vars[[var]]$short_name,
     series_heading = heading,
     series_description = peskas.timor.portal::pars$vars[[var]]$description,
-    last_period_val = data[nrow(data) - 1 , ..var][[1]],
-    last_period = data[nrow(data) - 1 , ..period][[1]],
+    last_period_val = data[nrow(data), ..var][[1]],
+    last_period = data[nrow(data), ..period][[1]],
     trend_direction = trend$direction,
     trend_magnitude = trend$magnitude,
     series_format = specify_format(var),

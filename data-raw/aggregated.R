@@ -232,9 +232,13 @@ label_taxa_groups <- function(x) {
 
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
+
 aggregated <- get_file("timor_aggregated")
+#municipal_aggregated <- get_file("timor_municipal_taxa")
+
 
 taxa_aggregated <- get_file("timor_taxa_aggregated")
+#municipal_taxa <- get_file("timor_municipal_aggregated")
 nutrients_aggregated <- get_file("timor_nutrients_aggregated")
 
 indicators_grid <- get_file("indicators_gridded")
@@ -249,6 +253,8 @@ nutrients_aggregated <- format_aggregated_data(nutrients_aggregated)
 
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
+#usethis::use_data(municipal_aggregated, overwrite = TRUE)
+#usethis::use_data(municipal_taxa, overwrite = TRUE)
 usethis::use_data(nutrients_aggregated, overwrite = TRUE)
 usethis::use_data(data_last_updated, overwrite = TRUE)
 usethis::use_data(indicators_grid, overwrite = TRUE)
