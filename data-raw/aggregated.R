@@ -210,13 +210,19 @@ get_file <- function(prefix){
   x
 }
 
-format_aggregated_data <- function(aggregated){
+format_aggregated_data <- function(aggregated, municipal = FALSE){
+  if(isTRUE(municipal)){
+    aggregated <- data.table::as.data.table(aggregated)
+    aggregated$month <- format(aggregated$date_bin_start, format = "%B %Y")
+    aggregated$year <- format(aggregated$date_bin_start, format = "%Y")
+  } else {
   aggregated <- lapply(aggregated, data.table::as.data.table)
   aggregated <- lapply(aggregated, function(x) x[, n_boats := 2334])
   aggregated$day <- aggregated$day[, day := format(date_bin_start, format = "%d %b %y")]
   aggregated$week <- aggregated$week[, week := format(date_bin_start, format = "%d %b %y")]
   aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")][, year := format(date_bin_start, format = "%Y")]
   aggregated$year <- aggregated$year[, year := format(date_bin_start, format = "%Y")]
+  }
   aggregated
 }
 
@@ -234,26 +240,25 @@ label_taxa_groups <- function(x) {
 pars <- config::get(file = "inst/golem-config.yml")
 
 aggregated <- get_file("timor_aggregated")
-#municipal_aggregated <- get_file("timor_municipal_taxa")
-
+municipal_aggregated <- get_file("timor_municipal_aggregated")
 
 taxa_aggregated <- get_file("timor_taxa_aggregated")
-#municipal_taxa <- get_file("timor_municipal_aggregated")
+municipal_taxa <- get_file("timor_municipal_taxa")
 nutrients_aggregated <- get_file("timor_nutrients_aggregated")
 
-indicators_grid <- get_file("indicators_gridded")
-indicators_grid <- data.table::as.data.table(indicators_grid)
+indicators_grid <- get_file("indicators_gridded") %>% data.table::as.data.table()
 label_groups_list <- label_taxa_groups(indicators_grid)
 
 data_last_updated <- attr(aggregated, "data_last_updated")
 aggregated <- format_aggregated_data(aggregated)
+municipal_aggregated <- format_aggregated_data(municipal_aggregated, municipal = TRUE)
 taxa_aggregated <- format_aggregated_data(taxa_aggregated)
 nutrients_aggregated <- format_aggregated_data(nutrients_aggregated)
 
 
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
-#usethis::use_data(municipal_aggregated, overwrite = TRUE)
+usethis::use_data(municipal_aggregated, overwrite = TRUE)
 #usethis::use_data(municipal_taxa, overwrite = TRUE)
 usethis::use_data(nutrients_aggregated, overwrite = TRUE)
 usethis::use_data(data_last_updated, overwrite = TRUE)

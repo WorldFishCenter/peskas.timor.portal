@@ -19,7 +19,7 @@ app_server <- function(input, output, session) {
 
 
   # Revenue tab
-  mod_highlight_card_server(id = "revenue-card", var = "revenue", period = "month", n = 25)
+  mod_highlight_card_server(id = "revenue-card", var = "revenue", period = "month", n = 12*3)
   mod_summary_card_server(id = "landing-revenue-card", var = "landing_revenue", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landing-per-boat-revenue-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "n-boats-revenue-card", var = "n_boats", period = "month", i18n_r = i18n_r)
@@ -27,7 +27,8 @@ app_server <- function(input, output, session) {
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"), i18n_r = i18n_r)
 
   # Catch tab
-  mod_highlight_card_server(id = "catch-card", var = "catch", period = "month", n = 25)
+  mod_highlight_card_server(id = "catch-card", var = "catch", period = "month", n = 12*3)
+  mod_highlight_mun_server(id = "catch-card-mun", var = "catch", period = "month", n = 12*3)
   mod_summary_card_server(id = "landing-catch-card", var = "landing_weight", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "landing-per-boat-catch-card", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "n-boats-catch-card", var = "n_boats", period = "month", i18n_r = i18n_r)

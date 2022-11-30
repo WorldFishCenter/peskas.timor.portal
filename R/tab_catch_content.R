@@ -1,7 +1,9 @@
-tab_catch_content <- function(i18n){
+tab_catch_content <- function(i18n) {
   tagList(
-    page_heading(pretitle = i18n$t(pars$catch$subtitle$text),
-                 title = i18n$t(pars$catch$title$text)),
+    page_heading(
+      pretitle = i18n$t(pars$catch$subtitle$text),
+      title = i18n$t(pars$catch$title$text)
+    ),
     page_cards(
       tags$div(
         class = "col-12 mt-0",
@@ -22,11 +24,12 @@ tab_catch_content <- function(i18n){
       ),
       tags$div(
         class = "col-lg-8 col-xl-8",
-        mod_highlight_card_ui(
-          id = "catch-card",
+        mod_highlight_mun_ui(
+          id = "catch-card-mun",
           card_class = "col",
           apex_height = "21rem",
-          heading = i18n$t(pars$vars$catch$short_name)),
+          heading = i18n$t(pars$vars$catch$short_name)
+        ),
       ),
       tags$div(
         class = "col-lg-4 col-xl-4",
@@ -48,7 +51,7 @@ tab_catch_content <- function(i18n){
           id = "catch-info",
           heading = i18n$t(pars$revenue$description$heading$text),
           # subheading = "Possible caveats and data description",
-          intro =  tagList(
+          intro = tagList(
             markdown(i18n$t(pars$revenue$description$content$text)),
             tags$div(
               class = "hr-text",
