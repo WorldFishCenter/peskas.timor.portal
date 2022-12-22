@@ -43,7 +43,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    info <- reactive(get_series_info(vars, period, year = input$y))
+    info <- reactive(get_series_info(vars, period, year = input$y, region = input$muni))
 
     table <- reactive({
       info <- info()
@@ -78,12 +78,12 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
       info <- info()
       total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       text <- paste0(info$series[[1]]$series_name)
-      total_recorded <- sum(info$series[[2]]$series_value, na.rm = TRUE)
+      total_recorded <- mean(info$series[[2]]$series_value, na.rm = TRUE)
       text_recorded <- paste0(info$series[[2]]$series_name)
 
       paste(
         paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total * info$series[[1]]$series_multiplier)),
-        paste(i18n_r()$t(text_recorded), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total_recorded * info$series[[1]]$series_multiplier)),
+        paste(i18n_r()$t(text_recorded), ":", d3.format::d3.format(info$series[[2]]$series_format, suffix = info$series[[2]]$series_suffix)(total_recorded * info$series[[2]]$series_multiplier)),
         sep = " ; ")
     })
   })
@@ -98,7 +98,6 @@ mod_summary_table_app <- function(){
   }
   shinyApp(ui, server)
 }
-
 
 
 table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NULL, dropdown = NULL, footer = NULL){
