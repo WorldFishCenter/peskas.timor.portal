@@ -136,90 +136,92 @@ highlight_card_narrow <- function(id = "",
 }
 
 
+mun_select <- function(id) {
+  ns <- NS(id)
+  regions <- list("Municipality" = sort(unique(peskas.timor.portal::municipal_aggregated$region)))
+
+  selectInput(
+    inputId = ns("muni"),
+    label = tags$div(style = c("font-weight: bolder"), "Select area"),
+    choices = c("National", regions),
+    width = "20%"
+  )
+}
 mod_highlight_mun_ui <- function(id, heading = NULL, apex_height = "20rem", ...) {
   ns <- NS(id)
-
-  regions <- unique(peskas.timor.portal::municipal_aggregated$region)
-
-  s <- selectInput(ns("r"),
-    label = "",
-    choices = c("National", regions),
-    selectize = FALSE,
-    width = "auto"
-  )
-
-  s$children[[2]]$children[[1]] <-
-    htmltools::tagAppendAttributes(s$children[[2]]$children[[1]],
-      class = "form-select"
-    )
-
   tagList(
     highlight_card(
       id = id,
       heading = heading,
-      top_right = s,
       in_body = tags$div(
         class = "mt-0",
-        apexcharter::apexchartOutput(ns("cm"), height = apex_height)
+        apexcharter::apexchartOutput(ns("brush_1"), height = "260px"),
+        apexcharter::apexchartOutput(ns("brush_2"), height = "130px")
       ),
       ...
     )
   )
 }
 
-
-mod_highlight_mun_server <- function(id, var, period = "month", n = NULL,
-                                     type = "bar",
+mod_highlight_mun_server <- function(id,
+                                     var,
+                                     period = "month",
                                      sparkline.enabled = F,
-                                     y_formatter = apexcharter::format_num(""),
                                      ...) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    region_in <- reactive({
-      req(input$r)
-    })
+    dat <- reactive({
+      d <- get_series_info(var, period, region = input$muni)
 
-    card_data <- reactive({
-      if (region_in() == "National") {
-        get_series_info(var, period, n, region = FALSE, ...)
-      } else {
-        get_series_info(var, period, n, region = input$r, ...)
-      }
-    })
-
-    output$cm <- apexcharter::renderApexchart({
-      d <- card_data()
-      # d <- plot_data()
-      # We use the format of the first series overall
-      y_formatter <- apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
-
-      series <- lapply(d$series, function(x) {
-        list(
-          name = x$series_name,
-          data = x$series_value * d$series[[1]]$series_multiplier
-        )
-      })
-
-      plot_timeseries(
-        x_categories = d$x_datetime,
-        series = series,
-        y_formatter = y_formatter,
-        type = type,
-        sparkline = sparkline.enabled
+      list(
+        data = data.frame(
+          date = d$x_datetime,
+          value = d$series[[1]]$series_value * d$series[[1]]$series_multiplier,
+          x_categories = d$x_categories
+        ),
+        name = d$series[[1]]$series_name,
+        format = d$series[[1]]$series_format,
+        suffix = d$series[[1]]$series_suffix
       )
+    })
+
+
+    output$brush_1 <- apexcharter::renderApexchart({
+
+      y_formatter <- apexcharter::format_num(format = dat()$format, suffix = dat()$suffix)
+      plot_timeseries_apex(data = dat(), y_formatter = y_formatter, mean = F) %>%
+        apexcharter::ax_tooltip(
+          x = list(format = "MMM yyyy"),
+          y = list(formatter = y_formatter)
+        )
+    })
+
+    output$brush_2 <- renderApexchart({
+      y_formatter <- apexcharter::format_num(format = dat()$format, suffix = dat()$suffix)
+      plot_timeseries_apex(data = dat(), y_formatter = y_formatter) %>%
+        apexcharter::ax_tooltip(
+          enabled = FALSE
+        ) %>%
+        apexcharter::set_input_selection(
+          inputId = "brush",
+          fill_color = "#2e5031",
+          type = "x",
+          xmin = format_date(dat()$data$date[1]),
+          xmax = format_date(dat()$data$date[nrow(dat()$data)])
+        )
+    })
+
+    observeEvent(input$brush, {
+      apexcharter::apexchartProxy("brush_1") %>%
+        apexcharter::ax_proxy_options(list(
+          xaxis = list(
+            min = as.numeric(input$brush$x$min) * 1000,
+            max = as.numeric(input$brush$x$max) * 1000
+          )
+        ))
     })
   })
 }
 
-
-mod_highlight_mun_app <- function() {
-  ui <- tabler_page(
-    mod_highlight_mun_ui(id = "cm", heading = "Estimated national revenue")
-  )
-  server <- function(input, output, session) {
-    mod_highlight_mun_server("cm", "revenue", type = "bar", n = 40, y_formatter = apexcharter::format_num("$,.2r", locale = "en-US"))
-  }
-  shinyApp(ui, server)
-}
 # mod_highlight_mun_app()

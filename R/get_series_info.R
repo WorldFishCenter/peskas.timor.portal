@@ -1,5 +1,10 @@
 #' @import data.table
-get_series_info <- function(vars, period = "month", n = NULL, year = NULL, region = FALSE, ...){
+get_series_info <- function(vars,
+                            period = "month",
+                            n = NULL,
+                            year = NULL,
+                            region = "National",
+                            ...){
   # Get a clean frame with only the variables required and relevant time-frames
   x <- lapply(vars, get_summary_frame_var, period, region, ...)
   full_merge <- function(x, y) merge(x, y, all.y = TRUE)
@@ -34,7 +39,7 @@ get_summary_frame_var <- function(var, period, region_filter, ...) {
     } else if (names(filters) == "nutrients") {
       data <- peskas.timor.portal::nutrients_aggregated[[period]][nutrient %in% filters$nutrients]
     }
-  } else if (is.character(region_filter)) {
+  } else if (isFALSE(region_filter == "National")) {
     data <- peskas.timor.portal::municipal_aggregated[region %in% region_filter]
   } else {
     data <- peskas.timor.portal::aggregated[[period]]

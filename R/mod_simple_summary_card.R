@@ -28,7 +28,7 @@ mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, yea
     ns <- session$ns
 
     output$o <- renderUI({
-      info <- get_series_info(var, period, n, year)
+      info <- get_series_info(var, period, n, year, region = input$muni)
       simple_card_content_ui(
         icon_ui = simple_card_icon_ui(direction = info$series[[1]]$trend_direction),
         heading = d3.format::d3.format(info$series[[1]]$series_format)(info$series[[1]]$last_period_val),

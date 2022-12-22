@@ -240,7 +240,9 @@ label_taxa_groups <- function(x) {
 pars <- config::get(file = "inst/golem-config.yml")
 
 aggregated <- get_file("timor_aggregated")
-municipal_aggregated <- get_file("timor_municipal_aggregated")
+municipal_aggregated <- get_file("timor_municipal_aggregated") %>%
+  dplyr::mutate(revenue = ifelse(revenue == 0, NA_real_, .data$revenue))
+
 
 taxa_aggregated <- get_file("timor_taxa_aggregated")
 municipal_taxa <- get_file("timor_municipal_taxa")

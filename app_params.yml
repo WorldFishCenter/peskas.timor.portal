@@ -189,7 +189,7 @@ default:
 
   revenue:
     title:
-      text: National revenue
+      text: Revenue
     subtitle:
       text: Small scale fisheries
     warning_1:
@@ -201,7 +201,7 @@ default:
         text: Learn more
     table:
       heading:
-        text: Annual national summary
+        text: Annual summary
       period_col:
         text: period
     description:
@@ -214,7 +214,7 @@ default:
 
   catch:
     title:
-      text: National catch
+      text: Catch
     subtitle:
       text: Small scale fisheries
 
@@ -344,7 +344,7 @@ tet:
       text: Relatóriu peska eskala ki'ik
   revenue:
     title:
-      text: Reseita nasional
+      text: Reseita
     subtitle:
       text: Peska eskala ki'ik
     warning_1:
@@ -495,7 +495,7 @@ por:
 
   revenue:
     title:
-      text: Receita nacional
+      text: Receita
     subtitle:
       text: Pesca de pequena escala
     warning_1:
@@ -507,7 +507,7 @@ por:
         text: Saber mais
     table:
       heading:
-        text: Resumo nacional anual
+        text: Resumo anual
       period_col:
         text: período
     description:
@@ -520,7 +520,7 @@ por:
 
   catch:
     title:
-      text: Captura nacional
+      text: Captura
     table:
       vars:
       heading:

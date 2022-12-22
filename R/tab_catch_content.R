@@ -5,6 +5,9 @@ tab_catch_content <- function(i18n) {
       title = i18n$t(pars$catch$title$text)
     ),
     page_cards(
+      mun_select("catch-card-mun")
+    ),
+    page_cards(
       tags$div(
         class = "col-12 mt-0",
         alert_ui(
@@ -29,19 +32,19 @@ tab_catch_content <- function(i18n) {
           card_class = "col",
           apex_height = "21rem",
           heading = i18n$t(pars$vars$catch$short_name)
-        ),
+        )
       ),
       tags$div(
         class = "col-lg-4 col-xl-4",
         tags$div(
           class = "row row-cards",
-          mod_summary_card_ui(id = "landing-catch-card", div_class = "col-12 col-md-6 col-lg-12"),
-          mod_summary_card_ui(id = "landing-per-boat-catch-card", div_class = "col-12 col-md-6 col-lg-12"),
-          mod_simple_summary_card_ui(id = "n-boats-catch-card", div_class = "col-12"),
+          mod_summary_card_ui2(id = "catch-card-mun", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_summary_card_ui3(id = "catch-card-mun", div_class = "col-12 col-md-6 col-lg-12"),
+          mod_simple_summary_card_ui(id = "catch-card-mun", div_class = "col-12"),
         )
       ),
       mod_summary_table_ui(
-        id = "catch-table",
+        id = "catch-card-mun",
         heading = i18n$t(pars$revenue$table$heading$text),
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
