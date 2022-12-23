@@ -28,8 +28,8 @@ app_server <- function(input, output, session) {
 
   # Catch tab
   mod_highlight_mun_server(id = "catch-card-mun", var = "catch", period = "month", n = 12)
-  mod_summary_card_server2(id = "catch-card-mun", var = "catch", period = "month", n = 12)
-  mod_summary_card_server3(id = "catch-card-mun", var = "landing_weight", period = "month", n = 12)
+  mod_summary_card_server2(id = "catch-card-mun", var = "catch", period = "month", n = 12, i18n_r = i18n_r)
+  mod_summary_card_server3(id = "catch-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
