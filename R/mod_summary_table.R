@@ -11,7 +11,7 @@ mod_summary_table_ui <- function(id, years = NULL, ...){
 
   ns <- NS(id)
   if (is.null(years)) {
-    years <- seq(as.numeric(format(Sys.Date(), "%Y")), "2018")
+    years <- seq(as.numeric(format(Sys.Date(), "%Y")), "2018")[-1]
   }
 
   s <- selectInput(ns("y"),

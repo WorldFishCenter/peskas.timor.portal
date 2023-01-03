@@ -11,7 +11,7 @@ mod_taxa_bar_highlight_ui <- function(id, heading = NULL, apex_height = "20rem",
   ns <- NS(id)
 
   # if (is.null(years)) {
-    years <- seq(as.numeric(format(Sys.Date(), "%Y")), "2018")
+    years <- seq(as.numeric(format(Sys.Date(), "%Y")), "2018")[-1]
   # }
 
   s <- selectInput(ns("y"),
