@@ -84,8 +84,8 @@ mod_summary_card_app <- function(options = list()){
     shiny.i18n::usei18n(i18n),
     shinyjs::useShinyjs(),
     mun_select("peppe"),
-    mod_summary_card_ui(id = "peppe", title = "ciao"),
-    mod_summary_card_ui(id = "pino", title = nino)
+    mod_summary_card_ui(id = "peppe"),
+    mod_summary_card_ui(id = "pino")
 
   )
   server <- function(input, output, session) {

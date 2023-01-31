@@ -118,7 +118,7 @@ default:
       methods: "The estimations were calculated referring to the RDI of a woman between 30 and 50 years old."
 
   taxa:
-    to_display: [CLP, CJX, SDX, BEN, TUN, EMP, FLY, SNA, RAX, CGX, GZP, MZZ]
+    to_display: [CJX, CLP, SDX, BEN, FLY, EMP, RAX, CGX, SNA, TUN, PWT, MZZ]
     taxa:
       CLP:
         short_name: Sardines and herrings
@@ -142,8 +142,8 @@ default:
         short_name: Jacks and trevalies
       TUN:
         short_name: Tunas
-      GZP:
-        short_name: Garfishes
+      PWT:
+        short_name: Parrotfishes
       MZZ:
         short_name: Other
 
