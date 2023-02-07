@@ -7,7 +7,7 @@ default:
       key: gcs
       options:
         project: peskas
-        bucket: public-timor
+        bucket: public-timor-dev
         service_account_key: !expr readLines("auth/gcp-sa-peskas_ingestion-key.json")
 production:
   app_prod: yes

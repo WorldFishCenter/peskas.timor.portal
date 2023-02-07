@@ -542,3 +542,35 @@ icon_nutrients <- function(size = 24, class = "") {
     tags$path(d = "M11.5 10.5c-.667 1 -.667 2 0 3")
   )
 }
+
+icon_market <- function(size = 24, class = "") {
+  tags$svg(
+    xmlns = "http://www.w3.org/2000/svg",
+    classname = "icon icon-tabler icon-tabler-shopping-cart",
+    width = "{24}",
+    height = "{24}",
+    viewbox = "0 0 24 24",
+    strokewidth = "2",
+    stroke = "currentColor",
+    fill = "none",
+    strokelinecap = "round",
+    strokelinejoin = "round",
+    tags$path(
+      stroke = "none",
+      d = "M0 0h24v24H0z",
+      fill = "none"
+    ),
+    tags$circle(
+      cx = "{6}",
+      cy = "{19}",
+      r = "{2}"
+    ),
+    tags$circle(
+      cx = "{17}",
+      cy = "{19}",
+      r = "{2}"
+    ),
+    tags$path(d = "M17 17h-11v-14h-2"),
+    tags$path(d = "M6 5l14 1l-1 7h-13")
+  )
+}

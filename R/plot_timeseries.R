@@ -335,7 +335,9 @@ plot_timeseries_apex <- function(data = NULL,
       padding = list(
         top = -20, right = 0, left = -4, bottom = -4
       )
-    )
+    ) %>%
+    apexcharter::ax_markers(size = 4,
+                            colors = plot_color)
 
   if (isTRUE(mean)) {
     a %>%

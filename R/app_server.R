@@ -15,6 +15,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server(id = "women-prop-summary-card", var = "prop_landings_woman", period = "month", n = 13, i18n_r = i18n_r)
+  mod_summary_card_server(id = "market-summary-card", var = "price_kg", period = "month", n = 13, i18n_r = i18n_r)
 
 
 
@@ -33,6 +34,19 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
+
+  # Market tab
+  mod_highlight_mun_server(id = "market-card-mun", var = "price_kg", period = "month", n = 12)
+  mod_summary_card_server2(id = "market-card-mun", var = "price_kg", period = "month", n = 12, i18n_r = i18n_r)
+  mod_summary_card_server3(id = "market-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
+  mod_simple_summary_card_server(id = "market-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
+  mod_summary_table_server(id = "market-card-mun", vars = c("price_kg", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
+  mod_var_descriptions_server(id = "market-info", vars = c("price_kg"), i18n_r = i18n_r)
+  output$spider_market <- renderApexchart({
+    apex_spider(data = peskas.timor.portal::municipal_aggregated,
+                cols = c("#c57b57", "#96BDC6"))
+  })
+
 
   # Composition tab
   taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>% strtrim(width = 7)
@@ -59,11 +73,29 @@ app_server <- function(input, output, session) {
     type = "treemap", sparkline.enabled = F, y_formatter = apexcharter::format_num(""),
     colors = nutrients_colors
   )
-
-
   # About tab
   timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
   mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
+
+  # Home
+  output$donut_fish <- renderApexchart({
+    apex_donut(data = peskas.timor.portal::summary_data$groups_comp,
+               cols = viridisLite::viridis(5, alpha = 0.75),
+               center_label = "Catch composition %",
+               show_total = T,
+               show_legend = F)
+  })
+  output$donut_trips <- renderApexchart({
+    apex_donut(data = peskas.timor.portal::summary_data$n_surveys,
+               cols = c("#a7a7a7", "#d88473", "#5cbed2"),
+               center_label = "Surveys recorded",
+               show_total = T,
+               show_legend = F)
+  })
+
+  output$radial_tracks <- renderApexchart({
+    apex_radial(peskas.timor.portal::summary_data$n_tracks)
+  })
 }
 
 

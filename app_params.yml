@@ -31,6 +31,13 @@ default:
       multiplier: 0.001
       suffix: "\u00A0t"
       quality: not assessed
+    price_kg:
+      short_name: Price per Kg
+      format: "$,.2r"
+      description: "The estimated price per Kg from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      problems: Not assessed.
+      methods: "The price per Kg is estimated by dividing the estimated revenue by by the estimated catch in Kg."
+      quality: not assessed
     recorded_catch:
       short_name: Recorded catch
       format: ",.2r"
@@ -163,6 +170,8 @@ default:
         text: Dynamic map
       nutrients:
         text: Nutrients
+      market:
+        text: Market
       about:
         text: About
 
@@ -185,7 +194,11 @@ default:
     subtitle:
       text: Small scale fisheries report
     report:
-      text: Download report
+      text: Download complete report
+    intro:
+      title: Automated analytics system for small scale fisheries in Timor-Leste
+      content: "Peskas is the Timor-Leste national fisheries monitoring system collecting fishing data and insights by Timorese enumerators. It's low cost, open source and near-real-time. Peskas is result of a partnership between WorldFish and Timor-Leste's Ministry of Agriculture and Fisheries since 2016."
+
 
   revenue:
     title:
@@ -211,13 +224,11 @@ default:
         text: Indicator information
       content:
         text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
-
   catch:
     title:
       text: Catch
     subtitle:
       text: Small scale fisheries
-
   composition:
     title:
       text: Catch composition
@@ -229,6 +240,23 @@ default:
     table:
       heading:
         text: Total catch
+  market:
+    title:
+      text: Market
+    subtitle:
+      text: Small scale fisheries
+    table:
+      heading:
+        text: Annual summary
+      period_col:
+        text: period
+    description:
+      heading:
+        text: About the data
+      subheading:
+        text: Indicator information
+      content:
+        text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
       footer:
         text: "* All values in metric tonnes. Totals only include data after April 2018."
 
@@ -342,6 +370,12 @@ tet:
       text: Panorama nasional
     subtitle:
       text: Relatóriu peska eskala ki'ik
+    report:
+      text: Baixa relatoriu completu
+    intro:
+      title: Sistema analítiku automatizadu ba peska uza-na'in sira iha Timor-Leste
+      content: "Sistema monitorizasaun peska nasional Timor-Leste nian, ne'ebé koleta dadus no informasaun kona-ba peska husi enumeradores timorenses. Sistema ne'e baratu, open source no iha tempu ne'ebé bei-beik. Sistema Peskas rezultadu husi parceria entre WorldFish no Ministériu Agrikultura no Peska Timor-Leste desde 2016."
+
   revenue:
     title:
       text: Reseita
@@ -465,6 +499,8 @@ por:
         text: Captura
       composition:
         text: Composição
+      market:
+        text: Mercado
       pds_tracks:
         text: Mapa dinâmico
       nutrients:
@@ -491,7 +527,11 @@ por:
     subtitle:
       text: Relatório de pesca em pequena escala
     report:
-      text: Baixe o relatório
+      text: Baixe o relatório completo
+    intro:
+      title: Sistema de análise automatizado para pequenas pescarias em Timor-Leste
+      content: "O Peskas é o sistema de monitoramento de pescarias nacionais de Timor-Leste, que coleta dados e insights de pesca por meio de enumeradores timorenses. É de baixo custo, de código aberto e quase em tempo real. O Peskas é resultado de uma parceria entre o WorldFish e o Ministério da Agricultura e Pesca de Timor-Leste desde 2016."
+
 
   revenue:
     title:

@@ -11,16 +11,16 @@ leaflet_map_ui <- function(id) {
   ns <- NS(id)
 
   indicators <- c(
-    "Number of trips",
     "Catch per unit effort (Kg)",
-    "Revenue per unit effort (USD)"
+    "Revenue per unit effort (USD)",
+    "Catch length (cm)"
   )
 
   sel_indicator <- selectInput(
     inputId = ns("param"),
     label = tags$div(style = c("font-weight: bolder"), "Indicator"),
     choices = indicators,
-    selected = "Number of trips"
+    selected = "Catch per unit effort (Kg)"
   )
 
   sel_gear <- selectInput(
@@ -30,7 +30,7 @@ leaflet_map_ui <- function(id) {
       "All gears", "Hand line", "Gill net", "Long line", "Spear gun",
       "Cast net", "Seine net", "Manual collection", "Trap"
     ),
-    selected = "all gears"
+    selected = "All gears"
   )
 
   sel_taxa <- selectizeInput(
@@ -38,7 +38,7 @@ leaflet_map_ui <- function(id) {
     label = tags$div(style = c("font-weight: bolder"), "Fish group"),
     choices = c("All groups", peskas.timor.portal::label_groups_list),
     selected = "All groups",
-    multiple = TRUE,
+    multiple = FALSE,
     options = list(plugins = list("drag_drop", "remove_button"))
   )
 
@@ -102,14 +102,14 @@ leaflet_map_server <- function(id,
 
     # Reactive expression to user filtering options
     dat <- reactive({
-      if (input$gear == "All gears" & taxa_in() == "All groups") {
+      if (input$gear == "All gears" & taxa_in() %in%  "All groups") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
         res <- aggregate_reactive(res)
-      } else if (input$gear == "All gears" & !taxa_in() == "All groups") {
+      } else if (input$gear == "All gears" & !taxa_in() %in% "All groups") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
         res <- res[res$catch_taxon %in% c(taxa_in()), ]
         res <- aggregate_reactive(res)
-      } else if (!input$gear == "All gears" & taxa_in() == "All groups") {
+      } else if (!input$gear == "All gears" & taxa_in() %in% "All groups") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
         res <- res[res$gear_type == input$gear, ]
         res <- aggregate_reactive(res)
@@ -130,6 +130,7 @@ leaflet_map_server <- function(id,
       }
     })
 
+
     # Include aspects of the map that won't need to change dynamically
     output$map <- leaflet::renderLeaflet({
       leaflet::leaflet(full_dat, options = leaflet::leafletOptions(minZoom = 5)) %>%
@@ -149,10 +150,10 @@ leaflet_map_server <- function(id,
         var <- dat()$RPE_log
         leg_title <- "Revenue per </br> unit effort (USD)"
         label_format <- leaflet::labelFormat(transform = function(x) exp(x), digits = 1)
-      } else if (input$param == "Number of trips") {
-        var <- dat()$trips_log
-        leg_title <- "N. trips"
-        label_format <- leaflet::labelFormat(transform = function(x) exp(x), digits = 0)
+      } else if (input$param == "Catch length (cm)") {
+        var <- dat()$length_log
+        leg_title <- "Catch length (cm)"
+        label_format <- leaflet::labelFormat(transform = function(x) exp(x), digits = 1)
       }
 
       ##
@@ -170,11 +171,11 @@ leaflet_map_server <- function(id,
       # Set text for the tooltip:
       mytext <- paste(
         paste0("<B>", dat()$region, "</B>"), "<br/>",
-        "Mean region CPE: ", dat()$region_cpe, "<br/>",
-        "Mean region RPE: ", dat()$region_rpe, "<br/>",
-        "N. trips: ", dat()$trips, "<br/>",
-        "CPE: ", dat()$CPE, "<br/>",
-        "RPE: ", dat()$RPE,
+        "Municipality CPE: ", dat()$region_cpe, "<br/>",
+        "Municipality RPE: ", dat()$region_rpe, "<br/>",
+        "Mean length: ", dat()$length, "<br/>",
+        "Mean CPUE: ", dat()$CPE, "<br/>",
+        "Mean RPUE: ", dat()$RPE,
         sep = ""
       ) %>%
         lapply(htmltools::HTML)
@@ -233,15 +234,15 @@ aggregate_reactive <- function(x, package = "data.table") {
         region = data.table::first(region),
         Lat = median(Lat),
         Lng = median(Lng),
-        trips = sum(trips),
         region_cpe = data.table::first(region_cpe),
         region_rpe = data.table::first(region_rpe),
         CPE = round(mean(CPE, na.rm = T), 2),
-        RPE = round(mean(RPE, na.rm = T), 2)
+        RPE = round(mean(RPE, na.rm = T), 2),
+        length = round(mean(length, na.rm = T), 2)
       ), by = "cell"]
 
     x[, ":="(
-      trips_log = log(trips + 1),
+      length_log = log(length + 1),
       CPE_log = log(CPE + 1),
       RPE_log = log(RPE + 1)
     )]
@@ -253,8 +254,8 @@ aggregate_reactive <- function(x, package = "data.table") {
         region = dplyr::first(region),
         Lat = median(Lat),
         Lng = median(Lng),
-        trips = sum(trips),
-        trips_log = log(trips + 1),
+        length = sum(length),
+        length_log = log(length + 1),
         region_cpe = dplyr::first(region_cpe),
         region_rpe = dplyr::first(region_rpe),
         CPE = round(mean(CPE, na.rm = T), 2),

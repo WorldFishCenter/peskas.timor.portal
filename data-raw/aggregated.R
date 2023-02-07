@@ -244,6 +244,7 @@ municipal_aggregated <- get_file("timor_municipal_aggregated")
 taxa_aggregated <- get_file("timor_taxa_aggregated")
 municipal_taxa <- get_file("timor_municipal_taxa")
 nutrients_aggregated <- get_file("timor_nutrients_aggregated")
+summary_data <- get_file("summary_data")
 
 indicators_grid <- get_file("indicators_gridded") %>% data.table::as.data.table()
 label_groups_list <- label_taxa_groups(indicators_grid)
@@ -256,6 +257,7 @@ municipal_aggregated <- format_aggregated_data(municipal_aggregated, municipal =
 taxa_aggregated <- format_aggregated_data(taxa_aggregated, national_boats = boats)
 nutrients_aggregated <- format_aggregated_data(nutrients_aggregated, national_boats = boats)
 
+
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
 usethis::use_data(municipal_aggregated, overwrite = TRUE)
@@ -264,3 +266,5 @@ usethis::use_data(nutrients_aggregated, overwrite = TRUE)
 usethis::use_data(data_last_updated, overwrite = TRUE)
 usethis::use_data(indicators_grid, overwrite = TRUE)
 usethis::use_data(label_groups_list, overwrite = TRUE)
+usethis::use_data(summary_data, overwrite = TRUE)
+
