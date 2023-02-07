@@ -5,14 +5,14 @@ apex_spider <- function(data = NULL, cols = NULL) {
 
   pg_dat_latest <-
     data %>%
-    dplyr::group_by(.data$region) %>%
+    dplyr::group_by(region) %>%
     dplyr::slice_tail(n = 2) %>%
-    dplyr::summarise("Price per Kg." = stats::median(.data$price_kg)) %>%
+    dplyr::summarise("Price per Kg." = stats::median(price_kg)) %>%
     dplyr::mutate(period = "Latest month")
 
   pg_dat <-
     dplyr::bind_rows(pg_dat_all, pg_dat_latest) %>%
-    dplyr::mutate("Price per Kg." = round(.$`Price per Kg.`, 2))
+    dplyr::mutate("Price per Kg." = round(`Price per Kg.`, 2))
 
   apexcharter::apexchart() %>%
     apexcharter::apex(
