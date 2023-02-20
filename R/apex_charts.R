@@ -83,7 +83,13 @@ apex_spider <- function(data = NULL, cols = NULL) {
     ))
 }
 
-apex_donut <- function(data = NULL, cols = NULL, center_label = NULL, show_total = F, show_legend = F) {
+apex_donut <- function(data = NULL,
+                       cols = NULL,
+                       center_label = NULL,
+                       show_total = F,
+                       show_legend = F,
+                       sparkline = T,
+                       formatter = formatter) {
   apexcharter::apexchart() %>%
     apexcharter::apex(
       data = data,
@@ -92,9 +98,10 @@ apex_donut <- function(data = NULL, cols = NULL, center_label = NULL, show_total
     ) %>%
     apexcharter::ax_chart(
       toolbar = list(show = FALSE),
+      sparkline = list(enabled = sparkline),
       animations = list(
         enabled = TRUE,
-        speed = 1000,
+        speed = 800,
         animateGradually = list(enabled = TRUE),
         offsetX = 0,
         offsetY = 0
@@ -113,14 +120,16 @@ apex_donut <- function(data = NULL, cols = NULL, center_label = NULL, show_total
           total = list(
             show = show_total,
             label = center_label,
-            color = "#373d3f"
+            color = "#373d3f",
+            formatter = formatter
           )
         ))
       )
     )
 }
 
-apex_radial <- function(data = NULL) {
+apex_radial <- function(data = NULL,
+                        sparkline = T) {
   apexcharter::apexchart() %>%
     apexcharter::apex(
       data = data,
@@ -129,6 +138,7 @@ apex_radial <- function(data = NULL) {
     ) %>%
     apexcharter::ax_chart(
       toolbar = list(show = FALSE),
+      sparkline = list(enabled = sparkline),
       animations = list(
         enabled = TRUE,
         speed = 1000,
@@ -140,12 +150,16 @@ apex_radial <- function(data = NULL) {
     apexcharter::ax_grid(
       strokeDashArray = 4,
       padding = list(
-        top = -40, right = 0, left = 0, bottom = 0
+        top = 0, right = 0, left = 0, bottom = 0
       )
     ) %>%
+    apexcharter::ax_stroke(dashArray = 10, width = 3) %>%
     apexcharter::ax_plotOptions(
       radialBar =
         apexcharter::radialBar_opts(
+          hollow = list(
+            size = "80%"
+          ),
           dataLabels = list(
             value = list(
               formatter = htmlwidgets::JS("function (x) {return x}")
@@ -155,70 +169,69 @@ apex_radial <- function(data = NULL) {
     )
 }
 
-apex_donut2 <- function(fish_groups_colors = c("#ffd166", "#bbacc1", "#25ced1", "#546a7b", "#a54657")) {
-  apexcharter::apexchart() %>%
-    apexcharter::apex(
-      data = show_data$groups_comp,
-      type = "donut",
-      mapping = apexcharter::aes(x = fish_group, y = weight_contr)
-    ) %>%
-    apexcharter::ax_chart(
-      toolbar = list(show = FALSE),
-      animations = list(
-        enabled = TRUE,
-        speed = 800,
-        animateGradually = list(enabled = TRUE),
-        offsetX = 0,
-        offsetY = 0
-      )
-    ) %>%
-    apexcharter::ax_yaxis(
-      labels = list(
-        rotate = 0,
-        datetimeUTC = FALSE,
-        padding = 0,
-        style = list(
-          colors = "#000000"
-        )
-      ),
-      axisBorder = list(
-        show = FALSE
-      )
-    ) %>%
-    apexcharter::ax_xaxis(
-      type = "category",
-      labels = list(
-        rotate = 0,
-        padding = 0,
-        style = list(
-          colors = "#000000"
-        )
-      ),
-      axisBorder = list(
-        show = FALSE
-      )
-    ) %>%
-    apexcharter::ax_legend(
-      position = "bottom",
-      fontSize = 15
-    ) %>%
-    apexcharter::ax_colors(fish_groups_colors) %>%
-    apexcharter::ax_grid(
-      strokeDashArray = 4,
-      padding = list(
-        top = 0, right = -25, left = -25, bottom = 0
-      )
-    ) %>%
-    apexcharter::ax_plotOptions(
-      pie = apexcharter::pie_opts(
-        donut = list(labels = list(
-          show = T,
-          total = list(
-            show = F,
-            label = "Fishing trips recorded",
-            color = "#373d3f"
-          )
-        ))
-      )
+apex_donut_ui <- function(id,
+                          div_class = "col-md-3",
+                          card_style = "min-height: 8rem",
+                          apex_height = "21rem") {
+  ns <- NS(id)
+
+  tags$div(
+    class = div_class,
+    tags$div(
+      class = "card",
+      style = card_style,
+      apexcharter::apexchartOutput(ns("chart"), height = apex_height)
     )
+  )
+}
+
+apex_donut_server <- function(id = NULL,
+                              data = NULL,
+                              center_label = NULL,
+                              show_total = T,
+                              show_legend = F,
+                              colors = NULL,
+                              sparkline = T,
+                              formatter = NULL,
+                              ...) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+
+    output$chart <- renderApexchart({
+      apex_donut(
+        data = data,
+        cols = colors,
+        center_label = center_label,
+        show_total = show_total,
+        show_legend = show_legend,
+        sparkline = sparkline,
+        formatter = formatter
+      )
+    })
+  })
+}
+
+apex_radial_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 8rem", apex_height = "21rem") {
+  ns <- NS(id)
+
+  tags$div(
+    class = div_class,
+    tags$div(
+      class = "card",
+      style = card_style,
+      apexcharter::apexchartOutput(ns("chart"), height = apex_height)
+    )
+  )
+}
+
+apex_radial_server <- function(id = NULL,
+                               data = NULL,
+                               sparkline = T) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+
+    output$chart <- renderApexchart({
+      apex_radial(data = data, sparkline = sparkline)
+    })
+  })
 }

@@ -71,9 +71,9 @@ app_ui <- function(request) {
           id = 'home',
           page_cards(
             home_text(i18n),
-            tags$div(apexchartOutput("donut_trips", width = "100%", height = "16rem"), class = 'col-md-3'),
-            tags$div(apexchartOutput("radial_tracks", width = "120%", height = "20rem"), class = 'col-md-3'),
-            tags$div(apexchartOutput("donut_fish", width = "100%", height = "16rem"), class = 'col-md-3'),
+            apex_donut_ui(id = 'donut_trips', div_class = 'col-md-4', apex_height = "16rem"),
+            apex_donut_ui(id = 'donut_fish', div_class = 'col-md-4', apex_height = "16rem"),
+            apex_radial_ui(id = 'radial_tracks', div_class = 'col-md-4', apex_height = "16rem"),
             leaflet_map_ui(id = "map"),
             #HTML("<iframe src='https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/WorldFishCenter/peskas.timor.portal/main/inst/peskas_CPUE.json' style='border:0px #ffffff none;' name='myiFrame' scrolling='no' frameborder='1' marginheight='0px' marginwidth='0px' height='500px' width='1000px' allowfullscreen></iframe>"),
             mod_summary_card_ui(id = 'revenue-summary-card', div_class = 'col-md-4'),
