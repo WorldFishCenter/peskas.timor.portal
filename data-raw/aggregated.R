@@ -245,6 +245,7 @@ taxa_aggregated <- get_file("timor_taxa_aggregated")
 municipal_taxa <- get_file("timor_municipal_taxa")
 nutrients_aggregated <- get_file("timor_nutrients_aggregated")
 summary_data <- get_file("summary_data")
+summary_data$n_tracks <- summary_data$n_tracks %>% dplyr::rename(`N. tracks` = n_tracks)
 
 indicators_grid <- get_file("indicators_gridded") %>% data.table::as.data.table()
 label_groups_list <- label_taxa_groups(indicators_grid)
