@@ -42,12 +42,7 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "market-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "market-card-mun", vars = c("price_kg", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "market-info", vars = c("price_kg"), i18n_r = i18n_r)
-  output$spider_market <- renderApexchart({
-    apex_spider(
-      data = peskas.timor.portal::municipal_aggregated,
-      cols = c("#c57b57", "#96BDC6")
-    )
-  })
+  apex_spider_server(id = "spider_market", data = peskas.timor.portal::municipal_aggregated, cols = c("#c57b57", "#96BDC6"))
 
 
   # Composition tab
@@ -80,12 +75,11 @@ app_server <- function(input, output, session) {
   mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
 
   # Home
-
   apex_donut_server(
     id = "donut_trips",
     data = peskas.timor.portal::summary_data$n_surveys,
-    center_label = "Surveys recorded",
-    colors = c("#a7a7a7", "#d88473", "#5cbed2"),
+    center_label = "Submitted surveys",
+    cols = c("#a7a7a7", "#d88473", "#5cbed2"),
     sparkline = F,
     show_total = T,
     formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
@@ -94,18 +88,19 @@ app_server <- function(input, output, session) {
   apex_donut_server(
     id = "donut_fish",
     data = peskas.timor.portal::summary_data$groups_comp,
-    center_label = "Composition %",
-    colors = viridisLite::viridis(5, alpha = 0.75),
+    center_label = "Recorded tons",
+    cols = viridisLite::viridis(5, alpha = 0.75),
     show_total = T,
     sparkline = F,
-    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return '100'}, 0)}")
-
+    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
   )
 
-  apex_radial_server(
-    id = "radial_tracks",
+  apex_bar_server(
+    id = "bar_tracks",
     data = peskas.timor.portal::summary_data$n_tracks,
-    sparkline = F
+    sparkline = F,
+    show_yaxis = F,
+    title = "GPS tracks"
   )
 }
 

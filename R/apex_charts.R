@@ -36,6 +36,7 @@ apex_spider <- function(data = NULL, cols = NULL) {
         rotate = 0,
         datetimeUTC = FALSE,
         padding = 0,
+        formatter = apexcharter::format_num("$,.2f"),
         style = list(
           colors = "#000000"
         )
@@ -83,6 +84,7 @@ apex_spider <- function(data = NULL, cols = NULL) {
     ))
 }
 
+
 apex_donut <- function(data = NULL,
                        cols = NULL,
                        center_label = NULL,
@@ -128,6 +130,51 @@ apex_donut <- function(data = NULL,
     )
 }
 
+apex_bar <- function(data = NULL,
+                     xvar = NULL,
+                     yvar = NULL,
+                     sparkline = F,
+                     show_yaxis = F,
+                     title = NULL) {
+  apexcharter::apexchart() %>%
+    apexcharter::apex(
+      data = data,
+      type = "bar",
+      mapping = apexcharter::aes(x = {{ xvar }}, y = {{ yvar }})
+    ) %>%
+    apexcharter::ax_title(text = title) %>%
+    apexcharter::ax_yaxis(
+      show = show_yaxis,
+      labels = list(
+        formatter = apexcharter::format_num("~s")
+      )
+    ) %>%
+    apexcharter::ax_grid(show = F) %>%
+    apexcharter::ax_chart(
+      toolbar = list(show = FALSE),
+      sparkline = list(enabled = sparkline),
+      animations = list(
+        enabled = TRUE,
+        speed = 800,
+        animateGradually = list(enabled = TRUE),
+        offsetX = 0,
+        offsetY = 0
+      )
+    ) %>%
+    # apexcharter::ax_legend(
+    #  show = show_legend,
+    #  position = "bottom",
+    #  fontSize = 15
+    # ) %>%
+    # apexcharter::ax_colors(cols) %>%
+    apexcharter::ax_plotOptions(
+      bar = apexcharter::bar_opts(
+        horizontal = F,
+        borderRadius = 15
+      )
+    )
+}
+
 apex_radial <- function(data = NULL,
                         sparkline = T) {
   apexcharter::apexchart() %>%
@@ -169,10 +216,10 @@ apex_radial <- function(data = NULL,
     )
 }
 
-apex_donut_ui <- function(id,
-                          div_class = "col-md-3",
-                          card_style = "min-height: 8rem",
-                          apex_height = "21rem") {
+apex_summary_ui <- function(id,
+                            div_class = "col-md-3",
+                            card_style = "min-height: 8rem",
+                            apex_height = "21rem") {
   ns <- NS(id)
 
   tags$div(
@@ -185,12 +232,28 @@ apex_donut_ui <- function(id,
   )
 }
 
+
+apex_spider_server <- function(id = NULL,
+                               data = NULL,
+                               cols = NULL,
+                               ...) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+
+    output$chart <- renderApexchart({
+      apex_spider(
+        data = data,
+        cols = cols
+      )
+    })
+  })
+}
 apex_donut_server <- function(id = NULL,
                               data = NULL,
                               center_label = NULL,
                               show_total = T,
                               show_legend = F,
-                              colors = NULL,
+                              cols = NULL,
                               sparkline = T,
                               formatter = NULL,
                               ...) {
@@ -200,7 +263,7 @@ apex_donut_server <- function(id = NULL,
     output$chart <- renderApexchart({
       apex_donut(
         data = data,
-        cols = colors,
+        cols = cols,
         center_label = center_label,
         show_total = show_total,
         show_legend = show_legend,
@@ -211,18 +274,27 @@ apex_donut_server <- function(id = NULL,
   })
 }
 
-apex_radial_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 8rem", apex_height = "21rem") {
-  ns <- NS(id)
+apex_bar_server <- function(id = NULL,
+                            data = NULL,
+                            sparkline = T,
+                            show_yaxis = F,
+                            title = NULL,
+                            ...) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
 
-  tags$div(
-    class = div_class,
-    tags$div(
-      class = "card",
-      style = card_style,
-      apexcharter::apexchartOutput(ns("chart"), height = apex_height)
-    )
-  )
+    output$chart <- renderApexchart({
+      apex_bar(
+        data = data,
+        xvar = `year`,
+        yvar = `N. tracks`,
+        sparkline = sparkline,
+        title = title
+      )
+    })
+  })
 }
+
 
 apex_radial_server <- function(id = NULL,
                                data = NULL,
