@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-leaflet_map_ui <- function(id) {
+leaflet_map_ui <- function(id, i18n) {
   ns <- NS(id)
 
   indicators <- c(
@@ -55,21 +55,32 @@ leaflet_map_ui <- function(id) {
     step = 31
   )
 
-  tab_map_leaflet(
-    id = id,
-    in_body = tagList(
-      leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
-      absolutePanel(
-        left = 65,
-        top = 10,
-        draggable = TRUE,
-        width = 330,
-        sel_indicator,
-        sel_gear,
-        sel_taxa,
-        time_slide
+  map_ui <-
+    tab_map_leaflet(
+      id = id,
+      in_body = tagList(
+        leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
+        absolutePanel(
+          left = 65,
+          top = 10,
+          draggable = TRUE,
+          width = 330,
+          sel_indicator,
+          sel_gear,
+          sel_taxa,
+          time_slide
+        )
       )
     )
+
+  tagList(
+    div(
+      class = "title",
+      h2(p(i18n$t(pars$home$map$title), style = "color:#666a70")),
+      p(i18n$t(pars$home$map$caption), style = "color:#666a70"),
+      p(i18n$t(pars$home$map$note), style = "color:#666a70; font-weight:bold;")
+    ),
+    map_ui
   )
 }
 
@@ -102,7 +113,7 @@ leaflet_map_server <- function(id,
 
     # Reactive expression to user filtering options
     dat <- reactive({
-      if (input$gear == "All gears" & taxa_in() %in%  "All groups") {
+      if (input$gear == "All gears" & taxa_in() %in% "All groups") {
         res <- full_dat[full_dat$month_date >= input$time[1] & full_dat$month_date <= input$time[2], ]
         res <- aggregate_reactive(res)
       } else if (input$gear == "All gears" & !taxa_in() %in% "All groups") {
@@ -212,9 +223,9 @@ leaflet_map_server <- function(id,
   })
 }
 
-leaflet_map_app <- function() {
+leaflet_map_app <- function(i18n) {
   ui <- tabler_page(
-    tags$div(leaflet_map_ui(id = "map"))
+    tags$div(leaflet_map_ui(id = "map", i18n))
   )
 
   server <- function(input, output, session) {
@@ -223,7 +234,27 @@ leaflet_map_app <- function() {
   shinyApp(ui, server)
 }
 
-#leaflet_map_app()
+tab_map_leaflet <- function(id, in_body) {
+    tags$div(
+      class = "card",
+      tags$div(
+        class = "card-body",
+        style = "position: relative;",
+        tags$div(
+          class = "ratio ratio-21x9",
+          tags$div(
+            id = id,
+            class = "in-body",
+            # style = "background-color: transparent;",
+            in_body
+          )
+        )
+      )
+    )
+}
+
+
+#leaflet_map_app(i18n)
 
 
 aggregate_reactive <- function(x, package = "data.table") {
