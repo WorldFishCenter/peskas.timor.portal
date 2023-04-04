@@ -4,26 +4,26 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd
-#'
 #' Outside of this module, the app must contain a globally accessible i18n translation object
 #' (shiny.i18n::Translator$new) and a call to shiny.i18n::usei18n
 #'
 #' @importFrom shiny NS tagList
-mod_language_ui <- function(id){
+#' @noRd
+mod_language_ui <- function(id) {
   ns <- NS(id)
 
   # i18n <<- shiny.i18n::Translator$new(
-    # translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+  # translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
 
   tagList(
     selectInput(
-      inputId = ns('language'),
+      inputId = ns("language"),
       label = tags$span(
         icon_world(),
         i18n$t(pars$settings$language_select$label$text),
-        #tags$span(class = "badge bg-red-lt ms-2", "Experimental"),
-        class = "form-label"),
+        # tags$span(class = "badge bg-red-lt ms-2", "Experimental"),
+        class = "form-label"
+      ),
       choices = c("English" = "eng", "Português" = "por", "Tetun" = "tet"),
       selected = i18n$get_key_translation(), width = "100%"
     )
@@ -34,11 +34,11 @@ mod_language_ui <- function(id){
 #' global session, not just that of the module. That ensures that the browser
 #' based translations work as well
 #' @noRd
-mod_language_server <- function(id, this_session = NULL){
-  moduleServer( id, function(input, output, session){
+mod_language_server <- function(id, this_session = NULL) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    if (is.null(this_session)){
+    if (is.null(this_session)) {
       this_session <- session
     }
 
@@ -56,7 +56,6 @@ mod_language_server <- function(id, this_session = NULL){
     })
 
     i18n_r
-
   })
 }
 
