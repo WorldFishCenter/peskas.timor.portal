@@ -29,20 +29,3 @@ tab_tracks_content <- function(i18n) {
 }
 
 
-tab_map_leaflet <- function(id, in_body) {
-  tags$div(
-    class = "card",
-    tags$div(
-      class = "card-body",
-      tags$div(
-        class = "ratio ratio-21x9",
-        tags$div(
-          id = id,
-          class = "w-100 h-100 jvm-container",
-          style = "background-color: transparent;",
-          in_body
-        )
-      )
-    )
-  )
-}

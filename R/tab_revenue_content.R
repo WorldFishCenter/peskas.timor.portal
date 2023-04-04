@@ -1,7 +1,9 @@
-tab_revenue_content <- function(i18n){
+tab_revenue_content <- function(i18n) {
   tagList(
-    page_heading(pretitle = i18n$t(pars$revenue$subtitle$text),
-                 title = i18n$t(pars$revenue$title$text)),
+    page_heading(
+      pretitle = i18n$t(pars$revenue$subtitle$text),
+      title = i18n$t(pars$revenue$title$text)
+    ),
     page_cards(
       mun_select("revenue-card-mun")
     ),
@@ -29,7 +31,8 @@ tab_revenue_content <- function(i18n){
           id = "revenue-card-mun",
           card_class = "col",
           apex_height = "21rem",
-          heading = i18n$t(pars$vars$revenue$short_name)),
+          heading = i18n$t(pars$vars$revenue$short_name)
+        ),
       ),
       tags$div(
         class = "col-lg-4 col-xl-4",
@@ -51,7 +54,7 @@ tab_revenue_content <- function(i18n){
           id = "revenue-info",
           heading = i18n$t(pars$revenue$description$heading$text),
           # subheading = "Possible caveats and data description",
-          intro =  tagList(
+          intro = tagList(
             markdown(i18n$t(pars$revenue$description$content$text)),
             tags$div(
               class = "hr-text",
@@ -59,8 +62,7 @@ tab_revenue_content <- function(i18n){
             )
           )
         )
-      ),
-
+      )
     )
   )
 }
