@@ -20,7 +20,8 @@ RUN install2.r --error --skipinstalled \
     shiny.i18n \
     logger \
     leaflet \
-    reactable
+    reactable \
+    grDevices
 
 RUN installGithub.r \
     RinteRface/charpente \
