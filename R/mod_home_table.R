@@ -21,8 +21,8 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
     ns <- session$ns
 
     make_color_pal <- function(colors, bias = 1) {
-      get_color <- colorRamp(colors, bias = bias)
-      function(x) rgb(get_color(x), maxColorValue = 255)
+      get_color <- grDevices::colorRamp(colors, bias = bias)
+      function(x) grDevices::rgb(get_color(x), maxColorValue = 255)
     }
 
     good_color <- make_color_pal(color_pal, bias = 2)
