@@ -21,7 +21,12 @@ app_ui <- function(request) {
         user_ui()
       ),
       tab_menu(
-        tab_menu_item(i18n$t(pars$header$nav$home$text), "home", icon_home()),
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$home$text),
+          ),
+          id = "home", icon_home()
+        ),
         # tab_menu_item(
         #  label = tagList(
         #    i18n$t(pars$header$nav$pds_tracks$text),
@@ -69,20 +74,7 @@ app_ui <- function(request) {
         menu_id = "main_tabset",
         tab_panel(
           id = "home",
-          page_cards(
-            home_text(i18n),
-            apex_summary_ui(id = "donut_trips", div_class = "col-md-4", apex_height = "16rem"),
-            apex_summary_ui(id = "donut_fish", div_class = "col-md-4", apex_height = "16rem"),
-            apex_summary_ui(id = "bar_tracks", div_class = "col-md-4", apex_height = "16rem"),
-            leaflet_map_ui(id = "map"),
-            # HTML("<iframe src='https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/WorldFishCenter/peskas.timor.portal/main/inst/peskas_CPUE.json' style='border:0px #ffffff none;' name='myiFrame' scrolling='no' frameborder='1' marginheight='0px' marginwidth='0px' height='500px' width='1000px' allowfullscreen></iframe>"),
-            mod_summary_card_ui(id = "revenue-summary-card", div_class = "col-md-4"),
-            mod_summary_card_ui(id = "catch-summary-card", div_class = "col-md-4"),
-            mod_summary_card_ui(id = "women-prop-summary-card", div_class = "col-md-4"),
-            mod_summary_card_ui(id = "landings-card", div_class = "col-md-4"),
-            mod_summary_card_ui(id = "tracks-card", div_class = "col-md-4"),
-            mod_summary_card_ui(id = "matched-card", div_class = "col-md-4"),
-          )
+          tab_home_content(i18n)
         ),
         tab_panel(
           id = "revenue",

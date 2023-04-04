@@ -8,15 +8,44 @@ app_server <- function(input, output, session) {
   i18n_r <- mod_language_server("lang", session)
   # For translation made in the UI
 
-  # Summary tab
-  mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
-  mod_summary_card_server(id = "catch-summary-card", var = "catch", period = "month", n = 13, i18n_r = i18n_r)
-  mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
-  mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
-  mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
-  mod_summary_card_server(id = "women-prop-summary-card", var = "prop_landings_woman", period = "month", n = 13, i18n_r = i18n_r)
-  mod_summary_card_server(id = "market-summary-card", var = "price_kg", period = "month", n = 13, i18n_r = i18n_r)
 
+  #mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
+  #mod_summary_card_server(id = "catch-summary-card", var = "catch", period = "month", n = 13, i18n_r = i18n_r)
+  #mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
+  #mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
+  #mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
+  #mod_summary_card_server(id = "women-prop-summary-card", var = "prop_landings_woman", period = "month", n = 13, i18n_r = i18n_r)
+  #mod_summary_card_server(id = "market-summary-card", var = "price_kg", period = "month", n = 13, i18n_r = i18n_r)
+
+  # Home
+  mod_home_table_server(id = "home_table", color_pal = c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"), i18n_r = i18n_r)
+  apex_donut_server(
+    id = "donut_trips",
+    data = peskas.timor.portal::summary_data$n_surveys,
+    center_label = "Submitted surveys",
+    cols = c("#a7a7a7", "#d88473", "#5cbed2"),
+    sparkline = F,
+    show_total = T,
+    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
+  )
+
+  apex_donut_server(
+    id = "donut_fish",
+    data = peskas.timor.portal::summary_data$groups_comp,
+    center_label = "Recorded tons",
+    cols = viridisLite::viridis(5, alpha = 0.75),
+    show_total = T,
+    sparkline = F,
+    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
+  )
+
+  apex_bar_server(
+    id = "bar_tracks",
+    data = peskas.timor.portal::summary_data$n_tracks,
+    sparkline = F,
+    show_yaxis = F,
+    title = "GPS tracks"
+  )
 
 
   # Revenue tab
@@ -24,7 +53,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server2(id = "revenue-card-mun", var = "landing_revenue", period = "month", n = 13, i18n_r = i18n_r)
   mod_summary_card_server3(id = "revenue-card-mun", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "revenue-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
-  mod_summary_table_server(id = "revenue-card-mun", vars = c("revenue", "landing_revenue", "n_landings_per_boat"), i18n_r = i18n_r)
+  mod_summary_table_server(id = "revenue-card-mun", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"), i18n_r = i18n_r)
 
   # Catch tab
@@ -32,7 +61,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server2(id = "catch-card-mun", var = "catch", period = "month", n = 12, i18n_r = i18n_r)
   mod_summary_card_server3(id = "catch-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
-  mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
+  mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
 
   # Market tab
@@ -74,34 +103,6 @@ app_server <- function(input, output, session) {
   timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
   mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
 
-  # Home
-  apex_donut_server(
-    id = "donut_trips",
-    data = peskas.timor.portal::summary_data$n_surveys,
-    center_label = "Submitted surveys",
-    cols = c("#a7a7a7", "#d88473", "#5cbed2"),
-    sparkline = F,
-    show_total = T,
-    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
-  )
-
-  apex_donut_server(
-    id = "donut_fish",
-    data = peskas.timor.portal::summary_data$groups_comp,
-    center_label = "Recorded tons",
-    cols = viridisLite::viridis(5, alpha = 0.75),
-    show_total = T,
-    sparkline = F,
-    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
-  )
-
-  apex_bar_server(
-    id = "bar_tracks",
-    data = peskas.timor.portal::summary_data$n_tracks,
-    sparkline = F,
-    show_yaxis = F,
-    title = "GPS tracks"
-  )
 }
 
 
