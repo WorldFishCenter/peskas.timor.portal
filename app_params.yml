@@ -36,7 +36,7 @@ default:
       format: "$,.2r"
       description: "The estimated price per Kg from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
-      methods: "The price per Kg is estimated by dividing the estimated revenue by by the estimated catch in Kg."
+      methods: "The price per Kg is estimated by dividing the estimated revenue by the estimated catch in Kg."
       quality: not assessed
     recorded_catch:
       short_name: Recorded catch
@@ -194,11 +194,17 @@ default:
     subtitle:
       text: Small scale fisheries report
     report:
-      text: Download complete report
+      text: Download full report
     intro:
       title: Automated analytics system for small scale fisheries in Timor-Leste
-      content: "Peskas is the Timor-Leste national fisheries monitoring system collecting fishing data and insights by Timorese enumerators. It's low cost, open source and near-real-time. Peskas is result of a partnership between WorldFish and Timor-Leste's Ministry of Agriculture and Fisheries since 2016."
-
+      content: "Peskas is an open-source web portal that provides data and insights on fisheries in Timor-Leste. The platform uses catch data collected by local enumerators and vessel tracking data to show fishing trends over time and space. The project was initiated in 2016 in partnership with the Timor-Leste Ministry of Agriculture and Fisheries and has been funded by various organizations. Peskas is a near-real-time monitoring system that is low-cost and open-access, with a focus on small-scale fisheries. Its application in fisheries research and management has been documented in several publications."
+    table:
+      title: Fishery General Statistics
+      caption: "Aggregated values of the estimated revenue and catch, along with the median values of landings per boat, revenue per trip, catch per trip and price per kg."
+    map:
+      title: Fishing Trips Around Timor-Leste Island
+      caption: "Explore fishing trip points and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
+      note: "The map displays only the fishing trips for which we have geolocation data, these represents about 5% of the total fishing trips recorded."
 
   revenue:
     title:
@@ -373,8 +379,15 @@ tet:
     report:
       text: Baixa relatoriu completu
     intro:
-      title: Sistema analítiku automatizadu ba peska uza-na'in sira iha Timor-Leste
-      content: "Sistema monitorizasaun peska nasional Timor-Leste nian, ne'ebé koleta dadus no informasaun kona-ba peska husi enumeradores timorenses. Sistema ne'e baratu, open source no iha tempu ne'ebé bei-beik. Sistema Peskas rezultadu husi parceria entre WorldFish no Ministériu Agrikultura no Peska Timor-Leste desde 2016."
+      title: Sistema analiza automatiku ba peska iha eskala kiik iha Timor-Leste
+      content: "Peskas mak portal web foun ho kódigu abertu ne'ebé fó dadus no ida-idak kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus agarra ne'ebé koleta husi enumeradór lokál no dadus rastreamentu barku atu hatudu tendénsia peska iha tempu no espasu. Projetu ne'e hetan iniciativa iha tinan 2016 ho parceria ho Ministériu Agrikultura no Peskas Timor-Leste no finansiadu husi organizasaun varias. Peskas mak sistema monitorizasaun kaze real ho kustu kiik no hakarak atu hetan asesu abertu, ho foku ba peska iha eskala kiik. Aplikasaun ne'ebé mak iha iha peskiza no jestaun peska nia dokumentu iha publikasaun varias."
+    table:
+      title: Estatístika Jeral Peska
+      caption: "Aggregadu valor husi estimasaun ba rendimentu no kapitasaun, hamutuk ho valor medianu husi hamlaha ikan ba luan, rendimentu ba hakmatek, kapitasaun ba hakmatek no presu ba kilograma."
+    map:
+      title: Viagem Peska Koleita Timor-Leste nian
+      caption: "Explora koleita viagem peska no estadístika asosia kona-ba kosta Illa Timor ho mapa interativo ami nian. Selesiona indikadór peska, tipu aparatua peska no grupu ikan atu filtra rezultadu. Klikka iha koleita viagem atu haree estadístika peska detalhadu ba koleita refere no múnisipiu asosia ho ne'e."
+      note: "Mapa ne'e hatudu deit koleita viagem peska ida-idak ne'ebé iha dadus geolokalizasaun, ne'e reprezenta kira-kira 5% husi total koleita viagem peska ne'ebé rekolla."
 
   revenue:
     title:
@@ -401,6 +414,13 @@ por:
       description: "A receita total estimada dos desembarques de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
       problems: Não avaliado.
       methods: "O valor total é estimado multiplicando o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
+      quality: não avaliado
+    price_kg:
+      short_name: Preço por Kg
+      format: "$,.2r"
+      description: "O preço estimado por Kg de viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
+      problems: Não avaliado.
+      methods: "O preço por Kg é estimado dividindo-se a receita estimada pela captura estimada em Kg."
       quality: não avaliado
     recorded_revenue:
       short_name: Receita registrada
@@ -529,9 +549,15 @@ por:
     report:
       text: Baixe o relatório completo
     intro:
-      title: Sistema de análise automatizado para pequenas pescarias em Timor-Leste
-      content: "O Peskas é o sistema de monitoramento de pescarias nacionais de Timor-Leste, que coleta dados e insights de pesca por meio de enumeradores timorenses. É de baixo custo, de código aberto e quase em tempo real. O Peskas é resultado de uma parceria entre o WorldFish e o Ministério da Agricultura e Pesca de Timor-Leste desde 2016."
-
+      title: Sistema automatizado de análise para pesca em pequena escala em Timor-Leste
+      content: "Peskas é um portal da web de código aberto que fornece dados e insights sobre pesca em Timor-Leste. A plataforma utiliza dados de captura coletados por enumeradores locais e dados de rastreamento de embarcações para mostrar tendências de pesca ao longo do tempo e espaço. O projeto foi iniciado em 2016 em parceria com o Ministério da Agricultura e Pescas de Timor-Leste e tem sido financiado por várias organizações. Peskas é um sistema de monitoramento quase em tempo real de baixo custo e acesso aberto, com foco na pesca em pequena escala. Sua aplicação em pesquisa e gestão de pesca foi documentada em várias publicações."
+    table:
+      title: Estatísticas gerais da pesca
+      caption: "Valores agregados das receitas e capturas estimadas, juntamente com os valores medianos de desembarques por barco, receitas por viagem, capturas por viagem e preço por kg."
+    map:
+      title: Viagens de Pesca ao Redor da Ilha de Timor-Leste
+      caption: "Explore os pontos de viagem de pesca e as estatísticas associadas à costa da Ilha de Timor com nosso mapa interativo. Selecione os indicadores de pesca, o tipo de equipamento de pesca e o grupo de peixes para filtrar os resultados. Clique em um ponto de viagem para ver estatísticas detalhadas de pesca para esse ponto e o município associado."
+      note: "O mapa exibe apenas as viagens de pesca para as quais temos dados de geolocalização, o que representa cerca de 5% do total de viagens de pesca registradas."
 
   revenue:
     title:
