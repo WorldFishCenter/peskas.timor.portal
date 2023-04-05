@@ -14,7 +14,7 @@ default:
       format: ","
     revenue:
       short_name: Estimated revenue
-      description: "The estimated total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      description: "The estimated total revenue  from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
       methods: "The total value is estimated by multiplying the estimated value per trip by the average number of trips per boat and by the number of boats."
       format: "$,.2r"
@@ -22,6 +22,10 @@ default:
     recorded_revenue:
       short_name: Recorded revenue
       format: "$,.2r"
+      description: "The recorded total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      problems: Not assessed.
+      methods: "The recorded value is calculated by aggregating the catch value reported by fishermen the in survey forms."
+      quality: not assessed
     catch:
       short_name: Estimated catch
       format: ",.2r"
@@ -31,18 +35,21 @@ default:
       multiplier: 0.001
       suffix: "\u00A0t"
       quality: not assessed
+    recorded_catch:
+      short_name: Recorded catch
+      format: "$,.2r"
+      suffix: "\u00A0t"
+      multiplier: 0.001
+      description: "The recorded total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
+      problems: Not assessed.
+      methods: "The recorded catch is calculated by aggregating the catch weight estimated for each fishing trip."
+      quality: not assessed
     price_kg:
       short_name: Price per Kg
       format: "$,.2r"
       description: "The estimated price per Kg from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
       problems: Not assessed.
       methods: "The price per Kg is estimated by dividing the estimated revenue by the estimated catch in Kg."
-      quality: not assessed
-    recorded_catch:
-      short_name: Recorded catch
-      format: ",.2r"
-      multiplier: 0.001
-      suffix: "\u00A0t"
       quality: not assessed
     landing_revenue:
       short_name: Average trip value
@@ -345,61 +352,6 @@ default:
       - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
       - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
 
-
-
-tet:
-  vars:
-    n_tracks:
-      short_name: Tracked trips tetun
-  header:
-    subtitle:
-      text: Panel Jestaun
-    nav:
-      home:
-        text: Prinsipal
-      revenue:
-        text: Reseita
-      about:
-        text: Informasaun
-  footer:
-    nav:
-      license:
-        text: Lisensa
-      code:
-        text: Fonte kódigu
-      project:
-        text: Projetu
-    copyright:
-      text: "Copyright © 2021 Peskas. Direitu hotu rezervadu."
-  home:
-    title:
-      text: Panorama nasional
-    subtitle:
-      text: Relatóriu peska eskala ki'ik
-    report:
-      text: Baixa relatoriu completu
-    intro:
-      title: Sistema analiza automatiku ba peska iha eskala kiik iha Timor-Leste
-      content: "Peskas mak portal web foun ho kódigu abertu ne'ebé fó dadus no ida-idak kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus agarra ne'ebé koleta husi enumeradór lokál no dadus rastreamentu barku atu hatudu tendénsia peska iha tempu no espasu. Projetu ne'e hetan iniciativa iha tinan 2016 ho parceria ho Ministériu Agrikultura no Peskas Timor-Leste no finansiadu husi organizasaun varias. Peskas mak sistema monitorizasaun kaze real ho kustu kiik no hakarak atu hetan asesu abertu, ho foku ba peska iha eskala kiik. Aplikasaun ne'ebé mak iha iha peskiza no jestaun peska nia dokumentu iha publikasaun varias."
-    table:
-      title: Estatístika Jeral Peska
-      caption: "Aggregadu valor husi estimasaun ba rendimentu no kapitasaun, hamutuk ho valor medianu husi hamlaha ikan ba luan, rendimentu ba hakmatek, kapitasaun ba hakmatek no presu ba kilograma."
-    map:
-      title: Viagem Peska Koleita Timor-Leste nian
-      caption: "Explora koleita viagem peska no estadístika asosia kona-ba kosta Illa Timor ho mapa interativo ami nian. Selesiona indikadór peska, tipu aparatua peska no grupu ikan atu filtra rezultadu. Klikka iha koleita viagem atu haree estadístika peska detalhadu ba koleita refere no múnisipiu asosia ho ne'e."
-      note: "Mapa ne'e hatudu deit koleita viagem peska ida-idak ne'ebé iha dadus geolokalizasaun, ne'e reprezenta kira-kira 5% husi total koleita viagem peska ne'ebé rekolla."
-
-  revenue:
-    title:
-      text: Reseita
-    subtitle:
-      text: Peska eskala ki'ik
-    warning_1:
-      heading:
-        text: Estimasaun provizória
-      content:
-        text: Estimasaun hirak ne'e seidauk hetan validasaun nune'e bele inexata. Uza ho kuidadu.
-
 por:
   vars:
     n_tracks:
@@ -669,3 +621,89 @@ por:
       - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
       - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
       - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
+
+tet:
+  vars:
+    n_tracks:
+      short_name: Tracked trips tetun
+
+  header:
+    subtitle:
+      text: Panel Jestaun
+    nav:
+      home:
+        text: Prinsipal
+      revenue:
+        text: Reseita
+      composition:
+        text: Kompozisaun
+      market:
+        text: Merkadu
+      pds_tracks:
+        text: Mapa dinámiku
+      nutrients:
+        text: Nutrientes
+      about:
+        text: Informasaun
+
+  footer:
+    nav:
+      license:
+        text: Lisensa
+      code:
+        text: Fonte kódigu
+      project:
+        text: Projetu
+    copyright:
+      text: "Copyright © 2021 Peskas. Direitu hotu rezervadu."
+  home:
+    title:
+      text: Panorama nasional
+    subtitle:
+      text: Relatóriu peska eskala ki'ik
+    report:
+      text: Baixa relatoriu completu
+    intro:
+      title: Sistema analiza automatiku ba peska iha eskala kiik iha Timor-Leste
+      content: "Peskas mak portal web foun ho kódigu abertu ne'ebé fó dadus no ida-idak kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus agarra ne'ebé koleta husi enumeradór lokál no dadus rastreamentu barku atu hatudu tendénsia peska iha tempu no espasu. Projetu ne'e hetan iniciativa iha tinan 2016 ho parceria ho Ministériu Agrikultura no Peskas Timor-Leste no finansiadu husi organizasaun varias. Peskas mak sistema monitorizasaun kaze real ho kustu kiik no hakarak atu hetan asesu abertu, ho foku ba peska iha eskala kiik. Aplikasaun ne'ebé mak iha iha peskiza no jestaun peska nia dokumentu iha publikasaun varias."
+    table:
+      title: Estatístika Jeral Peska
+      caption: "Aggregadu valor husi estimasaun ba rendimentu no kapitasaun, hamutuk ho valor medianu husi hamlaha ikan ba luan, rendimentu ba hakmatek, kapitasaun ba hakmatek no presu ba kilograma."
+    map:
+      title: Viagem Peska Koleita Timor-Leste nian
+      caption: "Explora koleita viagem peska no estadístika asosia kona-ba kosta Illa Timor ho mapa interativo ami nian. Selesiona indikadór peska, tipu aparatua peska no grupu ikan atu filtra rezultadu. Klikka iha koleita viagem atu haree estadístika peska detalhadu ba koleita refere no múnisipiu asosia ho ne'e."
+      note: "Mapa ne'e hatudu deit koleita viagem peska ida-idak ne'ebé iha dadus geolokalizasaun, ne'e reprezenta kira-kira 5% husi total koleita viagem peska ne'ebé rekolla."
+
+  revenue:
+    title:
+      text: Reseita
+    subtitle:
+      text: Peska eskala ki'ik
+    warning_1:
+      heading:
+        text: Estimasaun provizória
+      content:
+        text: "Estimasaun hirak ne'e seidauk hetan validasaun nune'e bele inexata. Uza ho kuidadu."
+  about:
+    text: |
+      # Kona ba Peskas
+
+      Peskas mak portal web ne'ebé apresenta dadus no insights kona-ba peskas iha Timor-Leste. Sira mak sistema ofisial monitorizasaun nasional ba peskas iha Timor-Leste.
+
+      Peskas iha ekipa recenseadores timoroan sira ne'ebé koleita dadus kaptura husi peskadór sira iha Timor-Leste. Dadus kaptura ne'e kombina ho dadus rastreiu husi embarkasaun atu hatudu tendénsia peskas iha tempu no espasu.
+
+      Peskas konstrui ho objetivu atu sai ba kostu ki'ik, kódigu abertu, asesu abertu no tempu kase-real.
+
+      Peskas rezultadu husi parceria kontinua entre WorldFish no Departamentu Peskas, Akultura no Recursu Marítimu husi Ministériu Agrikultura no Peskas Timor-Leste desde 2016.
+
+      Peskas possível tanba doasaun jenerozu husi Embaixada Reál Noruega iha Jakarta, Fundasaun Minderoo, Plataforma Big Data CGIAR no Fundasaun Schmidt.
+
+      Peskas finansia husi Governu Timor-Leste desde 2021 ho apoiu tekniku husi WorldFish no Pelagic Data Systems Inc.
+
+      Informasaun kona-ba prosesu no dezain sentradu iha usór ba pipeline Peskas no análize inisial, no aplikasaun ba peskiza no jestaun peska bele hetan iha publikasaun sira ne'ebé hanesan:
+
+      - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
+      - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
+      - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
+
+

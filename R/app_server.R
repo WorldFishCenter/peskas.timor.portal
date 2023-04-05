@@ -54,7 +54,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server3(id = "revenue-card-mun", var = "n_landings_per_boat", period = "month", n = 13, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "revenue-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "revenue-card-mun", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat"), i18n_r = i18n_r)
-  mod_var_descriptions_server(id = "revenue-info", vars = c("landing_revenue", "n_landings_per_boat", "n_boats", "revenue"), i18n_r = i18n_r)
+  mod_var_descriptions_server(id = "revenue-info", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
 
   # Catch tab
   mod_highlight_mun_server(id = "catch-card-mun", var = "catch", period = "month", n = 12)
@@ -62,7 +62,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server3(id = "catch-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
-  mod_var_descriptions_server(id = "catch-info", vars = c("landing_weight", "n_landings_per_boat", "n_boats", "catch"), i18n_r = i18n_r)
+  mod_var_descriptions_server(id = "catch-info", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
 
   # Market tab
   mod_highlight_mun_server(id = "market-card-mun", var = "price_kg", period = "month", n = 12)
@@ -70,7 +70,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server3(id = "market-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "market-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "market-card-mun", vars = c("price_kg", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
-  mod_var_descriptions_server(id = "market-info", vars = c("price_kg"), i18n_r = i18n_r)
+  mod_var_descriptions_server(id = "market-info", vars = "price_kg", i18n_r = i18n_r)
   apex_spider_server(id = "spider_market", data = peskas.timor.portal::municipal_aggregated, cols = c("#c57b57", "#96BDC6"))
 
 
