@@ -211,7 +211,7 @@ default:
     map:
       title: Fishing Trips Around Timor-Leste Island
       caption: "Explore fishing trip points and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
-      note: "The map displays only the fishing trips for which we have geolocation data, these represents about 5% of the total fishing trips recorded."
+      note: "The map displays only the fishing trips for which we have geolocation data, these represent about 5% of the total fishing trips recorded."
 
   revenue:
     title:
