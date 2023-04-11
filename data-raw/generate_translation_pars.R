@@ -72,3 +72,4 @@ taxa_names <- taxa_names[grouped_taxa %in% get_taxa_descending_order()]
 taxa_names <- taxa_names[, grouped_taxa := factor(grouped_taxa, get_taxa_descending_order())]
 taxa_names <- taxa_names[order(grouped_taxa)]
 usethis::use_data(taxa_names, overwrite = TRUE)
+
