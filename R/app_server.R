@@ -69,7 +69,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server2(id = "market-card-mun", var = "price_kg", period = "month", n = 12, i18n_r = i18n_r)
   mod_summary_card_server3(id = "market-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "market-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
-  mod_summary_table_server(id = "market-card-mun", vars = c("price_kg", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
+  mod_summary_table_server(id = "market-card-mun", vars = c("price_kg", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r, footer_value = "mean")
   mod_var_descriptions_server(id = "market-info", vars = "price_kg", i18n_r = i18n_r)
   apex_spider_server(id = "spider_market", data = peskas.timor.portal::municipal_aggregated, cols = c("#c57b57", "#96BDC6"))
 

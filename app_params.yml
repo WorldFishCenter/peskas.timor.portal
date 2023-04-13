@@ -193,7 +193,7 @@ default:
     copyright:
       text: "Copyright © 2021 Peskas. All rights reserved."
     update_time:
-      text: "Last update"
+      text: Last update
 
   home:
     title:
@@ -635,6 +635,8 @@ tet:
         text: Prinsipal
       revenue:
         text: Reseita
+      #catch:
+      #  text: Kaptura
       composition:
         text: Kompozisaun
       market:
@@ -656,6 +658,9 @@ tet:
         text: Projetu
     copyright:
       text: "Copyright © 2021 Peskas. Direitu hotu rezervadu."
+    update_time:
+      text: Atualizasaun ikus
+
   home:
     title:
       text: Panorama nasional

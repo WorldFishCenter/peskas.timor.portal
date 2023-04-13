@@ -39,7 +39,7 @@ mod_summary_table_ui <- function(id, years = NULL, ...){
 #' summary_table Server Functions
 #'
 #' @noRd
-mod_summary_table_server <- function(id, vars, period = "month", format_fun = I, i18n_r = reactive(list(t = function(x) x))) {
+mod_summary_table_server <- function(id, vars, period = "month", format_fun = I, i18n_r = reactive(list(t = function(x) x)), footer_value = "total") {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -76,7 +76,12 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
 
     output$f <- renderText({
       info <- info()
-      total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
+      if (footer_value == "mean"){
+        total <- mean(info$series[[1]]$series_value, na.rm = TRUE)
+      } else {
+        total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
+      }
+      #total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       text <- paste0(info$series[[1]]$series_name)
       total_recorded <- mean(info$series[[2]]$series_value, na.rm = TRUE)
       text_recorded <- paste0(info$series[[2]]$series_name)
