@@ -4,7 +4,6 @@ FROM rocker/shiny:4
 RUN apt-get update && apt-get install --no-install-recommends -y \
     libv8-dev \
     ## clean up
-    && apt-get install libgdal-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
