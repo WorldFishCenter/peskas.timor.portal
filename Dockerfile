@@ -21,7 +21,8 @@ RUN install2.r --error --skipinstalled \
     logger \
     leaflet \
     reactable \
-    grDevices
+    rgdal
+    #grDevices
 
 RUN installGithub.r \
     RinteRface/charpente \
