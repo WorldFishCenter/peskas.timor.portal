@@ -1,7 +1,7 @@
 FROM rocker/shiny:4.3
 
 # install R package dependencies
-RUN apt-get update && apt-get install \
+RUN apt-get update && apt-get install -y\
     libv8-dev \
     ## clean up
     && apt-get clean \
