@@ -1,7 +1,7 @@
 FROM rocker/shiny:4
 
 # install R package dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     libv8-dev \
     ## clean up
     && apt-get install libgdal-dev \
