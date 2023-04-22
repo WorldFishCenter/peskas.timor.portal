@@ -1,9 +1,10 @@
-FROM rocker/shiny:4.3
+FROM rocker/shiny:4
 
 # install R package dependencies
-RUN apt-get update && apt-get install -y\
+RUN apt-get update && apt-get install --no-install-recommends -y \
     libv8-dev \
     ## clean up
+    && apt-get install libgdal-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
@@ -20,7 +21,8 @@ RUN install2.r --error --skipinstalled -n 2 \
     logger \
     leaflet \
     dplyr \
-    reactable
+    reactable \
+    grDevices
 
 RUN Rscript -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
