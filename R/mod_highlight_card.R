@@ -73,7 +73,7 @@ highlight_card <- function(id = "",
                            card_class = "col-lg-6",
                            heading = "Card heading",
                            in_body = NULL,
-                           top_right = NULL) {
+                           top_right = list()) {
   tags$div(
     class = card_class,
     tags$div(
@@ -89,7 +89,7 @@ highlight_card <- function(id = "",
         tags$div(
           class = "ms-auto lh1",
           style = "line-height:0px;",
-          top_right
+          tagList(top_right)
         )
       ),
       tags$div(
@@ -103,6 +103,9 @@ highlight_card <- function(id = "",
     )
   )
 }
+
+
+
 
 
 highlight_card_narrow <- function(id = "",
