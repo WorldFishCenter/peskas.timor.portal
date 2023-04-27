@@ -4,7 +4,7 @@ get_series_info <- function(vars,
                             n = NULL,
                             year = NULL,
                             region = "National",
-                            ...){
+                            ...) {
   # Get a clean frame with only the variables required and relevant time-frames
   x <- lapply(vars, get_summary_frame_var, period, region, ...)
   full_merge <- function(x, y) merge(x, y, all.y = TRUE)
@@ -24,7 +24,7 @@ get_series_info <- function(vars,
 
   list(
     x_categories = summary_frame[, ..period, ][[1]],
-    x_datetime = summary_frame[ , date_bin_start, ],
+    x_datetime = summary_frame[, date_bin_start, ],
     series = series_info
   )
 }
@@ -36,6 +36,8 @@ get_summary_frame_var <- function(var, period, region_filter, ...) {
   if (length(filters) > 0) {
     if (names(filters) == "taxa") {
       data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa %in%  filters$taxa]
+    } else if (names(filters) == "taxa_groups") {
+      data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa %in% filters$taxa]
     } else if (names(filters) == "nutrients") {
       data <- peskas.timor.portal::nutrients_aggregated[[period]][nutrient %in% filters$nutrients]
     }
@@ -52,8 +54,7 @@ get_summary_frame_var <- function(var, period, region_filter, ...) {
 }
 
 #' @import data.table
-extract_series_info <- function(var, data, period, ...){
-
+extract_series_info <- function(var, data, period, ...) {
   filters <- list(...)
 
   if (length(filters) > 0) {
@@ -67,8 +68,8 @@ extract_series_info <- function(var, data, period, ...){
   } else {
     heading <- paste0(peskas.timor.portal::pars$vars[[var]]$short_name)
   }
-  this_period_val = data[nrow(data), ..var][[1]]
-  previous_period_val = data[nrow(data) - 1 , ..var][[1]]
+  this_period_val <- data[nrow(data), ..var][[1]]
+  previous_period_val <- data[nrow(data) - 1, ..var][[1]]
   trend <- get_trend(this_period_val, previous_period_val)
 
 
@@ -85,10 +86,9 @@ extract_series_info <- function(var, data, period, ...){
     series_multiplier = specify_multiplier(var),
     series_suffix = specify_suffix(var)
   )
-
 }
 
-get_trend <- function(this, previous){
+get_trend <- function(this, previous) {
   percentage_diff <- round((this - previous) / previous * 100)
   if (isTRUE(!is.na(percentage_diff)) & isTRUE(!is.null(percentage_diff))) {
     if (sign(percentage_diff) == 0) {
@@ -105,28 +105,32 @@ get_trend <- function(this, previous){
     trend_direction <- "none"
     percentage_diff <- "-"
   }
-  list(magnitude = ifelse(is.numeric(percentage_diff), d3.format::d3_format(",.0%")(percentage_diff/100), "-"),
-       direction = trend_direction)
+  list(
+    magnitude = ifelse(is.numeric(percentage_diff), d3.format::d3_format(",.0%")(percentage_diff / 100), "-"),
+    direction = trend_direction
+  )
 }
 
 
-specify_format <- function(var){
+specify_format <- function(var) {
   format_specifier <- peskas.timor.portal::pars$vars[[var]]$format
   null_default(format_specifier, "")
 }
 
-specify_suffix <- function(var){
+specify_suffix <- function(var) {
   prefix <- peskas.timor.portal::pars$vars[[var]]$suffix
   null_default(prefix, "")
 }
 
-specify_multiplier <- function(var){
+specify_multiplier <- function(var) {
   multiplier <- peskas.timor.portal::pars$vars[[var]]$multiplier
   null_default(multiplier, 1)
 }
 
 # returns the default if value is null
-null_default <- function(value, default){
-  if (is.null(value)) return(default)
+null_default <- function(value, default) {
+  if (is.null(value)) {
+    return(default)
+  }
   value
 }

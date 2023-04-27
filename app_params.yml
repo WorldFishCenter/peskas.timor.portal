@@ -132,32 +132,32 @@ default:
       methods: "The estimations were calculated referring to the RDI of a woman between 30 and 50 years old."
 
   taxa:
-    to_display: [CJX, CLP, SDX, BEN, FLY, EMP, RAX, CGX, SNA, TUN, PWT, MZZ]
+    to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
     taxa:
       CLP:
         short_name: Sardines and herrings
-      OCZ:
-        short_name: Octopuses
-      CJX:
-        short_name: Fusiliers
-      SDX:
-        short_name: Mackerel scad
-      BEN:
-        short_name: Needlefishes
-      EMP:
-        short_name: Emperors
       FLY:
         short_name: Flying fishes
-      SNA:
-        short_name: Snappers and seaperches
-      RAX:
-        short_name: Short bodied mackerel
-      CGX:
-        short_name: Jacks and trevalies
       TUN:
         short_name: Tunas
-      PWT:
-        short_name: Parrotfishes
+      SDX:
+        short_name: Mackerel scads
+      GZP:
+        short_name: Garfishes
+      SNA:
+        short_name: Snappers and seaperches
+      CGX:
+        short_name: Jacks and trevalies
+      CJX:
+        short_name: Fusiliers
+      BEN:
+        short_name: Needlefishes
+      MOO:
+        short_name: Moonfishes
+      RAX:
+        short_name: Short bodied mackerels
+      LWX:
+        short_name: Jobfishes
       MZZ:
         short_name: Other
 
