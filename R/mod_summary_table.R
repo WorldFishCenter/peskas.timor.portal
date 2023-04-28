@@ -7,22 +7,23 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_summary_table_ui <- function(id, years = NULL, ...){
-
+mod_summary_table_ui <- function(id, years = NULL, ...) {
   ns <- NS(id)
   if (is.null(years)) {
     years <- seq(as.numeric(format(Sys.Date(), "%Y")), "2018")
   }
 
   s <- selectInput(ns("y"),
-                   label = "",
-                   choices = years,
-                   selectize = FALSE,
-                   width = "auto")
+    label = "",
+    choices = years,
+    selectize = FALSE,
+    width = "auto"
+  )
 
   s$children[[2]]$children[[1]] <-
     htmltools::tagAppendAttributes(s$children[[2]]$children[[1]],
-                                   class = "form-select")
+      class = "form-select"
+    )
 
   tagList(
     table_card(
@@ -32,7 +33,6 @@ mod_summary_table_ui <- function(id, years = NULL, ...){
       footer = textOutput(ns("f"), inline = T),
       ...
     )
-
   )
 }
 
@@ -68,7 +68,7 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
       output$table <- renderTable(table,
         spacing = "m", width = "100%",
         align = alignment,
-        na = "–",
+        na = "\u2013",
         class = "table-responsive"
       )
       tableOutput(ns("table"))
@@ -76,12 +76,12 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
 
     output$f <- renderText({
       info <- info()
-      if (footer_value == "mean"){
+      if (footer_value == "mean") {
         total <- mean(info$series[[1]]$series_value, na.rm = TRUE)
       } else {
         total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       }
-      #total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
+      # total <- sum(info$series[[1]]$series_value, na.rm = TRUE)
       text <- paste0(info$series[[1]]$series_name)
       total_recorded <- mean(info$series[[2]]$series_value, na.rm = TRUE)
       text_recorded <- paste0(info$series[[2]]$series_name)
@@ -89,12 +89,13 @@ mod_summary_table_server <- function(id, vars, period = "month", format_fun = I,
       paste(
         paste(i18n_r()$t(text), ":", d3.format::d3.format(info$series[[1]]$series_format, suffix = info$series[[1]]$series_suffix)(total * info$series[[1]]$series_multiplier)),
         paste(i18n_r()$t(text_recorded), ":", d3.format::d3.format(info$series[[2]]$series_format, suffix = info$series[[2]]$series_suffix)(total_recorded * info$series[[2]]$series_multiplier)),
-        sep = " ; ")
+        sep = " ; "
+      )
     })
   })
 }
 
-mod_summary_table_app <- function(){
+mod_summary_table_app <- function() {
   ui <- tabler_page(
     mod_summary_table_ui(id = "i")
   )
@@ -105,7 +106,7 @@ mod_summary_table_app <- function(){
 }
 
 
-table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NULL, dropdown = NULL, footer = NULL){
+table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NULL, dropdown = NULL, footer = NULL) {
   tags$div(
     class = card_class,
     tags$div(
@@ -122,7 +123,6 @@ table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NUL
           class = "ms-auto lh-1",
           dropdown
         )
-
       ),
       tags$div(
         class = "card-table table-responsive",
@@ -138,4 +138,3 @@ table_card <- function(heading = "Heading", card_class = "col-lg-6", table = NUL
     )
   )
 }
-

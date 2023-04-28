@@ -24,7 +24,7 @@ mod_language_ui <- function(id) {
         # tags$span(class = "badge bg-red-lt ms-2", "Experimental"),
         class = "form-label"
       ),
-      choices = c("English" = "eng", "Português" = "por", "Tetun" = "tet"),
+      choices = c("English" = "eng", "Portugu\u00eas" = "por", "Tetun" = "tet"),
       selected = i18n$get_key_translation(), width = "100%"
     )
   )

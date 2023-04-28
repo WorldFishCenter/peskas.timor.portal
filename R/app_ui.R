@@ -121,7 +121,7 @@ app_ui <- function(request) {
             href = "https://github.com/WorldFishCenter/peskas.timor.portal"
           )
         ),
-        bottom = i18n$t("Copyright © 2021 Peskas. All rights reserved.")
+        bottom = i18n$t("Copyright \u00a9 2021 Peskas. All rights reserved.")
       ),
       inactivity_modal(timeout_seconds = 5 * 60),
       settings_modal(),

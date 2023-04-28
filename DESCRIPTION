@@ -12,7 +12,6 @@ Imports:
     magrittr,
     shiny (>= 1.6.0),
     shinyjs,
-    magrittr,
     shiny.i18n,
     logger,
     leaflet,

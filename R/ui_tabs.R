@@ -37,7 +37,7 @@ tab_menu <- function(..., id = ""){
     ),
     tags$script(
       HTML(
-        "$( document ).ready(function() { $('.navbar-nav>li>a').on('click', function(){$('.navbar-collapse').collapse('hide');});});"
+        "$( document ).ready(function() { $(\'.navbar-nav>li>a\').on(\'click\', function(){$(\'.navbar-collapse\').collapse(\'hide\');});});"
       )
     )
   )
@@ -211,7 +211,7 @@ language_drop_item <- function(label = "", id = "", icon_svg = NULL){
         class = "dropdown-item",
         href = NA,
         class="por",
-        "Português"
+        "Portugu\u00eas"
       )
     )
   )

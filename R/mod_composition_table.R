@@ -49,7 +49,7 @@ mod_composition_table_server <- function(id, var = "catch"){
       alignment <- paste(alignment, collapse = "")
       output$table <- renderTable(table, spacing = "m", width = "100%",
                                   align = alignment,
-                                  na = "–",
+                                  na = "\u2013",
                                   class = "table-responsive")
       tableOutput(ns('table'))
     })
