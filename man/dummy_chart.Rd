@@ -6,6 +6,11 @@
 \usage{
 dummy_chart(type = "bar", sparkline.enabled = TRUE)
 }
+\arguments{
+\item{type}{Plot type}
+
+\item{sparkline.enabled}{Enable sparkline}
+}
 \value{
 an htmlwidget
 }

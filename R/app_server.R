@@ -108,6 +108,9 @@ app_server <- function(input, output, session) {
 
 #' Dummy apex chart
 #'
+#' @param type Plot type
+#' @param sparkline.enabled Enable sparkline
+#'
 #' @return an htmlwidget
 #' @import apexcharter
 dummy_chart <- function(type = "bar", sparkline.enabled = TRUE) {

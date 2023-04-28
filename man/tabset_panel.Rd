@@ -8,6 +8,8 @@ tabset_panel(..., menu_id = "")
 }
 \arguments{
 \item{...}{panels created with `tab_panel()`}
+
+\item{menu_id}{HTML element ID}
 }
 \value{
 a shiny.tag object

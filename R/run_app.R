@@ -45,6 +45,10 @@ with_golem_options <- function (app, golem_opts, print = FALSE)
   }
 }
 
+#' Shiny Application starting function
+#'
+#' @param global_pars Set global parameters
+#'
 #' @export
 start_fun <- function(global_pars = TRUE){
   logger::log_info("Running start_fun")

@@ -14,6 +14,24 @@ plot_timeseries_apex(
   mean = FALSE
 )
 }
+\arguments{
+\item{data}{Data to plot}
+
+\item{type}{Plot type}
+
+\item{sparkline}{Enable sparkiline}
+
+\item{y_formatter}{Y axis formatter}
+
+\item{plot_color}{Plot fill color}
+
+\item{lab_color}{Plot lab color}
+
+\item{mean}{Enable mean reference line}
+}
+\value{
+An apexcharter timeseries
+}
 \description{
 Plot series using apexcharter for more custom use
 }

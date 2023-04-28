@@ -12,7 +12,6 @@ RUN install2.r --error --skipinstalled \
     bslib \
     golem \
     shinyjs \
-    spelling \
     apexcharter \
     profvis \
     shinyloadtest \

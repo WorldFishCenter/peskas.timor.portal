@@ -14,6 +14,24 @@ plot_horizontal_barplot(
   colors = NULL
 )
 }
+\arguments{
+\item{x_categories}{X axis categories}
+
+\item{series}{Time series in list format}
+
+\item{y_formatter}{Y axis formatter}
+
+\item{x_formatter}{X axis formatter}
+
+\item{type}{Plot type}
+
+\item{sparkline}{Enable sparkiline}
+
+\item{colors}{Plot colors}
+}
+\value{
+An apexcharter barplot
+}
 \description{
 Plot series using apexcharter
 }

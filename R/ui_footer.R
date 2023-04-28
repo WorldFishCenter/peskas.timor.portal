@@ -34,11 +34,18 @@ footer_panel <- function(right_side_elements = tagList(), left_side_elements = t
   )
 }
 
+
 #' Creates a inline list item with a link
 #'
 #' Te be used in elements like the footer
 #'
+#'
+#' @param content Link
+#' @param href Prefix to reference
+#' @param target Target reference
+#'
 #' @return a shiny tag "li" element
+#' @export
 #'
 inline_li_link <- function(content = "Link text", href = "#", target = "_blank"){
   tags$li(

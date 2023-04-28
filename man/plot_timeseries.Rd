@@ -14,6 +14,24 @@ plot_timeseries(
   stacked = F
 )
 }
+\arguments{
+\item{x_categories}{X axis categories}
+
+\item{series}{Time series in list format}
+
+\item{y_formatter}{Y axis formatter}
+
+\item{type}{Plot type}
+
+\item{sparkline}{Enable sparkiline}
+
+\item{colors}{Plot colors}
+
+\item{stacked}{Enable stacked plot}
+}
+\value{
+An apexcharter timeseries
+}
 \description{
 Plot series using apexcharter
 }

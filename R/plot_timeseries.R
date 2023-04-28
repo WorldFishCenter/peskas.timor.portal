@@ -1,6 +1,15 @@
-
-
 #' Plot series using apexcharter
+#'
+#' @param x_categories X axis categories
+#' @param series Time series in list format
+#' @param y_formatter Y axis formatter
+#' @param type Plot type
+#' @param sparkline Enable sparkiline
+#' @param colors Plot colors
+#' @param stacked Enable stacked plot
+#'
+#' @return An apexcharter timeseries
+#' @export
 #'
 plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function(x) {return x}"), type = "bar", sparkline = F, colors = NULL, stacked = F) {
   if (is.null(colors)) colors <- c("#206bc4", "#aaaaaa")
@@ -83,7 +92,19 @@ plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function
 }
 
 
+
 #' Plot series using apexcharter
+#'
+#' @param x_categories X axis categories
+#' @param series Time series in list format
+#' @param y_formatter Y axis formatter
+#' @param x_formatter X axis formatter
+#' @param type Plot type
+#' @param sparkline Enable sparkiline
+#' @param colors Plot colors
+#'
+#' @return An apexcharter barplot
+#' @export
 #'
 plot_horizontal_barplot <- function(x_categories, series, y_formatter, x_formatter, type = "bar", sparkline = F, colors = NULL) {
   if (is.null(colors)) colors <- c("#206bc4", "#aaaaaa")
@@ -255,8 +276,17 @@ plot_barplot <- function(x_categories, series, y_formatter, x_formatter, type = 
 }
 
 #' Plot series using apexcharter for more custom use
+#' @param data Data to plot
+#' @param type Plot type
+#' @param sparkline Enable sparkiline
+#' @param y_formatter Y axis formatter
+#' @param plot_color Plot fill color
+#' @param lab_color Plot lab color
+#' @param mean Enable mean reference line
 #'
-
+#' @return An apexcharter timeseries
+#' @export
+#'
 plot_timeseries_apex <- function(data = NULL,
                                  type = "area",
                                  sparkline = F,

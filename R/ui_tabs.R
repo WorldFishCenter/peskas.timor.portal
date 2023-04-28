@@ -4,6 +4,7 @@
 #' `tabset_panel()`. The id of the menu and the panel must match.
 #'
 #' @param ... Navigation menu items created with `navigation_menu_item()`
+#' @param id HTML element ID
 #'
 #' @return a shiny tag
 #'
@@ -87,6 +88,7 @@ tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
 #' Creates a panel of tabs that is controled with `tab_menu()`
 #'
 #' @param ... panels created with `tab_panel()`
+#' @param menu_id HTML element ID
 #'
 #' @return a shiny.tag object
 #' @seealso tab_menu

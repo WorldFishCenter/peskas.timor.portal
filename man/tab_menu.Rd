@@ -8,6 +8,8 @@ tab_menu(..., id = "")
 }
 \arguments{
 \item{...}{Navigation menu items created with `navigation_menu_item()`}
+
+\item{id}{HTML element ID}
 }
 \value{
 a shiny tag

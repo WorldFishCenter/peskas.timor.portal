@@ -6,6 +6,13 @@
 \usage{
 inline_li_link(content = "Link text", href = "#", target = "_blank")
 }
+\arguments{
+\item{content}{Link}
+
+\item{href}{Prefix to reference}
+
+\item{target}{Target reference}
+}
 \value{
 a shiny tag "li" element
 }
