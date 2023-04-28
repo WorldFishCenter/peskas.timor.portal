@@ -75,6 +75,14 @@ mod_taxa_bar_highlight_server <- function(id, var, colors) {
       x <- dat[date_bin_start >= from & date_bin_start <= to]
       x <- x[grouped_taxa %in% peskas.timor.portal::taxa_names$grouped_taxa]
       x <- x[, .(catch = sum(catch)), by = "grouped_taxa"]
+      missing_taxa <- setdiff(peskas.timor.portal::taxa_names$grouped_taxa, x$grouped_taxa)
+      if (length(missing_taxa) > 0) {
+        new_rows <- data.table::data.table(
+          grouped_taxa = missing_taxa,
+          catch = rep(0, length(missing_taxa))
+        )
+        x <- rbind(x, new_rows)
+      }
       x <- x[, grouped_taxa := factor(grouped_taxa, peskas.timor.portal::taxa_names$grouped_taxa)]
       merge(x[order(grouped_taxa)], peskas.timor.portal::taxa_names)
     })

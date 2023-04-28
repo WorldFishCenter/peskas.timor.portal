@@ -77,7 +77,7 @@ app_server <- function(input, output, session) {
   # Composition tab
   taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>% strtrim(width = 7)
   mod_taxa_bar_highlight_server("taxa-highlight", var = "catch", colors = taxa_colors)
-  mapply(pars$taxa$to_display, taxa_colors, FUN = function(x, y) {
+  mapply(pars$taxa$to_display[1:12], taxa_colors[1:12], FUN = function(x, y) {
     mod_summary_card_server(id = paste(x, "catch-card", sep = "-"), var = "catch", taxa = x, n = 25, colors = y)
   })
   mod_composition_table_server("taxa-table")
