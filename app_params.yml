@@ -280,7 +280,7 @@ default:
       text: Small scale fisheries
     description:
       content:
-        text: "The dynamic map is the result of the data-crossing between boats\' GPS tracks (Pelagic Data Systems) and fishing information derived from survey landings (KoBo toolbox). The fishery indicators are aggregated on a geographic grid with a resolution of 0.1 x 0.1 degrees (approximately 11 x 11 kilometres)."
+        text: "The dynamic map is the result of the data-crossing between boats' GPS tracks (Pelagic Data Systems) and fishing information derived from survey landings (KoBo toolbox). The fishery indicators are aggregated on a geographic grid with a resolution of 0.1 x 0.1 degrees (approximately 11 x 11 kilometres)."
 
   nutrients:
     to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
