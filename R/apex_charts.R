@@ -331,10 +331,10 @@ apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom", 
       labels = list(
         rotate = 0,
         datetimeUTC = FALSE,
-        padding = 0
-      ),
-      axisBorder = list(
-        show = FALSE
+        padding = 0,
+        style = list(
+          colors = "#000000"
+        )
       )
     ) %>%
     apexcharter::ax_xaxis(
@@ -342,10 +342,10 @@ apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom", 
         rotate = 0,
         datetimeUTC = FALSE,
         padding = 0,
-        formatter = V8::JS('function(x) {return x + "%"}')
-      ),
-      axisBorder = list(
-        show = TRUE
+        formatter = V8::JS('function(x) {return x + "%"}'),
+        style = list(
+          colors = "#000000"
+        )
       )
     ) %>%
     apexcharter::ax_legend(
