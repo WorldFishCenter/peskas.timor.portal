@@ -53,7 +53,7 @@ mod_region_composition_server <- function(id, legend_position, legend_align, leg
       region_composition <-
         peskas.timor.portal::municipal_taxa %>%
         dplyr::select(region, date_bin_start, catch, grouped_taxa) %>%
-        dplyr::mutate(year = year(date_bin_start)) %>%
+        dplyr::mutate(year = data.table::year(date_bin_start)) %>%
         dplyr::filter(year %in% input$y) %>%
         dplyr::group_by(region, grouped_taxa) %>%
         dplyr::summarise(catch = sum(catch)) %>%
