@@ -368,7 +368,7 @@ apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom", 
         horizontal = T,
         dataLabels = list(
           total = list(
-            enabled = TRUE
+            enabled = FALSE
           )
         )
       )
