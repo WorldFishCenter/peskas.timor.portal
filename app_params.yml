@@ -250,6 +250,9 @@ default:
     highlight:
       heading:
         text: Total catch
+    percent:
+      heading:
+        text: Relative composition
     table:
       heading:
         text: Total catch
@@ -579,6 +582,9 @@ por:
     highlight:
       heading:
         text: Captura total
+    percent:
+      heading:
+        text: Composição relativa
     table:
       heading:
         text: Captura total

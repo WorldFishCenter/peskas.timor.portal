@@ -307,3 +307,70 @@ apex_radial_server <- function(id = NULL,
     })
   })
 }
+
+apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom", legend_align = "center", legend_fontsize = 5) {
+  apex(
+    data = plot_data, type = "bar",
+    mapping = aes(x = region, y = catch / 1000, fill = grouped_taxa_names)
+  ) %>%
+    ax_chart(
+      stacked = TRUE,
+      stackType = "100%"
+    ) %>%
+    apexcharter::ax_chart(
+      toolbar = list(show = FALSE),
+      animations = list(
+        enabled = TRUE,
+        speed = 800,
+        animateGradually = list(enabled = TRUE),
+        offsetX = 0,
+        offsetY = 0
+      )
+    ) %>%
+    apexcharter::ax_yaxis(
+      labels = list(
+        rotate = 0,
+        datetimeUTC = FALSE,
+        padding = 0
+      ),
+      axisBorder = list(
+        show = FALSE
+      )
+    ) %>%
+    apexcharter::ax_xaxis(
+      labels = list(
+        rotate = 0,
+        datetimeUTC = FALSE,
+        padding = 0,
+        formatter = V8::JS('function(x) {return x + "%"}')
+      ),
+      axisBorder = list(
+        show = TRUE
+      )
+    ) %>%
+    apexcharter::ax_legend(
+      position = legend_position,
+      horizontalAlign = legend_align,
+      fontSize = legend_fontsize,
+      height = 70
+    ) %>%
+    apexcharter::ax_tooltip(
+      shared = FALSE,
+      followCursor = TRUE,
+      intersect = TRUE,
+      y = list(
+        formatter = apexcharter::format_num(pars$vars$catch$format, suffix = pars$vars$catch$suffix)
+      )
+    ) %>%
+    apexcharter::ax_colors(viridisLite::viridis(13) %>% strtrim(width = 7)) %>%
+    apexcharter::ax_plotOptions(
+      apexcharter::bar_opts(
+        horizontal = T,
+        dataLabels = list(
+          total = list(
+            enabled = TRUE
+          )
+        )
+      )
+    )
+}
