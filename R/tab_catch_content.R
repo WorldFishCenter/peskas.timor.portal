@@ -2,7 +2,7 @@ tab_catch_content <- function(i18n) {
   tagList(
     page_heading(
       pretitle = i18n$t(pars$catch$subtitle$text),
-      title = i18n$t(pars$catch$title$text)
+      title = i18n$t(pars$header$nav$catch$text)
     ),
     page_cards(
       mun_select("catch-card-mun")

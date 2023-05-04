@@ -1,3 +1,7 @@
+# peskas.timor.portal 0.2.0
+
+- Updated portal translation
+
 # peskas.timor.portal 0.1.0
 
 ## New features

@@ -1,8 +1,8 @@
 tab_revenue_content <- function(i18n) {
   tagList(
     page_heading(
-      pretitle = i18n$t(pars$revenue$subtitle$text),
-      title = i18n$t(pars$revenue$title$text)
+      pretitle = i18n$t(pars$catch$subtitle$text),
+      title = i18n$t(pars$header$nav$revenue$text)
     ),
     page_cards(
       mun_select("revenue-card-mun")
