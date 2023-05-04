@@ -123,7 +123,7 @@ default:
       description: "The number of people fed for the seven nutrients is calculated based on the Recommended Daily Intake (RDI) tables conforming to [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). We obtained these  estimates by integrating the weight estimates for each group of fish with the associated nutritional values obtained from [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "The nutrient concentrations for each group of fish are the result of a model, this reduces the accuracy of the estimates."
       methods: "The estimations were calculated referring to the RDI of a woman between 30 and 50 years old."
-
+      quality: medium
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
     taxa:
