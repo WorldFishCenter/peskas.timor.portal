@@ -15,42 +15,42 @@ default:
     revenue:
       short_name: Estimated revenue
       description: "The estimated total revenue  from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      problems: Not assessed.
+      problems: Not assessed
       methods: "The total value is estimated by multiplying the estimated value per trip by the average number of trips per boat and by the number of boats."
       format: "$,.2r"
-      quality: not assessed
+      quality: medium
     recorded_revenue:
       short_name: Recorded revenue
       format: "$,.2r"
       description: "The recorded total value from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      problems: Not assessed.
       methods: "The recorded value is calculated by aggregating the catch value reported by fishermen the in survey forms."
-      quality: not assessed
+      quality: high
+      problems: Not assessed
     catch:
       short_name: Estimated catch
       format: ",.2r"
       description: "The estimated total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      problems: Not assessed.
       methods: "The total catch is estimated by multiplying the estimated catch per trip (nationally or per taxa) by the average number of trips per boat and by the number of boats."
       multiplier: 0.001
       suffix: "\u00A0t"
-      quality: not assessed
+      quality: medium
+      problems: Not assessed
     recorded_catch:
       short_name: Recorded catch
       format: "$,.2r"
       suffix: "\u00A0t"
       multiplier: 0.001
       description: "The recorded total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      problems: Not assessed.
       methods: "The recorded catch is calculated by aggregating the catch weight estimated for each fishing trip."
-      quality: not assessed
+      quality: high
+      problems: Not assessed
     price_kg:
       short_name: Price per Kg
       format: "$,.2r"
       description: "The estimated price per Kg from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
-      problems: Not assessed.
       methods: "The price per Kg is estimated by dividing the estimated revenue by the estimated catch in Kg."
-      quality: not assessed
+      quality: medium
+      problems: Not assessed
     landing_revenue:
       short_name: Average trip value
       format: "$,.2r"
@@ -64,8 +64,8 @@ default:
       description: "The average catch per trip is obtained from landing surveys at multiple sites around the country. Enumerators observe the catch and record the length distribution for each taxon caught. We then use the length data to estimate the equivalent weight using publicly available length-weight relationship coefficients. Finally, we obtain monthly estimates using a random-effect statistical model."
       problems: "The length and number of caught individuals can be imprecise. Taxa are not always correctly identified by enumerators. In addition, taxa are generally grouped at the family or genus level whereas length-weight coefficients are generally available at the species level. This greatly reduces the accuracy of the species-based length-weight coefficients used."
       methods: "Catch lengths and the number of individuals are filtered for outliers. We consider outliers those values that are beyond 3 and 7 times the median absolute deviation of the log-transformed lengths and number of individuals respectively. Length-weight relationships are obtained from [FishBase](https://www.fishbase.de/). For each taxon, we use the average for all species present in East Timor or Indonesia."
-      quality: medium
       suffix: "\u00A0kg"
+      quality: medium
     n_landings_per_boat:
       short_name: Trips per boat
       format: ",.3r"
@@ -76,32 +76,29 @@ default:
     n_boats:
       short_name: Number of boats
       format: ","
-      quality: low
-      description: "The number of boats is derived from information obtained in the 2015 East-Timor census. The number of boats in each municipality level is added together to form the national total."
-      problems: "Data have not been updated since 2015. The data are currently unreliable. DGP are currently registering fishing vessels. This process should be complete in early 2022."
-      methods: None.
+      description: "The number of boats is derived from the 2021 East-Timor census. The number of boats in each municipality level is added together to form the national total."
+      problems: Not assessed
+      methods: None
+      quality: high
     taxa:
       short_name: "Taxa (species)"
       format: ""
-      quality: medium
       description: "The taxa (species or groups of species) are recorded by enumerators at the landing site."
       problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to the species family or genus. It is not known how this change might affect the estimates."
       methods: "We calculate national catch for the eleven most common taxa by weight. "
+      quality: medium
     prop_landings_woman:
       short_name: "Trips with women"
       format: ".1%"
-      quality: high
     pds_tracks_trips:
       short_name: Number of trips
       format: ",.3r"
-      quality: low
       description: "The number of trips indicates the total number of fishing trips recorded in a specific area."
       problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
       methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
     pds_tracks_cpe:
       short_name: Catch per unit effort
       format: ",.3r"
-      quality: medium
       description: "The catch per unit effort (CPE) indicates the average catch in Kg per fishing unit (fisherman) by fishing trip. The CPE is standardised one on trip hour."
       problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to the species family or genus. Both the categorization itself and its change result in estimates with a certain margin of error that is not entirely defined."
       methods: "Catch weights are subjected to a validation process. Outliers are recognized based on the overall catch-weight statistical distribution and on the quality of linear models relating the catch-weight and number of individuals for each fish group."
@@ -116,16 +113,12 @@ default:
       short_name: "Nutrients supply"
       format: ",.3r"
       multiplier: 0.001
-      quality: medium
       suffix: "\u00A0Kg"
       description: "Nutritional values are obtained by integrating the weight estimates for each fish-group with modelled concentrations of seven nutrients according to [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
-      problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
-      methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
     nut_rdi:
       short_name: "People fed"
       format: ",.2r"
       multiplier: 0.000001
-      quality: medium
       suffix: "\u00A0MM"
       description: "The number of people fed for the seven nutrients is calculated based on the Recommended Daily Intake (RDI) tables conforming to [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). We obtained these  estimates by integrating the weight estimates for each group of fish with the associated nutritional values obtained from [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "The nutrient concentrations for each group of fish are the result of a model, this reduces the accuracy of the estimates."
@@ -181,7 +174,6 @@ default:
         text: Market
       about:
         text: About
-
   footer:
     nav:
       license:
@@ -212,12 +204,7 @@ default:
       title: Fishing Trips Around Timor-Leste Island
       caption: "Explore fishing trips and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
       note: "The map displays only the fishing trips for which we have geolocation data, these represent about 5% of the total fishing trips recorded."
-
   revenue:
-    title:
-      text: Revenue
-    subtitle:
-      text: Small scale fisheries
     warning_1:
       heading:
         text: Estimates are provisional
@@ -238,15 +225,11 @@ default:
       content:
         text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
   catch:
-    title:
-      text: Catch
     subtitle:
       text: Small scale fisheries
   composition:
     title:
       text: Catch composition
-    subtitle:
-      text: Small scale fisheries
     highlight:
       heading:
         text: Total catch
@@ -256,35 +239,20 @@ default:
     table:
       heading:
         text: Total catch
+      footer:
+        text: "* All values in metric tons. Totals include data after April 2018."
   market:
     title:
       text: Market
-    subtitle:
-      text: Small scale fisheries
-    table:
-      heading:
-        text: Annual summary
-      period_col:
-        text: period
     description:
-      heading:
-        text: About the data
-      subheading:
-        text: Indicator information
-      content:
-        text: These estimates have not been thoroughly validated and might be inaccurate. There is some uncertainty on all data used in the calculations. Estimates, even from previous years, may be updated whenever new data is available. Indicators only include data from artisanal and subsistence fisheries.
       footer:
         text: "* All values in metric tonnes. Totals only include data after April 2018."
-
   pds_tracks:
     title:
       text: Fishery indicators
-    subtitle:
-      text: Small scale fisheries
     description:
       content:
         text: "The dynamic map is the result of the data-crossing between boats' GPS tracks (Pelagic Data Systems) and fishing information derived from survey landings (KoBo toolbox). The fishery indicators are aggregated on a geographic grid with a resolution of 0.1 x 0.1 degrees (approximately 11 x 11 kilometres)."
-
   nutrients:
     to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
     nutrients:
@@ -313,8 +281,6 @@ default:
       text: Nutritional metrics
     tree_map:
       text: People fed by average catch
-    subtitle:
-      text: Small scale fisheries
 
   indicators:
     processing:
@@ -357,42 +323,50 @@ default:
 
 por:
   vars:
-    n_tracks:
-      short_name: Viagens monitoradas
     n_landings:
-      short_name: Patamares pesquisados
+      short_name: Desembarques pesqueiros registrados
+      long_name: "O número de desembarques que foram registrados"
+      format: ","
+    n_tracks:
+      short_name: Viagens rastreadas
+      long_name: "Número de viagens rastreadas por barcos equipados com rastreadores de embarcações"
+      format: ","
     n_matched:
-      short_name: Faixas combinadas
+      short_name: Viagens correspondidas
+      description: "Número de viagens correspondidas"
+      format: ","
     revenue:
       short_name: Receita estimada
+      description: "A receita total estimada das viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para duas casas decimais."
+      problems: Não avaliado
+      methods: "O valor total é estimado multiplicando-se o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
       format: "$,.2r"
-      description: "A receita total estimada dos desembarques de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
-      problems: Não avaliado.
-      methods: "O valor total é estimado multiplicando o valor estimado por viagem pelo número médio de viagens por barco e pelo número de barcos."
-      quality: não avaliado
-    price_kg:
-      short_name: Preço por Kg
-      format: "$,.2r"
-      description: "O preço estimado por Kg de viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
-      problems: Não avaliado.
-      methods: "O preço por Kg é estimado dividindo-se a receita estimada pela captura estimada em Kg."
-      quality: não avaliado
     recorded_revenue:
       short_name: Receita registrada
       format: "$,.2r"
+      description: "O valor total registrado das viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para duas casas decimais."
+      methods: "O valor registrado é calculado agregando o valor de captura reportado pelos pescadores nos formulários de pesquisa."
+      quality: alta
     catch:
       short_name: Captura estimada
       format: ",.2r"
-      description: "A captura total estimada em viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para dois dígitos significativos."
-      problems: Não avaliado.
-      methods: "A captura total é estimada multiplicando a captura estimada por viagem (nacionalmente ou por taxa) pelo número médio de viagens por barco e pelo número de barcos."
-      quality: não avaliado
-    recorded_catch:
-      short_name: Captura registrada
-      format: ",.2r"
+      description: "A captura total estimada das viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para duas casas decimais."
+      methods: "A captura total é estimada multiplicando-se a captura estimada por viagem (nacionalmente ou por taxa) pelo número médio de viagens por barco e pelo número de barcos."
       multiplier: 0.001
       suffix: "\u00A0t"
-      quality: not assessed
+    recorded_catch:
+      short_name: Captura registrada
+      format: "$,.2r"
+      suffix: "\u00A0t"
+      multiplier: 0.001
+      description: "O valor total registrado de captura das viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para duas casas decimais."
+      methods: "A captura registrada é calculada agregando o peso de captura estimado para cada viagem de pesca."
+      quality: alta
+    price_kg:
+      short_name: Preço por Kg
+      format: "$,.2r"
+      description: "O preço estimado por Kg das viagens de pesca. Para ilustrar a incerteza em torno dessa estimativa, os valores são arredondados para duas casas decimais."
+      methods: "O preço por Kg é estimado dividindo-se a receita estimada pela captura estimada em Kg."
     landing_revenue:
       short_name: Valor de desembarque
       format: "$,.2r"
@@ -407,125 +381,142 @@ por:
       problems: "O comprimento e o número de indivíduos capturados podem ser imprecisos. Os taxa nem sempre são identificados corretamente pelos enumeradores. Além disso, os táxons são geralmente agrupados em nível de família ou gênero, enquanto os coeficientes de peso-comprimento estão geralmente disponíveis em nível de espécie. Isso reduz muito a precisão dos coeficientes de peso-comprimento baseados em espécies usados."
       methods: "Os comprimentos de captura e o número de indivíduos são filtrados quanto a valores discrepantes. Consideramos outliers os valores que estão além de 3 e 7 vezes o desvio absoluto mediano dos comprimentos transformados em logaritmo e do número de indivíduos, respectivamente. As relações comprimento-peso são obtidas em [FishBase] (https://www.fishbase.de/). Para cada táxon, usamos a média de todas as espécies presentes em Timor-Leste ou na Indonésia."
     n_landings_per_boat:
-      short_name: Desembarques por barco
+      short_name: Viagens por barco
       format: ",.3r"
       quality: baixo
-      description: "O número de pousos por barco é obtido nos dados de rastreamento da [Pelagic Data Systems](https://www.pelagicdata.com/). Os movimentos do barco são rastreados e um algoritmo proprietário é usado para determinar quando ocorre uma viagem. As estimativas são obtidas pela média do número de viagens que um barco faz ao longo de um mês."
-      problems: "Existem problemas conhecidos com o algoritmo de sistemas de Dados Pelágicos. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede ruim pode atrasar ou impedir que as informações sejam transferidas dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Atualmente, não é possível distinguir as viagens de pesca (que resultam em um desembarque) das viagens que não são de pesca."
-      methods: "As viagens são filtradas quanto a valores discrepantes e alguns erros de algoritmo em potencial. Especificamente, não levamos em consideração viagens em que a duração presumida seja superior a 18 horas ou cobre uma distância superior a 60 km."
+      description: "O número de viagens por barco é obtido a partir dos dados de rastreamento da [Pelagic Data Systems](https://www.pelagicdata.com/). Os movimentos dos barcos são rastreados e um algoritmo proprietário é usado para determinar quando uma viagem ocorre. As estimativas são obtidas pela média do número de viagens que um barco faz durante um mês."
+      problems: "Existem problemas conhecidos com o algoritmo do sistema Pelagic Data. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma única viagem ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede inadequada pode atrasar ou impedir a transferência de informações dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Atualmente, não é possível distinguir as viagens de pesca (que resultam em desembarques) das viagens não relacionadas à pesca."
+      methods: "As viagens são filtradas quanto a valores atípicos e alguns possíveis erros de algoritmo. Especificamente, não levamos em conta as viagens em que a duração presumida é superior a 18 horas ou cobre uma distância superior a 60 km."
     n_boats:
       short_name: Número de barcos
+      methods: Nada
       format: ","
-      description: "O número de barcos é calculado a partir de informações obtidas no censo 2015 de Timor-Leste. O número de barcos em cada nível de município é somado para formar o total nacional."
-      problems: "Os dados não são atualizados desde 2015. No entanto, o número de barcos provavelmente mudou consideravelmente desde então."
-      methods: Nenhum.
-      quality: baixo
+      description: "O número de barcos é derivado do censo de 2021 em Timor-Leste. O número de barcos em cada nível municipal é somado para formar o total nacional."
     taxa:
-      short_name: "Taxa (espécie)"
+      short_name: "Taxa (espécies)"
       format: ""
-      quality: médio
-      description: "Os táxons (espécies ou grupos de espécies) são registrados pelos recenseadores no local de desembarque."
-      problems: "A classificação dos táxons mudou ao longo do tempo. Antes de abril de 2019, os táxons foram registrados em nível de espécie. Mais tarde, os táxons foram agrupados em cerca de 60 categorias que correspondem vagamente à família ou gênero da espécie. Não se sabe como essa mudança pode afetar as estimativas."
-      methods: "Calculamos a captura nacional para os onze táxons mais comuns por peso."
+      description: "As taxas (espécies ou grupos de espécies) são registradas pelos enumeradores no local de desembarque."
+      problems: "A categorização das taxas mudou ao longo do tempo. Antes de abril de 2019, as taxas eram registradas no nível de espécie. Posteriormente, as taxas foram agrupadas em cerca de 60 categorias que correspondem vagamente à família ou gênero das espécies. Não se sabe como essa mudança pode afetar as estimativas."
+      methods: "Calculamos a captura nacional para as onze taxas mais comuns por peso."
     prop_landings_woman:
-      short_name: Viagens com mulheres
+      short_name: "Viagens com mulheres"
       format: ".1%"
-      quality: alta
     pds_tracks_trips:
       short_name: Número de viagens
       format: ",.3r"
-      quality: baixo
-      description: "O número de viagens indica o número total de viagens de pesca registradas em uma área específica."
-      problems: "Existem problemas conhecidos com o algoritmo de sistemas Pelagic Data. Em algumas ocasiões, as viagens não são detectadas pelo sistema, várias viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, uma cobertura de rede ruim pode atrasar ou impedir que as informações sejam transferidas dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Actualmente, não é possível distinguir as viagens de pesca (que resultam num desembarque) das viagens de não pesca."
-      methods: "As faixas são filtradas para valores discrepantes e alguns possíveis erros de algoritmo. Especificamente, não levamos em consideração trilhas georreferenciadas caracterizadas por grandes anomalias na qualidade do rastreamento, na velocidade das embarcações, na distância e no tempo percorrido."
+      description: "O número de viagens indica o total de viagens de pesca registradas em uma área específica."
+      problems: "Existem problemas conhecidos com o algoritmo do sistema de dados pelágicos. Em algumas ocasiões, as viagens não são detectadas pelo sistema, múltiplas viagens são mescladas em uma ou uma única viagem é dividida em várias. Além disso, a cobertura de rede ruim pode atrasar ou impedir a transferência de informações dos dispositivos de rastreamento. A extensão ou gravidade desses problemas é desconhecida. Atualmente, não é possível distinguir viagens de pesca de viagens não relacionadas à pesca."
+      methods: "As trilhas são filtradas para remover valores discrepantes e alguns erros potenciais do algoritmo. Especificamente, não consideramos trilhas georreferenciadas caracterizadas por grandes anomalias na qualidade do rastreamento, na velocidade dos barcos, na distância e no tempo percorridos."
     pds_tracks_cpe:
       short_name: Captura por unidade de esforço
       format: ",.3r"
-      quality: médio
-      description: "A captura por unidade de esforço (CPE) indica a captura média em Kg por unidade de pesca (pescador) por viagem de pesca. O CPE é padronizado em uma hora de viagem."
-      problems: "A classificação dos táxons mudou ao longo do tempo. Antes de abril de 2019, os táxons foram registrados em nível de espécie. Mais tarde, os táxons foram agrupados em cerca de 60 categorias que correspondem vagamente à família ou gênero da espécie. Tanto a própria categorização quanto sua alteração resultam em estimativas com certa margem de erro que não é totalmente definida."
-      methods: "Os pesos de captura são submetidos a um processo de validação. Os outliers são reconhecidos com base na distribuição estatística geral do peso de captura e na qualidade dos modelos lineares que relacionam o peso de captura e o número de indivíduos para cada grupo de peixes."
+      description: "A captura por unidade de esforço (CPE) indica a captura média em Kg por unidade de pesca (pescador) por viagem de pesca. A CPE é padronizada por hora de viagem."
+      problems: "A categorização de táxons mudou ao longo do tempo. Antes de abril de 2019, os táxons eram registrados no nível da espécie. Mais tarde, os táxons foram agrupados em cerca de 60 categorias que correspondem vagamente à família ou gênero das espécies. Tanto a própria categorização quanto sua mudança resultam em estimativas com uma certa margem de erro que não é totalmente definida."
+      methods: "Os pesos das capturas são submetidos a um processo de validação. Os valores discrepantes são reconhecidos com base na distribuição estatística geral de peso de captura e na qualidade dos modelos lineares que relacionam o peso de captura e o número de indivíduos para cada grupo de peixes."
     pds_tracks_rpe:
       short_name: Receita por unidade de esforço
       format: ",.3r"
       quality: alta
-      description: "A receita por unidade de esforço (RPE) indica a receita média em USD por unidade de pesca (pescador) por viagem de pesca. O RPE é padronizado por hora de viagem."
-      problems: "Nenhuma limitação conhecida."
-      methods: "A receita de captura associada a cada viagem é submetida a um processo de validação baseado no reconhecimento de valores anormais de receita da distribuição estatística geral."
+      description: "A receita por unidade de esforço (RPE) indica a receita média em USD por unidade de pesca (pescador) por viagem de pesca. A RPE é padronizada por hora de viagem."
+      problems: "Sem limitações conhecidas."
+      methods: "A receita da captura associada a cada viagem é submetida a um processo de validação com base no reconhecimento de valores de receita anômalos da distribuição estatística geral."
     nut_rdi:
       short_name: "Pessoas alimentadas"
       format: ",.2r"
       multiplier: 0.000001
-      quality: medium
       suffix: "\u00A0MM"
-      description: "TO número de pessoas alimentadas com os sete nutrientes é calculado com base nas tabelas de Ingestão Diária Recomendada (RDI) de acordo com [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). Obtivemos essas estimativas integrando as estimativas de peso para cada grupo de peixes com os valores nutricionais associados obtidos de [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
-      problems: "As concentrações de nutrientes para cada grupo de peixes são resultado de um modelo, o que reduz a precisão das estimativas."
-      methods: "As estimativas foram calculadas referentes ao RDI de uma mulher entre 30 e 50 anos."
+      description: "O número de pessoas alimentadas com os sete nutrientes é calculado com base nas tabelas de Ingestão Diária Recomendada (IDR) conforme [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). Obtivemos essas estimativas integrando as estimativas de peso para cada grupo de peixe com os valores nutricionais associados obtidos de [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      problems: "As concentrações de nutrientes para cada grupo de peixe são o resultado de um modelo, o que reduz a precisão das estimativas."
+      methods: "As estimativas foram calculadas com base na IDR de uma mulher entre 30 e 50 anos de idade."
+
+  taxa:
+    to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
+    taxa:
+      CLP:
+        short_name: Sardinhas e arenques
+      FLY:
+        short_name: Peixes voadores
+      TUN:
+        short_name: Atuns
+      SDX:
+        short_name: Cavalas
+      GZP:
+        short_name: Agulhas
+      SNA:
+        short_name: Lutjanídeos e serranídeos
+      CGX:
+        short_name: Carapaus e xaréus
+      CJX:
+        short_name: Caçonetes
+      BEN:
+        short_name: Agulhinhas
+      MOO:
+        short_name: Peixes-lua
+      RAX:
+        short_name: Cavalas curtas
+      LWX:
+        short_name: Pargos
+      MZZ:
+        short_name: Outros
 
   header:
     subtitle:
-      text: Painel de Gestão
+      text: Painel de Gerenciamento
     nav:
       home:
-        text: Principal
-      revenue:
-        text: Receita
+        text: Início
       catch:
         text: Captura
+      revenue:
+        text: Receita
       composition:
         text: Composição
-      market:
-        text: Mercado
       pds_tracks:
-        text: Mapa dinâmico
+        text: Mapa Dinâmico
       nutrients:
         text: Nutrientes
+      market:
+        text: Mercado
       about:
-        text: Informação
-
+        text: Sobre
   footer:
     nav:
       license:
-        text: Licencia
+        text: Licença
       code:
-        text: Código fonte
+        text: Código Fonte
       project:
-        text: O projeto
+        text: O Projeto
     copyright:
       text: "Copyright © 2021 Peskas. Todos os direitos reservados."
     update_time:
-      text: Ultima atualização
+      text: Última atualização
 
   home:
     title:
-      text: Visão geral nacional
+      text: Visão Nacional
     subtitle:
-      text: Relatório de pesca em pequena escala
+      text: Relatório de Pesca de Pequena Escala
     report:
-      text: Baixe o relatório completo
+      text: Baixar relatório completo
     intro:
-      title: Sistema automatizado de análise para pesca em pequena escala em Timor-Leste
-      content: "Peskas é um portal da web de código aberto que fornece dados e insights sobre pesca em Timor-Leste. A plataforma utiliza dados de captura coletados por enumeradores locais e dados de rastreamento de embarcações para mostrar tendências de pesca ao longo do tempo e espaço. O projeto foi iniciado em 2016 em parceria com o Ministério da Agricultura e Pescas de Timor-Leste e tem sido financiado por várias organizações. Peskas é um sistema de monitoramento quase em tempo real de baixo custo e acesso aberto, com foco na pesca em pequena escala. Sua aplicação em pesquisa e gestão de pesca foi documentada em várias publicações."
+      title: Sistema Analítico Automatizado para Pesca de Pequena Escala em Timor-Leste
+      content: "Peskas é um portal web de código aberto que fornece dados e insights sobre pesca em Timor-Leste. A plataforma utiliza dados de captura coletados por enumeradores locais e dados de rastreamento de embarcações para mostrar tendências de pesca ao longo do tempo e espaço. O projeto foi iniciado em 2016 em parceria com o Ministério da Agricultura e Pescas de Timor-Leste e tem sido financiado por diversas organizações. Peskas é um sistema de monitoramento em tempo quase real, de baixo custo e de acesso aberto, com foco em pesca de pequena escala. Sua aplicação em pesquisa e gerenciamento de pesca foi documentada em várias publicações."
     table:
-      title: Estatísticas gerais da pesca
-      caption: "Explorar os principais indicadores de pesca em Timor-Leste. O quadro mostra os valores agregados das receitas e capturas estimadas, juntamente com os valores medianos dos desembarques por barco, receitas por viagem, capturas por viagem e preço por kg."
+      title: Estatísticas Gerais da Pesca
+      caption: "Explore os principais indicadores de pesca em Timor-Leste. A tabela mostra os valores agregados da receita e da captura estimadas, juntamente com os valores medianos dos desembarques por barco, receita por viagem, captura por viagem e preço por kg."
     map:
       title: Viagens de Pesca ao Redor da Ilha de Timor-Leste
-      caption: "Explore viagens de pesca e estatísticas associadas ao redor da costa da Ilha de Timor com o nosso mapa interativo. Selecione indicadores de pesca, tipo de equipamento de pesca e grupo de peixes para filtrar os resultados. Clique em um ponto da viagem para ver estatísticas detalhadas de pesca para esse ponto e o município associado."
-      note: "O mapa exibe apenas as viagens de pesca para as quais temos dados de geolocalização, o que representa cerca de 5% do total de viagens de pesca registradas."
-
+      caption: "Explore viagens de pesca e estatísticas associadas ao redor da costa da Ilha de Timor com nosso mapa interativo. Selecione indicadores de pesca, tipo de engrenagem de pesca e grupo de peixes para filtrar os resultados. Clique em um ponto de viagem para ver estatísticas detalhadas de pesca para esse ponto e a municipalidade associada."
+      note: "O mapa exibe apenas as viagens de pesca para as quais temos dados de geolocalização, que representam cerca de 5% do total de viagens de pesca registradas."
   revenue:
-    title:
-      text: Receita
-    subtitle:
-      text: Pesca de pequena escala
     warning_1:
       heading:
         text: As estimativas são provisórias
       content:
-        text: Essas estimativas não foram validadas e podem ser imprecisas. Use com cuidado.
+        text: Estas estimativas não foram validadas e podem ser imprecisas. Use com cautela.
       more:
-        text: Saber mais
+        text: Saiba mais
     table:
       heading:
         text: Resumo anual
@@ -535,26 +526,66 @@ por:
       heading:
         text: Sobre os dados
       subheading:
-        text: Informação do indicador
-      content:
-        text: Essas estimativas não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis. Os indicadores incluem apenas dados da pesca artesanal e de subsistência.
-
-  catch:
-    title:
-      text: Captura
-    table:
-      vars:
-      heading:
-        text: Sumário anual
-      period_col:
-        text: período
-    description:
-      heading:
-        text: Sobre os dados
-      subheading:
         text: Informações do indicador
       content:
-        text: As estimativas de receita não foram totalmente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. Estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que houver novos dados disponíveis.
+        text: Estas estimativas não foram minuciosamente validadas e podem ser imprecisas. Existe alguma incerteza em todos os dados usados nos cálculos. As estimativas, mesmo de anos anteriores, podem ser atualizadas sempre que novos dados estiverem disponíveis. Os indicadores incluem apenas dados da pesca artesanal e de subsistência.
+  catch:
+    subtitle:
+      text: Pesca de pequena escala
+  composition:
+    title:
+      text: Composição de captura
+    highlight:
+      heading:
+        text: Captura total
+    percent:
+      heading:
+        text: Composição relativa
+    table:
+      heading:
+        text: Captura total
+      footer:
+        text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após Abril de 2018."
+  market:
+    title:
+      text: Mercado
+    description:
+      footer:
+        text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após abril de 2018."
+  pds_tracks:
+    title:
+      text: Indicadores da pesca
+    description:
+      content:
+        text: "O mapa dinâmico é resultado do cruzamento de dados entre as trilhas de GPS dos barcos (Pelagic Data Systems) e informações de pesca derivadas das capturas das pesquisas (KoBo toolbox). Os indicadores de pesca são agregados em uma grade geográfica com resolução de 0,1 x 0,1 graus (aproximadamente 11 x 11 quilômetros)."
+  nutrients:
+    to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
+    nutrients:
+      selenium:
+        short_name: Selênio
+        conversion_fact: 0.000055
+      protein:
+        short_name: Proteína
+        conversion_fact: 46.000000
+      omega3:
+        short_name: "Ômega-3"
+        conversion_fact: 1.100000
+      calcium:
+        short_name: Cálcio
+        conversion_fact: 1
+      zinc:
+        short_name: Zinco
+        conversion_fact: 0.008000
+      iron:
+        short_name: Ferro
+        conversion_fact: 0.018000
+      vitaminA:
+        short_name: "Vitamina A"
+        conversion_fact: 0.000700
+    title:
+      text: Métricas nutricionais
+    tree_map:
+      text: Pessoas alimentadas pela captura média
 
   indicators:
     processing:
@@ -573,39 +604,6 @@ por:
     buttons:
       close:
         label: Fechar
-
-  composition:
-    title:
-      text: Composição de captura
-    subtitle:
-      text: Small scale fisheries
-    highlight:
-      heading:
-        text: Captura total
-    percent:
-      heading:
-        text: Composição relativa
-    table:
-      heading:
-        text: Captura total
-      footer:
-        text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após Abril de 2018."
-
-  pds_tracks:
-    title:
-      text: Indicadores de pesca
-    subtitle:
-      text: Small scale fisheries
-    description:
-      content:
-        text: "O mapa dinâmico é o resultado do cruzamento de dados entre as trilhas GPS dos barcos (Pelagic Data Systems) e as informações de pesca derivadas dos desembarques de pesquisa (KoBo toolbox). Os indicadores de pesca são agregados em uma grade geográfica com resolução de 0,1 x 0,1 graus (aproximadamente 11 x 11 quilômetros)."
-
-  nutrients:
-    title:
-      text: Métricas nutricionais
-    tree_map:
-      text: Pessoas alimentadas por captura média
-
   about:
     text: |
       # Sobre Peskas
@@ -630,8 +628,148 @@ por:
 
 tet:
   vars:
+    n_landings:
+      short_name: Susaun dalan konaba
+      long_name: "Numeru dalan konaba ne'ebé surbeia"
+      format: ","
     n_tracks:
-      short_name: Tracked trips tetun
+      short_name: Viagem ne'ebé rastreadu
+      long_name: "Numeru viagem ne'ebé rastreadu husi barku ne'ebé instaladu ho rastreadór"
+      format: ","
+    n_matched:
+      short_name: Rastreadór ne'ebé ko'alia
+      description: "Numeru rastreadór ne'ebé ko'alia"
+      format: ","
+    revenue:
+      short_name: Estimasaun rendimentu
+      description: "Total estimasaun rendimentu husi viagem peska. Atu hili susar ba estimasaun ida ne'e, valór balu rónde ba digitu rua ne'ebé signifikante."
+      problems: Labele avalia
+      methods: "Valór hotu-hotu estimadu husi múltiplikasaun husi estimasaun valór ba kada viagem ho númeru média ba viagem iha barku no númeru barku."
+      format: "$,.2r"
+    recorded_revenue:
+      short_name: Rendimentu rejistadu
+      format: "$,.2r"
+      description: "Valór hotu-hotu rejistadu husi viagem peska. Atu hili susar ba estimasaun ida ne'e, valór balu rónde ba digitu rua ne'ebé signifikante."
+      methods: "Valór rejistadu ne'e kalkula husi ajregasaun valór kapasidadu ne'ebé reporta husi pescador sira iha formuláriu peskiza."
+      quality: "ki'ik"
+    catch:
+      short_name: Estimasaun tanis
+      format: ",.2r"
+      description: "Total estimasaun tanis husi viagem peska. Atu hili susar ba estimasaun ida ne'e, valór balu rónde ba digitu rua ne'ebé signifikante."
+      methods: "Tanis hotu-hotu estimadu husi múltiplikasaun husi estimasaun tanis ba kada viagem (nasionálmente ka taxa-idak ne'ebé) ho númeru média ba viagem iha barku no númeru barku."
+      multiplier: 0.001
+      suffix: "\u00A0t"
+    recorded_catch:
+      short_name: Captura rejistadu
+      format: "$,.2r"
+      suffix: "\u00A0t"
+      multiplier: 0.001
+      description: "Total captura rejistadu husi nia kavaloada peska. Atu ilustra inkerteza kona-ba estimativa ne'e, valor sira sei arredonda ba digitus signifikante rua."
+      methods: "Captura rejistadu ne'e kalkula liu husi agregasaun ne'ebe peso apanha estimadu ba kada kavaloada peska."
+      quality: "ki'ik"
+    price_kg:
+      short_name: Preju husi kilograma
+      format: "$,.2r"
+      description: "Preju estimadu husi kilograma peska. Atu ilustra inkerteza kona-ba estimativa ne'e, valor sira sei arredonda ba digitus signifikante rua."
+      methods: "Preju husi kilograma ne'e estimadu liu husi dividir estimativa rekadu ho estimativa apanha iha kilograma."
+    landing_revenue:
+      short_name: Valor média ba viájen
+      format: "$,.2r"
+      description: "Valor média ba viájen ne'ebe hetan husi súrvei ba tempu iha nasaun hotu-hotu. Pescador sira sei pergunta kona-ba preju estimadu ba sira nia peska iha área desembarke, independentemente se sira nia peska sei fahe ka konsumu. Preju bele muda liu-liu iha loron ida-idak no iha área desembarke ida-idak. Ita depois hetan estimativa mensal liu husi modelu estadístika efetu ho efeitu aleatóriu."
+      problems: "Iha momentu ida-idak, liu-liu dalaruma to'o tinan 2019, valor ba sira nia peska ne'ebe venda hotu ona rejistadu inkorektamente. Problema ne'e bele akontese bainhira valor ba sira nia peska ne'ebe venda ho presu hodi entra ba sistema. Bele iha ka'as bainhira presu ne'ebe rejista ho kada ikun ba peska ka karik rejista ba parte husi peska. Bele iha ka'as atrasu tinan barak, hodi fo informasaun ba sitema."
+      methods: "Resposta husi súrvei ne'ebe sei filtra ba outlier. Ita konsidera outlier sira valor ne'ebe hela liu husi 3 beses median absolute deviation ba valor ne'ebe transforma ba logaritmu ba presu rejista iha desembarke."
+      quality: mediu
+    landing_weight:
+      short_name: Kaptura Media ba Fulan
+      format: ",.3r"
+      description: "Kaptura Media ba fulan ida-ne'e hetan husi survey sira iha fatin barak liu husi rai. Enemadores observa kaptura no regista distribuisaun makas ba kada takson hodi kaptura. Kuandu ne'e uza dadus distribuisaun ne'e hodi estimativu husi peso hanesan kuivalenti ne'ebe iha koefisiente relasaun peso-taman publika. Finalmente, hetan estimativu mensal uza modelu estatistiku efeitu aleatoriu."
+      problems: "Taman no numeru individu sira ne'ebe kaptura bele imprecisamente. Takson la loos identifika liu husi enumeradores. Iha dadus distribuisaun tamaun hodi grupu takson sira iha familia ka genus nian, wainhira koefisiente peso-taman iha geralmente iha nivel espesies nian. Ne'e maka reduz kualidade koefisiente peso-taman ne'ebe uza ba espesies sira nian."
+      methods: "Taman kaptura no numeru individu sira ne'ebe kaptura hetan filtru ba outliers. Ami konsidera outliers sira ne'ebe iha valor ida-ne'ebe iha raihan 3 no 7 hosi median absolute deviation hosi distribuisaun taman no numeru individu sira ne'ebe iha log-transformed. Koefisiente peso-taman hetan husi [FishBase](https://www.fishbase.de/). Ba kada takson, ami uza media ba espesies hotu iha Timor Leste ka Indonesia nian."
+      suffix: "\u00A0kg"
+    n_landings_per_boat:
+      short_name: Viagen ba fatin kaptura
+      format: ",.3r"
+      quality: kiik
+      description: "Numeru viagen ba fatin kaptura ne'ebe nain hetan husi dadus rai tasi husi [Pelagic Data Systems](https://www.pelagicdata.com/). Movimentu ba nain ne'ebe hetan rekolla, no algoritmo propriedade ne'ebe uza hodi determina kada viagen mosu. Estimativu hetan husi mediu numeru viagen ne'ebe nain halo durante fulan ida."
+      problems: "Iha problema ne'ebé mak hatene ho algoritmu Pelagic Data Systems nian. Iha loron balu, dalan seidauk deteta ba viajen sira, viajen barak mak juntar iha viajen ida, ka viajen ida mak divide iha viajen barak. Ida ne'e, falta kovaridu rede bele atraza ka prevene informasaun atu transfere husi aparelhu rastreiu. Ema la hatene ne'ebé mak grau no gravidade husi problema sira ne'e. Iha momentu ne'e, laiha posibilidade atu distingui viajen peskiza (ne'ebé resulta iha deit) husi viajen seluk."
+      methods: "Viajen sira sei filtra atu detecta outlier sira no erro algoritmu potensial sira. Espesifikamente, ami la konta viajen sira ne'ebé durasaun presumidu liu ba 18 oras ka husiudan ne'ebé mak liu ba 60km."
+    n_boats:
+      short_name: Númeru eskolan
+      format: ","
+      description: "Númeru kais ne'e deriva husi sensu iha Timor-Leste nian iha tinan 2021. Númeru kais iha kada nivel munisipal sei hala'o ajuntu atu forma total nasionál."
+      methods: La boot
+    taxa:
+      short_name: "Taxa (espésie)"
+      format: ""
+      description: "Enumeradór sira rejista taxa (espésie ka grupu espésie) iha fatin desizaun."
+      problems: "Kategorizasaun taxa sira muda iha tempu ida ne'ebe lalais tebes. Antes de Abríl 2019, taxa sira rejistu ba nivel espésie. Hafoin ne'e, taxa sira grupu hamutuk kedas, no hanesan espésie família ka genus. La hatene kona ba efetu ne'ebe mudansa ne'e bele hadia ba estimativa sira."
+      methods: "Ita kalkula kapasidade tama nasaun ba taxa ona-rua-nulu ida ne'ebe komúm liu husi dalan halai."
+    prop_landings_woman:
+      short_name: "Vijéns ho feto"
+      format: ".1%"
+    pds_tracks_trips:
+      short_name: Númeru dalan
+      format: ",.3r"
+      description: "Númeru dalan signifika númeru dalan peskiza ne'ebé rejistu iha área espesífiku."
+      problems: "Iha problema hatudu iha algoritmu Pelagic Data nian. Iha situasaun sira, dalan peskiza la registu husi sistema, dalan peskiza mútus ba dalan ida, ka dalan peskiza ida kloot ba númeru ida. Tanba ne'e, limitasaun ka gravidade ba problema sira ne'ebe mak la hatene. Agora, la bele disemina dalan peskiza husi dalan ne'ebé lao liu husi peskiza sira."
+      methods: "Ita koreje dalan ne'ebé estranhu no parte husi problema sira iha algoritmu. Hanesan espesífiku, ita la fó konsiderasaun ba dalan iha razaun ne'ebé lalais, dala ne'ebé halai no la halai, no dala ne'ebé hanesan distánsia no tempu husi dalan ne'e."
+    pds_tracks_cpe:
+      short_name: Kaptura liu husi esforsu unidade peska
+      format: ",.3r"
+      description: "Kaptura liu husi esforsu unidade peska (CPE) indika kapasidade média ne'ebé kaptura iha kilograma liu husi unidade peska (pescadór) iha dalan peska. CPE padroniza iha oras peska."
+      problems: "Kategorizasaun taxa muda liu tempu. Antes de April 2019, taxa registra ho nível espésie. Depois, taxa grupu iha rihun 60 tan ne'ebé koresponde loosamente ba família ou genus espésie. Tantu kategorizasaun iha-an ka mudansa ne'e resulta iha estimasaun ho marginu eroru ne'ebé seidauk defini tiha ona."
+      methods: "Pezu kaptura submete ba validasaun. Outliers rekonoce ho baze ba distribuisaun estadístika peso kaptura no kalidade modelu linear relasiona ho peso kaptura no númeru individu ba grupu ikan ne'ebé tuir."
+    pds_tracks_rpe:
+      short_name: Receita liu husi esforsu unidade peska
+      format: ",.3r"
+      quality: ki'ik
+      description: "Receita liu husi esforsu unidade peska (RPE) indika kapasidade média ne'ebé hetan rekursu iha dollar amerikanu liu husi unidade peska (pescadór) iha dalan peska. RPE padroniza iha oras peska."
+      problems: Labele hatene limitasaun ne'ebé konhese.
+      methods: "Receita kaptura ho nia konesementu ba kada dalan submete ba validasaun. Validasaun ne'e bazeia ba rekonesementu ba valor revenu anomaLus ho distribuisaun estadístika peso kaptura hotu-hotu."
+    nut_supply:
+      short_name: "Fornesimentu Nutrisaun"
+      format: ",.3r"
+      multiplier: 0.001
+      suffix: "\u00A0Kg"
+      description: "Valores nutrisaun hetan husi estimasaun peso ba grupu ikus ho koncentrasaun modelu ba 7 nutrientes liu husi [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+    nut_rdi:
+      short_name: "Ema sira ne'ebé alimenta"
+      format: ",.2r"
+      multiplier: 0.000001
+      suffix: "\u00A0MM"
+      description: "Numeru ema sira ne'ebé alimenta ho ba nutrientes 7 mak kalkula ho baze ba rekomendasaun diaria ho ingesta (RDI) konforme ho [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). Ita hetan estimasaun sira ne'ebe mak refere ba estimasaun peso ba grupu ikus ho valor nutrisaun mak asosia ho [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      problems: "Koncentrasaun nutrientes ba grupu ikus sira ne'ebe hatudu ho modelu, ne'ebe nune'e reduz presizaun husi estimasaun."
+      methods: "Estimasaun sira ne'ebe mak kalkula refere ba RDI husi feto ida ho idade entre 30 ho 50."
+
+  taxa:
+    to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
+    taxa:
+      CLP:
+        short_name: Sardinia no hering
+      FLY:
+        short_name: Ikan moska
+      TUN:
+        short_name: Atum
+      SDX:
+        short_name: Ikan geladi
+      GZP:
+        short_name: Ikan longuinhos
+      SNA:
+        short_name: Ikan mapalus
+      CGX:
+        short_name: Jacks no trevallies
+      CJX:
+        short_name: Fusiliers
+      BEN:
+        short_name: Ikan agulha
+      MOO:
+        short_name: Ikan bulan
+      RAX:
+        short_name: Mackerels bidan-kuruk
+      LWX:
+        short_name: Jobfishes
+      MZZ:
+        short_name: Seluk
 
   header:
     subtitle:
@@ -639,21 +777,20 @@ tet:
     nav:
       home:
         text: Prinsipal
+      catch:
+        text: Kaptura
       revenue:
         text: Reseita
-      #catch:
-      #  text: Kaptura
       composition:
-        text: Kompozisaun
-      market:
-        text: Merkadu
+        text: Komposisaun
       pds_tracks:
         text: Mapa dinámiku
       nutrients:
         text: Nutrientes
+      market:
+        text: Merkadu
       about:
         text: Informasaun
-
   footer:
     nav:
       license:
@@ -669,32 +806,124 @@ tet:
 
   home:
     title:
-      text: Panorama nasional
+      text: Visão jerál nasionál
     subtitle:
-      text: Relatóriu peska eskala ki'ik
+      text: Relatóriu peska eskala kiik
     report:
-      text: Baixa relatoriu completu
+      text: Download relatóriu kompletu
     intro:
-      title: Sistema analiza automatiku ba peska iha eskala kiik iha Timor-Leste
-      content: "Peskas mak portal web foun ho kódigu abertu ne'ebé fó dadus no ida-idak kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus agarra ne'ebé koleta husi enumeradór lokál no dadus rastreamentu barku atu hatudu tendénsia peska iha tempu no espasu. Projetu ne'e hetan iniciativa iha tinan 2016 ho parceria ho Ministériu Agrikultura no Peskas Timor-Leste no finansiadu husi organizasaun varias. Peskas mak sistema monitorizasaun kaze real ho kustu kiik no hakarak atu hetan asesu abertu, ho foku ba peska iha eskala kiik. Aplikasaun ne'ebé mak iha iha peskiza no jestaun peska nia dokumentu iha publikasaun varias."
+      title: Sistema analiza automatiku ba peska iha eskala kiik iha Timor-Leste.
+      content: "Peskas mak plataforma web aberta ne'ebé fó dadus no informasaun kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus kaptura ne'ebé koleta husi enumeradór lokal sira no dadus rastreamentu embarkasun sira atu haforsa tendénsia peska iha tempu no espasu. Projeto ne'e hetan iniciativa iha tinan 2016 iha parseria ho Ministériu Agrikultura no Peska Timor-Leste nian no hetan finansiamentu husi organizasaun sira ne'ebé mak diferenti. Peskas mak sistema monitorizasaun karik, hamenus kustu no asesu abertu, ho enfoke ba peska iha eskala kiik. Aplikasaun husi peskas ne'e iha peskiza no jestaun peska dokumenta iha publikasaun sira ne'ebé barak."
     table:
-      title: Estatístika Jeral Peska
-      caption: "Haree indikadór prinsipál peskaria iha Timor-Leste. Tabela mosu valór agregadu husi estimasaun rendimentu no apanha, hamutuk ho valór medianu husi desembarke ba kada eskalér, rendimentu ba kada dalan, apanha ba kada dalan no prenu ba kilograma."
+      title: Estatístika jerál peska
+      caption: "Eskola indikadór prinsipál peska iha Timor-Leste. Tabela ne'e aprezenta valór agregadu husi estimasaun rendimentu no kaptura, hamutuk ho valór medianu husi desembarke ba liur sira, rendimentu husi viagen, kaptura husi viagen no prezú husi kg."
     map:
-      title: Viagem Peska Koleita Timor-Leste nian
-      caption: "Haree viajen peskaria no estatístika asosiasaun iha beira-mar Ilha Timor ho mapa interaktívu ne'e. Hili indikadór peskaria, tipu hirak ne'ebé uza no grupu ikan hodi filtra rezultadu sira. Klik iha pontu viajen atu haree estatístika peskaria detalladu ba pontu hirak ne'e no múnisípiu asosiasaun."
-      note: "Mapa ne'e hatudu deit koleita viagem peska ida-idak ne'ebé iha dadus geolokalizasaun, ne'e reprezenta kira-kira 5% husi total koleita viagem peska ne'ebé rekolla."
-
+      title: Viagen peska koresande iha Timor-Leste
+      caption: "Eskola viagen peska no estatístika koresande ao longu kostal Ilha Timor ho mapa interaktívu ne'e. Seleksiona indikadór peskeiru, tipu ekipamentu peska no grupu pisuk ba filtra rezultadu. Klikka iha pontu viagen ida atu hare estatístika peska detallu ba pontu no munisípiu korespondente."
+      note: "Mapa ne'e aprezenta deit viagen peska ne'ebé iha dadus lokalizasaun, ne'ebé reprsenta klean liu menus 5% husi total viagen peska rejistradu."
   revenue:
-    title:
-      text: Reseita
     subtitle:
-      text: Peska eskala ki'ik
+      text: Peska eskala kiik
     warning_1:
       heading:
-        text: Estimasaun provizória
+        text: Estimativa provizória
       content:
-        text: "Estimasaun hirak ne'e seidauk hetan validasaun nune'e bele inexata. Uza ho kuidadu."
+        text: "Estimativa ne'ebe ne'e validadu la'ós no bele la'os precizu. Uza ho kuidadu."
+      more:
+        text: Sai ba sai mais informasaun.
+    table:
+      heading:
+        text: Rezumu tinan-anual
+      period_col:
+        text: periodu
+    description:
+      heading:
+        text: Kona-ba dadus
+      subheading:
+        text: Informasaun kona-ba indikadór
+      content:
+        text: "Estimativa ne'ebe la'ós validadu kompletamente no bele la'os precizu. Iha kualker inkertesa iha dadus hotu ne'ebé uza iha kalkulasaun. Estimativa, inklui tinan-tinan liu ba, bele atualiza dala-ruma bainhira dadus foun iha. Indikadór sira ne'ebe iha, inklui deit dadus peska artesanal no subsisténsia."
+  catch:
+    subtitle:
+      text: Peskas iha peskaria kiik
+  composition:
+    title:
+      text: Kompozisaun kapitura
+    subtitle:
+      text: Peskaria kiik
+    highlight:
+      heading:
+        text: Kapitura hotu
+    percent:
+      heading:
+        text: Kompozisaun relativa
+    table:
+      heading:
+        text: Kapitura hotu
+  market:
+    title:
+      text: Merkadu
+    subtitle:
+      text: Peskaria kiik
+    description:
+      footer:
+        text: "* Valores hotu iha tonelada métrika. Total inklui dadus hosi April 2018."
+  pds_tracks:
+    title:
+      text: Indikador peskaria
+    subtitle:
+      text: Peskaria kiik
+    description:
+      content:
+        text: "Mapa dinamika ne'e rezultadu husi dadus GPS ba barcu (Pelagic Data Systems) no dadus peskaria husi levantamentu surveys (KoBo toolbox). Indikador peskaria sira hanesan rezultadu agregadu iha kordenada 0.1 x 0.1 grau (aproximadamente 11 x 11 kilometru)."
+  nutrients:
+    to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
+    nutrients:
+      selenium:
+        short_name: Selenium
+        conversion_fact: 0.000055
+      protein:
+        short_name: Proteina
+        conversion_fact: 46.000000
+      omega3:
+        short_name: "Omega-3"
+        conversion_fact: 1.100000
+      calcium:
+        short_name: Kálsiu
+        conversion_fact: 1
+      zinc:
+        short_name: Zinc
+        conversion_fact: 0.008000
+      iron:
+        short_name: Iron
+        conversion_fact: 0.018000
+      vitaminA:
+        short_name: "Vitamina A"
+        conversion_fact: 0.000700
+    title:
+      text: Metrica nutrisaun
+    tree_map:
+      text: Emak sira ne'ebé hamenus husi kapitura média
+    subtitle:
+      text: Peskaria kiik
+
+  indicators:
+    processing:
+      text: "Prosesamentu no validasaun dadus:"
+    limitations:
+      text: "Problema no limitasaun ne'ebé konahuk iha:"
+    quality:
+      text: "Kualidade dadus:"
+
+  settings:
+    title:
+      text: Setór
+    language_select:
+      label:
+        text: Lian
+    buttons:
+      close:
+        label: Serru
   about:
     text: |
       # Kona ba Peskas

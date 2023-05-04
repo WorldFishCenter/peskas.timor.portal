@@ -1,7 +1,7 @@
 tab_market_content <- function(i18n) {
   tagList(
     page_heading(
-      pretitle = i18n$t(pars$market$subtitle$text),
+      pretitle = i18n$t(pars$catch$subtitle$text),
       title = i18n$t(pars$market$title$text)
     ),
     page_cards(
@@ -45,7 +45,7 @@ tab_market_content <- function(i18n) {
       ),
       mod_summary_table_ui(
         id = "market-card-mun",
-        heading = i18n$t(pars$market$table$heading$text),
+        heading = i18n$t(pars$revenue$table$heading$text),
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
       tags$div(
