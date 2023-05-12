@@ -46,7 +46,6 @@ pars <- params$eng
 usethis::use_data(pars, overwrite = TRUE)
 
 # taxa names
-pars$taxa$to_display
 n <- lapply(pars$taxa$taxa, function(x){x$short_name}) %>% unlist()
 
 library(data.table)
