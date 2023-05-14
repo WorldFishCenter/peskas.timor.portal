@@ -23,7 +23,7 @@ mod_composition_table_ui <- function(id, ...) {
 #' composition_table Server Functions
 #'
 #' @noRd
-mod_composition_table_server <- function(id, var = "catch") {
+mod_composition_table_server <- function(id, var = "catch", i18n_r = reactive(list(t = function(x) x))) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -42,6 +42,7 @@ mod_composition_table_server <- function(id, var = "catch") {
       x <- merge(x[order(grouped_taxa)], peskas.timor.portal::taxa_names)
       x <- setcolorder(x, c("grouped_taxa_names", "grouped_taxa"))
       table <- setnames(x, old = c("grouped_taxa", "grouped_taxa_names"), new = c("code", "name"))
+      table$name <- i18n_r()$t(table$name)
       alignment <- c("l", rep("r", ncol(table) - 1))
       alignment <- paste(alignment, collapse = "")
       output$table <- renderTable(table,
