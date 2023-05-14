@@ -24,11 +24,11 @@ tab_catch_composition <- function(i18n) {
       ),
       mod_taxa_bar_highlight_ui("taxa-highlight", i18n$t(pars$composition$highlight$heading$text), card_class = "col-12"),
       mod_region_composition_ui(id = "region-composition", heading = i18n$t(pars$composition$percent$heading$text), apex_height = "30rem"),
-      #page_cards(
+      # page_cards(
       #  lapply(peskas.timor.portal::taxa_names$grouped_taxa[1:12], function(x) {
       #    mod_summary_card_ui(id = paste(x, "catch-card", sep = "-"), div_class = "col-12 col-md-6 col-lg-4")
       #  })
-      #),
+      # ),
       mod_composition_table_ui("taxa-table", heading = i18n$t(pars$composition$table$heading$text), card_class = "col-lg-7 col-xl-auto"),
       tags$div(
         class = "col",

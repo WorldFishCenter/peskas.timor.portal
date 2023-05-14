@@ -1,4 +1,4 @@
-page_cards <- function(...){
+page_cards <- function(...) {
   tags$div(
     class = "page-body",
     tags$div(

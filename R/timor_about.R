@@ -42,4 +42,3 @@ timor_about_server <- function(id, content, i18n_r = reactive(list(t = function(
     })
   })
 }
-

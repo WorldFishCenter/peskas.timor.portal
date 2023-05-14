@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 8rem"){
+mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 8rem") {
   ns <- NS(id)
 
   tags$div(
@@ -21,7 +21,6 @@ mod_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-he
   )
 }
 
-
 #' summary_card Server Functions
 #'
 #' @noRd
@@ -32,8 +31,8 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL,
                                     apex_height = "4rem",
                                     i18n_r = reactive(list(t = function(x) x)),
                                     colors = NULL,
-                                    ...){
-  moduleServer( id, function(input, output, session){
+                                    ...) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     data <- reactive(get_series_info(var, period, n, region = input$muni, ...))
@@ -42,21 +41,23 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL,
       d <- data()
 
       # We use the format of the first series overall
-      y_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
+      y_formatter <- apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
       series <- lapply(d$series, function(x) {
         list(
           name = x$series_name,
           data = x$series_value * d$series[[1]]$series_multiplier
-        )})
+        )
+      })
 
-      output$chart  <- renderApexchart({
+      output$chart <- renderApexchart({
         plot_timeseries(
           x_categories = d$x_datetime,
           series = series,
           y_formatter = y_formatter,
           type = type,
           sparkline = sparkline.enabled,
-          colors = colors)
+          colors = colors
+        )
       })
 
       shinyjs::hideElement("placeholder")
@@ -65,20 +66,25 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL,
         id = id,
         subheader = i18n_r()$t(d$series[[1]]$series_heading),
         heading = d3.format::d3.format(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)(d$series[[1]]$last_period_val * d$series[[1]]$series_multiplier),
-        annotation = trend_annotation_summary_card(magnitude = d$series[[1]]$trend_magnitude,
-                                      direction = d$series[[1]]$trend_direction),
+        annotation = trend_annotation_summary_card(
+          magnitude = d$series[[1]]$trend_magnitude,
+          direction = d$series[[1]]$trend_direction
+        ),
         top_right_element = d$series[[1]]$last_period,
         off_body = tags$div(
           class = "mt-0",
-          apexchartOutput(ns("chart"), height = apex_height)))
+          apexchartOutput(ns("chart"), height = apex_height)
+        )
+      )
     })
   })
 }
 
 
-mod_summary_card_app <- function(options = list()){
+mod_summary_card_app <- function(options = list()) {
   i18n <- shiny.i18n::Translator$new(
-    translation_json_path = system.file("translation.json", package = "peskas.timor.portal"))
+    translation_json_path = system.file("translation.json", package = "peskas.timor.portal")
+  )
 
   ui <- tabler_page(
     shiny.i18n::usei18n(i18n),
@@ -86,10 +92,8 @@ mod_summary_card_app <- function(options = list()){
     mun_select("peppe"),
     mod_summary_card_ui(id = "peppe"),
     mod_summary_card_ui(id = "pino")
-
   )
   server <- function(input, output, session) {
-
     i18n_r <- reactive({
       selected <- input$language
       if (length(selected) > 0 && selected %in% i18n$get_languages()) {
@@ -100,60 +104,59 @@ mod_summary_card_app <- function(options = list()){
 
     mod_summary_card_server("peppe", "n_landings_per_boat", n = 13, apex_height = "100px", i18n_r = i18n_r)
     mod_summary_card_server("pino", "catch", n = 13, apex_height = "100px", i18n_r = i18n_r)
-
   }
   shinyApp(ui, server, options = options)
 }
 
-#mod_summary_card_app()
+# mod_summary_card_app()
 
 summary_card_content <- function(id = "",
-                         heading = "Card heading",
-                         subheader = "Card subheader",
-                         annotation = NULL,
-                         top_right_element = NULL,
-                         in_body = NULL,
-                         off_body = NULL,
-                         card_class = ""){
-    tagList(
+                                 heading = "Card heading",
+                                 subheader = "Card subheader",
+                                 annotation = NULL,
+                                 top_right_element = NULL,
+                                 in_body = NULL,
+                                 off_body = NULL,
+                                 card_class = "") {
+  tagList(
+    tags$div(
+      class = "card-body pb-0",
       tags$div(
-        class = "card-body pb-0",
+        class = "d-flex align-items-center",
         tags$div(
-          class = "d-flex align-items-center",
-          tags$div(
-            class = "font-weight-medium",
-            subheader
-          ),
-          tags$div(
-            class = "ms-auto lh-1 text-muted small",
-            top_right_element
-          )
+          class = "font-weight-medium",
+          subheader
         ),
         tags$div(
-          class = "d-flex align-items-center",
-          tags$div(
-            class = "h1 mb-0",
-            heading
-          ),
-          tags$div(
-            class = "me-auto",
-            annotation
-          )
-        ),
-        tags$div(
-          class = "in-body",
-          in_body
+          class = "ms-auto lh-1 text-muted small",
+          top_right_element
         )
       ),
       tags$div(
-        class = 'off-body',
-        off_body
+        class = "d-flex align-items-center",
+        tags$div(
+          class = "h1 mb-0",
+          heading
+        ),
+        tags$div(
+          class = "me-auto",
+          annotation
+        )
+      ),
+      tags$div(
+        class = "in-body",
+        in_body
       )
+    ),
+    tags$div(
+      class = "off-body",
+      off_body
     )
+  )
 }
 
 
-summary_card_content_placeholder <- function(id = ""){
+summary_card_content_placeholder <- function(id = "") {
   tags$div(
     id = id,
     class = "card-body",
@@ -172,7 +175,7 @@ summary_card_content_placeholder <- function(id = ""){
   )
 }
 
-card_dropdown <- function(){
+card_dropdown <- function() {
   tags$div(
     class = "dropdown",
     tags$a(
@@ -205,64 +208,57 @@ card_dropdown <- function(){
   )
 }
 
-unit_annotation <- function(unit = NULL){
+unit_annotation <- function(unit = NULL) {
   div(
     class = "text-muted mb-1",
     unit
   )
 }
 
-trend_annotation_summary_card <- function(magnitude = "0%", direction = c("none", "up","down")){
-
+trend_annotation_summary_card <- function(magnitude = "0%", direction = c("none", "up", "down")) {
   icon <- trend_icon(direction, style = "trend")
   colour_class <- trend_color(direction)$text
 
   tags$span(
-    class = paste(colour_class,"ms-2 d-inline-flex align-items-center font-weight-medium lh-1"),
+    class = paste(colour_class, "ms-2 d-inline-flex align-items-center font-weight-medium lh-1"),
     magnitude,
     icon
   )
 }
 
-trend_icon <- function(direction = c("none", "up","down"), style = c("trend", "arrow")){
+trend_icon <- function(direction = c("none", "up", "down"), style = c("trend", "arrow")) {
   if (style == "trend") {
-    switch(
-      direction[1],
+    switch(direction[1],
       "none" = icon_trend_none(),
       "up" = icon_trend_up(),
       "down" = icon_trend_down(),
       NULL
     )
   } else {
-    switch(
-      direction[1],
+    switch(direction[1],
       "none" = icon_trend_none(),
       "up" = icon_arrow_up(),
       "down" = icon_arrow_down(),
       NULL
     )
   }
-
 }
 
-trend_color <- function(direction = c("none", "up","down")){
+trend_color <- function(direction = c("none", "up", "down")) {
   list(
-    text = switch(
-      direction[1],
+    text = switch(direction[1],
       "none" = "text-yellow",
       "up" = "text-green",
       "down" = "text-red",
       "text-muted"
     ),
-    background = switch(
-      direction[1],
+    background = switch(direction[1],
       "none" = "bg-yellow-lt",
       "up" = "bg-green-lt",
       "down" = "bg-red-lt",
       "bg-secondary-lt"
     )
   )
-
 }
 
 
@@ -303,8 +299,8 @@ mod_summary_card_server2 <- function(id, var, period = "month", n = NULL,
                                      apex_height = "4rem",
                                      i18n_r = reactive(list(t = function(x) x)),
                                      colors = NULL,
-                                     ...){
-  moduleServer( id, function(input, output, session){
+                                     ...) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     data <- reactive(get_series_info(var, period, n, region = input$muni, ...))
@@ -313,21 +309,23 @@ mod_summary_card_server2 <- function(id, var, period = "month", n = NULL,
       d <- data()
 
       # We use the format of the first series overall
-      y_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
+      y_formatter <- apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
       series <- lapply(d$series, function(x) {
         list(
           name = x$series_name,
           data = x$series_value * d$series[[1]]$series_multiplier
-        )})
+        )
+      })
 
-      output$chart  <- renderApexchart({
+      output$chart <- renderApexchart({
         plot_timeseries(
           x_categories = d$x_datetime,
           series = series,
           y_formatter = y_formatter,
           type = type,
           sparkline = sparkline.enabled,
-          colors = colors)
+          colors = colors
+        )
       })
 
       shinyjs::hideElement("placeholder")
@@ -336,24 +334,28 @@ mod_summary_card_server2 <- function(id, var, period = "month", n = NULL,
         id = id,
         subheader = i18n_r()$t(d$series[[1]]$series_heading),
         heading = d3.format::d3.format(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)(d$series[[1]]$last_period_val * d$series[[1]]$series_multiplier),
-        annotation = trend_annotation_summary_card(magnitude = d$series[[1]]$trend_magnitude,
-                                                   direction = d$series[[1]]$trend_direction),
+        annotation = trend_annotation_summary_card(
+          magnitude = d$series[[1]]$trend_magnitude,
+          direction = d$series[[1]]$trend_direction
+        ),
         top_right_element = d$series[[1]]$last_period,
         off_body = tags$div(
           class = "mt-0",
-          apexchartOutput(ns("chart"), height = apex_height)))
+          apexchartOutput(ns("chart"), height = apex_height)
+        )
+      )
     })
   })
 }
 
 mod_summary_card_server3 <- function(id, var, period = "month", n = NULL,
-                                       type = "area",
-                                       sparkline.enabled = T,
-                                       apex_height = "4rem",
-                                       i18n_r = reactive(list(t = function(x) x)),
-                                       colors = NULL,
-                                       ...){
-  moduleServer( id, function(input, output, session){
+                                     type = "area",
+                                     sparkline.enabled = T,
+                                     apex_height = "4rem",
+                                     i18n_r = reactive(list(t = function(x) x)),
+                                     colors = NULL,
+                                     ...) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     data <- reactive(get_series_info(var, period, n, region = input$muni, ...))
@@ -362,21 +364,23 @@ mod_summary_card_server3 <- function(id, var, period = "month", n = NULL,
       d <- data()
 
       # We use the format of the first series overall
-      y_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
+      y_formatter <- apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
       series <- lapply(d$series, function(x) {
         list(
           name = x$series_name,
           data = x$series_value * d$series[[1]]$series_multiplier
-        )})
+        )
+      })
 
-      output$chart2  <- renderApexchart({
+      output$chart2 <- renderApexchart({
         plot_timeseries(
           x_categories = d$x_datetime,
           series = series,
           y_formatter = y_formatter,
           type = type,
           sparkline = sparkline.enabled,
-          colors = colors)
+          colors = colors
+        )
       })
 
       shinyjs::hideElement("placeholder2")
@@ -385,13 +389,16 @@ mod_summary_card_server3 <- function(id, var, period = "month", n = NULL,
         id = id,
         subheader = i18n_r()$t(d$series[[1]]$series_heading),
         heading = d3.format::d3.format(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)(d$series[[1]]$last_period_val * d$series[[1]]$series_multiplier),
-        annotation = trend_annotation_summary_card(magnitude = d$series[[1]]$trend_magnitude,
-                                                   direction = d$series[[1]]$trend_direction),
+        annotation = trend_annotation_summary_card(
+          magnitude = d$series[[1]]$trend_magnitude,
+          direction = d$series[[1]]$trend_direction
+        ),
         top_right_element = d$series[[1]]$last_period,
         off_body = tags$div(
           class = "mt-0",
-          apexchartOutput(ns("chart2"), height = apex_height)))
+          apexchartOutput(ns("chart2"), height = apex_height)
+        )
+      )
     })
   })
 }
-

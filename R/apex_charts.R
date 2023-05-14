@@ -308,7 +308,8 @@ apex_radial_server <- function(id = NULL,
   })
 }
 
-apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom", legend_align = "center", legend_fontsize = 5) {
+apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom",
+                                  legend_align = "center", legend_fontsize = 5) {
   apex(
     data = plot_data, type = "bar",
     mapping = aes(x = region, y = catch / 1000, fill = grouped_taxa_names)

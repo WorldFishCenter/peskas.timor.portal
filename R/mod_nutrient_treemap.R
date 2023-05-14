@@ -56,8 +56,10 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
       pars$nutrients$nutrients$zinc$conversion_fact
     )
     data$people <- round(data$nut_supply / data$rdi_coeff, 2)
-    data <- data[match(c("selenium", "protein", "omega3",
-                         "calcium", "zinc", "iron", "vitaminA"), data$nutrient), ]
+    data <- data[match(c(
+      "selenium", "protein", "omega3",
+      "calcium", "zinc", "iron", "vitaminA"
+    ), data$nutrient), ]
 
     output$t <- apexcharter::renderApexchart({
       y_formatter <- apexcharter::format_num(",.2r", suffix = " individuals")

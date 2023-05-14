@@ -8,7 +8,7 @@ names(languages) <- languages
 params <- lapply(languages, function(x) config::get(file = "app_params.yml", config = x))
 unlisted_params <- lapply(params, unlist)
 
-to_df <- function(x){
+to_df <- function(x) {
   lang <- names(unlisted_params[x])
   x <- unlisted_params[[x]]
   df <- data.frame(names(x), x)
@@ -17,7 +17,7 @@ to_df <- function(x){
 }
 params_as_df <- lapply(seq_along(unlisted_params), to_df)
 
-no_translation <- function(x){
+no_translation <- function(x) {
   x$eng == x$tet & x$eng == x$por
 }
 
@@ -46,7 +46,9 @@ pars <- params$eng
 usethis::use_data(pars, overwrite = TRUE)
 
 # taxa names
-n <- lapply(pars$taxa$taxa, function(x){x$short_name}) %>% unlist()
+n <- lapply(pars$taxa$taxa, function(x) {
+  x$short_name
+}) %>% unlist()
 
 library(data.table)
 
@@ -57,7 +59,7 @@ taxa_names <- data.table(
 
 load("data/taxa_aggregated.rda")
 
-get_taxa_descending_order <- function(){
+get_taxa_descending_order <- function() {
   # beginning of current year
   start <- as.Date(paste0(format(Sys.Date(), "%Y"), "-01-01")) - 90
   # specific taxa (without other)
@@ -71,4 +73,3 @@ taxa_names <- taxa_names[grouped_taxa %in% get_taxa_descending_order()]
 taxa_names <- taxa_names[, grouped_taxa := factor(grouped_taxa, get_taxa_descending_order())]
 taxa_names <- taxa_names[order(grouped_taxa)]
 usethis::use_data(taxa_names, overwrite = TRUE)
-

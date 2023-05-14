@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_var_descriptions_ui <- function(id, heading, subheading = NULL, intro = ""){
+mod_var_descriptions_ui <- function(id, heading, subheading = NULL, intro = "") {
   ns <- NS(id)
   tagList(
     text_card_ui(
@@ -17,19 +17,17 @@ mod_var_descriptions_ui <- function(id, heading, subheading = NULL, intro = ""){
       intro,
       htmlOutput(ns("vars"))
     )
-
   )
 }
 
 #' var_descriptions Server Functions
 #'
 #' @noRd
-mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = function(x) x))){
-  moduleServer( id, function(input, output, session){
+mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = function(x) x))) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     output$vars <- renderUI({
-
       info <- lapply(vars, get_var_info)
       accordion_items <- lapply(info, function(x) {
         bg <- get_bg_quality(x[[1]]$quality)
@@ -46,7 +44,8 @@ mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = fun
             ),
           content = tagList(
             markdown(
-              i18n_r()$t(x[[1]]$description)),
+              i18n_r()$t(x[[1]]$description)
+            ),
             tags$div(
               class = "small",
               tags$strong(i18n_r()$t(pars$indicators$processing$text)),
@@ -60,7 +59,8 @@ mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = fun
             tags$p(
               class = paste("badge mb-0", bg$light),
               icon_check(), i18n_r()$t(pars$indicators$quality$text),
-              i18n_r()$t(x[[1]]$quality)),
+              i18n_r()$t(x[[1]]$quality)
+            ),
           )
         )
       })
@@ -76,11 +76,10 @@ mod_var_descriptions_server <- function(id, vars, i18n_r = reactive(list(t = fun
         )
       )
     })
-
   })
 }
 
-get_bg_quality <- function(x){
+get_bg_quality <- function(x) {
   if (is.null(x)) {
     bg <- "secondary"
   } else {
@@ -97,19 +96,27 @@ get_bg_quality <- function(x){
   )
 }
 
-get_quality_text <- function(x){
-  if (!any(x %in% c("low", "medium","high"))) return("Not assessed")
+get_quality_text <- function(x) {
+  if (!any(x %in% c("low", "medium", "high"))) {
+    return("Not assessed")
+  }
   x
 }
 
-get_text <- function(x, y = "Not assessed."){
-  if (is.null(x)) return(y)
-  if (is.na(x)) return(y)
-  if (x == "") return(y)
+get_text <- function(x, y = "Not assessed.") {
+  if (is.null(x)) {
+    return(y)
+  }
+  if (is.na(x)) {
+    return(y)
+  }
+  if (x == "") {
+    return(y)
+  }
   markdown(x)
 }
 
-mod_var_descriptions_app <- function(){
+mod_var_descriptions_app <- function() {
   ui <- tabler_page(
     mod_var_descriptions_ui(id = "i", "About this data", intro = markdown("Below some info"))
   )
@@ -119,7 +126,7 @@ mod_var_descriptions_app <- function(){
   shinyApp(ui, server)
 }
 
-text_ui <- function(heading = "", text = ""){
+text_ui <- function(heading = "", text = "") {
   tagList(
     tags$h4(
       heading
@@ -130,7 +137,7 @@ text_ui <- function(heading = "", text = ""){
   )
 }
 
-text_card_ui <- function(id = "", heading = "Card heading", subheading = "Card subheading", ...){
+text_card_ui <- function(id = "", heading = "Card heading", subheading = "Card subheading", ...) {
   tags$div(
     class = "card",
     id = id,
@@ -154,6 +161,6 @@ text_card_ui <- function(id = "", heading = "Card heading", subheading = "Card s
   )
 }
 
-get_var_info <- function(var){
+get_var_info <- function(var) {
   peskas.timor.portal::pars$vars[var]
 }

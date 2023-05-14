@@ -3,7 +3,7 @@
 #' @param logo html for the logo
 #' @param ... html tags to be included on the right hand side of the header
 #'
-header <- function(..., logo = NULL){
+header <- function(..., logo = NULL) {
   htmltools::tags$header(
     class = "navbar navbar-expand-md navbar-light d-print-none",
     htmltools::tags$div(
@@ -30,7 +30,7 @@ header <- function(..., logo = NULL){
   )
 }
 
-peskas_logo <- function(){
+peskas_logo <- function() {
   htmltools::tags$span(
     class = "text-blue logo",
     style = "font-weight: bolder;",
@@ -39,7 +39,7 @@ peskas_logo <- function(){
 }
 
 version_flex <- function(heading = "Heading",
-                         subheading = "subheading"){
+                         subheading = "subheading") {
   htmltools::tags$div(
     class = "nav-item d-none d-md-flex me-3",
     htmltools::tags$span(heading),

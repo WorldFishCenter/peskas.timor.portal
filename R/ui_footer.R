@@ -1,4 +1,3 @@
-
 footer_panel <- function(right_side_elements = tagList(), left_side_elements = tagList(), bottom = "") {
   tags$footer(
     class = "footer footer-transparent d-print-none",
@@ -47,7 +46,7 @@ footer_panel <- function(right_side_elements = tagList(), left_side_elements = t
 #' @return a shiny tag "li" element
 #' @export
 #'
-inline_li_link <- function(content = "Link text", href = "#", target = "_blank"){
+inline_li_link <- function(content = "Link text", href = "#", target = "_blank") {
   tags$li(
     class = "list-inline-item",
     tags$a(
@@ -58,7 +57,3 @@ inline_li_link <- function(content = "Link text", href = "#", target = "_blank")
     )
   )
 }
-
-
-
-

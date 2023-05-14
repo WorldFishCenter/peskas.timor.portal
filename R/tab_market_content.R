@@ -38,8 +38,8 @@ tab_market_content <- function(i18n) {
         class = "col-lg-4 col-xl-4",
         tags$div(
           class = "row row-cards",
-          apex_summary_ui(id = 'spider_market', div_class = 'col-lg-12', apex_height = "22rem"),
-          #tags$div(apexchartOutput("spider_market", width = "100%", height = "16rem"), class = "col-12 col-md-6 col-lg-12"),
+          apex_summary_ui(id = "spider_market", div_class = "col-lg-12", apex_height = "22rem"),
+          # tags$div(apexchartOutput("spider_market", width = "100%", height = "16rem"), class = "col-12 col-md-6 col-lg-12"),
           mod_summary_card_ui2(id = "market-card-mun", div_class = "col-12 col-md-6 col-lg-12")
         )
       ),

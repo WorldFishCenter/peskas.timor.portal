@@ -8,7 +8,7 @@
 #'
 #' @return a shiny tag
 #'
-tab_menu <- function(..., id = ""){
+tab_menu <- function(..., id = "") {
   menu_items <- list(...)
 
   if (length(menu_items) >= 1) {
@@ -51,8 +51,7 @@ tab_menu <- function(..., id = ""){
 #' @param icon_svg icon for the menu
 #'
 #' @seealso tab_menu
-tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
-
+tab_menu_item <- function(label = "", id = "", icon_svg = NULL) {
   icon <- if (!is.null(icon_svg)) {
     tags$span(
       class = "nav-link-icon d-md-none d-lg-inline-block",
@@ -92,8 +91,7 @@ tab_menu_item <- function(label = "", id = "", icon_svg = NULL){
 #'
 #' @return a shiny.tag object
 #' @seealso tab_menu
-tabset_panel <- function(..., menu_id = ""){
-
+tabset_panel <- function(..., menu_id = "") {
   panels <- list(...)
   if (length(panels) >= 1) {
     panels[[1]] <- tagAppendAttributes(panels[[1]], class = "active show")
@@ -113,8 +111,7 @@ tabset_panel <- function(..., menu_id = ""){
 #'
 #' @return a shiny.tag object
 #' @seealso tabset_panel
-tab_panel <- function(..., id = ""){
-
+tab_panel <- function(..., id = "") {
   tags$div(
     class = "tab-pane fade",
     id = id,
@@ -127,7 +124,7 @@ tab_panel <- function(..., id = ""){
 
 
 
-tabler_nav_dropdown <- function(..., label, icon = NULL){
+tabler_nav_dropdown <- function(..., label, icon = NULL) {
   tags$li(
     class = "nav-item dropdown",
     tags$a(
@@ -153,21 +150,20 @@ tabler_nav_dropdown <- function(..., label, icon = NULL){
 }
 
 
-dropdown_item <- function(label, nav_target){
+dropdown_item <- function(label, nav_target) {
   tags$a(
     class = "dropdown-item",
     `data-bs-toggle` = "tab",
-    `data-bs-target` =  paste0("#", nav_target),
+    `data-bs-target` = paste0("#", nav_target),
     id = paste0(nav_target, "-tab"),
     `aria-controls` = nav_target,
-    href =  paste0("#", nav_target),
+    href = paste0("#", nav_target),
     label
   )
 }
 
 
-language_drop_item <- function(label = "", id = "", icon_svg = NULL){
-
+language_drop_item <- function(label = "", id = "", icon_svg = NULL) {
   icon <- if (!is.null(icon_svg)) {
     tags$span(
       class = "nav-link-icon d-md-none d-lg-inline-block",
@@ -190,7 +186,8 @@ language_drop_item <- function(label = "", id = "", icon_svg = NULL){
       href = paste0("#", id),
       icon,
       tags$span(
-        class = "nav-link-title"),
+        class = "nav-link-title"
+      ),
       label
     ),
     tags$div(
@@ -198,19 +195,19 @@ language_drop_item <- function(label = "", id = "", icon_svg = NULL){
       tags$a(
         class = "dropdown-item",
         href = NA,
-        class="eng",
+        class = "eng",
         "English"
       ),
       tags$a(
         class = "dropdown-item",
         href = NA,
-        class="tet",
+        class = "tet",
         "Tetun"
       ),
       tags$a(
         class = "dropdown-item",
         href = NA,
-        class="por",
+        class = "por",
         "Portugu\u00eas"
       )
     )

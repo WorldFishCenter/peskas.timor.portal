@@ -9,13 +9,13 @@ app_server <- function(input, output, session) {
   # For translation made in the UI
 
 
-  #mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
-  #mod_summary_card_server(id = "catch-summary-card", var = "catch", period = "month", n = 13, i18n_r = i18n_r)
-  #mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
-  #mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
-  #mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
-  #mod_summary_card_server(id = "women-prop-summary-card", var = "prop_landings_woman", period = "month", n = 13, i18n_r = i18n_r)
-  #mod_summary_card_server(id = "market-summary-card", var = "price_kg", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "catch-summary-card", var = "catch", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "women-prop-summary-card", var = "prop_landings_woman", period = "month", n = 13, i18n_r = i18n_r)
+  # mod_summary_card_server(id = "market-summary-card", var = "price_kg", period = "month", n = 13, i18n_r = i18n_r)
 
   # Home
   mod_home_table_server(id = "home_table", color_pal = c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"), i18n_r = i18n_r)
@@ -78,9 +78,9 @@ app_server <- function(input, output, session) {
   taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>% strtrim(width = 7)
   mod_taxa_bar_highlight_server("taxa-highlight", var = "catch", colors = taxa_colors, i18n_r = i18n_r)
   mod_region_composition_server(id = "region-composition", legend_position = "top", legend_align = "center", legend_fontsize = 16)
-  #mapply(pars$taxa$to_display[1:12], taxa_colors[1:12], FUN = function(x, y) {
+  # mapply(pars$taxa$to_display[1:12], taxa_colors[1:12], FUN = function(x, y) {
   #  mod_summary_card_server(id = paste(x, "catch-card", sep = "-"), var = "catch", taxa = x, n = 25, colors = y)
-  #})
+  # })
   mod_composition_table_server(id = "taxa-table")
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
@@ -103,7 +103,6 @@ app_server <- function(input, output, session) {
   # About tab
   timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
   mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
-
 }
 
 
