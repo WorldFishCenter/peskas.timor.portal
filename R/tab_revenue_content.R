@@ -5,7 +5,7 @@ tab_revenue_content <- function(i18n) {
       title = i18n$t(pars$header$nav$revenue$text)
     ),
     page_cards(
-      mun_select("revenue-card-mun")
+      mun_select("revenue-card-mun", header = i18n$t(pars$revenue$area_dropdown$text))
     ),
     page_cards(
       tags$div(

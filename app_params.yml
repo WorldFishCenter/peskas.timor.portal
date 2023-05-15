@@ -213,6 +213,8 @@ default:
         text: These estimates have not been validated and might be inaccurate. Use with caution.
       more:
         text: Learn more
+    area_dropdown:
+      text: Select area
     table:
       heading:
         text: Annual summary
@@ -519,6 +521,8 @@ por:
         text: Estas estimativas não foram validadas e podem ser imprecisas. Use com cautela.
       more:
         text: Saiba mais
+    area_dropdown:
+      text: Selecionar área
     table:
       heading:
         text: Resumo anual
@@ -834,6 +838,8 @@ tet:
         text: "Estimativa ne'ebe ne'e validadu la'ós no bele la'os precizu. Uza ho kuidadu."
       more:
         text: Sai ba sai mais informasaun.
+    area_dropdown:
+      text: Hili área
     table:
       heading:
         text: Rezumu tinan-anual

@@ -5,7 +5,7 @@ tab_market_content <- function(i18n) {
       title = i18n$t(pars$market$title$text)
     ),
     page_cards(
-      mun_select("market-card-mun")
+      mun_select("market-card-mun", header = i18n$t(pars$revenue$area_dropdown$text))
     ),
     page_cards(
       tags$div(

@@ -5,7 +5,7 @@ tab_catch_content <- function(i18n) {
       title = i18n$t(pars$header$nav$catch$text)
     ),
     page_cards(
-      mun_select("catch-card-mun")
+      mun_select("catch-card-mun", header = i18n$t(pars$revenue$area_dropdown$text))
     ),
     page_cards(
       tags$div(

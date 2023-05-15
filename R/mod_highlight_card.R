@@ -139,13 +139,13 @@ highlight_card_narrow <- function(id = "",
 }
 
 
-mun_select <- function(id) {
+mun_select <- function(id, header = NULL) {
   ns <- NS(id)
   regions <- list("Municipality" = sort(unique(peskas.timor.portal::municipal_aggregated$region)))
 
   selectInput(
     inputId = ns("muni"),
-    label = tags$div(style = c("font-weight: bolder"), "Select area"),
+    label = tags$div(style = c("font-weight: bolder"), header),
     choices = c("National", regions),
     width = "20%"
   )
