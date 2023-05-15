@@ -35,7 +35,8 @@ mod_region_composition_ui <- function(id, heading = NULL, apex_height = "20rem",
       top_right = s,
       in_body = tags$div(
         class = "mt-0",
-        apexcharter::apexchartOutput(ns("rc"), height = apex_height)
+        #apexcharter::apexchartOutput(ns("rc"), height = apex_height)
+        uiOutput(ns("c"))
       ),
       ...
     )
@@ -45,7 +46,7 @@ mod_region_composition_ui <- function(id, heading = NULL, apex_height = "20rem",
 #' mod_region_composition Server Functions
 #'
 #' @noRd
-mod_region_composition_server <- function(id, legend_position, legend_align, legend_fontsize) {
+mod_region_composition_server <- function(id, legend_position, legend_align, legend_fontsize, i18n_r = reactive(list(t = function(x) x))) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -64,7 +65,7 @@ mod_region_composition_server <- function(id, legend_position, legend_align, leg
         tidyr::complete(region, grouped_taxa) %>%
         dplyr::left_join(peskas.timor.portal::taxa_names, by = "grouped_taxa") %>%
         dplyr::mutate(grouped_taxa_names = factor(grouped_taxa_names,
-          levels = peskas.timor.portal::taxa_names$grouped_taxa_names
+          levels = peskas.timor.portal::taxa_names$grouped_taxa_names,
         )) %>%
         dplyr::select(region, catch, grouped_taxa_names) %>%
         dplyr::group_by(region) %>%
@@ -73,10 +74,13 @@ mod_region_composition_server <- function(id, legend_position, legend_align, leg
         dplyr::mutate(catch = round(catch, 2))
     })
 
-    output$rc <- apexcharter::renderApexchart({
+    output$c <- renderUI({
       data <- plot_data()
-
-      apex_taxa_composition(plot_data = data, legend_position, legend_align, legend_fontsize)
+      data$grouped_taxa_names <- i18n_r()$t(as.character(data$grouped_taxa_names))
+      output$char <- apexcharter::renderApexchart({
+        apex_taxa_composition(plot_data = data, legend_position, legend_align, legend_fontsize)
+      })
     })
+    apexcharter::apexchartOutput(ns("char"), height = "20rem")
   })
 }
