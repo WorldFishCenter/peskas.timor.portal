@@ -752,29 +752,29 @@ tet:
     names: ["Sardinas no peixe manu", "Ikan mosu-tuan", "Atun", "Carapaus", "Agulhas", "Pargos no kalolas", "Caranhas no peixe-rai", "Fusiliers", "Peixe-agulha", "Ikan madan", "Macu no kabalaka", "Pargos", "Seluk"]
     taxa:
       CLP:
-        short_name: Sardinia no hering
+        short_name: Sardina
       FLY:
-        short_name: Ikan moska
+        short_name: Ikan manu
       TUN:
-        short_name: Atum
+        short_name: Tuna
       SDX:
-        short_name: Ikan geladi
+        short_name: Kombong
       GZP:
-        short_name: Ikan longuinhos
+        short_name: Samber
       SNA:
-        short_name: Ikan mapalus
+        short_name: Tanggalara
       CGX:
-        short_name: Jacks no trevallies
+        short_name: Sera Atan
       CJX:
-        short_name: Fusiliers
+        short_name: Bainar
       BEN:
-        short_name: Ikan agulha
+        short_name: Ikan Daun
       MOO:
-        short_name: Ikan bulan
+        short_name: Baleu belar oan
       RAX:
-        short_name: Mackerels bidan-kuruk
+        short_name: Bainar mutin
       LWX:
-        short_name: Jobfishes
+        short_name: Karungu
       MZZ:
         short_name: Seluk
 
