@@ -35,7 +35,7 @@ get_summary_frame_var <- function(var, period, region_filter, ...) {
 
   if (length(filters) > 0) {
     if (names(filters) == "taxa") {
-      data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa %in%  filters$taxa]
+      data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa %in% filters$taxa]
     } else if (names(filters) == "taxa_groups") {
       data <- peskas.timor.portal::taxa_aggregated[[period]][grouped_taxa %in% filters$taxa]
     } else if (names(filters) == "nutrients") {

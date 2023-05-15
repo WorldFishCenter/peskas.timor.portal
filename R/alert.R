@@ -1,6 +1,6 @@
 alert_ui <- function(heading = "Alert title", content = "Alert content",
                      icon = icon_info_circle(class = "alert-icon"),
-                     alert_class = "alert-info", bottom = NULL){
+                     alert_class = "alert-info", bottom = NULL) {
   alert_class <- paste("alert w-100", alert_class)
   dismiss_button <- NULL
 

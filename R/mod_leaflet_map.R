@@ -235,26 +235,26 @@ leaflet_map_app <- function(i18n) {
 }
 
 tab_map_leaflet <- function(id, in_body) {
+  tags$div(
+    class = "card",
     tags$div(
-      class = "card",
+      class = "card-body",
+      style = "position: relative;",
       tags$div(
-        class = "card-body",
-        style = "position: relative;",
+        class = "ratio ratio-21x9",
         tags$div(
-          class = "ratio ratio-21x9",
-          tags$div(
-            id = id,
-            class = "in-body",
-            # style = "background-color: transparent;",
-            in_body
-          )
+          id = id,
+          class = "in-body",
+          # style = "background-color: transparent;",
+          in_body
         )
       )
     )
+  )
 }
 
 
-#leaflet_map_app(i18n)
+# leaflet_map_app(i18n)
 
 
 aggregate_reactive <- function(x, package = "data.table") {

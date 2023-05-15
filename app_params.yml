@@ -126,6 +126,7 @@ default:
       quality: medium
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
+    #names: ["Sardines and herrings", "Flying fishes", "Tunas", "Mackerel scads", "Garfishes", "Snappers and seaperches", "Jacks and trevalies", "Fusiliers", "Needlefishes", "Moonfishes", "Short bodied mackerels", "Jobfishes", "Other"]
     taxa:
       CLP:
         short_name: Sardines and herrings
@@ -431,6 +432,7 @@ por:
 
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
+    names: ["Sardinhas e arenques", "Peixes voadores", "Atuns", "Carapaus", "Agulhas", "Pargos e percas", "Caranhas e peixes-reis", "Fusiliers", "Agulhas-voadoras", "Peixes-lua", "Cavala pequena", "Pargos-rosas", "Outros"]
     taxa:
       CLP:
         short_name: Sardinhas e arenques
@@ -743,6 +745,7 @@ tet:
 
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
+    names: ["Sardinas no peixe manu", "Ikan mosu-tuan", "Atun", "Carapaus", "Agulhas", "Pargos no kalolas", "Caranhas no peixe-rai", "Fusiliers", "Peixe-agulha", "Ikan madan", "Macu no kabalaka", "Pargos", "Seluk"]
     taxa:
       CLP:
         short_name: Sardinia no hering

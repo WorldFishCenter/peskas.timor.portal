@@ -1,4 +1,4 @@
-google_analytics <- function(){
+google_analytics <- function() {
   tagList(
     tags$head(
       tags$script(

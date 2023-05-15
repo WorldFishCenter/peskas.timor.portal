@@ -1,5 +1,4 @@
-tabler_page <- function(..., title = ""){
-
+tabler_page <- function(..., title = "") {
   add_resource_path("www", app_sys("app/www"), T)
 
   args <- list(
@@ -32,14 +31,13 @@ tabler_page <- function(..., title = ""){
   do.call(tagList, args)
 }
 
-add_resource_path <- function(prefix, directoryPath, warn_empty = FALSE){
+add_resource_path <- function(prefix, directoryPath, warn_empty = FALSE) {
   list_f <- length(list.files(path = directoryPath)) == 0
   if (list_f) {
     if (warn_empty) {
       warning("No resources to add from resource path (directory empty).")
     }
-  }
-  else {
+  } else {
     shiny::addResourcePath(prefix, directoryPath)
   }
 }

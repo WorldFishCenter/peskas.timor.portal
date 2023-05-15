@@ -1,4 +1,4 @@
-inactivity_modal <- function(timeout_seconds = 5*60){
+inactivity_modal <- function(timeout_seconds = 5 * 60) {
   inactivity_modal_ui(
     tags$div(
       class = "text-center pt-4 pb-3",
@@ -8,10 +8,10 @@ inactivity_modal <- function(timeout_seconds = 5*60){
         class = "text-muted",
         tags$span(id = "modal-placeholder"),
         "Reload the page to reconnect."
-        ),
+      ),
       tags$div(
         class = "text-muted small",
-         markdown("Contact us at peskas.platform@gmail.com if you are experiencing problems")
+        markdown("Contact us at peskas.platform@gmail.com if you are experiencing problems")
       ),
     ),
     footer = tags$button(
@@ -23,7 +23,7 @@ inactivity_modal <- function(timeout_seconds = 5*60){
   )
 }
 
-inactivity_modal_ui <- function(..., header = NULL, footer = NULL, timeoutSeconds = 10){
+inactivity_modal_ui <- function(..., header = NULL, footer = NULL, timeoutSeconds = 10) {
   tagList(
     modal_dialog_ui(
       ...,
@@ -55,7 +55,7 @@ clearTimeout(t);
 t = setTimeout(logout, %s);  // time is in milliseconds (1000 is 1 second)
 }
 }
-idleTimer();", timeoutSeconds*1000, timeoutSeconds*1000)
+idleTimer();", timeoutSeconds * 1000, timeoutSeconds * 1000)
     ),
     tags$script("
 $( document ).on('shiny:sessioninitialized', function(event) {
@@ -70,7 +70,7 @@ $( document ).on('shiny:sessioninitialized', function(event) {
 }
 
 
-modal_dialog_ui <- function(..., id = "", header = NULL, footer = NULL, z_index = NULL, close_icon = FALSE){
+modal_dialog_ui <- function(..., id = "", header = NULL, footer = NULL, z_index = NULL, close_icon = FALSE) {
   style <- "display: none;"
   close_x <- NULL
   if (!is.null(z_index)) style <- paste(style, "z-index:", z_index, ";")
@@ -120,4 +120,3 @@ modal_dialog_ui <- function(..., id = "", header = NULL, footer = NULL, z_index 
     ),
   )
 }
-

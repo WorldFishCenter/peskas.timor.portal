@@ -191,7 +191,6 @@ mod_highlight_mun_server <- function(id,
 
 
     output$brush_1 <- apexcharter::renderApexchart({
-
       y_formatter <- apexcharter::format_num(format = dat()$format, suffix = dat()$suffix)
       plot_timeseries_apex(data = dat(), y_formatter = y_formatter, mean = F) %>%
         apexcharter::ax_tooltip(

@@ -1,5 +1,4 @@
-
-accordion_ui <- function(id, ...){
+accordion_ui <- function(id, ...) {
   tags$div(
     class = "accordion",
     id = id,
@@ -7,7 +6,7 @@ accordion_ui <- function(id, ...){
   )
 }
 
-accordion_item_ui <- function(id, id_parent,  heading = "Accordion heading", content = "Acordion content", expanded = FALSE){
+accordion_item_ui <- function(id, id_parent, heading = "Accordion heading", content = "Acordion content", expanded = FALSE) {
   collapse_class <- "accordion-collapse collapse"
   button_class <- "accordion-button collapsed"
   aria_expanded <- "false"

@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_simple_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 4rem"){
+mod_simple_summary_card_ui <- function(id, div_class = "col-md-3", card_style = "min-height: 4rem") {
   ns <- NS(id)
 
   tags$div(
@@ -23,8 +23,8 @@ mod_simple_summary_card_ui <- function(id, div_class = "col-md-3", card_style = 
 #' simple_summary_card Server Functions
 #'
 #' @noRd
-mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, year = NULL,  i18n_r = reactive(list(t = function(x) x))){
-  moduleServer( id, function(input, output, session){
+mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, year = NULL, i18n_r = reactive(list(t = function(x) x))) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     output$o <- renderUI({
@@ -35,16 +35,16 @@ mod_simple_summary_card_server <- function(id, var, period = "month", n = 2, yea
         subheading = i18n_r()$t(info$series[[1]]$series_name),
         trend_ui = simple_card_trend_ui(
           trend = info$series[[1]]$trend_magnitude,
-          direction = info$series[[1]]$trend_direction),
+          direction = info$series[[1]]$trend_direction
+        ),
         top_right_element = info$series[[1]]$last_period
       )
     })
-
   })
 }
 
 
-mod_simple_summary_card_app <- function(){
+mod_simple_summary_card_app <- function() {
   ui <- tabler_page(
     mod_simple_summary_card_ui(id = "i"),
     mod_simple_summary_card_ui(id = "i2"),
@@ -64,8 +64,7 @@ simple_card_content_ui <- function(icon_ui = simple_card_icon_ui(),
                                    heading = "Card heading",
                                    subheading = "Card subheading",
                                    trend_ui = simple_card_trend_ui(),
-                                   top_right_element = ""){
-
+                                   top_right_element = "") {
   tags$div(
     class = "card-body",
     tags$div(
@@ -103,7 +102,7 @@ simple_card_content_ui <- function(icon_ui = simple_card_icon_ui(),
   )
 }
 
-simple_card_icon_ui <- function(direction = c("none", "up","down")){
+simple_card_icon_ui <- function(direction = c("none", "up", "down")) {
   icon <- trend_icon(direction, style = "arrow")
   color <- trend_color(direction)
   tags$span(
@@ -112,7 +111,7 @@ simple_card_icon_ui <- function(direction = c("none", "up","down")){
   )
 }
 
-simple_card_trend_ui <- function(trend = "0%", direction = c("none", "up","down")){
+simple_card_trend_ui <- function(trend = "0%", direction = c("none", "up", "down")) {
   color <- trend_color(direction)
   tags$span(
     class = paste("ms-2 float-right font-weight-medium lh-1", color$text),

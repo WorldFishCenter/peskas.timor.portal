@@ -1,4 +1,3 @@
-
 icon_trend_none <- function(class = "icon ms-1") {
   tags$svg(
     xmlns = "http://www.w3.org/2000/svg",

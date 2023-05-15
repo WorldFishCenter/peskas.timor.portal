@@ -48,7 +48,8 @@ mod_taxa_bar_highlight_ui <- function(id, heading = NULL, apex_height = "20rem",
       top_right = list(s, r),
       in_body = tags$div(
         class = "mt-0",
-        apexcharter::apexchartOutput(ns("c"), height = apex_height)
+        uiOutput(ns("c"))
+        # apexcharter::apexchartOutput(ns("c"), height = apex_height)
       ),
       ...
     )
@@ -58,7 +59,7 @@ mod_taxa_bar_highlight_ui <- function(id, heading = NULL, apex_height = "20rem",
 #' taxa_bar_highlight Server Functions
 #'
 #' @noRd
-mod_taxa_bar_highlight_server <- function(id, var, colors) {
+mod_taxa_bar_highlight_server <- function(id, var, colors, i18n_r = reactive(list(t = function(x) x))) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -87,24 +88,28 @@ mod_taxa_bar_highlight_server <- function(id, var, colors) {
       merge(x[order(grouped_taxa)], peskas.timor.portal::taxa_names)
     })
 
-    output$c <- apexcharter::renderApexchart({
+    output$c <- renderUI({
       d <- get_series_info(var, n = 2)
-
       data <- plot_data()
+      taxa_names <- i18n_r()$t(plot_data()$grouped_taxa_names)
 
-      plot_horizontal_barplot(
-        x_categories = data$grouped_taxa_names,
-        series = list(
-          name = d$series[[1]]$series_name,
-          data = data$catch * d$series[[1]]$series_multiplier
-        ),
-        y_formatter = V8::JS("function(x) {return x}"),
-        x_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix),
-        colors = colors
-      )
+      output$char <- apexcharter::renderApexchart({
+        plot_horizontal_barplot(
+          x_categories = taxa_names,
+          series = list(
+            name = d$series[[1]]$series_name,
+            data = data$catch * d$series[[1]]$series_multiplier
+          ),
+          y_formatter = V8::JS("function(x) {return x}"),
+          x_formatter = apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix),
+          colors = colors
+        )
+      })
     })
+    apexcharter::apexchartOutput(ns("char"), height = "20rem")
   })
 }
+
 
 ## To be copied in the UI
 # mod_taxa_bar_highlight_ui("taxa_bar_highlight_1")

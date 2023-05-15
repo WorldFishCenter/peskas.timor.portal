@@ -6,7 +6,7 @@ tab_tracks_content <- function(i18n) {
     ),
     page_cards(
       tags$div(
-        #leaflet_map_ui_v1(id = "map")
+        # leaflet_map_ui_v1(id = "map")
         leaflet_map_ui(id = "map")
       ),
       tags$div(
@@ -27,5 +27,3 @@ tab_tracks_content <- function(i18n) {
     )
   )
 }
-
-
