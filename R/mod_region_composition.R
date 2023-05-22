@@ -35,7 +35,7 @@ mod_region_composition_ui <- function(id, heading = NULL, apex_height = "20rem",
       top_right = s,
       in_body = tags$div(
         class = "mt-0",
-        #apexcharter::apexchartOutput(ns("rc"), height = apex_height)
+        # apexcharter::apexchartOutput(ns("rc"), height = apex_height)
         uiOutput(ns("c"))
       ),
       ...

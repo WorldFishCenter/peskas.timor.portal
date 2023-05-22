@@ -317,3 +317,28 @@ format_hexbin_data <- function(data, input = NULL) {
   }
   res
 }
+
+
+#' Render HTML Kepler map
+#'
+#' @description Render a Kepler map as a HTML file
+#'
+#' @param width HTML object width
+#' @param height HTML object height
+#'
+#' @noRd
+#'
+kepler_map <- function(width = NULL, height = NULL, i18n) {
+  addResourcePath(
+    prefix = "www",
+    directoryPath = system.file("app/www", package = "peskas.timor.portal")
+  )
+  tagList(
+    div(
+      class = "title",
+      h2(p(i18n$t(pars$home$map$title), style = "color:#666a70")),
+      p(i18n$t(pars$home$map$caption), style = "color:#666a70")
+    ),
+    htmltools::tags$iframe(src = "www/kepler_pds_map.html", width = width, height = height)
+  )
+}

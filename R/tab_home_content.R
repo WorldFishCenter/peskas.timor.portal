@@ -2,12 +2,12 @@ tab_home_content <- function(i18n) {
   tagList(
     home_text(title = i18n$t(pars$home$intro$title), content = i18n$t(pars$home$intro$content), report_text = i18n$t(pars$home$report$text)),
     page_cards(
+      kepler_map(width = "580", height = "530", i18n),
       apex_summary_ui(id = "donut_trips", div_class = "col-md-4", apex_height = "16rem"),
       apex_summary_ui(id = "donut_fish", div_class = "col-md-4", apex_height = "16rem"),
       apex_summary_ui(id = "bar_tracks", div_class = "col-md-4", apex_height = "16rem"),
-      mod_home_table_ui(id = "home_table"),
-      leaflet_map_ui(id = "map", i18n)
-      # HTML("<iframe src='https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/WorldFishCenter/peskas.timor.portal/main/inst/peskas_CPUE.json' style='border:0px #ffffff none;' name='myiFrame' scrolling='no' frameborder='1' marginheight='0px' marginwidth='0px' height='500px' width='1000px' allowfullscreen></iframe>"),
+      mod_home_table_ui(id = "home_table")
+      # leaflet_map_ui(id = "map", i18n),
     )
   )
 }
