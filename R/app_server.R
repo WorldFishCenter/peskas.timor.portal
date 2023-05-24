@@ -85,7 +85,7 @@ app_server <- function(input, output, session) {
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
   # Tracks tab (dynamic map)
-  # leaflet_map_server(id = "map", marker_radius = 7, scale_markers = T, fill_marker_alpha = 0.6, legend_bins = 5, zoom = 8.5)
+  leaflet_map_server(id = "map", marker_radius = 7, scale_markers = T, fill_marker_alpha = 0.6, legend_bins = 5, zoom = 8.5)
   mod_var_descriptions_server(id = "map-info", vars = c("pds_tracks_trips", "pds_tracks_cpe", "pds_tracks_rpe"), i18n_r = i18n_r)
 
   # Nutrition tab

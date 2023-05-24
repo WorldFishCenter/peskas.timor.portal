@@ -27,16 +27,16 @@ app_ui <- function(request) {
           ),
           id = "home", icon_home()
         ),
-        # tab_menu_item(
-        #  label = tagList(
-        #    i18n$t(pars$header$nav$pds_tracks$text),
-        #    tags$span(
-        #      class = 'badge bg-lime-lt',
-        #      'New'
-        #    )
-        #  ),
-        #  id = 'pds_tracks', icon_map()
-        # ),
+         tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$pds_tracks$text),
+            #tags$span(
+            #  class = 'badge bg-lime-lt',
+            #  'New'
+            #)
+          ),
+          id = 'pds_tracks', icon_map()
+         ),
         tab_menu_item(
           label = tagList(
             i18n$t(pars$header$nav$catch$text)
@@ -92,10 +92,10 @@ app_ui <- function(request) {
           id = "catch-composition",
           tab_catch_composition(i18n)
         ),
-        # tab_panel(
-        #  id = 'pds_tracks',
-        #  tab_tracks_content(i18n)
-        # ),
+         tab_panel(
+          id = 'pds_tracks',
+          tab_tracks_content(i18n)
+         ),
         tab_panel(
           id = "nutrients",
           tab_nutrients_content(i18n)
