@@ -1,13 +1,12 @@
 tab_tracks_content <- function(i18n) {
   tagList(
     page_heading(
-      pretitle = i18n$t(pars$pds_tracks$subtitle),
-      title = i18n$t(pars$pds_tracks$title)
+      pretitle = i18n$t(pars$catch$subtitle$text),
+      title = i18n$t(pars$header$nav$pds_tracks$text)
     ),
     page_cards(
       tags$div(
-        # leaflet_map_ui_v1(id = "map")
-        leaflet_map_ui(id = "map")
+        leaflet_map_ui(id = "map", i18n)
       ),
       tags$div(
         class = "col",

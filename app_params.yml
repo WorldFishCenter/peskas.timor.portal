@@ -96,12 +96,14 @@ default:
       description: "The number of trips indicates the total number of fishing trips recorded in a specific area."
       problems: "There are known problems with the Pelagic Data systems algorithm. On some occasions, trips are not detected by the system, multiple trips are merged into one, or a single trip is split into several. In addition, poor network coverage might delay or prevent information from being transferred from the tracking devices. The extent or severity of these problems is unknown. Currently, it is not possible to distinguish fishing trips from the non-fishing trips."
       methods: "The tracks are filtered for outliers and some potential algorithm errors. Specifically, we do not take into account geo-referenced tracks characterized by large anomalies in the quality of the tracking, in the speed of the boats, and in the distance and time travelled."
+      quality: low
     pds_tracks_cpe:
       short_name: Catch per unit effort
       format: ",.3r"
       description: "The catch per unit effort (CPE) indicates the average catch in Kg per fishing unit (fisherman) by fishing trip. The CPE is standardised one on trip hour."
       problems: "The categorisation of taxa has changed over time. Prior to April 2019, taxa were recorded at the species level. Later, taxa were grouped into about 60 categories that loosely correspond to the species family or genus. Both the categorization itself and its change result in estimates with a certain margin of error that is not entirely defined."
       methods: "Catch weights are subjected to a validation process. Outliers are recognized based on the overall catch-weight statistical distribution and on the quality of linear models relating the catch-weight and number of individuals for each fish group."
+      quality: medium
     pds_tracks_rpe:
       short_name: Revenue per unit effort
       format: ",.3r"
@@ -168,7 +170,7 @@ default:
       composition:
         text: Composition
       pds_tracks:
-        text: Dynamic map
+        text: Fishery indicators
       nutrients:
         text: Nutrients
       market:
@@ -203,8 +205,7 @@ default:
       caption: "Explore the main fishery indicators in Timor-Leste. The table shows the aggregated values of the estimated revenue and catch, along with the median values of landings per boat, revenue per trip, catch per trip and price per kg."
     map:
       title: Fishing Trips Around Timor-Leste Island
-      caption: "Explore fishing trips and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
-      note: "The map displays only the fishing trips for which we have geolocation data, these represent about 5% of the total fishing trips recorded."
+      caption: "Explore fishing trips around the Timor Island coast with our interactive map. The map shows the density of movements recorded by PDS devices installed on small-scale fishing vessels."
   revenue:
     warning_1:
       heading:
@@ -251,11 +252,12 @@ default:
       footer:
         text: "* All values in metric tonnes. Totals only include data after April 2018."
   pds_tracks:
-    title:
-      text: Fishery indicators
     description:
       content:
         text: "The dynamic map is the result of the data-crossing between boats' GPS tracks (Pelagic Data Systems) and fishing information derived from survey landings (KoBo toolbox). The fishery indicators are aggregated on a geographic grid with a resolution of 0.1 x 0.1 degrees (approximately 11 x 11 kilometres)."
+      map:
+        caption: "Explore fishing trips and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
+        note: "The map displays only the fishing trips for which we have geolocation data, these represent about 5% of the total fishing trips recorded."
   nutrients:
     to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
     nutrients:
@@ -476,7 +478,7 @@ por:
       composition:
         text: Composição
       pds_tracks:
-        text: Mapa Dinâmico
+        text: Indicadores da Pesca
       nutrients:
         text: Nutrientes
       market:
@@ -511,8 +513,7 @@ por:
       caption: "Explore os principais indicadores de pesca em Timor-Leste. A tabela mostra os valores agregados da receita e da captura estimadas, juntamente com os valores medianos dos desembarques por barco, receita por viagem, captura por viagem e preço por kg."
     map:
       title: Viagens de Pesca ao Redor da Ilha de Timor-Leste
-      caption: "Explore viagens de pesca e estatísticas associadas ao redor da costa da Ilha de Timor com nosso mapa interativo. Selecione indicadores de pesca, tipo de engrenagem de pesca e grupo de peixes para filtrar os resultados. Clique em um ponto de viagem para ver estatísticas detalhadas de pesca para esse ponto e a municipalidade associada."
-      note: "O mapa exibe apenas as viagens de pesca para as quais temos dados de geolocalização, que representam cerca de 5% do total de viagens de pesca registradas."
+      caption: "Explore viagens de pesca ao redor da costa da Ilha de Timor-Leste com o nosso mapa interativo. O mapa mostra a densidade de movimentos registrados pelos dispositivos PDS instalados em embarcações de pesca de pequena escala."
   revenue:
     warning_1:
       heading:
@@ -559,11 +560,12 @@ por:
       footer:
         text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após abril de 2018."
   pds_tracks:
-    title:
-      text: Indicadores da pesca
     description:
       content:
-        text: "O mapa dinâmico é resultado do cruzamento de dados entre as trilhas de GPS dos barcos (Pelagic Data Systems) e informações de pesca derivadas das capturas das pesquisas (KoBo toolbox). Os indicadores de pesca são agregados em uma grade geográfica com resolução de 0,1 x 0,1 graus (aproximadamente 11 x 11 quilômetros)."
+        text: "O mapa dinâmico é resultado do cruzamento de dados entre as trajetórias GPS das embarcações (Pelagic Data Systems) e informações pesqueiras derivadas de desembarques de pesquisas (KoBo toolbox). Os indicadores da pesca são agregados em uma grade geográfica com uma resolução de 0,1 x 0,1 graus (aproximadamente 11 x 11 quilômetros)."
+      map:
+        caption: "Explore viagens de pesca e estatísticas associadas ao longo da costa da Ilha de Timor com nosso mapa interativo. Selecione indicadores da pesca, tipo de equipamento de pesca e grupo de peixes para filtrar os resultados. Clique em um ponto de viagem para ver estatísticas detalhadas da pesca para aquele ponto e o município associado."
+        note: "O mapa exibe apenas as viagens de pesca para as quais temos dados de geolocalização, que representam cerca de 5% do total de viagens de pesca registradas."
   nutrients:
     to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
     nutrients:
@@ -791,7 +793,7 @@ tet:
       composition:
         text: Komposisaun
       pds_tracks:
-        text: Mapa dinámiku
+        text: Indikadór Peska
       nutrients:
         text: Nutrientes
       market:
@@ -826,8 +828,7 @@ tet:
       caption: "Eskola indikadór prinsipál peska iha Timor-Leste. Tabela ne'e aprezenta valór agregadu husi estimasaun rendimentu no kaptura, hamutuk ho valór medianu husi desembarke ba liur sira, rendimentu husi viagen, kaptura husi viagen no prezú husi kg."
     map:
       title: Viagen peska koresande iha Timor-Leste
-      caption: "Eskola viagen peska no estatístika koresande ao longu kostal Ilha Timor ho mapa interaktívu ne'e. Seleksiona indikadór peskeiru, tipu ekipamentu peska no grupu pisuk ba filtra rezultadu. Klikka iha pontu viagen ida atu hare estatístika peska detallu ba pontu no munisípiu korespondente."
-      note: "Mapa ne'e aprezenta deit viagen peska ne'ebé iha dadus lokalizasaun, ne'ebé reprsenta klean liu menus 5% husi total viagen peska rejistradu."
+      caption: "Haree viajen peska rona Timor-Leste nian ho mapa interativu husi ami. Mapa ne'e hatudu dadaun ba intensidade husi movimentu sira ne'ebé rekorda husi aparelho PDS ne'ebé instala iha barak sira nia natar peska ne'ebé ki'ik rasik."
   revenue:
     subtitle:
       text: Peska eskala kiik
@@ -878,13 +879,12 @@ tet:
       footer:
         text: "* Valores hotu iha tonelada métrika. Total inklui dadus hosi April 2018."
   pds_tracks:
-    title:
-      text: Indikador peskaria
-    subtitle:
-      text: Peskaria kiik
     description:
       content:
-        text: "Mapa dinamika ne'e rezultadu husi dadus GPS ba barcu (Pelagic Data Systems) no dadus peskaria husi levantamentu surveys (KoBo toolbox). Indikador peskaria sira hanesan rezultadu agregadu iha kordenada 0.1 x 0.1 grau (aproximadamente 11 x 11 kilometru)."
+        text: "Mapa dinámiku ne'e rezultadu husi kruzamentu dadus entre husi barcu nia GPS nian rasta (Pelagic Data Systems) no informasaun kona-ba peska ne'ebé rekolla husi surbey nian (KoBo toolbox). Indikadór peska sira aggrega iha rejiaun geografiku ho rezolusaun 0.1 x 0.1 graus (aproximadamente 11 x 11 kilometrus)."
+      map:
+        caption: "Explora viájen peska no estatístika ne'ebé relasionadu iha beira-mar Ilha Timor ho mapa interaktívu ami nian. Halo tulun iha seleksaun indikadór peska, tipu ekipamentu peska no grupu peixe atu halo filtar rezultadu. Klik iha pontu viájen atu hare estatístika detalladu peska iha pontu ne'e no municípiu ne'ebé relasionadu."
+        note: "Mapa mosu deit viájen peska sira ne'ebé ami iha dadus geolokalizasaun, ne'ebe signifika kalan-kalan 5% husi total viájen peska ne'ebé rejistu."
   nutrients:
     to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
     nutrients:

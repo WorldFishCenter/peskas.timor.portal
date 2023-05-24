@@ -269,6 +269,18 @@ taxa_aggregated <- format_aggregated_data(taxa_aggregated, national_boats = boat
 nutrients_aggregated <- format_aggregated_data(nutrients_aggregated, national_boats = boats)
 municipal_taxa <- format_aggregated_data(municipal_taxa, municipal = TRUE)
 
+# download kepler map and move to www folder
+kepler_map <- download_cloud_file(
+  name = "kepler_pds_map.html",
+  provider = pars$storage$google$key,
+  options = pars$storage$google$options
+)
+
+destination_dir <- system.file("app/www", package = "peskas.timor.portal")
+file.copy(kepler_map, destination_dir, overwrite = TRUE)
+file.remove(kepler_map)
+
+
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
 usethis::use_data(municipal_aggregated, overwrite = TRUE)

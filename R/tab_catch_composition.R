@@ -1,7 +1,7 @@
 tab_catch_composition <- function(i18n) {
   tagList(
     page_heading(
-      pretitle = i18n$t(pars$composition$subtitle$text),
+      pretitle = i18n$t(pars$catch$subtitle$text),
       title = i18n$t(pars$composition$title$text)
     ),
     page_cards(
