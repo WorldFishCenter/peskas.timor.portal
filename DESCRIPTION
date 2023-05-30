@@ -16,7 +16,8 @@ Imports:
     logger,
     leaflet,
     reactable,
-    tidyr
+    tidyr,
+    reactablefmtr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3

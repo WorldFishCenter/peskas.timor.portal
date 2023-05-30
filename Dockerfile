@@ -20,7 +20,8 @@ RUN install2.r --error --skipinstalled \
     logger \
     leaflet \
     reactable \
-    tidyr
+    tidyr \
+    reactablefmtr
 
 RUN installGithub.r \
     RinteRface/charpente \

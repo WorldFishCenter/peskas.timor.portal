@@ -62,6 +62,7 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
         tbl <-
           reactable::reactable(
             tab,
+            theme = reactablefmtr::fivethirtyeight(centered = TRUE),
             pagination = FALSE,
             compact = FALSE,
             borderless = FALSE,
@@ -73,18 +74,11 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
               align = "center",
               minWidth = 100
             ),
-            theme = reactable::reactableTheme(
-              headerStyle = list(
-                "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
-                "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
-                borderColor = "#555"
-              )
-            ),
             columns = list(
               region = reactable::colDef(
                 name = "Municipality",
                 minWidth = 140,
-                align = "left"
+                align = "center"
               ),
               landing_revenue = reactable::colDef(
                 name = "Revenue per trip",
@@ -96,7 +90,7 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
                 cell = JS("function(cellInfo) {return '$' + cellInfo.value}")
               ),
               n_landings_per_boat = reactable::colDef(
-                name = "N. landings per boat",
+                name = "Landings per boat",
                 style = function(value) {
                   normalized <- (value - min(tab$n_landings_per_boat)) / (max(tab$n_landings_per_boat) - min(tab$n_landings_per_boat))
                   color <- good_color(normalized)
