@@ -76,7 +76,7 @@ leaflet_map_ui <- function(id, i18n) {
   tagList(
     div(
       class = "title",
-      #h2(p(i18n$t(pars$home$map$title), style = "color:#666a70")),
+      # h2(p(i18n$t(pars$home$map$title), style = "color:#666a70")),
       p(i18n$t(pars$pds_tracks$description$map$caption), style = "color:#666a70"),
       p(i18n$t(pars$pds_tracks$description$map$note), style = "color:#666a70; font-weight:bold;")
     ),

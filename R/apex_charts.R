@@ -91,7 +91,8 @@ apex_donut <- function(data = NULL,
                        show_total = F,
                        show_legend = F,
                        sparkline = T,
-                       formatter = formatter) {
+                       tooltip_formatter = tooltip_formatter,
+                       total_formatter = total_formatter) {
   apexcharter::apexchart() %>%
     apexcharter::apex(
       data = data,
@@ -109,6 +110,10 @@ apex_donut <- function(data = NULL,
         offsetY = 0
       )
     ) %>%
+    apexcharter::ax_tooltip(
+      enabled = TRUE,
+      y = list(formatter = tooltip_formatter)
+    ) %>%
     apexcharter::ax_legend(
       show = show_legend,
       position = "bottom",
@@ -119,11 +124,14 @@ apex_donut <- function(data = NULL,
       pie = apexcharter::pie_opts(
         donut = list(labels = list(
           show = T,
+          value = list(
+            show = T,
+            formatter = tooltip_formatter),
           total = list(
             show = show_total,
             label = center_label,
             color = "#373d3f",
-            formatter = formatter
+            formatter = total_formatter
           )
         ))
       )
@@ -255,7 +263,8 @@ apex_donut_server <- function(id = NULL,
                               show_legend = F,
                               cols = NULL,
                               sparkline = T,
-                              formatter = NULL,
+                              tooltip_formatter = NULL,
+                              total_formatter = NULL,
                               ...) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -268,7 +277,8 @@ apex_donut_server <- function(id = NULL,
         show_total = show_total,
         show_legend = show_legend,
         sparkline = sparkline,
-        formatter = formatter
+        tooltip_formatter = tooltip_formatter,
+        total_formatter = total_formatter
       )
     })
   })

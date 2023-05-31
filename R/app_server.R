@@ -6,16 +6,6 @@
 #' @noRd
 app_server <- function(input, output, session) {
   i18n_r <- mod_language_server("lang", session)
-  # For translation made in the UI
-
-
-  # mod_summary_card_server(id = "revenue-summary-card", var = "revenue", period = "month", n = 13, i18n_r = i18n_r)
-  # mod_summary_card_server(id = "catch-summary-card", var = "catch", period = "month", n = 13, i18n_r = i18n_r)
-  # mod_summary_card_server(id = "landings-card", var = "n_landings", period = "month", n = 13, i18n_r = i18n_r)
-  # mod_summary_card_server(id = "tracks-card", var = "n_tracks", period = "month", n = 13, i18n_r = i18n_r)
-  # mod_summary_card_server(id = "matched-card", var = "n_matched", period = "month", n = 13, i18n_r = i18n_r)
-  # mod_summary_card_server(id = "women-prop-summary-card", var = "prop_landings_woman", period = "month", n = 13, i18n_r = i18n_r)
-  # mod_summary_card_server(id = "market-summary-card", var = "price_kg", period = "month", n = 13, i18n_r = i18n_r)
 
   # Home
   mod_home_table_server(id = "home_table", color_pal = c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"), i18n_r = i18n_r)
@@ -23,28 +13,33 @@ app_server <- function(input, output, session) {
     id = "donut_trips",
     data = peskas.timor.portal::summary_data$n_surveys,
     center_label = "Submitted surveys",
-    cols = c("#a7a7a7", "#d88473", "#5cbed2"),
+    cols = c("#d7eaf3", "#77b5d9", "#14397d"),
     sparkline = F,
     show_total = T,
-    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
+    tooltip_formatter = V8::JS("function(x) {return (x).toLocaleString('en-US')}"),
+    total_formatter = V8::JS("function (x) {return (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)).toLocaleString('en-US')}")
+  )
+
+  apex_donut_server(
+    id = "donut_revenue",
+    data = peskas.timor.portal::summary_data$estimated_revenue,
+    center_label = "Estimated revenue",
+    cols = c("#d7eaf3", "#77b5d9", "#14397d"),
+    sparkline = F,
+    show_total = T,
+    tooltip_formatter = V8::JS("function(x) {return '$' + (x / 1000000).toFixed(2) + ' M'}"),
+    total_formatter = V8::JS("function (x) {return '$' + (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0) / 1000000).toFixed(2) + ' M'}")
   )
 
   apex_donut_server(
     id = "donut_fish",
-    data = peskas.timor.portal::summary_data$groups_comp,
-    center_label = "Recorded tons",
+    data = peskas.timor.portal::summary_data$estimated_tons,
+    center_label = "Estimated catch",
     cols = viridisLite::viridis(5, alpha = 0.75),
     show_total = T,
     sparkline = F,
-    formatter = V8::JS("function (x) {return x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)}")
-  )
-
-  apex_bar_server(
-    id = "bar_tracks",
-    data = peskas.timor.portal::summary_data$n_tracks,
-    sparkline = F,
-    show_yaxis = F,
-    title = "GPS tracks"
+    tooltip_formatter = V8::JS("function(x) {return (x).toLocaleString('en-US') + ' t'}"),
+    total_formatter = V8::JS("function (x) {return (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)).toLocaleString('en-US') + ' t'}")
   )
 
 

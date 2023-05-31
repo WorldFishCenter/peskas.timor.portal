@@ -255,7 +255,6 @@ taxa_aggregated <- get_file("timor_taxa_aggregated")
 municipal_taxa <- get_file("timor_municipal_taxa") %>% data.table::as.data.table()
 nutrients_aggregated <- get_file("timor_nutrients_aggregated")
 summary_data <- get_file("summary_data")
-summary_data$n_tracks <- summary_data$n_tracks %>% dplyr::rename(`N. tracks` = n_tracks)
 
 indicators_grid <- get_file("indicators_gridded") %>% data.table::as.data.table()
 label_groups_list <- label_taxa_groups(indicators_grid)
@@ -280,6 +279,43 @@ destination_dir <- system.file("app/www", package = "peskas.timor.portal")
 file.copy(kepler_map, destination_dir, overwrite = TRUE)
 file.remove(kepler_map)
 
+estimated_tons <-
+  taxa_aggregated$month %>%
+  dplyr::mutate(fish_group = dplyr::case_when(
+    grouped_taxa %in% c("COZ") ~ "Molluscs",
+    grouped_taxa %in% c("PEZ") ~ "Shrimps",
+    grouped_taxa %in% c("MZZ") ~ "Other",
+    grouped_taxa %in% c("SLV", "CRA") ~ "Crustaceans",
+    grouped_taxa %in% c("OCZ", "IAX") ~ "Cephalopods",
+    grouped_taxa %in% c("SKH", "SRX") ~ "Sharks and rays",
+    grouped_taxa %in% c("SNA", "GPX", "PWT", "GRX", "MUI", "BGX") ~ "Large demersals",
+    grouped_taxa %in% c("CGX", "TUN", "BEN", "LWX", "BAR", "SFA", "CBA", "DOX", "ECN", "DOS") ~ "Large pelagics",
+    grouped_taxa %in% c("YDX", "SPI", "EMP", "SUR", "TRI", "MOJ", "WRA", "MOO", "BWH", "LGE", "MOB", "MHL", "GOX", "THO", "IHX", "APO", "IHX", "PUX", "DRZ") ~ "Small demersals",
+    grouped_taxa %in% c("RAX", "SDX", "CJX", "CLP", "GZP", "FLY", "KYX", "CLP", "MUL", "DSF", "MIL", "THF") ~ "Small pelagics",
+    TRUE ~ NA_character_
+  )) %>%
+  dplyr::group_by(.data$fish_group) %>%
+  dplyr::summarise(tons = sum(.data$catch, na.rm = T) / 1000) %>%
+  dplyr::mutate(tons = round(.data$tons, 0)) %>%
+  dplyr::arrange(-.data$tons)
+
+estimated_revenue <-
+  municipal_aggregated %>%
+  dplyr::mutate(Area = dplyr::case_when(
+    .data$region %in% c("Oecusse", "Bobonaro", "Liquica", "Dili", "Manatuto", "Baucau") ~ "North Coast",
+    .data$region == "Atauro" ~ "Atauro island",
+    TRUE ~ "South Coast"
+  )) %>%
+  dplyr::group_by(.data$Area) %>%
+  dplyr::summarise(`Estimated revenue` = sum(.data$revenue, na.rm = T)) %>%
+  dplyr::mutate(`Estimated revenue` = round(`Estimated revenue`, 0))
+
+summary_data <-
+  list(
+    n_surveys = summary_data$n_surveys,
+    estimated_tons = estimated_tons,
+    estimated_revenue = estimated_revenue
+  )
 
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
