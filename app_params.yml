@@ -37,7 +37,7 @@ default:
       problems: Not assessed
     recorded_catch:
       short_name: Recorded catch
-      format: "$,.2r"
+      format: ",.2r"
       suffix: "\u00A0t"
       multiplier: 0.001
       description: "The recorded total catch from fishing trips. To illustrate the uncertainty around this estimate, values are rounded to two significant digits."
