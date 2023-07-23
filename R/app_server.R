@@ -95,9 +95,11 @@ app_server <- function(input, output, session) {
     type = "treemap", sparkline.enabled = F, y_formatter = apexcharter::format_num(""),
     colors = nutrients_colors
   )
+
+  mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
+
   # About tab
   timor_about_server(id = "about-text", content = pars$about$text, i18n_r = i18n_r)
-  mod_var_descriptions_server(id = "nutrients-info", vars = "nut_rdi", i18n_r = i18n_r)
 }
 
 

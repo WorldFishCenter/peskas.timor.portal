@@ -67,8 +67,12 @@ app_ui <- function(request) {
           ),
           id = "nutrients", icon_nutrients()
         ),
-        tab_menu_item(i18n$t(pars$header$nav$about$text), "about", icon_info_circle()),
-        id = "main_tabset"
+        tab_menu_item(
+          label = tagList(
+            i18n$t(pars$header$nav$about$text),
+          ),
+          id = "about", icon_info_circle()
+        )
       ),
       tabset_panel(
         menu_id = "main_tabset",

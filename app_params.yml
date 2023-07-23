@@ -306,7 +306,19 @@ default:
         label: Close
   about:
     text: |
-      # About Peskas
+
+      ## Contents
+
+      <ul>
+        <li><a href="#about-peskas">About Peskas</a></li>
+        <li><a href="#methodological-information">Methodological Information</a>
+          <ul>
+            <li><a href="#workflow">Workflow Steps</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h1 id="about-peskas">About Peskas</h1>
 
       Peskas is a web portal displaying data and insights on the fisheries of Timor-Leste. It is the official fisheries national monitoring system of Timor-Leste.
 
@@ -325,6 +337,52 @@ default:
       - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
       - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
       - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
+
+      <h1 id="methodological-information">Methodological Information</h1>
+
+      The whole Peskas process returns a significant amount of information of different types, from the people involved in the project, the properties of the boats, the species caught, the temporal and spatial information related to fishing trips. This heterogeneous complex of information needs to be tracked, organized and cleaned to be understandable and usable by the community. For this purpose, the path from raw to final data combines the use of many software tools to guarantee that the Peskas data workflow is processed according to the principles of traceability, reproducibility and transparency of the data.
+
+      Peskas was designed to be expanded and eventually distributed in different contexts. One of the biggest issues associated with the distribution of software products is represented by the compatibility between different platforms and different operating systems, as a product developed under a certain platform and version’ dependencies may not work in other platforms. Peskas' workflow uses containerization technology to face this problem, and specifically Docker, which provides an isolated environment containing all the libraries, dependencies and configurations necessary for the correct functioning of the application.
+
+      The [source code](https://github.com/WorldFishCenter/peskas.timor.data.pipeline) regulating the several steps of data workflow is maintained in an R package that bundles together the code, the documentation, the tests, increasing the general manageability and shareability of the whole platform. Furthermore, the code was conceived and developed in a modular and functional-oriented way.
+
+      Given the complexity of the data that compose Peskas, any change to the code must be regularly tested and tracked, a practice called version control. Peskas’ data pipeline relies on the GitHub version control service which guarantees an active and reversible register of the changes made to Peskas as well as improves and speeds up the integration process of new features. All the data pipeline' steps are organized and triggered according to a specific plan through Github Actions, a service provided by GitHub which automates the data workflow and facilitates the identification of any errors during the progress of the pipeline.
+
+      The final steps of the pipeline produce data products that will be processed by other tools for distribution. Currently, the final products constitute a dashboard web application developed with Shiny, a data report generated with Rmarkdown, and the actual data, distributed through the open-source Dataverse portal.
+
+      <h2 id="workflow">Workflow Steps</h2>
+
+      The following workflow runs on a daily scale through GitHub actions, automatically updating all the input data and the respective outputs.
+
+      1. **Build Docker container**
+
+      The first step consists in building the virtual space in which the data pipeline application runs (the container). All subsequent steps operate in this container, which can be run on any host platform.
+
+      2. **Raw data acquisition**
+
+      In this phase, the raw data associated with the survey landings and the spatial and temporal information of the fishing trips are retrieved through the services provided by the KoBo toolbox and Pelagic data system (PDS) respectively. These data are accessed through the APIs of the respective services and are uploaded and stored on Google Cloud. Data from the SSF project and more recent Peskas data are uploaded separately as they are characterised by a different structure. Each file is assigned with an ID to make each uploaded object unique and easy to recall.
+
+      3. **Data preprocessing**
+
+      The latest versions of survey landings' and PDS raw data are downloaded from Google Cloud and elaborated to return an appropriate format for subsequent processing. Specifically, the structure of the raw data tables is reorganized and compacted, date formats are homogenized, and data tables are converted into a binary format that is easier to deal with in R. SSF-project raw data are subjected to a more intensive preprocessing as information including the species' codes, habitats' types and gear' types are defined under a different syntax from that of recent Peskas data.
+
+      4. **Landings merging and weight calculation**
+
+      This phase involves merging the SSF and recent Peskas data into a single preprocessed dataframe. From this dataframe, we estimate the weight associated with each fishing trip by referring to the length-weight tables provided by the FishBase database. Specifically, we use the API service offered by FishBase to associate both the length-length and length-weight conversion tables with the species captured in Peskas and return an accurate measurement of the catchweight. Since not all species were covered by the FishBase databases, we manually extracted some conversion tables from the SeaLifeBase database.
+
+      5. **Data validation**
+
+      The data collected by Peskas are not always accurate and may contain many types of errors such as temporal inconsistencies, typo errors, altered numerical values. In this step, the preprocessed data are checked, cleaned and validated. We use the absolute deviation around the median (MAD) for the identification of outliers in the distribution of the numerical values as the number of individuals, catch values and weight. Moreover, the variables are renamed according to a specific ontology developed for small-scale fisheries.
+
+      6. **Data modelling**
+
+      In this phase the validated data estimate summary statistics of landing value, catches and landings per unit by modelling validated data using a random-effect statistical model (glmmTMB)
+
+      7. **Data export**
+
+      This step involves the preparation and the distribution of data across different platforms (see scheme above). The data are firstly anonymised to guarantee the privacy of fishermen involved in Peskas, then we estimate daily, monthly and yearly summaries of Peskas main descriptors. These data constitute the primary material on which the 3 main outputs are generated:
+
+      - The daily, monthly and yearly data of Peska’s summaries, uploaded via an API service on the open-source data portal Dataverse every 6 months.
 
 por:
   vars:
@@ -614,7 +672,19 @@ por:
         label: Fechar
   about:
     text: |
-      # Sobre Peskas
+
+      ## Conteúdos
+
+      <ul>
+        <li><a href="#about-peskas">Sobre Peskas</a></li>
+        <li><a href="#methodological-information">Informações Metodológicas</a>
+          <ul>
+            <li><a href="#workflow">Etapas de Trabalho</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h1 id="about-peskas">Sobre Peskas</h1>
 
       Peskas é um portal web que apresenta dados e insights sobre as pescas de Timor-Leste. É o sistema oficial de monitorização nacional das pescas de Timor-Leste.
 
@@ -633,6 +703,52 @@ por:
       - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
       - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
       - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
+
+      <h1 id="methodological-information">Informações Metodológicas</h1>
+
+      Todo o processo Peskas retorna uma quantidade significativa de informações de diferentes tipos, das pessoas envolvidas no projeto, das propriedades dos barcos, das espécies capturadas, das informações temporais e espaciais relacionadas às viagens de pesca. Esse complexo heterogêneo de informações precisa ser rastreado, organizado e limpo para ser compreensível e utilizável pela comunidade. Para esse propósito, o caminho dos dados brutos para os dados finais combina o uso de muitas ferramentas de software para garantir que o fluxo de trabalho dos dados Peskas seja processado de acordo com os princípios de rastreabilidade, reprodutibilidade e transparência dos dados.
+
+      Peskas foi projetado para ser expandido e eventualmente distribuído em diferentes contextos. Um dos maiores problemas associados à distribuição de produtos de software é representado pela compatibilidade entre diferentes plataformas e diferentes sistemas operacionais, pois um produto desenvolvido sob uma certa plataforma e dependências de versão pode não funcionar em outras plataformas. O fluxo de trabalho do Peskas usa a tecnologia de contêinerização para enfrentar esse problema, e especificamente o Docker, que fornece um ambiente isolado contendo todas as bibliotecas, dependências e configurações necessárias para o correto funcionamento do aplicativo.
+
+      O [código-fonte](https://github.com/WorldFishCenter/peskas.timor.data.pipeline) que regula as várias etapas do fluxo de trabalho de dados é mantido em um pacote R que agrupa o código, a documentação, os testes, aumentando a gerenciabilidade geral e a capacidade de compartilhamento de toda a plataforma. Além disso, o código foi concebido e desenvolvido de uma maneira modular e orientada para funções.
+
+      Dada a complexidade dos dados que compõem o Peskas, qualquer mudança no código deve ser regularmente testada e rastreada, uma prática chamada controle de versão. O pipeline de dados do Peskas conta com o serviço de controle de versão GitHub, que garante um registro ativo e reversível das mudanças feitas no Peskas, bem como melhora e acelera o processo de integração de novos recursos. Todas as etapas do pipeline de dados são organizadas e disparadas de acordo com um plano específico por meio de Ações do GitHub, um serviço fornecido pelo GitHub que automatiza o fluxo de trabalho de dados e facilita a identificação de quaisquer erros durante o progresso do pipeline.
+
+      As etapas finais do pipeline produzem produtos de dados que serão processados por outras ferramentas para distribuição. Atualmente, os produtos finais constituem um aplicativo de painel de controle da web desenvolvido com Shiny, um relatório de dados gerado com Rmarkdown e os dados reais, distribuídos através do portal de código aberto Dataverse.
+
+      <h2 id="workflow">Etapas do Fluxo de Trabalho</h2>
+
+      O seguinte fluxo de trabalho é executado diariamente através das ações do GitHub, atualizando automaticamente todos os dados de entrada e os respectivos resultados.
+
+      1. **Construção do container Docker**
+
+      A primeira etapa consiste na construção do espaço virtual no qual a aplicação do pipeline de dados é executada (o container). Todas as etapas subsequentes operam neste container, que pode ser executado em qualquer plataforma de hospedagem.
+
+      2. **Aquisição de dados brutos**
+
+      Nesta fase, os dados brutos associados aos desembarques de pesquisa e às informações espaciais e temporais das viagens de pesca são obtidos através dos serviços fornecidos pelas ferramentas KoBo e pelo sistema de dados pelágicos (PDS), respectivamente. Esses dados são acessados através das APIs dos serviços correspondentes e são carregados e armazenados no Google Cloud. Os dados do projeto SSF e os dados mais recentes do Peskas são carregados separadamente, pois possuem uma estrutura diferente. Cada arquivo é atribuído a um ID para tornar cada objeto carregado único e fácil de ser recuperado.
+
+      3. **Pré-processamento de dados**
+
+      As versões mais recentes dos dados brutos de desembarques de pesquisa e PDS são baixadas do Google Cloud e elaboradas para retornar um formato adequado para processamento subsequente. Especificamente, a estrutura das tabelas de dados brutos é reorganizada e compactada, os formatos de data são padronizados e as tabelas de dados são convertidas em um formato binário que é mais fácil de ser tratado no R. Os dados brutos do projeto SSF passam por um pré-processamento mais intensivo, pois informações, incluindo códigos de espécies, tipos de habitats e tipos de equipamentos, são definidas sob uma sintaxe diferente da dos dados recentes do Peskas.
+
+      4. **Fusão de desembarques e cálculo de peso**
+
+      Esta fase envolve a fusão dos dados do SSF e dos dados recentes do Peskas em um único dataframe pré-processado. A partir desse dataframe, estimamos o peso associado a cada viagem de pesca consultando as tabelas de peso e comprimento fornecidas pelo banco de dados FishBase. Especificamente, utilizamos o serviço API oferecido pelo FishBase para associar as tabelas de conversão de comprimento-comprimento e comprimento-peso com as espécies capturadas no Peskas e obtemos uma medida precisa do peso da captura. Como nem todas as espécies estão presentes nas bases de dados do FishBase, extraímos manualmente algumas tabelas de conversão do banco de dados SeaLifeBase.
+
+      5. **Validação de dados**
+
+      Os dados coletados pelo Peskas nem sempre são precisos e podem conter diversos tipos de erros, como inconsistências temporais, erros de digitação e valores numéricos alterados. Nesta etapa, os dados pré-processados são verificados, limpos e validados. Utilizamos o desvio absoluto em torno da mediana (MAD) para a identificação de valores discrepantes na distribuição de valores numéricos, como o número de indivíduos, valores das capturas e peso. Além disso, as variáveis são renomeadas de acordo com uma ontologia específica desenvolvida para a pesca de pequena escala.
+
+      6. **Modelagem de dados**
+
+      Nesta fase, os dados validados estimam estatísticas resumidas do valor das capturas, das capturas e dos desembarques por unidade, através da modelagem dos dados validados usando um modelo estatístico de efeitos aleatórios (glmmTMB).
+
+      7. **Exportação de dados**
+
+      Esta etapa envolve a preparação e distribuição dos dados em diferentes plataformas (consulte o esquema acima). Os dados são primeiramente anonimizados para garantir a privacidade dos pescadores envolvidos no Peskas, em seguida, estimamos resumos diários, mensais e anuais dos principais descritores do Peskas. Esses dados constituem o material principal a partir do qual os 3 principais resultados são gerados:
+
+      - Os dados diários, mensais e anuais dos resumos do Peskas são carregados através de um serviço de API no portal de dados de código aberto Dataverse a cada 6 meses.
 
 tet:
   vars:
@@ -935,23 +1051,78 @@ tet:
         label: Serru
   about:
     text: |
-      # Kona ba Peskas
 
-      Peskas mak portal web ne'ebé apresenta dadus no insights kona-ba peskas iha Timor-Leste. Sira mak sistema ofisial monitorizasaun nasional ba peskas iha Timor-Leste.
+      ## Konteudu
 
-      Peskas iha ekipa recenseadores timoroan sira ne'ebé koleita dadus kaptura husi peskadór sira iha Timor-Leste. Dadus kaptura ne'e kombina ho dadus rastreiu husi embarkasaun atu hatudu tendénsia peskas iha tempu no espasu.
+      <ul>
+        <li><a href="#about-peskas">Kona-ba Peskas</a></li>
+        <li><a href="#methodological-information">Informasaun Metodolójika</a>
+          <ul>
+            <li><a href="#workflow">Pasu-à-Pasu Workflow</a></li>
+          </ul>
+        </li>
+      </ul>
 
-      Peskas konstrui ho objetivu atu sai ba kostu ki'ik, kódigu abertu, asesu abertu no tempu kase-real.
+      <h1 id="about-peskas">Kona-ba Peskas</h1>
 
-      Peskas rezultadu husi parceria kontinua entre WorldFish no Departamentu Peskas, Akultura no Recursu Marítimu husi Ministériu Agrikultura no Peskas Timor-Leste desde 2016.
+      Peskas mak hanesan portal web ne'ebé aprezenta dadus no analiza kona-ba peskaria iha Timor-Leste. Nia mak sistema monitorizasaun nasionál ofisial ba peskaria iha Timor-Leste.
 
-      Peskas possível tanba doasaun jenerozu husi Embaixada Reál Noruega iha Jakarta, Fundasaun Minderoo, Plataforma Big Data CGIAR no Fundasaun Schmidt.
+      Peskas fó importánsia ba ekipa enumeradór Timor-oan ne'ebé hetan dadus kaptura husi peskadores iha rai-laran Timor-Leste. Dadus kaptura ne'e identifika ho dadus rastreiajetu vasél husi peskadores iha loron no espaçu.
 
-      Peskas finansia husi Governu Timor-Leste desde 2021 ho apoiu tekniku husi WorldFish no Pelagic Data Systems Inc.
+      Peskas konstrui ho objetivu ba bele reduz custu, fonte-abertu, asesu-abertu no aprosimadu em tempu real.
 
-      Informasaun kona-ba prosesu no dezain sentradu iha usór ba pipeline Peskas no análize inisial, no aplikasaun ba peskiza no jestaun peska bele hetan iha publikasaun sira ne'ebé hanesan:
+      Peskas hanesan rezultadu hosi kolaborasaun ne'ebé hahu hosi WorldFish ho Ministériu Agricultura no Peskas Timor-Leste nian, Departamentu Peskaria, Akrikultura no Rekursus Marínu husi tinan 2016.
+
+      Peskas torna posível tanba konsellu generozu husi Embaixada Noruega Reál iha Jakarta, Fundasaun Minderoo, Plataforma Dadus Big CGIAR no Fundasaun Schmidt.
+
+      Peskas hetan finansiamentu husi Governu Timor-Leste husi tinan 2021 ho apoiu tekniku husi WorldFish no Pelagic Data Systems Inc.
+
+      Informasaun kona-ba prosesu no desenh ho nafatin iha kbi'it utilizadór hosi sistema Peskas nian no análize inisial, no aplikasaun sira ba peskiza no gerensa peskaria bele hetan iha publikasaun sira ne'e mai kraik:
 
       - [PeskAAS: A near real-time monitoring system for small-scale fisheries in Timor-Leste](http://www.fao.org/documents/card/en/c/cb2030en). In A. Tilley & M. B. Roscher (Eds.), Information and communication technologies for small-scale fisheries (ICT4SSF) - A handbook for fisheries stakeholders. In support of the implementation of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (pp. 11–18). FAO; WorldFish.
       - [PeskAAS: A near-real-time, open-source monitoring and analytics system for small-scale fisheries](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234760). PloS One, 15(11), e0234760.
       - [Nearshore Fish Aggregating Devices Show Positive Outcomes for Sustainable Fisheries Development in Timor-Leste](https://www.frontiersin.org/articles/10.3389/fmars.2019.00487/full). Frontiers in Marine Science, 6, 487."
 
+      <h1 id="methodological-information">Informasaun Metodolójika</h1>
+
+      Prosesu hotu-hosi Peskas hatudu informasaun signifikante hosi tipu diferente, husi ema sira ne'ebé envolve iha projetu, propriedades ba motór, espésies ne'ebé halakon, informasaun temporál no espasiál kona-ba viajen peskaria. Informasaun komplexu ne'ebe hetan ona tenki sei akompaña, organiza no fa'an hodi bele kompriende no hetan uza husi komunidade. Ho objetivu ida ne'e, trajetu husi dadus ki'ik ba dadus finál kombina ho utilizasaun software barak atu garante katak Peskas nia prosesu dadus atuasse konformi prinsípiu rastreabilidade, reproduzibilidade no transparénsia dadus.
+
+      Peskas konstrui ho objetivu atu hasa'e no hadiak iha kontestu diferente. Uma husi problema boot ne'ebé asosia ho distribuisaun produtu software mak kompatibilidade entre plataforma diferente no sistema operasaun diferente, tanba produtu ne'ebé dezenvolve iha plataforma no dependénsia versaun ida-nia bele lao iha plataforma seluk. Workflow Peskas nian utiliza teknolojia containerization atu hakarak problema ne'e, liuliu Docker, ne'ebé fornese ambiente isoladu ne'ebé kontinua hosi biblioteka, dependénsia no konfigurasaun hotu ne'ebé presiza ba funsionamentu koreitu aplikasaun nian.
+
+      [Kódigu fonte](https://github.com/WorldFishCenter/peskas.timor.data.pipeline) ne'ebé regula pasu hotu hosi dadus nia workflow ne'e mantén iha pakote R ne'ebé ajunta kódigu, dokumentasaun, testes hotu, ho objetivu atu aumenta fasilidade no partilha plataforma hotu nian. Tanba ne'e, kódigu boot halao no dezenvolve ho forma modulár no orientadu ba funsionalidade.
+
+      Tanba dadus Peskas nian ne'ebé kompostu hamutuk kompleksu, mudansa ida iha kódigu presiza hetan teste regular no registra ho nafatin, pratika ne'ebe hateten kontrole versaun. Pipeline dadus Peskas nian konfia ho servisu kontrole versaun GitHub nian ne'ebé garante rejistu ativu no reversível ba mudansa sira ne'ebé halo iha Peskas, liuliu hatudu no hapa hatudu prosesu integrasaun rekursu foun sira nian. Pasu hotu hosi pipeline dadus organizadu no halo kriadór iha planu espesífiku liuhusi Github Actions, servisu ne'ebé fornese husi GitHub ne'ebé automatiza dadus nia workflow no fasilidade identifikasaun erros sira wainhira prosesu pipeline nian halao.
+
+      Pasu finál hosi pipeline prodús produtu dadus ne'ebé sei prosesa husi ferramenta seluk ba distribuisaun. Agora dadaun, produtu finál inklui aplikasaun web dashboard dezenvolve ho Shiny, relatóriu dadus ne'ebé hetan husi Rmarkdown, no dadus atuál, distribui husi portal dadus fonte-abertu Dataverse.
+
+      <h2 id="workflow">Pasu-à-Pasu Workflow</h2>
+
+      Pasu-à-pasu ida ne'e kore tiha ona tuir loron liuhusi GitHub actions, atu atualiza automátikamente dadus input no sira-nia saída.
+
+      1. **Konstrui konteiner Docker**
+
+      Pasu boot ne'e hanesan konstrui espasiu virtual ne'ebé aplikasaun pipeline dadus nian sei hala'o (konteiner). Pasu sira seluk hotu atu lori iha konteiner ne'e, ne'ebé bele hala'o iha plataforma doméstika ida.
+
+      2. **Akuisisaun dadus rawa**
+
+      Iha fase ne'e, dadus rawa ne'ebé asosia ho susar-pesku husi levantamentu peskaria no informasaun temporál no espasiál kona-ba viajen peskaria, rekolla husi servisu ne'ebé fornese husi KoBo toolbox no sistema dadus Pelagic (PDS) saída-hosi. Dadus sira ne'e hetan husi API husi servisu sira-nia respetivu no karrega ho armazena iha Google Cloud. Dadus husi projeitu SSF no dadus Peskas mais recente sira karrega separatamente tanba sira identifika ho estrutura diferente. Fait-fila karik iha kada fó naran ID ne'ebé mosu hodi sai objetu karrega úniku no fasil atu hetan.
+
+      3. **Pre-prosesamentu dadus**
+
+      Versaun mais recente husi levantamentu peskaria no dadus rawa PDS sira sei transfer husi Google Cloud no elabora fila-fali atu fo formatu apropriadu ba prosesamentu susesejente. Espesifikamente, estrutura tabela dadus rawa ne'e reorganiza no kompaktadu, formatu data uniformiza, no tabela dadus konverte ba formatu bináriu ne'ebé sai mudansa atu trata iha R. Dadus projeitu SSF sira submete ba pre-prosesamentu ne'ebé maka intensivu tanba informasaun ne'ebé inklui kódigu espésies nian, tipu habitat nian no tipu ekipamentu nian defini iha sintakse diferente husi dadus Peskas nian.
+
+      4. **Fó-ho-fila, hamutuk-ho-hesi dalan peskaria nian**
+
+      Faze ne'e inklui fó fila sira husi projeitu SSF no dadus Peskas mai hamutuk iha data frame pre-prosesadu ida. Husi data frame ne'e, estimativu peso ne'ebé asosia ho kada viajen peskaria kalkula liuhusi referénsia ba tabela peso-tamaun ne'ebé fornese husi base dadus FishBase. Espesifikamente, utiliza servisu API ne'ebé oferese husi FishBase atu asosia tabela konversaun tamaun-tamaun ho tamaun-pesu ho espésies ne'ebé kaptura iha Peskas no fó hodi hahu fo medida pontuasaun hosi kaptura-pesu. Tamba laiha espésies hotu iha base dadus FishBase, ami extrai manualmente sira-nia tabela konversaun hosi base dadus SeaLifeBase.
+
+      5. **Validasaun dadus**
+
+      Dadus ne'ebé rekolla husi Peskas la'ós sempre pontuasaun no bele iha erros tipu ida-idak hanesan inkonsisténsia temporal, erros dala ruma, valór numériku altera. Iha fase ne'e, dadus pre-prosesadu sira submete ba konfirmasaun, higiene no validasaun. Uza desviasaun absoluta kona-ba média (MAD) hodi identifika outlier sira iha distribuisaun valór numériku hanesan númeru individu, valór kaptura no pesu. Além ne'e, variável sira muda naran konforme ho ontolojia espesífika ne'ebé dezenvolve ba peskaria oin-oin.
+
+      6. **Modelasaun dadus**
+
+      Iha fase ne'e, dadus validadu estimativu estadístika rezumu valor viajen, kaptura no viajen ba unidade sira, liuhusi modelu estatístika efetu-randu ne'ebé efeitu aleatóriu (glmmTMB).
+
+      7. **Eksportasaun dadus**
+
+      Pasu ne'e inklui preparasaun no distribuisaun dadus ba plataforma sira ne'ebé diferente (as regras iha esqusi mai). Dadus ne'e anónimu hodi garantia privasidade peskadores ne'ebé envolve iha Peskas, depois ami estimativu dadus sumáriu peskas nian iha loron, fulan no tinan, karrega liuhusi servisu API iha portal dadus fonte-abertu Dataverse, kada fulan 6 resin.

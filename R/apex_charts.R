@@ -126,7 +126,8 @@ apex_donut <- function(data = NULL,
           show = T,
           value = list(
             show = T,
-            formatter = tooltip_formatter),
+            formatter = tooltip_formatter
+          ),
           total = list(
             show = show_total,
             label = center_label,
