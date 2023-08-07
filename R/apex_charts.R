@@ -386,3 +386,39 @@ apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom",
       )
     )
 }
+
+
+apex_treemap <- function(series = NULL, colors = NULL, legend_size = 15, y_formatter = NULL) {
+  apexcharter::apexchart() %>%
+    apexcharter::ax_chart(
+      type = "treemap",
+      toolbar = list(show = FALSE),
+      animations = list(
+        enabled = TRUE,
+        speed = 800,
+        animateGradually = list(enabled = TRUE)
+      ),
+      selection = list(enabled = FALSE),
+      zoom = list(enabled = FALSE)
+    ) %>%
+    apexcharter::ax_series2(series) %>%
+    apexcharter::ax_legend(
+      show = T,
+      fontSize = legend_size,
+      position = "top",
+      onItemClick = FALSE
+    ) %>%
+    apexcharter::ax_colors(colors) %>%
+    apexcharter::ax_tooltip(
+      shared = FALSE,
+      followCursor = TRUE,
+      intersect = TRUE,
+      fillSeriesColor = FALSE
+    ) %>%
+    apexcharter::ax_yaxis(
+      labels = list(
+        padding = 4,
+        formatter = y_formatter
+      )
+    )
+}

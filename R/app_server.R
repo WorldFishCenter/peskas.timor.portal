@@ -7,6 +7,10 @@
 app_server <- function(input, output, session) {
   i18n_r <- mod_language_server("lang", session)
 
+  habitat_palette <- c("#440154", "#30678D", "#35B778", "#FDE725", "#FCA35D", "#D32F2F", "#67001F")
+  habitat_colors <- habitat_palette %>% strtrim(width = 7)
+
+
   # Home
   mod_home_table_server(id = "home_table", color_pal = c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"), i18n_r = i18n_r)
   apex_donut_server(
@@ -50,6 +54,13 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "revenue-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "revenue-card-mun", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "revenue-info", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
+  mod_normalized_treemap_server(
+    data = peskas.timor.portal::summary_data$revenue_habitat,
+    id = "habitat-revenue",
+    colors = habitat_colors,
+    y_formatter = apexcharter::format_num("$,.2f")
+  )
+
 
   # Catch tab
   mod_highlight_mun_server(id = "catch-card-mun", var = "catch", period = "month", n = 12)
@@ -58,6 +69,13 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
+  mod_normalized_treemap_server(
+    data = peskas.timor.portal::summary_data$catch_habitat,
+    id = "habitat-catch",
+    colors = habitat_colors,
+    y_formatter = apexcharter::format_num(",.2f", suffix = " Kg")
+  )
+
 
   # Market tab
   mod_highlight_mun_server(id = "market-card-mun", var = "price_kg", period = "month", n = 12)

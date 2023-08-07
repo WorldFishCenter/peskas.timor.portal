@@ -111,6 +111,7 @@ highlight_card <- function(id = "",
 highlight_card_narrow <- function(id = "",
                                   card_class = "col-lg-6",
                                   heading = "Card heading",
+                                  subheading = NULL,
                                   in_body = NULL,
                                   top_right = NULL) {
   tags$div(
@@ -123,7 +124,8 @@ highlight_card_narrow <- function(id = "",
           tags$h3(
             class = "card-title",
             heading
-          )
+          ),
+          p(subheading)
         )
       ),
       tags$div(

@@ -43,6 +43,7 @@ tab_revenue_content <- function(i18n) {
           mod_simple_summary_card_ui(id = "revenue-card-mun", div_class = "col-12"),
         )
       ),
+      mod_normalized_treemap_ui(id = "habitat-revenue", heading = i18n$t(pars$revenue$treemap$title), shiny::markdown(i18n$t(pars$revenue$treemap$description)), card_class = "col-12", apex_height = "28rem"),
       mod_summary_table_ui(
         id = "revenue-card-mun",
         heading = i18n$t(pars$revenue$table$heading$text),

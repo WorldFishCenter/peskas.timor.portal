@@ -314,7 +314,9 @@ summary_data <-
   list(
     n_surveys = summary_data$n_surveys,
     estimated_tons = estimated_tons,
-    estimated_revenue = estimated_revenue
+    estimated_revenue = estimated_revenue,
+    catch_habitat = summary_data$catch_norm,
+    revenue_habitat = summary_data$revenue_norm
   )
 
 usethis::use_data(aggregated, overwrite = TRUE)
