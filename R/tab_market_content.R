@@ -52,13 +52,13 @@ tab_market_content <- function(i18n) {
         class = "col",
         mod_var_descriptions_ui(
           id = "market-info",
-          heading = i18n$t(pars$market$description$heading$text),
+          heading = i18n$t(pars$revenue$description$heading$text),
           # subheading = "Possible caveats and data description",
           intro = tagList(
-            markdown(i18n$t(pars$market$description$content$text)),
+            markdown(i18n$t(pars$revenue$description$content$text)),
             tags$div(
               class = "hr-text",
-              i18n$t(pars$market$description$subheading$text)
+              i18n$t(pars$revenue$description$subheading$text)
             )
           )
         )

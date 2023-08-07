@@ -90,3 +90,35 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
     })
   })
 }
+
+mod_normalized_treemap_ui <- function(id, heading = NULL, subheading = NULL, apex_height = "28rem", ...) {
+  ns <- NS(id)
+  tagList(
+    highlight_card_narrow(
+      id = id,
+      heading = heading,
+      subheading = subheading,
+      in_body = tags$div(
+        class = "mt-0",
+        apexcharter::apexchartOutput(ns("n"), height = apex_height)
+      ),
+      ...
+    )
+  )
+}
+
+mod_normalized_treemap_server <- function(id,
+                                          data = NULL,
+                                          type = NULL,
+                                          sparkline.enabled = F,
+                                          y_formatter = NULL,
+                                          colors,
+                                          ...) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+
+    output$n <- apexcharter::renderApexchart({
+      apex_treemap(series = data, colors, legend_size = 15, y_formatter = y_formatter)
+    })
+  })
+}
