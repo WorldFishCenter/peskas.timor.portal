@@ -112,13 +112,14 @@ mod_normalized_treemap_server <- function(id,
                                           type = NULL,
                                           sparkline.enabled = F,
                                           y_formatter = NULL,
+                                          label_formatter = NULL,
                                           colors,
                                           ...) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     output$n <- apexcharter::renderApexchart({
-      apex_treemap(series = data, colors, legend_size = 15, y_formatter = y_formatter)
+      apex_treemap(series = data, colors, legend_size = 15, y_formatter = y_formatter, label_formatter = label_formatter)
     })
   })
 }

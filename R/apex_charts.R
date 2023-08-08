@@ -388,7 +388,7 @@ apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom",
 }
 
 
-apex_treemap <- function(series = NULL, colors = NULL, legend_size = 15, y_formatter = NULL) {
+apex_treemap <- function(series = NULL, colors = NULL, legend_size = 15, y_formatter = y_formatter, label_formatter = NULL) {
   apexcharter::apexchart() %>%
     apexcharter::ax_chart(
       type = "treemap",
@@ -420,5 +420,9 @@ apex_treemap <- function(series = NULL, colors = NULL, legend_size = 15, y_forma
         padding = 4,
         formatter = y_formatter
       )
+    ) %>%
+    apexcharter::ax_dataLabels(
+      enabled = TRUE,
+      formatter = label_formatter
     )
 }
