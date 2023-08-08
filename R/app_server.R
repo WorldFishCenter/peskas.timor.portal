@@ -74,7 +74,7 @@ app_server <- function(input, output, session) {
     data = peskas.timor.portal::summary_data$catch_habitat,
     id = "habitat-catch",
     colors = habitat_colors,
-    y_formatter = apexcharter::format_num("$,.2f", suffix = " Kg"),
+    y_formatter = apexcharter::format_num(",.2f", suffix = " Kg"),
     label_formatter = V8::JS("function (text, op) {return [text, op.value.toFixed(2) + ' Kg']}")
   )
 
