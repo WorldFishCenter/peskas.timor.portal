@@ -217,7 +217,7 @@ default:
     area_dropdown:
       text: Select area
     treemap:
-      title: Revenue per habitat and gear type
+      title: Revenue rate per habitat and gear type
       description: Each box represents the average hourly revenue for an individual fisherman for each habitat and gear type.
     table:
       heading:
@@ -235,7 +235,7 @@ default:
     subtitle:
       text: Small scale fisheries
     treemap:
-      title: Catch per habitat and gear type
+      title: Catch rate per habitat and gear type
       description: Each box represents the average hourly catch for an individual fisherman for each habitat and gear type.
   composition:
     title:
@@ -589,7 +589,7 @@ por:
     area_dropdown:
       text: Selecionar área
     treemap:
-      title: Receita por habitat e tipo de equipamento
+      title: Taxa de receita por habitat e tipo de equipamento
       description: Cada caixa representa a receita média por hora para um pescador individual para cada habitat e tipo de equipamento.
     table:
       heading:
@@ -607,7 +607,7 @@ por:
     subtitle:
       text: Pesca de pequena escala
     treemap:
-      title: Captura por habitat e tipo de equipamento
+      title: Taxa de captura por habitat e tipo de equipamento
       description: Cada caixa representa a captura média por hora para um pescador individual para cada habitat e tipo de equipamento.
   composition:
     title:
@@ -970,7 +970,7 @@ tet:
     area_dropdown:
       text: Hili área
     treemap:
-      title: Rendimentu husi habitat no tipo equipamento
+      title: Taxa rendimentu husi habitat no tipo ekipamentu
       description: Kada kaixa reprezenta rendimentu mediu kada oras ba pescador ida-idak ba kada habitat no tipo equipamento.
     table:
       heading:
@@ -988,7 +988,7 @@ tet:
     subtitle:
       text: Peskas iha peskaria kiik
     treemap:
-      title: Kaptura husi habitat no tipo equipamento
+      title: Taxa kaptura husi habitat no tipo ekipamentu
       description: Kada kaixa reprezenta kaptura mediu kada oras ba pescador ida-idak ba kada habitat no tipo equipamento.
   composition:
     title:
