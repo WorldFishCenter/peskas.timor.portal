@@ -118,7 +118,7 @@ default:
       suffix: "\u00A0Kg"
       description: "Nutritional values are obtained by integrating the weight estimates for each fish-group with modelled concentrations of seven nutrients according to [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
     nut_rdi:
-      short_name: "People fed"
+      short_name: "Number of people meeting the daily intake recommendation"
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
@@ -265,11 +265,11 @@ default:
         caption: "Explore fishing trips and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
         note: "The map displays only the fishing trips for which we have geolocation data, these represent about 5% of the total fishing trips recorded."
   nutrients:
-    to_display: [selenium, protein, omega3, calcium, zinc, iron, vitaminA]
+    to_display: [omega3, protein, calcium, zinc, iron, vitaminA]
     nutrients:
-      selenium:
-        short_name: Selenium
-        conversion_fact: 0.000055
+      #selenium:
+      #  short_name: Selenium
+      #  conversion_fact: 0.000035
       protein:
         short_name: Protein
         conversion_fact: 46.000000
@@ -290,8 +290,13 @@ default:
         conversion_fact: 0.000700
     title:
       text: Nutritional metrics
-    tree_map:
-      text: People fed by average catch
+    treemap_average:
+      title: Nutrient intake by average catch
+      description: Every box shows the count of people meeting the daily intake recommendation from an average catch in Timor-Leste.
+    treemap_kg:
+      title: Habitats' nutrient intake from 1 Kg of catch
+      description: Every box shows the count of people meeting the daily intake recommendation from 1 Kg of catch in each habitat for each nutrient.
+
 
   indicators:
     processing:
@@ -490,7 +495,7 @@ por:
       problems: "Sem limitações conhecidas."
       methods: "A receita da captura associada a cada viagem é submetida a um processo de validação com base no reconhecimento de valores de receita anômalos da distribuição estatística geral."
     nut_rdi:
-      short_name: "Pessoas alimentadas"
+      short_name: "Número de pessoas atendendo à recomendação diária de ingestão"
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
@@ -662,8 +667,13 @@ por:
         conversion_fact: 0.000700
     title:
       text: Métricas nutricionais
-    tree_map:
-      text: Pessoas alimentadas pela captura média
+    treemap_average:
+      title: Ingestão de nutrientes pela captura média
+      description: Cada caixa mostra a contagem de pessoas que atendem à recomendação de ingestão diária a partir de uma captura média em Timor-Leste.
+    treemap_kg:
+      title: Ingestão de nutrientes nos habitats a partir de 1 kg de captura
+      description: Cada caixa mostra a contagem de pessoas que atendem à recomendação de ingestão diária a partir de 1 kg de captura em cada habitat para cada nutriente.
+
 
   indicators:
     processing:
@@ -869,7 +879,7 @@ tet:
       suffix: "\u00A0Kg"
       description: "Valores nutrisaun hetan husi estimasaun peso ba grupu ikus ho koncentrasaun modelu ba 7 nutrientes liu husi [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
     nut_rdi:
-      short_name: "Ema sira ne'ebé alimenta"
+      short_name: "Emar di'ak ne'ebé tuir rekolla di'aria nian"
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
@@ -1045,10 +1055,12 @@ tet:
         conversion_fact: 0.000700
     title:
       text: Metrica nutrisaun
-    tree_map:
-      text: Emak sira ne'ebé hamenus husi kapitura média
-    subtitle:
-      text: Peskaria kiik
+    treemap_average:
+      title: Inan nutrisaun husi kaptura média
+      description: Kada kixa mosu konta ema ne'ebé hetan rekomendasaun konsumu nutrisaun loron husi kaptura média iha Timor-Leste.
+    treemap_kg:
+      title: Inan nutrisaun husi 1 Kg kaptura iha Habitats
+      description: Kada kixa mosu konta ema ne'ebé hetan rekomendasaun konsumu nutrisaun loron husi 1 Kg kaptura iha kada habitat ba kada nutrisaun.
 
   indicators:
     processing:

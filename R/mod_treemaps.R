@@ -7,12 +7,13 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_nutrient_treemap_ui <- function(id, heading = NULL, apex_height = "21rem", ...) {
+mod_nutrient_treemap_ui <- function(id, heading = NULL, subheading = NULL, apex_height = "21rem", ...) {
   ns <- NS(id)
   tagList(
     highlight_card_narrow(
       id = id,
       heading = heading,
+      subheading = subheading,
       in_body = tags$div(
         class = "mt-0",
         apexcharter::apexchartOutput(ns("t"), height = apex_height)
@@ -31,6 +32,7 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
                                         sparkline.enabled = F,
                                         y_formatter = apexcharter::format_num(""),
                                         colors,
+                                        label_formatter = NULL,
                                         ...) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -41,8 +43,8 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
     data$nut_rdi <- (data$nut_supply / sum(data_agg$n_landings, na.rm = TRUE))
     data <- aggregate(nut_supply ~ nutrient, data = data, FUN = mean)
     nutrient_names <- c(
-      selenium = "Selenium", zinc = "Zinc", protein = "Protein",
-      omega3 = "Omega-3", calcium = "Calcium", iron = "Iron", vitaminA = "Vitamin A"
+      omega3 = "Omega-3", protein = "Protein", calcium = "Calcium",
+      zinc = "Zinc", iron = "Iron", vitaminA = "Vitamin A"
     )
     data$nutrient_names <- as.character(nutrient_names[data$nutrient])
     data$nut_supply <- data$nut_supply / 1000
@@ -51,14 +53,13 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
       pars$nutrients$nutrients$iron$conversion_fact,
       pars$nutrients$nutrients$omega3$conversion_fact,
       pars$nutrients$nutrients$protein$conversion_fact,
-      pars$nutrients$nutrients$selenium$conversion_fact,
       pars$nutrients$nutrients$vitaminA$conversion_fact,
       pars$nutrients$nutrients$zinc$conversion_fact
     )
     data$people <- round(data$nut_supply / data$rdi_coeff, 2)
     data <- data[match(c(
-      "selenium", "protein", "omega3",
-      "calcium", "zinc", "iron", "vitaminA"
+      "protein", "omega3", "calcium",
+      "zinc", "iron", "vitaminA"
     ), data$nutrient), ]
 
     output$t <- apexcharter::renderApexchart({
@@ -67,7 +68,7 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
       apexcharter::apexchart() %>%
         apex(
           data = data,
-          type = type,
+          type = "treemap",
           mapping = aes(x = nutrient_names, y = people, fill = nutrient_names)
         ) %>%
         apexcharter::ax_chart(
@@ -86,7 +87,11 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
             formatter = y_formatter
           )
         ) %>%
-        ax_colors(colors)
+        apexcharter::ax_colors(colors) %>%
+        apexcharter::ax_dataLabels(
+          enabled = TRUE,
+          formatter = label_formatter
+        )
     })
   })
 }

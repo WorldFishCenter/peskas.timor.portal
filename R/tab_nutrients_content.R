@@ -5,28 +5,9 @@ tab_nutrients_content <- function(i18n) {
       title = i18n$t(pars$nutrients$title$text)
     ),
     page_cards(
-      tags$div(
-        class = "col-12 mt-0",
-        alert_ui(
-          heading = i18n$t(pars$revenue$warning_1$heading$text),
-          icon = icon_alert_triangle(class = "alert-icon"),
-          content = i18n$t(pars$revenue$warning_1$content$text),
-          alert_class = "alert-warning alert-dismissible mb-0 mt-2",
-          bottom = tags$div(
-            class = "btn-list mt-3",
-            tags$a(
-              href = "#composition-info",
-              class = "btn btn-warning",
-              i18n$t(pars$revenue$warning_1$more$text)
-            )
-          )
-        )
-      ),
       mod_nutrients_highlight_card_ui("nutrients-highlight", i18n$t(pars$vars$nut_rdi$short_name), card_class = "col-12"),
-      mod_nutrient_treemap_ui(id = "nutrient-tree", i18n$t(pars$nutrients$tree_map$text), card_class = "col-12", apex_height = "8rem"),
-      lapply(factor(unique(peskas.timor.portal::nutrients_aggregated$month$nutrient)), function(x) {
-        mod_summary_card_ui(id = paste(x, "nutrient-card", sep = "-"), div_class = "col-12 col-md-6 col-lg-4")
-      }),
+      mod_nutrient_treemap_ui(id = "nutrient-tree", heading = i18n$t(pars$nutrients$treemap_average$title), shiny::markdown(i18n$t(pars$nutrients$treemap_average$description)), card_class = "col-12", apex_height = "8rem"),
+      mod_normalized_treemap_ui(id = "habitat-nutrients", heading = i18n$t(pars$nutrients$treemap_kg$title), shiny::markdown(i18n$t(pars$nutrients$treemap_kg$description)), card_class = "col-12", apex_height = "28rem"),
       mod_var_descriptions_ui(
         id = "nutrients-info",
         heading = i18n$t(pars$revenue$description$heading$text),
