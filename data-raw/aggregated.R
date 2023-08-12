@@ -253,7 +253,7 @@ aggregated <- get_file("timor_aggregated")
 municipal_aggregated <- get_file("timor_municipal_aggregated")
 taxa_aggregated <- get_file("timor_taxa_aggregated")
 municipal_taxa <- get_file("timor_municipal_taxa") %>% data.table::as.data.table()
-nutrients_aggregated <- get_file("timor_nutrients_aggregated")
+nutrients_aggregated <- get_file("timor_nutrients_aggregated") %>% purrr::map(., ~ dplyr::filter(.x, !nutrient == "selenium"))
 summary_data <- get_file("summary_data")
 
 indicators_grid <- get_file("indicators_gridded") %>% data.table::as.data.table()
@@ -316,7 +316,8 @@ summary_data <-
     estimated_tons = estimated_tons,
     estimated_revenue = estimated_revenue,
     catch_habitat = summary_data$catch_norm,
-    revenue_habitat = summary_data$revenue_norm
+    revenue_habitat = summary_data$revenue_norm,
+    nutrients_habitat = summary_data$nutrients_norm
   )
 
 usethis::use_data(aggregated, overwrite = TRUE)

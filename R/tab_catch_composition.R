@@ -5,23 +5,6 @@ tab_catch_composition <- function(i18n) {
       title = i18n$t(pars$composition$title$text)
     ),
     page_cards(
-      tags$div(
-        class = "col-12 mt-0",
-        alert_ui(
-          heading = i18n$t(pars$revenue$warning_1$heading$text),
-          icon = icon_alert_triangle(class = "alert-icon"),
-          content = i18n$t(pars$revenue$warning_1$content$text),
-          alert_class = "alert-warning alert-dismissible mb-0 mt-2",
-          bottom = tags$div(
-            class = "btn-list mt-3",
-            tags$a(
-              href = "#composition-info",
-              class = "btn btn-warning",
-              i18n$t(pars$revenue$warning_1$more$text)
-            )
-          )
-        )
-      ),
       mod_taxa_bar_highlight_ui("taxa-highlight", i18n$t(pars$composition$highlight$heading$text), card_class = "col-12"),
       mod_region_composition_ui(id = "region-composition", heading = i18n$t(pars$composition$percent$heading$text), apex_height = "30rem"),
       # page_cards(
