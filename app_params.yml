@@ -327,6 +327,7 @@ default:
             <li><a href="#workflow">Workflow Steps</a></li>
           </ul>
         </li>
+        <li><a href="#download-data">Download data</a>
       </ul>
 
       <h1 id="about-peskas">About Peskas</h1>
@@ -397,6 +398,9 @@ default:
 
       This step encompasses data preparation and distribution across various platforms. Initially, the data is anonymized to ensure the privacy of fishermen associated with Peskas. Subsequently, we generate daily, monthly, and annual summaries of Peskas' key descriptors. Each month, these summaries are uploaded to the open-source Dataverse portal via an API service.
 
+      <h1 id="download-data">Download Data</h1>
+
+      Download the PeskAAS data for Timor-Leste using the following Dataverse portal.
 
 por:
   vars:
@@ -707,6 +711,7 @@ por:
             <li><a href="#workflow">Etapas de Trabalho</a></li>
           </ul>
         </li>
+        <li><a href="#download-data">Baixar dados</a>
       </ul>
 
       <h1 id="about-peskas">Sobre Peskas</h1>
@@ -777,7 +782,9 @@ por:
 
       Esta etapa abrange a preparação de dados e sua distribuição em várias plataformas. Inicialmente, os dados são anonimizados para garantir a privacidade dos pescadores associados ao Peskas. Posteriormente, geramos resumos diários, mensais e anuais dos principais descritores do Peskas. Todos os meses, esses resumos são carregados no portal de código aberto Dataverse através de um serviço API.
 
+      <h1 id="download-data">Baixar dados</h1>
 
+      Baixe os dados do PeskAAS para Timor-Leste usando o seguinte portal Dataverse.
 
 tet:
   vars:
@@ -1098,6 +1105,7 @@ tet:
             <li><a href="#workflow">Pasu-à-Pasu Workflow</a></li>
           </ul>
         </li>
+        <li><a href="#download-data">Download dadus</a>
       </ul>
 
       <h1 id="about-peskas">Kona-ba Peskas</h1>
@@ -1167,5 +1175,11 @@ tet:
       7. **Eksportasaun dadus**
 
       Etapu ne'e kobre preparasaun dadus no distribuisaun liu husi plataforma sira ne'ebé la hanesan. Iha inisiu, dadus ne'e anonimu hodi asegura privasidade husi pescador sira ne'ebé asosia ho Peskas. Hafoin, ami produz sumariu loron-loron, fulan-fulan, no tinan-tinan husi deskritor chavi Peskas nian. Kada fulan, sumariu sira ne'e sobe ba portal Dataverse ne'ebé ho fonte aberta liu husi servisu API.
+
+      <h1 id="download-data">Download dadus</h1>
+
+      Download dadus PeskAAS ba Timor-Leste liuhusi portal Dataverse tuir mai.
+
+
 
 

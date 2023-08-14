@@ -21,8 +21,8 @@ peskas_timor_about_ui <- function(id) {
             class = "card card-lg",
             tags$div(
               class = "card-body markdown",
-              htmlOutput(ns("about"))
-              # shiny::HTML('<script src="https://dataverse.harvard.edu/resources/js/widgets.js?alias=peskas&amp;dvUrl=https://dataverse.harvard.edu&amp;widgetScope=peskas&amp;widget=iframe&amp;heightPx=500"></script>')
+              htmlOutput(ns("about")),
+              shiny::HTML('<script src="https://dataverse.harvard.edu/resources/js/widgets.js?alias=peskas&amp;dvUrl=https://dataverse.harvard.edu&amp;widgetScope=peskas&amp;widget=iframe&amp;heightPx=500"></script>')
             )
           )
         )
