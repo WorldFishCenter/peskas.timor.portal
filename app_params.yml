@@ -361,6 +361,10 @@ default:
 
       The final steps of the pipeline produce data products that will be processed by other tools for distribution. Currently, the final products constitute a dashboard web application developed with Shiny, a data report generated with Rmarkdown, and the actual data, distributed through the open-source Dataverse portal.
 
+      Below a schematic representation of Peskas digital infrastructure.
+
+      <img src="www/peskas-infrastructure.png" width="600" style="display: block; margin: 0 auto; margin-bottom: 30px;">
+
       <h2 id="workflow">Workflow Steps</h2>
 
       The following workflow runs on a daily scale through GitHub actions, automatically updating all the input data and the respective outputs.
@@ -391,9 +395,8 @@ default:
 
       7. **Data export**
 
-      This step involves the preparation and the distribution of data across different platforms (see scheme above). The data are firstly anonymised to guarantee the privacy of fishermen involved in Peskas, then we estimate daily, monthly and yearly summaries of Peskas main descriptors. These data constitute the primary material on which the 3 main outputs are generated:
+      This step encompasses data preparation and distribution across various platforms. Initially, the data is anonymized to ensure the privacy of fishermen associated with Peskas. Subsequently, we generate daily, monthly, and annual summaries of Peskas' key descriptors. Each month, these summaries are uploaded to the open-source Dataverse portal via an API service.
 
-      - The daily, monthly and yearly data of Peska’s summaries, uploaded via an API service on the open-source data portal Dataverse every 6 months.
 
 por:
   vars:
@@ -738,6 +741,10 @@ por:
 
       As etapas finais do pipeline produzem produtos de dados que serão processados por outras ferramentas para distribuição. Atualmente, os produtos finais constituem um aplicativo de painel de controle da web desenvolvido com Shiny, um relatório de dados gerado com Rmarkdown e os dados reais, distribuídos através do portal de código aberto Dataverse.
 
+      Abaixo, uma representação esquemática da infraestrutura digital do Peskas.
+
+      <img src="www/peskas-infrastructure.png" width="600" style="display: block; margin: 0 auto; margin-bottom: 30px;">
+
       <h2 id="workflow">Etapas do Fluxo de Trabalho</h2>
 
       O seguinte fluxo de trabalho é executado diariamente através das ações do GitHub, atualizando automaticamente todos os dados de entrada e os respectivos resultados.
@@ -768,9 +775,9 @@ por:
 
       7. **Exportação de dados**
 
-      Esta etapa envolve a preparação e distribuição dos dados em diferentes plataformas (consulte o esquema acima). Os dados são primeiramente anonimizados para garantir a privacidade dos pescadores envolvidos no Peskas, em seguida, estimamos resumos diários, mensais e anuais dos principais descritores do Peskas. Esses dados constituem o material principal a partir do qual os 3 principais resultados são gerados:
+      Esta etapa abrange a preparação de dados e sua distribuição em várias plataformas. Inicialmente, os dados são anonimizados para garantir a privacidade dos pescadores associados ao Peskas. Posteriormente, geramos resumos diários, mensais e anuais dos principais descritores do Peskas. Todos os meses, esses resumos são carregados no portal de código aberto Dataverse através de um serviço API.
 
-      - Os dados diários, mensais e anuais dos resumos do Peskas são carregados através de um serviço de API no portal de dados de código aberto Dataverse a cada 6 meses.
+
 
 tet:
   vars:
@@ -1125,6 +1132,10 @@ tet:
 
       Pasu finál hosi pipeline prodús produtu dadus ne'ebé sei prosesa husi ferramenta seluk ba distribuisaun. Agora dadaun, produtu finál inklui aplikasaun web dashboard dezenvolve ho Shiny, relatóriu dadus ne'ebé hetan husi Rmarkdown, no dadus atuál, distribui husi portal dadus fonte-abertu Dataverse.
 
+      Okos, representasaun eskematiku husi infraestrutura digital Peskas nian.
+
+      <img src="www/peskas-infrastructure.png" width="600" style="display: block; margin: 0 auto; margin-bottom: 30px;">
+
       <h2 id="workflow">Pasu-à-Pasu Workflow</h2>
 
       Pasu-à-pasu ida ne'e kore tiha ona tuir loron liuhusi GitHub actions, atu atualiza automátikamente dadus input no sira-nia saída.
@@ -1155,4 +1166,6 @@ tet:
 
       7. **Eksportasaun dadus**
 
-      Pasu ne'e inklui preparasaun no distribuisaun dadus ba plataforma sira ne'ebé diferente (as regras iha esqusi mai). Dadus ne'e anónimu hodi garantia privasidade peskadores ne'ebé envolve iha Peskas, depois ami estimativu dadus sumáriu peskas nian iha loron, fulan no tinan, karrega liuhusi servisu API iha portal dadus fonte-abertu Dataverse, kada fulan 6 resin.
+      Etapu ne'e kobre preparasaun dadus no distribuisaun liu husi plataforma sira ne'ebé la hanesan. Iha inisiu, dadus ne'e anonimu hodi asegura privasidade husi pescador sira ne'ebé asosia ho Peskas. Hafoin, ami produz sumariu loron-loron, fulan-fulan, no tinan-tinan husi deskritor chavi Peskas nian. Kada fulan, sumariu sira ne'e sobe ba portal Dataverse ne'ebé ho fonte aberta liu husi servisu API.
+
+
