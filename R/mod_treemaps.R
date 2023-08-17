@@ -58,8 +58,8 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
     )
     data$people <- round(data$nut_supply / data$rdi_coeff, 2)
     data <- data[match(c(
-      "protein", "omega3", "calcium",
-      "zinc", "iron", "vitaminA"
+      "protein", "omega3", "zinc",
+      "calcium", "vitaminA", "iron"
     ), data$nutrient), ]
 
     output$t <- apexcharter::renderApexchart({

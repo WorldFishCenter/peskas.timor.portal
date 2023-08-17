@@ -122,9 +122,9 @@ default:
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
-      description: "The number of people fed for the seven nutrients is calculated based on the Recommended Daily Intake (RDI) tables conforming to [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). We obtained these  estimates by integrating the weight estimates for each group of fish with the associated nutritional values obtained from [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      description: "The number of people fed for the seven nutrients is calculated based on the Recommended Nutrient Intake (RNI) tables conforming to [World Health Organization (2004)](https://apps.who.int/iris/handle/10665/42716). We obtained these  estimates by integrating the weight estimates for each group of fish with the associated nutritional values obtained from [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "The nutrient concentrations for each group of fish are the result of a model, this reduces the accuracy of the estimates."
-      methods: "The estimations were calculated referring to the RDI of a woman between 30 and 50 years old."
+      methods: "The estimations were calculated referring to the RNI of a woman between 15 and 49 years old."
       quality: medium
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
@@ -265,33 +265,33 @@ default:
         caption: "Explore fishing trips and associated statistics around the Timor Island coast with our interactive map. Select fishery indicators, fishing gear type, and fish group to filter the results. Click on a trip point to see detailed fishery statistics for that point and the associated municipality."
         note: "The map displays only the fishing trips for which we have geolocation data, these represent about 5% of the total fishing trips recorded."
   nutrients:
-    to_display: [omega3, protein, calcium, zinc, iron, vitaminA]
+    to_display: [omega3, protein, zinc, calcium, vitaminA, iron]
     nutrients:
       #selenium:
       #  short_name: Selenium
-      #  conversion_fact: 0.000035
+      #  conversion_fact: 0.000026
       protein:
         short_name: Protein
-        conversion_fact: 46.000000
+        conversion_fact: 46
       omega3:
         short_name: "Omega-3"
-        conversion_fact: 1.100000
+        conversion_fact: 1.1
       calcium:
         short_name: Calcium
         conversion_fact: 1
       zinc:
         short_name: Zinc
-        conversion_fact: 0.008000
+        conversion_fact: 0.0049
       iron:
         short_name: Iron
-        conversion_fact: 0.018000
+        conversion_fact: 0.0294
       vitaminA:
         short_name: "Vitamin A"
-        conversion_fact: 0.000700
+        conversion_fact: 0.0005
     title:
       text: Nutritional metrics
     treemap_average:
-      title: Nutrient intake by average catch
+      title: Nutrients intake by average catch
       description: Every box shows the count of people meeting the daily intake recommendation from an average catch in Timor-Leste.
     treemap_kg:
       title: Habitats' nutrient intake from 1 Kg of catch
@@ -506,9 +506,9 @@ por:
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
-      description: "O número de pessoas alimentadas com os sete nutrientes é calculado com base nas tabelas de Ingestão Diária Recomendada (IDR) conforme [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). Obtivemos essas estimativas integrando as estimativas de peso para cada grupo de peixe com os valores nutricionais associados obtidos de [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      description: "O número de pessoas alimentadas com os sete nutrientes é calculado com base nas tabelas de Recomendação de Ingestão de Nutrientes (RNI) conforme [World Health Organization (2004)](https://apps.who.int/iris/handle/10665/42716). Obtivemos essas estimativas integrando as estimativas de peso para cada grupo de peixe com os valores nutricionais associados obtidos de [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "As concentrações de nutrientes para cada grupo de peixe são o resultado de um modelo, o que reduz a precisão das estimativas."
-      methods: "As estimativas foram calculadas com base na IDR de uma mulher entre 30 e 50 anos de idade."
+      methods: "As estimativas foram calculadas com base na RNI de uma mulher entre 15 e 49 anos de idade."
 
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
@@ -653,25 +653,18 @@ por:
     nutrients:
       selenium:
         short_name: Selênio
-        conversion_fact: 0.000055
       protein:
         short_name: Proteína
-        conversion_fact: 46.000000
       omega3:
         short_name: "Ômega-3"
-        conversion_fact: 1.100000
       calcium:
         short_name: Cálcio
-        conversion_fact: 1
       zinc:
         short_name: Zinco
-        conversion_fact: 0.008000
       iron:
         short_name: Ferro
-        conversion_fact: 0.018000
       vitaminA:
         short_name: "Vitamina A"
-        conversion_fact: 0.000700
     title:
       text: Métricas nutricionais
     treemap_average:
@@ -897,9 +890,9 @@ tet:
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
-      description: "Numeru ema sira ne'ebé alimenta ho ba nutrientes 7 mak kalkula ho baze ba rekomendasaun diaria ho ingesta (RDI) konforme ho [Trumbo et al., (2002)](https://pubmed.ncbi.nlm.nih.gov/12449285/). Ita hetan estimasaun sira ne'ebe mak refere ba estimasaun peso ba grupu ikus ho valor nutrisaun mak asosia ho [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
+      description: "Numeru ema sira ne'ebé alimenta ho ba nutrientes 7 mak kalkula ho baze ba Rekomendasaun Intake Nutriente (RNI) konforme ho [World Health Organization (2004)](https://apps.who.int/iris/handle/10665/42716). Ita hetan estimasaun sira ne'ebe mak refere ba estimasaun peso ba grupu ikus ho valor nutrisaun mak asosia ho [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "Koncentrasaun nutrientes ba grupu ikus sira ne'ebe hatudu ho modelu, ne'ebe nune'e reduz presizaun husi estimasaun."
-      methods: "Estimasaun sira ne'ebe mak kalkula refere ba RDI husi feto ida ho idade entre 30 ho 50."
+      methods: "Estimasaun sira ne'ebe mak kalkula refere ba RNI husi feto ida ho idade entre 15 ho 49."
 
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
@@ -1048,25 +1041,18 @@ tet:
     nutrients:
       selenium:
         short_name: Selenium
-        conversion_fact: 0.000055
       protein:
         short_name: Proteina
-        conversion_fact: 46.000000
       omega3:
         short_name: "Omega-3"
-        conversion_fact: 1.100000
       calcium:
         short_name: Kálsiu
-        conversion_fact: 1
       zinc:
         short_name: Zinc
-        conversion_fact: 0.008000
       iron:
         short_name: Iron
-        conversion_fact: 0.018000
       vitaminA:
         short_name: "Vitamina A"
-        conversion_fact: 0.000700
     title:
       text: Metrica nutrisaun
     treemap_average:
