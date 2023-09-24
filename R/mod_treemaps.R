@@ -37,30 +37,11 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    data <- peskas.timor.portal::nutrients_aggregated$year
-    data_agg <- peskas.timor.portal::aggregated$year
-    data <- data[, c(2, 3)]
-    data$nut_rdi <- (data$nut_supply / sum(data_agg$n_landings, na.rm = TRUE))
-    data <- aggregate(nut_supply ~ nutrient, data = data, FUN = mean)
-    nutrient_names <- c(
-      omega3 = "Omega-3", protein = "Protein", calcium = "Calcium",
-      zinc = "Zinc", iron = "Iron", vitaminA = "Vitamin A"
-    )
-    data$nutrient_names <- as.character(nutrient_names[data$nutrient])
-    data$nut_supply <- data$nut_supply / 1000
-    data$rdi_coeff <- c(
-      pars$nutrients$nutrients$calcium$conversion_fact,
-      pars$nutrients$nutrients$iron$conversion_fact,
-      pars$nutrients$nutrients$omega3$conversion_fact,
-      pars$nutrients$nutrients$protein$conversion_fact,
-      pars$nutrients$nutrients$vitaminA$conversion_fact,
-      pars$nutrients$nutrients$zinc$conversion_fact
-    )
-    data$people <- round(data$nut_supply / data$rdi_coeff, 2)
+    data <- peskas.timor.portal::summary_data$nutrients_per_catch
     data <- data[match(c(
-      "protein", "omega3", "zinc",
-      "calcium", "vitaminA", "iron"
-    ), data$nutrient), ]
+      "Protein", "Omega-3", "Zinc",
+      "Calcium", "Vitamin A", "Iron"
+    ), data$nutrient_names), ]
 
     output$t <- apexcharter::renderApexchart({
       y_formatter <- apexcharter::format_num(",.2r", suffix = " individuals")
@@ -69,7 +50,7 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
         apex(
           data = data,
           type = "treemap",
-          mapping = aes(x = nutrient_names, y = people, fill = nutrient_names)
+          mapping = aes(x = nutrient_names, y = nut_rdi, fill = nutrient_names)
         ) %>%
         apexcharter::ax_chart(
           toolbar = list(show = FALSE),
