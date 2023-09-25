@@ -124,7 +124,7 @@ default:
       suffix: "\u00A0k"
       description: "The number of people that meets daily requirements for the six nutrients is calculated based on the Recommended Nutrient Intake (RNI) tables conforming to [World Health Organization (2004)](https://apps.who.int/iris/handle/10665/42716) and other UN references. We obtained these  estimates by integrating the weight estimates for each group of fish with the associated nutritional values obtained from [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "The nutrient concentrations for each group of fish are the result of a model, this reduces the accuracy of the estimates."
-      methods: "The estimations were calculated referring to the RNI of a woman between 15 and 49 years old."
+      methods: "The estimations were calculated referring to the RNI of a woman between 19 and 50 years old."
       quality: medium
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
@@ -508,7 +508,7 @@ por:
       suffix: "\u00A0MM"
       description: "O número de pessoas que atende aos requisitos diários para os seis nutrientes é calculado com base nas tabelas de Ingestão Nutricional Recomendada (RNI) de acordo com a [World Health Organization (2004)](https://apps.who.int/iris/handle/10665/42716) e outras referências da UN. Obtivemos essas estimativas integrando as estimativas de peso para cada grupo de peixe com os valores nutricionais associados obtidos de [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "As concentrações de nutrientes para cada grupo de peixe são o resultado de um modelo, o que reduz a precisão das estimativas."
-      methods: "As estimativas foram calculadas com base na RNI de uma mulher entre 15 e 49 anos de idade."
+      methods: "As estimativas foram calculadas com base na RNI de uma mulher entre 19 e 50 anos de idade."
 
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
@@ -892,7 +892,7 @@ tet:
       suffix: "\u00A0MM"
       description: "Numeru ema ne'ebé tuir rekizitu di'ak ba nutrientes neen ne'e hetan husi tabela ba Intake Nutrisaun Rekomendadu (RNI) tuir [World Health Organization (2004)](https://apps.who.int/iris/handle/10665/42716) no referensia UN sira seluk. Ita hetan estimasaun sira ne'ebe mak refere ba estimasaun peso ba grupu ikus ho valor nutrisaun mak asosia ho [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
       problems: "Koncentrasaun nutrientes ba grupu ikus sira ne'ebe hatudu ho modelu, ne'ebe nune'e reduz presizaun husi estimasaun."
-      methods: "Estimasaun sira ne'ebe mak kalkula refere ba RNI husi feto ida ho idade entre 15 ho 49."
+      methods: "Estimasaun sira ne'ebe mak kalkula refere ba RNI husi feto ida ho idade entre 19 ho 50."
 
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
