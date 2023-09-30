@@ -31,12 +31,16 @@ header <- function(..., logo = NULL) {
 }
 
 peskas_logo <- function() {
-  htmltools::tags$span(
-    class = "text-blue logo",
-    style = "font-weight: bolder;",
-    "PESKAS"
+  htmltools::tags$div(
+    htmltools::tags$span(
+      class = "text-blue logo",
+      style = "font-weight: bolder; display: inline-block; vertical-align: middle;",
+      "PESKAS"
+    ),
+    htmltools::tags$img(src = "www/tl.svg", width = "30", height = "20", style = "display: inline-block; vertical-align: middle; margin-right: 5px;")
   )
 }
+
 
 version_flex <- function(heading = "Heading",
                          subheading = "subheading") {
