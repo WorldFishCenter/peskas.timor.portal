@@ -128,7 +128,6 @@ default:
       quality: medium
   taxa:
     to_display: [CLP, FLY, TUN, SDX, GZP, SNA, CGX, CJX, BEN, MOO, RAX, LWX, MZZ]
-    #names: ["Sardines and herrings", "Flying fishes", "Tunas", "Mackerel scads", "Garfishes", "Snappers and seaperches", "Jacks and trevalies", "Fusiliers", "Needlefishes", "Moonfishes", "Short bodied mackerels", "Jobfishes", "Other"]
     taxa:
       CLP:
         short_name: Sardines and herrings
@@ -156,6 +155,9 @@ default:
         short_name: Jobfishes
       MZZ:
         short_name: Other
+
+  conservation:
+    names: ["Box", "Ice box", "Open", "Shade"]
 
   header:
     subtitle:
@@ -257,6 +259,10 @@ default:
     description:
       footer:
         text: "* All values in metric tonnes. Totals only include data after April 2018."
+    conservation:
+      region_barplot:
+        title: Catch conservation practices
+        description: Distribution of fish storage methods on boats across Timor-Leste municipalities
   pds_tracks:
     description:
       content:
@@ -541,6 +547,9 @@ por:
       MZZ:
         short_name: Outros
 
+  conservation:
+    names: ["Caixa", "Caixa de gelo", "Aberto", "Sombra"]
+
   header:
     subtitle:
       text: Painel de Gerenciamento
@@ -641,6 +650,10 @@ por:
     description:
       footer:
         text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após abril de 2018."
+    conservation:
+      region_barplot:
+        title: Práticas de conservação de pescado
+        description: Distribuição dos métodos de armazenamento de peixe em barcos pelos municípios de Timor-Leste
   pds_tracks:
     description:
       content:
@@ -925,6 +938,9 @@ tet:
       MZZ:
         short_name: Seluk
 
+  conservation:
+    names: ["Kaixa", "Kaixa ais", "Abertu", "Iha mahon"]
+
   header:
     subtitle:
       text: Panel Jestaun
@@ -1029,6 +1045,10 @@ tet:
     description:
       footer:
         text: "* Valores hotu iha tonelada métrika. Total inklui dadus hosi April 2018."
+    conservation:
+      region_barplot:
+        title: Prátika konservasaun hasai ikan
+        description: Distribuisaun husi métodu sira atu rai ikan iha boto sira nian liuliu iha município sira Timor-Leste
   pds_tracks:
     description:
       content:

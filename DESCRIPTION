@@ -17,7 +17,8 @@ Imports:
     leaflet,
     reactable,
     tidyr,
-    reactablefmtr
+    reactablefmtr,
+    rlang
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
@@ -31,7 +32,6 @@ Suggests:
     V8,
     htmltools,
     htmlwidgets,
-    rlang,
     viridisLite,
     spelling
 Config/testthat/edition: 3
