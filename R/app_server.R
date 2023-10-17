@@ -84,6 +84,7 @@ app_server <- function(input, output, session) {
   mod_summary_card_server2(id = "market-card-mun", var = "price_kg", period = "month", n = 12, i18n_r = i18n_r)
   mod_summary_card_server3(id = "market-card-mun", var = "landing_weight", period = "month", n = 12, i18n_r = i18n_r)
   mod_simple_summary_card_server(id = "market-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
+  mod_region_conservation_server(id = "region-conservation", xvar = reporting_region, yvar = perc, fillvar = conservation_place, legend_position = "top", legend_align = "center", legend_fontsize = 16, col_length = 5, y_formatter = V8::JS('function(x) {return x + "%"}'), i18n_r = i18n_r)
   mod_summary_table_server(id = "market-card-mun", vars = c("price_kg", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r, footer_value = "mean")
   mod_var_descriptions_server(id = "market-info", vars = "price_kg", i18n_r = i18n_r)
   apex_spider_server(id = "spider_market", data = peskas.timor.portal::municipal_aggregated, cols = c("#c57b57", "#96BDC6"))
@@ -92,7 +93,7 @@ app_server <- function(input, output, session) {
   # Composition tab
   taxa_colors <- viridisLite::viridis(length(pars$taxa$to_display)) %>% strtrim(width = 7)
   mod_taxa_bar_highlight_server("taxa-highlight", var = "catch", colors = taxa_colors, i18n_r = i18n_r)
-  mod_region_composition_server(id = "region-composition", legend_position = "top", legend_align = "center", legend_fontsize = 16, i18n_r = i18n_r)
+  mod_region_composition_server(id = "region-composition", xvar = region, yvar = catch, fillvar = grouped_taxa_names, legend_position = "top", legend_align = "center", legend_fontsize = 16, col_length = 13, y_formatter = apexcharter::format_num(pars$vars$catch$format, suffix = pars$vars$catch$suffix), i18n_r = i18n_r)
   # mapply(pars$taxa$to_display[1:12], taxa_colors[1:12], FUN = function(x, y) {
   #  mod_summary_card_server(id = paste(x, "catch-card", sep = "-"), var = "catch", taxa = x, n = 25, colors = y)
   # })
@@ -100,8 +101,8 @@ app_server <- function(input, output, session) {
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
   # Tracks tab (dynamic map)
-  #leaflet_map_server(id = "map", marker_radius = 7, scale_markers = T, fill_marker_alpha = 0.6, legend_bins = 5, zoom = 8.5)
-  #mod_var_descriptions_server(id = "map-info", vars = c("pds_tracks_trips", "pds_tracks_cpe", "pds_tracks_rpe"), i18n_r = i18n_r)
+  # leaflet_map_server(id = "map", marker_radius = 7, scale_markers = T, fill_marker_alpha = 0.6, legend_bins = 5, zoom = 8.5)
+  # mod_var_descriptions_server(id = "map-info", vars = c("pds_tracks_trips", "pds_tracks_cpe", "pds_tracks_rpe"), i18n_r = i18n_r)
 
   # Nutrition tab
   nutrients_colors <- c("#a98600", "#376280", "#3d405b", "#969695", "#81b29a", "#945183")

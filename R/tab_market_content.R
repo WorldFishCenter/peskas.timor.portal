@@ -26,6 +26,7 @@ tab_market_content <- function(i18n) {
           mod_summary_card_ui2(id = "market-card-mun", div_class = "col-12 col-md-6 col-lg-12")
         )
       ),
+      mod_region_conservation_ui(id = "region-conservation", heading = i18n$t(pars$market$conservation$region_barplot$title), subheading = shiny::markdown(i18n$t(pars$market$conservation$region_barplot$description)), apex_height = "20rem"),
       mod_summary_table_ui(
         id = "market-card-mun",
         heading = i18n$t(pars$revenue$table$heading$text),

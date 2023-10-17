@@ -319,11 +319,18 @@ apex_radial_server <- function(id = NULL,
   })
 }
 
-apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom",
-                                  legend_align = "center", legend_fontsize = 5) {
+apex_bar_stacked <- function(plot_data = NULL,
+                             xvar = NULL,
+                             yvar = NULL,
+                             fillvar = NULL,
+                             legend_position = "bottom",
+                             legend_align = "center",
+                             legend_fontsize = 5,
+                             col_length = 5,
+                             y_formatter = NULL) {
   apex(
     data = plot_data, type = "bar",
-    mapping = aes(x = region, y = catch / 1000, fill = grouped_taxa_names)
+    mapping = aes(x = !!xvar, y = !!yvar, fill = !!fillvar)
   ) %>%
     ax_chart(
       stacked = TRUE,
@@ -371,10 +378,16 @@ apex_taxa_composition <- function(plot_data = NULL, legend_position = "bottom",
       followCursor = TRUE,
       intersect = TRUE,
       y = list(
-        formatter = apexcharter::format_num(pars$vars$catch$format, suffix = pars$vars$catch$suffix)
+        formatter = y_formatter
       )
     ) %>%
-    apexcharter::ax_colors(viridisLite::viridis(13) %>% strtrim(width = 7)) %>%
+    apexcharter::ax_colors(viridisLite::viridis(col_length) %>% strtrim(width = 7)) %>%
+    apexcharter::ax_grid(
+      strokeDashArray = 4,
+      padding = list(
+        top = -20, right = 0, left = 0, bottom = -4
+      )
+    ) %>%
     apexcharter::ax_plotOptions(
       apexcharter::bar_opts(
         horizontal = T,

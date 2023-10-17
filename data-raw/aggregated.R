@@ -318,7 +318,8 @@ summary_data <-
     catch_habitat = summary_data$catch_norm,
     revenue_habitat = summary_data$revenue_norm,
     nutrients_per_catch = summary_data$nutrients_per_catch,
-    nutrients_habitat = summary_data$nutrients_norm
+    nutrients_habitat = summary_data$nutrients_norm,
+    conservation = summary_data$conservation
   )
 
 usethis::use_data(aggregated, overwrite = TRUE)

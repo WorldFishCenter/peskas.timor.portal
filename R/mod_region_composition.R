@@ -46,7 +46,16 @@ mod_region_composition_ui <- function(id, heading = NULL, apex_height = "20rem",
 #' mod_region_composition Server Functions
 #'
 #' @noRd
-mod_region_composition_server <- function(id, legend_position, legend_align, legend_fontsize, i18n_r = reactive(list(t = function(x) x))) {
+mod_region_composition_server <- function(id,
+                                          xvar,
+                                          yvar,
+                                          fillvar,
+                                          legend_position,
+                                          legend_align,
+                                          legend_fontsize,
+                                          col_length,
+                                          y_formatter,
+                                          i18n_r = reactive(list(t = function(x) x))) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -71,14 +80,29 @@ mod_region_composition_server <- function(id, legend_position, legend_align, leg
         dplyr::group_by(region) %>%
         dplyr::arrange(grouped_taxa_names) %>%
         dplyr::ungroup() %>%
-        dplyr::mutate(catch = round(catch, 2))
+        dplyr::mutate(catch = round(catch, 2) / 1000)
     })
 
     output$c <- renderUI({
       data <- plot_data()
       data$grouped_taxa_names <- i18n_r()$t(as.character(data$grouped_taxa_names))
+
+      x <- rlang::enquo(arg = xvar)
+      y <- rlang::enquo(arg = yvar)
+      group <- rlang::enquo(arg = fillvar)
+
       output$char <- apexcharter::renderApexchart({
-        apex_taxa_composition(plot_data = data, legend_position, legend_align, legend_fontsize)
+        apex_bar_stacked(
+          plot_data = data,
+          xvar = x,
+          yvar = y,
+          fillvar = group,
+          legend_position,
+          legend_align,
+          legend_fontsize,
+          col_length,
+          y_formatter
+        )
       })
     })
     apexcharter::apexchartOutput(ns("char"), height = "20rem")
