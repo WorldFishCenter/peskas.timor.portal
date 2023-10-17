@@ -43,7 +43,7 @@ mod_region_conservation_server <- function(id,
 
 
     output$c <- renderUI({
-      data <- summary_data$conservation %>%
+      data <- peskas.timor.portal::summary_data$conservation %>%
         dplyr::mutate(perc = round(perc, 2),
                       conservation_place = as.factor(conservation_place)) %>%
         na.omit()
