@@ -10,13 +10,11 @@
 mod_region_composition_ui <- function(id, heading = NULL, apex_height = "20rem", ...) {
   ns <- NS(id)
 
-  # if (is.null(years)) {
-  years <- seq(as.numeric(format(Sys.Date(), "%Y")), "2018")
-  # }
+  years <- list("Year" = seq(as.numeric(format(Sys.Date(), "%Y")), "2018"))
 
   s <- selectInput(ns("y"),
     label = "",
-    choices = years,
+    choices = c("All data", years),
     selectize = FALSE,
     width = "auto"
   )
@@ -60,11 +58,18 @@ mod_region_composition_server <- function(id,
     ns <- session$ns
 
     plot_data <- reactive({
+
+      if (input$y == "All data") {
+        year_selected <- c(2018:data.table::year(Sys.Date()))
+      } else {
+        year_selected <- input$y
+      }
+
       region_composition <-
         peskas.timor.portal::municipal_taxa %>%
         dplyr::select(region, date_bin_start, catch, grouped_taxa) %>%
         dplyr::mutate(year = data.table::year(date_bin_start)) %>%
-        dplyr::filter(year %in% input$y) %>%
+        dplyr::filter(year %in% year_selected) %>%
         dplyr::group_by(region, grouped_taxa) %>%
         dplyr::summarise(catch = sum(catch)) %>%
         dplyr::mutate(
