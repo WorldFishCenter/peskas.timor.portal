@@ -9,10 +9,11 @@ app_server <- function(input, output, session) {
 
   habitat_palette <- c("#440154", "#30678D", "#35B778", "#FDE725", "#FCA35D", "#D32F2F", "#67001F")
   habitat_colors <- habitat_palette %>% strtrim(width = 7)
+  tab_palette <- c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab")
 
 
   # Home
-  mod_home_table_server(id = "home_table", color_pal = c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"), i18n_r = i18n_r)
+  mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r)
   apex_donut_server(
     id = "donut_trips",
     data = peskas.timor.portal::summary_data$n_surveys,
@@ -97,7 +98,7 @@ app_server <- function(input, output, session) {
   # mapply(pars$taxa$to_display[1:12], taxa_colors[1:12], FUN = function(x, y) {
   #  mod_summary_card_server(id = paste(x, "catch-card", sep = "-"), var = "catch", taxa = x, n = 25, colors = y)
   # })
-  mod_composition_table_server(id = "taxa-table", i18n_r = i18n_r)
+  mod_composition_table_react_server(id = "taxa-table", cols = tab_palette, i18n_r = i18n_r)
   mod_var_descriptions_server(id = "composition-info", vars = c("catch", "taxa"), i18n_r = i18n_r)
 
   # Tracks tab (dynamic map)
