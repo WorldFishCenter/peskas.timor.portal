@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_taxa_bar_highlight_ui <- function(id, heading = NULL, apex_height = "20rem", ...) {
+mod_taxa_bar_highlight_ui <- function(id, heading = NULL, ...) {
   ns <- NS(id)
 
   # if (is.null(years)) {
@@ -106,10 +106,9 @@ mod_taxa_bar_highlight_server <- function(id, var, colors, i18n_r = reactive(lis
         )
       })
     })
-    apexcharter::apexchartOutput(ns("char"), height = "20rem")
+    apexcharter::apexchartOutput(ns("char"), height = "100%", width = "100%")
   })
 }
-
 
 ## To be copied in the UI
 # mod_taxa_bar_highlight_ui("taxa_bar_highlight_1")

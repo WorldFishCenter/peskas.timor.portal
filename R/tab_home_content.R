@@ -6,7 +6,7 @@ tab_home_content <- function(i18n) {
       apex_summary_ui(id = "donut_trips", div_class = "col-md-4", apex_height = "16rem"),
       apex_summary_ui(id = "donut_revenue", div_class = "col-md-4", apex_height = "16rem"),
       apex_summary_ui(id = "donut_fish", div_class = "col-md-4", apex_height = "16rem"),
-      mod_home_table_ui(id = "home_table")
+      mod_table_react_ui(id = "home_table")
     )
   )
 }

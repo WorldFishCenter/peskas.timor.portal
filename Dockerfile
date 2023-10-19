@@ -25,7 +25,8 @@ RUN install2.r --error --skipinstalled \
 
 RUN installGithub.r \
     RinteRface/charpente \
-    dreamRs/d3.format
+    dreamRs/d3.format \
+    timelyportfolio/dataui
 
 # Rstudio interface preferences
 COPY rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json

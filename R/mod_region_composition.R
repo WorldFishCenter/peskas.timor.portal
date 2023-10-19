@@ -58,7 +58,6 @@ mod_region_composition_server <- function(id,
     ns <- session$ns
 
     plot_data <- reactive({
-
       if (input$y == "All data") {
         year_selected <- c(2018:data.table::year(Sys.Date()))
       } else {

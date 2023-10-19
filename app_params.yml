@@ -252,7 +252,7 @@ default:
       heading:
         text: Total catch
       footer:
-        text: "* All values in metric tons. Totals include data after April 2018."
+        text: "*Pictures by FAO"
   market:
     title:
       text: Market
@@ -643,7 +643,7 @@ por:
       heading:
         text: Captura total
       footer:
-        text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após Abril de 2018."
+        text: "*Imagens da FAO"
   market:
     title:
       text: Mercado
@@ -1044,7 +1044,7 @@ tet:
       text: Peskaria kiik
     description:
       footer:
-        text: "* Valores hotu iha tonelada métrika. Total inklui dadus hosi April 2018."
+        text: "*Foto husi FAO"
     conservation:
       region_barplot:
         title: Prátika konservasaun hasai ikan

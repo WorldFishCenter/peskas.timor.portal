@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_home_table_ui <- function(id, ...) {
+mod_table_react_ui <- function(id, ...) {
   ns <- NS(id)
   uiOutput(ns("o"))
 }
