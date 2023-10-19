@@ -108,44 +108,67 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       output$t <- reactable::renderReactable({
         tab %>%
           reactable::reactable(
-            theme = reactablefmtr::fivethirtyeight(centered = T),
+            theme = reactablefmtr::fivethirtyeight(centered = T, cell_padding = 0),
             pagination = FALSE,
             compact = FALSE,
-            borderless = FALSE,
+            borderless = TRUE,
             striped = FALSE,
             fullWidth = TRUE,
             sortable = FALSE,
+            height = 500,
+            defaultColDef = reactable::colDef(
+              align = "center"
+            ),
             columns = list(
-              grouped_taxa_names = reactable::colDef(name = "Taxa", maxWidth = 100),
+              grouped_taxa_names = reactable::colDef(
+                name = "Taxa",
+                minWidth = 100
+              ),
               "2018" = reactable::colDef(
+                maxWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = JS("function(cellInfo) {return cellInfo.value + ' t'}")
               ),
               "2019" = reactable::colDef(
+                maxWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
               ),
               "2020" = reactable::colDef(
+                maxWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
               ),
               "2021" = reactable::colDef(
+                maxWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
               ),
               "2022" = reactable::colDef(
+                maxWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
               ),
               "2023" = reactable::colDef(
+                maxWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
               ),
               urls = reactable::colDef(
-                name = "", minWidth = 150,
+                name = "",
+                minWidth = 150,
+                footer = i18n_r()$t(pars$composition$table$footer$text),
+                footerStyle = list(fontWeight = "lighter"),
+                format = reactable::colFormat(separators = TRUE),
                 cell = reactablefmtr::embed_img(
-                  height = 70,
-                  width = 105
+                  height = 60,
+                  width = 95
                 )
               ),
               ts = reactable::colDef(
