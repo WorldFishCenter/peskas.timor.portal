@@ -105,6 +105,7 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       dplyr::select(grouped_taxa_names, urls, dplyr::everything())
 
     output$o <- renderUI({
+      tab$grouped_taxa_names <- i18n_r()$t(as.character(tab$grouped_taxa_names))
       output$t <- reactable::renderReactable({
         tab %>%
           reactable::reactable(
@@ -114,7 +115,7 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
             borderless = TRUE,
             striped = FALSE,
             fullWidth = TRUE,
-            sortable = FALSE,
+            sortable = TRUE,
             height = 500,
             defaultColDef = reactable::colDef(
               align = "center"
