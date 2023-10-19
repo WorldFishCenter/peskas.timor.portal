@@ -27,6 +27,7 @@ RUN install2.r --error --skipinstalled -n 2 \
 RUN Rscript -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
     ))'
+RUN Rscript -e 'remotes::install_github("timelyportfolio/dataui")'
 
 COPY inst /srv/shiny-server/inst
 COPY R /srv/shiny-server/R
