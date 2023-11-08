@@ -39,7 +39,7 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
 
     data <- peskas.timor.portal::summary_data$nutrients_per_catch
     data <- data[match(c(
-      "Protein", "Omega-3", "Zinc",
+      "Protein", "Zinc", "Omega-3",
       "Calcium", "Vitamin A", "Iron"
     ), data$nutrient_names), ]
 
