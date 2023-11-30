@@ -104,6 +104,8 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       ) %>%
       dplyr::select(grouped_taxa_names, urls, dplyr::everything())
 
+    t_format <- function(value) {paste0(value, " t")}
+
     output$o <- renderUI({
       tab$grouped_taxa_names <- i18n_r()$t(as.character(tab$grouped_taxa_names))
       output$t <- reactable::renderReactable({
@@ -130,37 +132,37 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
-                cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
+                cell = t_format
               ),
               "2019" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
-                cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
+                cell = t_format
               ),
               "2020" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
-                cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
+                cell = t_format
               ),
               "2021" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
-                cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
+                cell = t_format
               ),
               "2022" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
-                cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
+                cell = t_format
               ),
               "2023" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
-                cell = htmlwidgets::JS("function(cellInfo) {return cellInfo.value + ' t'}")
+                cell = t_format
               ),
               urls = reactable::colDef(
                 name = "",
