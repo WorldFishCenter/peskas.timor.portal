@@ -33,9 +33,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
           peskas.timor.portal::municipal_aggregated %>%
           dplyr::group_by(region) %>%
           dplyr::summarise(
-            landing_revenue = median(landing_revenue),
-            landing_weight = median(landing_weight),
-            n_landings_per_boat = median(n_landings_per_boat),
+            landing_revenue = stats::median(landing_revenue),
+            landing_weight = stats::median(landing_weight),
+            n_landings_per_boat = stats::median(n_landings_per_boat),
             revenue = sum(revenue) / 1000000,
             catch = sum(catch) / 1000,
             price_kg = mean(price_kg)
@@ -46,9 +46,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
           tab %>%
           dplyr::summarise(
             region = "Total",
-            landing_revenue = median(landing_revenue),
-            landing_weight = median(landing_weight),
-            n_landings_per_boat = median(n_landings_per_boat),
+            landing_revenue = stats::median(landing_revenue),
+            landing_weight = stats::median(landing_weight),
+            n_landings_per_boat = stats::median(n_landings_per_boat),
             revenue = sum(revenue),
             catch = sum(catch),
             price_kg = mean(price_kg)

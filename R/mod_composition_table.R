@@ -108,6 +108,7 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       tab$grouped_taxa_names <- i18n_r()$t(as.character(tab$grouped_taxa_names))
       output$t <- reactable::renderReactable({
         tab %>%
+          dplyr::select(-.data$ts) %>%
           reactable::reactable(
             theme = reactablefmtr::fivethirtyeight(centered = T, cell_padding = 0),
             pagination = FALSE,
@@ -171,23 +172,23 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
                   height = 60,
                   width = 95
                 )
-              ),
-              ts = reactable::colDef(
-                name = "Time Series",
-                minWidth = 250,
-                cell = reactablefmtr::react_sparkline(
-                  .,
-                  height = 80,
-                  line_color = "#00939d",
-                  line_width = 2,
-                  statline = "mean",
-                  statline_color = "#9d0a00",
-                  statline_label_size = "0.9em",
-                  area_opacity = 0.1,
-                  show_area = TRUE,
-                  tooltip_type = 1
-                )
               )
+              #ts = reactable::colDef(
+              #  name = "Time Series",
+              #  minWidth = 250,
+              #  cell = reactablefmtr::react_sparkline(
+              #    .,
+              #    height = 80,
+              #    line_color = "#00939d",
+              #    line_width = 2,
+              #    statline = "mean",
+              #    statline_color = "#9d0a00",
+              #    statline_label_size = "0.9em",
+              #    area_opacity = 0.1,
+              #    show_area = TRUE,
+              #    tooltip_type = 1
+              #  )
+              #)
             )
           )
       })

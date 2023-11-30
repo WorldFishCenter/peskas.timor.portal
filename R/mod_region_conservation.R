@@ -48,7 +48,7 @@ mod_region_conservation_server <- function(id,
           perc = round(perc, 2),
           conservation_place = as.factor(conservation_place)
         ) %>%
-        na.omit()
+        stats::na.omit()
 
       data$conservation_place <- i18n_r()$t(as.character(data$conservation_place))
 
