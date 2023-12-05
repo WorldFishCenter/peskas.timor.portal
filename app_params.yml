@@ -261,7 +261,7 @@ default:
         text: "* All values in metric tonnes. Totals only include data after April 2018."
     conservation:
       region_barplot:
-        title: Catch conservation practices
+        title: Catch preservation practices
         description: Distribution of fish storage methods on boats across Timor-Leste municipalities
   pds_tracks:
     description:
@@ -652,7 +652,7 @@ por:
         text: "* Todos os valores em toneladas métricas. Os totais incluem apenas dados após abril de 2018."
     conservation:
       region_barplot:
-        title: Práticas de conservação de pescado
+        title: Práticas de preservação de pescado
         description: Distribuição dos métodos de armazenamento de peixe em barcos pelos municípios de Timor-Leste
   pds_tracks:
     description:
@@ -1047,7 +1047,7 @@ tet:
         text: "*Foto husi FAO"
     conservation:
       region_barplot:
-        title: Prátika konservasaun hasai ikan
+        title: Prátika preservasaun hasai ikan
         description: Distribuisaun husi métodu sira atu rai ikan iha boto sira nian liuliu iha município sira Timor-Leste
   pds_tracks:
     description:
