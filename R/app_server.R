@@ -106,19 +106,19 @@ app_server <- function(input, output, session) {
   # mod_var_descriptions_server(id = "map-info", vars = c("pds_tracks_trips", "pds_tracks_cpe", "pds_tracks_rpe"), i18n_r = i18n_r)
 
   # Nutrition tab
-  nutrients_colors <- c("#a98600", "#376280", "#3d405b", "#969695", "#81b29a", "#945183")
+ #nutrients_colors <- c("#8f7489", "#81B29A", "#c1a372","#0a9396", "#E07A5F", "#3D405B")
   # nutrients_colors <- viridisLite::viridis(length(pars$nutrients$to_display)) %>% strtrim(width = 7)
-  mod_nutrients_highlight_card_server("nutrients-highlight", var = "nut_rdi", period = "month", n = 25, colors = nutrients_colors)
+  mod_nutrients_highlight_card_server("nutrients-highlight", var = "nut_rdi", period = "month", n = 25, colors = habitat_palette)
   mod_nutrient_treemap_server(
     id = "nutrient-tree", var = "nut_rdi", period = "month", n = NULL,
     type = "treemap", sparkline.enabled = F, y_formatter = apexcharter::format_num(""),
-    colors = nutrients_colors,
+    colors = habitat_palette,
     label_formatter = V8::JS("function (text, op) {return [text, op.value.toFixed(0) + ' Indv.']}")
   )
   mod_normalized_treemap_server(
     data = peskas.timor.portal::summary_data$nutrients_habitat,
     id = "habitat-nutrients",
-    colors = nutrients_colors,
+    colors = habitat_palette,
     y_formatter = apexcharter::format_num(",.1f", suffix = " Indv."),
     label_formatter = V8::JS("function (text, op) {return [text, op.value.toFixed(1) + ' Indv.']}")
   )

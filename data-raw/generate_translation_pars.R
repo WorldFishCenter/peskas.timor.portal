@@ -61,7 +61,7 @@ load("data/taxa_aggregated.rda")
 
 get_taxa_descending_order <- function() {
   # beginning of current year
-  #start <- as.Date(paste0(format(Sys.Date(), "%Y"), "-01-01")) - 90
+  # start <- as.Date(paste0(format(Sys.Date(), "%Y"), "-01-01")) - 90
   # specific taxa (without other)
   taxa <- pars$taxa$to_display[pars$taxa$to_display != "MZZ"]
   x <- taxa_aggregated$month[date_bin_start >= 2018]

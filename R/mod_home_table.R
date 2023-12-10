@@ -87,7 +87,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
                   color <- good_color(normalized)
                   list(background = color)
                 },
-                cell = function(value) {paste0("$", value)}
+                cell = function(value) {
+                  paste0("$", value)
+                }
               ),
               n_landings_per_boat = reactable::colDef(
                 name = "Landings per boat",
@@ -104,7 +106,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
                   color <- good_color(normalized)
                   list(background = color)
                 },
-                cell = function(value) {paste0(value, " kg")}
+                cell = function(value) {
+                  paste0(value, " kg")
+                }
               ),
               revenue = reactable::colDef(
                 name = "Total revenue",
@@ -114,7 +118,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
                   color <- good_color(normalized)
                   list(background = color)
                 },
-                cell = function(value) {paste0("$", value, " M")}
+                cell = function(value) {
+                  paste0("$", value, " M")
+                }
               ),
               catch = reactable::colDef(
                 name = "Total catch",
@@ -124,7 +130,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
                   color <- good_color(normalized)
                   list(background = color)
                 },
-                cell = function(value) {paste0(value, " t")}
+                cell = function(value) {
+                  paste0(value, " t")
+                }
               ),
               price_kg = reactable::colDef(
                 name = "Price per kg",
@@ -133,7 +141,9 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
                   color <- good_color(normalized)
                   list(background = color)
                 },
-                cell = function(value) {paste0("$", value)}
+                cell = function(value) {
+                  paste0("$", value)
+                }
               )
             )
           )

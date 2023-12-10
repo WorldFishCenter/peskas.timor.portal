@@ -40,8 +40,8 @@ mod_nutrients_highlight_card_server <- function(id, var, period = "month", n = N
     data <- peskas.timor.portal::nutrients_aggregated$month
     data <- data[, c(1, 2, 4)]
     nutrient_names <- c(
-      protein = "Protein", zinc = "Zinc", omega3 = "Omega-3",
-      calcium = "Calcium", vitaminA = "Vitamin A", iron = "Iron"
+      protein = "Protein", zinc = "Zinc", vitaminA = "Vitamin A",
+      calcium = "Calcium", omega3 = "Omega-3", iron = "Iron"
     )
 
     data$nutrient_names <- as.character(nutrient_names[data$nutrient])
@@ -60,8 +60,7 @@ mod_nutrients_highlight_card_server <- function(id, var, period = "month", n = N
     output$n <- apexcharter::renderApexchart({
       y_formatter <- apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
       series <- list(
-        l$Protein, l$Zinc, l$`Omega-3`,
-        l$Calcium, l$`Vitamin A`, l$Iron
+        l$Protein, l$Zinc, l$`Vitamin A`, l$Calcium, l$`Omega-3`, l$Iron
       )
 
       plot_timeseries(

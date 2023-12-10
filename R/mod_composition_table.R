@@ -104,7 +104,9 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       ) %>%
       dplyr::select(grouped_taxa_names, urls, dplyr::everything())
 
-    t_format <- function(value) {paste0(value, " t")}
+    t_format <- function(value) {
+      paste0(value, " t")
+    }
 
     output$o <- renderUI({
       tab$grouped_taxa_names <- i18n_r()$t(as.character(tab$grouped_taxa_names))
@@ -175,7 +177,7 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
                   width = 95
                 )
               )
-              #ts = reactable::colDef(
+              # ts = reactable::colDef(
               #  name = "Time Series",
               #  minWidth = 250,
               #  cell = reactablefmtr::react_sparkline(
@@ -190,7 +192,7 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
               #    show_area = TRUE,
               #    tooltip_type = 1
               #  )
-              #)
+              # )
             )
           )
       })
