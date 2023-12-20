@@ -60,7 +60,7 @@ mod_nutrients_highlight_card_server <- function(id, var, period = "month", n = N
     output$n <- apexcharter::renderApexchart({
       y_formatter <- apexcharter::format_num(d$series[[1]]$series_format, suffix = d$series[[1]]$series_suffix)
       series <- list(
-        l$Protein, l$Zinc, l$`Omega-3`, l$`Vitamin A`, l$Calcium, l$Iron
+        l$Protein, l$Zinc, l$`Vitamin A`, l$Calcium, l$`Omega-3`, l$Iron
       )
 
       plot_timeseries(

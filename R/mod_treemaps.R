@@ -39,7 +39,7 @@ mod_nutrient_treemap_server <- function(id, var, period = "month", n = NULL,
 
     data <- peskas.timor.portal::summary_data$nutrients_per_catch
     data <- data[match(c(
-      "Protein", "Zinc", "Omega-3", "Vitamin A", "Calcium", "Iron"
+      "Protein", "Zinc", "Vitamin A", "Calcium", "Omega-3", "Iron"
     ), data$nutrient_names), ]
 
     output$t <- apexcharter::renderApexchart({
