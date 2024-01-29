@@ -96,7 +96,7 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       dplyr::filter(!is.na(year)) %>%
       tidyr::pivot_wider(names_from = year, values_from = catch) %>%
       dplyr::rowwise() %>%
-      dplyr::mutate(ts = list(c(`2018`, `2019`, `2020`, `2021`, `2022`, `2023`))) %>%
+      dplyr::mutate(ts = list(c(`2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`))) %>%
       dplyr::ungroup() %>%
       dplyr::mutate(
         urls = images,
