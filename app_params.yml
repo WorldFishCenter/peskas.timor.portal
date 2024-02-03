@@ -300,8 +300,8 @@ default:
       title: Nutrients intake by average catch
       description: Every box shows the count of people meeting the daily intake recommendation from an average catch in Timor-Leste.
     treemap_kg:
-      title: Habitats' nutrient intake from 1 Kg of catch
-      description: Every box shows the count of people meeting the daily intake recommendation from 1 Kg of catch in each habitat for each nutrient.
+      title: "Habitats' nutrient intake from 1 Kg of catch
+      description: Every box shows the count of people meeting the daily intake recommendation from 1 Kg of catch in each habitat for each nutrient."
 
 
   indicators:
@@ -336,7 +336,7 @@ default:
         <li><a href="#download-data">Download data</a>
       </ul>
 
-      <h1 id="about-peskas">About Peskas</h1>
+      <h1 id="about-peskas">About Peskas™</h1>
 
       Peskas is a web portal displaying data and insights on the fisheries of Timor-Leste. It is the official fisheries national monitoring system of Timor-Leste.
 
@@ -720,7 +720,7 @@ por:
         <li><a href="#download-data">Baixar dados</a>
       </ul>
 
-      <h1 id="about-peskas">Sobre Peskas</h1>
+      <h1 id="about-peskas">Sobre Peskas™</h1>
 
       Peskas é um portal web que apresenta dados e insights sobre as pescas de Timor-Leste. É o sistema oficial de monitorização nacional das pescas de Timor-Leste.
 
@@ -1114,7 +1114,7 @@ tet:
         <li><a href="#download-data">Download dadus</a>
       </ul>
 
-      <h1 id="about-peskas">Kona-ba Peskas</h1>
+      <h1 id="about-peskas">Kona-ba Peskas™</h1>
 
       Peskas mak hanesan portal web ne'ebé aprezenta dadus no analiza kona-ba peskaria iha Timor-Leste. Nia mak sistema monitorizasaun nasionál ofisial ba peskaria iha Timor-Leste.
 
