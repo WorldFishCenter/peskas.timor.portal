@@ -166,6 +166,12 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
                 style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
                 cell = t_format
               ),
+              "2024" = reactable::colDef(
+                minWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
+                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                cell = t_format
+              ),
               urls = reactable::colDef(
                 name = "",
                 minWidth = 120,
