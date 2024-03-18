@@ -319,8 +319,11 @@ summary_data <-
     revenue_habitat = summary_data$revenue_norm,
     nutrients_per_catch = summary_data$nutrients_per_catch,
     nutrients_habitat = summary_data$nutrients_norm,
-    conservation = summary_data$conservation
+    conservation = summary_data$conservation,
+    region_cpue = summary_data$cpue_df,
+    timor_boundaries = summary_data$timor_shape
   )
+
 
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)

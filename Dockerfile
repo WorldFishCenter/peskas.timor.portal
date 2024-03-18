@@ -21,7 +21,10 @@ RUN install2.r --error --skipinstalled \
     leaflet \
     reactable \
     tidyr \
-    reactablefmtr
+    reactablefmtr \
+    sf \
+    purrr \
+    stringr
 
 RUN installGithub.r \
     RinteRface/charpente \

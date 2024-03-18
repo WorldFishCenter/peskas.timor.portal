@@ -16,7 +16,7 @@ Imports:
     reactable,
     tidyr,
     reactablefmtr,
-    rlang,
+    rlang
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
@@ -34,7 +34,10 @@ Suggests:
     spelling,
     dataui,
     leaflet,
-    logger
+    logger,
+    sf,
+    purrr,
+    stringr
 Config/testthat/edition: 3
 Language: en-US
 Remotes: 

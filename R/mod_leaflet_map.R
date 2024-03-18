@@ -84,8 +84,6 @@ leaflet_map_ui <- function(id, i18n) {
   )
 }
 
-
-
 #' leaflet_map Server Functions
 #'
 #' @noRd
@@ -222,6 +220,141 @@ leaflet_map_server <- function(id,
     })
   })
 }
+
+#' leaflet_map UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd
+#'
+#' @importFrom shiny NS tagList
+leaflet_cpue_ui <- function(id) {
+  ns <- NS(id)
+
+  sel_gear <- selectInput(
+    inputId = ns("gear"),
+    label = tags$div(style = c("color: white"), "Select gear type"),
+    choices = c(
+      "All Gears", "Hand Line", "Gill Net", "Long Line", "Spear Gun",
+      "Cast Net", "Seine Net", "Manual Collection", "Beach Seine"
+    ),
+    selected = "All Gears"
+  )
+
+  map_ui <-
+    tab_map_leaflet(
+      id = id,
+      in_body = tagList(
+        leaflet::leafletOutput(ns("map"), width = "100%", height = "100%"),
+        shiny::absolutePanel(
+          left = 65,
+          top = 10,
+          width = 330,
+          sel_gear
+        )
+      )
+    )
+
+  map_ui
+}
+
+
+
+#' leaflet_map Server Functions
+#'
+#' @noRd
+leaflet_cpue_server <- function(id, zoom = NULL) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+
+    full_dat <- peskas.timor.portal::summary_data$region_cpue %>% dplyr::filter(!gear_type == "Trap")
+    full_dat$gear_type <- stringr::str_to_title(full_dat$gear_type)
+
+    timor_boundaries <- sf::st_as_sf(peskas.timor.portal::summary_data$timor_boundaries)
+
+    # Reactive expression to user filtering options
+    dat <- reactive({
+      if (input$gear == "All Gears") {
+        res <- full_dat %>%
+          tidyr::complete(region, gear_type) %>%
+          dplyr::group_by(region) %>%
+          dplyr::summarise(cpue = mean(cpue, na.rm = T))
+        res <- timor_boundaries %>%
+          dplyr::left_join(res, by = "region") %>%
+          dplyr::select(region, cpue, geometry)
+      } else {
+        res <- full_dat %>%
+          tidyr::complete(region, gear_type) %>%
+          dplyr::filter(gear_type == input$gear)
+        res <- timor_boundaries %>%
+          dplyr::left_join(res, by = "region") %>%
+          dplyr::select(region, cpue, geometry)
+      }
+    })
+
+    # Include aspects of the map that won't need to change dynamically
+    output$map <- leaflet::renderLeaflet({
+      leaflet::leaflet(timor_boundaries, options = leaflet::leafletOptions(minZoom = 5)) %>%
+        leaflet::setView(lat = -8.75, lng = 125.7, zoom = zoom) %>%
+        leaflet::addTiles(urlTemplate = "https://api.mapbox.com/styles/v1/langbart/cli8oua4m002a01pg17wt6vqa/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGFuZ2JhcnQiLCJhIjoiY2xkcGN0b3lhMDhmODNvbzQzNGlqbXI0OSJ9.JhvnRPg7hwJ5rPc5M5NChQ")
+    })
+
+    outputOptions(output, "map", suspendWhenHidden = FALSE)
+    # Observe changes in user indicators selection and set legends and text accordingly
+    observe({
+      var <- dat()$cpue
+      # Set colors
+      mypalette <- leaflet::colorNumeric(
+        palette = c(
+          "#ffffff", "#f6fae6", "#f2fbd2", "#deedd8", "#c9ecb4",
+          "#add9ba", "#93d3ab", "#64c0b5", "#35b0ab"
+        ),
+        domain = var,
+        na.color = "transparent",
+        reverse = F
+      )
+
+      # Set text for the tooltip:
+      labels <- sprintf(
+        "<div style='font-size:16px;'><strong>%s</strong><br/>Hourly catch rate per fisherman: <strong>%g kg</strong></div>",
+        dat()$region, round(var, 3)
+      ) %>%
+        purrr::map(~ stringr::str_replace(., "NA kg", "No data")) %>%
+        lapply(htmltools::HTML)
+
+
+      leaflet::leafletProxy("map", data = dat()) %>%
+        leaflet::clearShapes() %>%
+        leaflet::clearControls() %>%
+        leaflet::addPolygons(
+          color = "transparent",
+          weight = 2,
+          smoothFactor = 1,
+          opacity = 1,
+          fillOpacity = 0.8,
+          fillColor = ~ mypalette(var),
+          label = labels,
+          highlightOptions = leaflet::highlightOptions(
+            color = "white", weight = 4,
+            bringToFront = TRUE
+          ),
+          layerId = dat()$region
+        ) %>%
+        leaflet::addLegend(
+          pal = mypalette,
+          opacity = 0.9,
+          # bins = 2,
+          values = ~var,
+          className = "custom-legend",
+          title = htmltools::HTML("Hourly catch rate<br/>per fisherman (kg)"),
+          position = "bottomright"
+        )
+    })
+  })
+}
+
 
 leaflet_map_app <- function(i18n) {
   ui <- tabler_page(

@@ -35,7 +35,7 @@ peskas_logo <- function() {
     htmltools::tags$span(
       class = "text-blue logo",
       style = "font-weight: bolder; display: inline-block; vertical-align: middle;",
-      "PESKAS™"
+      "PESKAS\u2122"
     ),
     htmltools::tags$img(src = "www/tl.svg", width = "30", height = "20", style = "display: inline-block; vertical-align: middle; margin-right: 5px;")
   )

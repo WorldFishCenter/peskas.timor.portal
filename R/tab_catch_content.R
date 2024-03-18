@@ -32,6 +32,7 @@ tab_catch_content <- function(i18n) {
         heading = i18n$t(pars$revenue$table$heading$text),
         card_class = "col-lg-7 col-xl-auto order-lg-last"
       ),
+      leaflet_cpue_ui(id = "catch-map"),
       tags$div(
         class = "col",
         mod_var_descriptions_ui(
