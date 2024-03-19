@@ -257,7 +257,12 @@ leaflet_cpue_ui <- function(id) {
       )
     )
 
-  map_ui
+  tagList(
+    div(
+      class = "title",
+    ),
+    map_ui
+  )
 }
 
 
