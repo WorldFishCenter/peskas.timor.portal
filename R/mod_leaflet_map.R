@@ -221,7 +221,7 @@ leaflet_map_server <- function(id,
   })
 }
 
-#' leaflet_map UI Function
+#' leaflet_cpue UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -261,8 +261,7 @@ leaflet_cpue_ui <- function(id) {
 }
 
 
-
-#' leaflet_map Server Functions
+#' leaflet_cpue Server Functions
 #'
 #' @noRd
 leaflet_cpue_server <- function(id, zoom = NULL) {
