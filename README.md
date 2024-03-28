@@ -9,11 +9,13 @@ A web portal displaying data and insights from small fisheries in East Timor.
 This app is structured as an R package and makes heavy use of the [golem](https://github.com/ThinkR-open/golem) framework to organise the package. 
 The user interface is heavily customised and relies on the open source dashboard template [tabler](https://tabler.io).
 
+The content of the dashboard is automatically updated every day through GitHub actions, in concert with the data processing and upload performed by the complementary repository [peskas.timor.pipeline](https://github.com/WorldFishCenter/peskas.timor.data.pipeline)
+
 Reproducibility is managed by combining docker and renv. This app runs in Google Cloud Run. 
 
 ## Multilingual support
 
-Peskas supports multiple languages. 
+Peskas supports multiple languages. The languages currently supported are English, Portuguese and Tetum.
 
 The text displayed and the number formatted is specified in the file `app_params.yaml`. A translation file `inst/translation.json` is then generated automatically using `data-raw/generate_translation_pars.R`. Do not edit `inst/translation.json` by hand.
 
