@@ -130,7 +130,8 @@ cloud_object_name <- function(prefix, version = "latest", extension = "",
         remove = FALSE
       ) %>%
       dplyr::filter(stringr::str_detect(.data$ext, paste0(extension, "$"))) %>%
-      dplyr::group_by(.data$base_name, .data$ext)
+      dplyr::group_by(.data$base_name, .data$ext) %>%
+      na.omit()
 
     if (isTRUE(exact_match)) {
       selected_rows <- gcs_files_formatted %>%
