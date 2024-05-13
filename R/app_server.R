@@ -71,7 +71,7 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
-  #leaflet_cpue_server(id = "catch-map", zoom = 8)
+  leaflet_cpue_server(id = "catch-map", zoom = 8)
   mod_normalized_treemap_server(
     data = peskas.timor.portal::summary_data$catch_habitat,
     id = "habitat-catch",

@@ -328,7 +328,6 @@ leaflet_cpue_server <- function(id, zoom = NULL) {
         purrr::map(~ stringr::str_replace(., "NA kg", "No data")) %>%
         lapply(htmltools::HTML)
 
-
       leaflet::leafletProxy("map", data = dat()) %>%
         leaflet::clearShapes() %>%
         leaflet::clearControls() %>%
