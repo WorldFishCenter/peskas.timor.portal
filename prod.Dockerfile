@@ -19,6 +19,7 @@ RUN install2.r --error --skipinstalled -n 2 \
     shiny.i18n \
     logger \
     leaflet \
+    htmltools \
     dplyr \
     reactable \
     tidyr \
