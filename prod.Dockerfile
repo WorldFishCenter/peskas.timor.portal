@@ -18,6 +18,7 @@ RUN install2.r --error --skipinstalled -n 2 \
     shinyjs \
     shiny.i18n \
     leaflet \
+    sf \
     logger \
     dplyr \
     reactable \
