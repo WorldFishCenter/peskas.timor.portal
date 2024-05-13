@@ -18,12 +18,9 @@ RUN install2.r --error --skipinstalled \
     googleCloudStorageR \
     shiny.i18n \
     logger \
-    leaflet \
-    htmltools \
     reactable \
     tidyr \
     reactablefmtr \
-    sf \
     purrr \
     stringr
 
