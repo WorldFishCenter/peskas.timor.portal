@@ -46,11 +46,11 @@ mod_region_conservation_server <- function(id,
       data <- peskas.timor.portal::summary_data$conservation %>%
         dplyr::mutate(
           perc = round(perc, 2),
-          conservation_place = as.factor(conservation_place)
+          catch_preservation = as.factor(catch_preservation)
         ) %>%
         stats::na.omit()
 
-      data$conservation_place <- i18n_r()$t(as.character(data$conservation_place))
+      data$catch_preservation <- i18n_r()$t(as.character(data$catch_preservation))
 
       x <- rlang::enquo(arg = xvar)
       y <- rlang::enquo(arg = yvar)

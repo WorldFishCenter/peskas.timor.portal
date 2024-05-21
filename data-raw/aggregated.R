@@ -247,13 +247,22 @@ label_taxa_groups <- function(x) {
   label_groups_list
 }
 
+rename_ontology <- function(x) {
+  names(x) <- gsub("catch_price", "revenue", names(x))
+  names(x) <- gsub("municipality", "region", names(x))
+  names(x) <- gsub("landing_catch", "landing_weight", names(x))
+  names(x) <- gsub("catch_preservation", "conservation_place", names(x))
+  names(x) <- gsub("gear", "gear_type", names(x))
+  return(x)
+}
+
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
 
-aggregated <- get_file("timor_aggregated")
-municipal_aggregated <- get_file("timor_municipal_aggregated")
-taxa_aggregated <- get_file("timor_taxa_aggregated")
-municipal_taxa <- get_file("timor_municipal_taxa") %>% data.table::as.data.table()
+aggregated <- get_file("timor_aggregated") %>% purrr::map(rename_ontology)
+municipal_aggregated <- get_file("timor_municipal_aggregated") %>% rename_ontology()
+taxa_aggregated <- get_file("timor_taxa_aggregated") %>% purrr::map(rename_ontology)
+municipal_taxa <- get_file("timor_municipal_taxa") %>% rename_ontology()
 nutrients_aggregated <- get_file("timor_nutrients_aggregated") %>% purrr::map(., ~ dplyr::filter(.x, !nutrient == "selenium"))
 summary_data <- get_file("summary_data")
 
@@ -317,7 +326,7 @@ summary_data <-
     estimated_tons = estimated_tons,
     estimated_revenue = estimated_revenue,
     catch_habitat = summary_data$catch_norm,
-    revenue_habitat = summary_data$revenue_norm,
+    revenue_habitat = summary_data$revenue_habitat,
     nutrients_per_catch = summary_data$nutrients_per_catch,
     nutrients_habitat = summary_data$nutrients_norm,
     conservation = summary_data$conservation,
