@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Extra R packages
 RUN install2.r --error --skipinstalled -n 2 \
     remotes \
-    apexcharter \
     config \
     data.table \
     V8 \
@@ -31,6 +30,8 @@ RUN Rscript -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
     ))'
 RUN Rscript -e 'remotes::install_github("timelyportfolio/dataui")'
+RUN Rscript -e 'remotes::install_local("/srv/shiny-server", dependencies = FALSE)'
+RUN Rscript -e 'remotes::install_version("apexcharter", version = "0.4.2")'
 
 COPY inst /srv/shiny-server/inst
 COPY R /srv/shiny-server/R
@@ -38,7 +39,6 @@ COPY DESCRIPTION /srv/shiny-server/DESCRIPTION
 COPY NAMESPACE /srv/shiny-server/NAMESPACE
 COPY data /srv/shiny-server/data
 
-RUN Rscript -e 'remotes::install_local("/srv/shiny-server", dependencies = FALSE)'
 
 COPY shiny.config /etc/shiny-server/shiny-server.conf
 COPY app.R /srv/shiny-server/app.R

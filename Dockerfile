@@ -8,11 +8,11 @@ RUN wget https://github.com/rstudio/shinycannon/releases/download/v1.1.0/shinyca
 
 # Extra R packages
 RUN install2.r --error --skipinstalled \
+    remotes \
     renv	\
     bslib \
     golem \
     shinyjs \
-    apexcharter \
     profvis \
     shinyloadtest \
     googleCloudStorageR \
@@ -25,6 +25,9 @@ RUN install2.r --error --skipinstalled \
     reactablefmtr \
     purrr \
     stringr
+
+
+RUN Rscript -e 'remotes::install_version("apexcharter", version = "0.4.2")'
 
 RUN installGithub.r \
     RinteRface/charpente \
