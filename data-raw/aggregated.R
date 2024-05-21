@@ -259,7 +259,9 @@ rename_ontology <- function(x) {
 # Download file
 pars <- config::get(file = "inst/golem-config.yml")
 
-aggregated <- get_file("timor_aggregated") %>% purrr::map(rename_ontology)
+aggregated <- get_file("timor_aggregated")
+data_last_updated <- attr(aggregated, "data_last_updated")
+aggregated <- aggregated %>% purrr::map(rename_ontology)
 municipal_aggregated <- get_file("timor_municipal_aggregated") %>% rename_ontology()
 taxa_aggregated <- get_file("timor_taxa_aggregated") %>% purrr::map(rename_ontology)
 municipal_taxa <- get_file("timor_municipal_taxa") %>% rename_ontology()
@@ -271,7 +273,6 @@ label_groups_list <- label_taxa_groups(indicators_grid)
 
 boats <- sum(unique(municipal_aggregated$n_boats))
 
-data_last_updated <- attr(aggregated, "data_last_updated")
 aggregated <- format_aggregated_data(aggregated, national_boats = boats)
 municipal_aggregated <- format_aggregated_data(municipal_aggregated, municipal = TRUE)
 taxa_aggregated <- format_aggregated_data(taxa_aggregated, national_boats = boats)
