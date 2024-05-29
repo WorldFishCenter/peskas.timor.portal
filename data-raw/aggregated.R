@@ -327,7 +327,7 @@ summary_data <-
     estimated_tons = estimated_tons,
     estimated_revenue = estimated_revenue,
     catch_habitat = summary_data$catch_norm,
-    revenue_habitat = summary_data$revenue_habitat,
+    revenue_habitat = summary_data$catch_price_norm,
     nutrients_per_catch = summary_data$nutrients_per_catch,
     nutrients_habitat = summary_data$nutrients_norm,
     conservation = summary_data$conservation,
