@@ -2,7 +2,6 @@ default:
   golem_name: peskas.timor.portal
   golem_version: 0.0.0.9000
   app_prod: no
-  mapbox_token: !expr readLines("auth/mapbox-token")
   storage:
     google:
       key: gcs
@@ -12,7 +11,6 @@ default:
         service_account_key: !expr readLines("auth/gcp-sa-peskas_ingestion-key.json")
 production:
   app_prod: yes
-  mapbox_token: !expr readLines("mapbox_token")
   storage:
     google:
       options:
