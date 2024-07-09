@@ -478,3 +478,229 @@ kepler_map <- function(width = NULL, height = NULL, i18n) {
     htmltools::tags$iframe(src = "www/kepler_pds_map.html", width = width, height = height)
   )
 }
+
+
+
+fishing_map_ui <- function(id) {
+  ns <- NS(id)
+  color_range <- list(
+    c(1, 152, 189),
+    c(73, 227, 206),
+    c(216, 254, 181),
+    c(254, 237, 177),
+    c(254, 173, 84),
+    c(209, 55, 78)
+  )
+  div(
+    style = "position: relative; width: 100%; height: 650px;", # Adjust height as needed
+    tags$head(
+      tags$style(shiny::HTML("
+        .legend {
+        margin-top: 15px;;
+        display: flex;
+        }
+        .legend-item {
+        flex-grow: 1;
+        height: 20px;
+        min-width: 45px;
+        }
+        .panel {
+        background: rgba(255,255,255,0.8);
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 300px;
+        z-index: 1000;
+        }
+        .panel h2, .panel p {
+        margin: 0;
+        padding: 0;
+        color: black;
+        }
+        .legend span {
+        color: black;
+        }
+        .checkbox-inline {
+        display: block;
+        margin-top: 10px;
+        }
+        .bold-label {
+        font-weight: bold;
+        }
+        .checkbox-inline input[type='checkbox'] {
+          accent-color: #0073b7;
+        }
+        .checkbox-inline input[type='checkbox']:checked {
+          background-color: #0073b7;
+          border-color: #0073b7;
+        }
+      "))
+    ),
+    deckgl::deckglOutput(ns("map"), height = "100%"),
+    div(
+      class = "panel panel-default",
+      style = "position: absolute; top: 20px; right: 20px;",
+      h2("Fishing Activity Heatmap"),
+      p("Visualizing fishing vessel density in Timor-Leste waters"),
+      div(
+        class = "legend",
+        lapply(1:6, function(i) {
+          div(
+            class = "legend-item",
+            style = sprintf(
+              "background-color: rgb(%s);",
+              paste(color_range[[i]], collapse = ",")
+            )
+          )
+        })
+      ),
+      div(
+        style = "display: flex; justify-content: space-between; margin-top: 10px;",
+        span("Low Density"),
+        span("High Density")
+      ),
+      div(
+        style = "margin-top: 15px;",
+        span(class = "bold-label", "Gear Types:"),
+        checkboxGroupInput(ns("Gear"), NULL,
+                           choices = unique(peskas.timor.portal::predicted_tracks$Gear),
+                           selected = unique(peskas.timor.portal::predicted_tracks$Gear),
+                           inline = TRUE
+        )
+      ),
+      div(
+        style = "margin-top: 15px;",
+        span(class = "bold-label", "Time Range:"),
+        sliderInput(ns("year_range"), NULL,
+                    min = min(peskas.timor.portal::predicted_tracks$year),
+                    max = max(peskas.timor.portal::predicted_tracks$year),
+                    value = c(min(peskas.timor.portal::predicted_tracks$year), max(peskas.timor.portal::predicted_tracks$year)),
+                    step = 1,
+                    sep = "",
+                    ticks = FALSE
+        )
+      ),
+      div(
+        style = "margin-top: 15px;",
+        span(class = "bold-label", "Hexagon Radius:"),
+        sliderInput(ns("radius"), NULL, min = 500, max = 3000, value = 500, step = 500, ticks = FALSE)
+      ),
+      p(
+        style = "margin-top: 15px; font-size: 0.9em;",
+        "Click on a hexagon to view detailed fishing activity information."
+      )
+    )
+  )
+}
+
+# Define server logic for the module
+fishing_map_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+
+    color_range <- list(
+      c(1, 152, 189),
+      c(73, 227, 206),
+      c(216, 254, 181),
+      c(254, 237, 177),
+      c(254, 173, 84),
+      c(209, 55, 78)
+    )
+
+    filtered_data <- reactive({
+      peskas.timor.portal::predicted_tracks %>%
+        dplyr::filter(
+          Gear %in% input$Gear,
+          year >= input$year_range[1],
+          year <= input$year_range[2]
+        )
+    })
+
+    props <- list(
+      autoHighlight = TRUE,
+      material = list(
+        ambient = 0.75,
+        diffuse = 0.75,
+        specularColor = c(51, 51, 51)
+      ),
+      transitions = list(
+        elevationScale = 3000
+      )
+    )
+
+    tooltip_js <- htmlwidgets::JS("object => {
+      const gearCounts = object.points.reduce((acc, point) => {
+        acc[point.Gear] = (acc[point.Gear] || 0) + 1;
+        return acc;
+      }, {});
+
+      const totalActivities = object.points.length;
+      const mainGear = Object.keys(gearCounts).reduce((a, b) => gearCounts[a] > gearCounts[b] ? a : b);
+
+      let backgroundColor = 'rgba(255, 255, 255, 0.9)'; // default white
+      if (mainGear.toLowerCase().includes('long line')) {
+        backgroundColor = 'rgba(204, 51, 99, 1)'; // light red
+      } else if (mainGear.toLowerCase().includes('gill net')) {
+        backgroundColor = 'rgba(51, 55, 69, 1)'; // light green
+      } else if (mainGear.toLowerCase().includes('hand line')) {
+        backgroundColor = 'rgba(188, 175, 156, 1)'; // light blue
+      }
+
+      const gearInfo = Object.entries(gearCounts)
+        .map(([gear, count]) => `<strong>${gear}:</strong> ${count} (${(count/totalActivities*100).toFixed(1)}%)`)
+        .join('<br>');
+
+      return `
+        <div style='background-color: ${backgroundColor}; padding: 10px; border-radius: 5px;'>
+          <strong>Location:</strong> ${object.position[1].toFixed(4)}, ${object.position[0].toFixed(4)}<br>
+          <strong>Total Activities:</strong> ${totalActivities}<br>
+          <strong>Gear Types:</strong><br>
+          ${gearInfo}
+        </div>
+      `;
+    }")
+
+    output$map <- deckgl::renderDeckgl({
+      deckgl::deckgl(
+        longitude = 125.7,
+        latitude = -8.75,
+        zoom = 8,
+        pitch = 40.5
+      ) %>%
+        deckgl::add_basemap(
+          style = deckgl::use_carto_style(theme = "dark-matter")
+        ) %>%
+        deckgl::add_hexagon_layer(
+          data = peskas.timor.portal::predicted_tracks,
+          getPosition = ~ c(lon, lat),
+          colorRange = color_range,
+          elevationRange = c(0, 3000),
+          elevationScale = 30,
+          extruded = TRUE,
+          radius = 500, # Default radius
+          coverage = 0.4,
+          pickable = TRUE,
+          properties = props,
+          getTooltip = tooltip_js
+        )
+    })
+
+    # Update the layer when inputs change
+    observe({
+      deckgl::deckgl_proxy(ns("map")) %>%
+        deckgl::add_hexagon_layer(
+          data = filtered_data(),
+          getPosition = ~ c(lon, lat),
+          colorRange = color_range,
+          elevationRange = c(0, 3000),
+          elevationScale = 30,
+          extruded = TRUE,
+          radius = input$radius,
+          coverage = 0.4,
+          pickable = TRUE,
+          properties = props,
+          getTooltip = tooltip_js
+        ) %>%
+        deckgl::update_deckgl()
+    })
+  })
+}

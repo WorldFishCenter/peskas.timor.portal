@@ -2,7 +2,8 @@ tab_home_content <- function(i18n) {
   tagList(
     home_text(title = i18n$t(pars$home$intro$title), content = i18n$t(pars$home$intro$content), report_text = i18n$t(pars$home$report$text)),
     page_cards(
-      kepler_map(width = "580", height = "510", i18n),
+      fishing_map_ui(id = "fishing_map"),
+      # kepler_map(width = "580", height = "510", i18n),
       apex_summary_ui(id = "donut_trips", div_class = "col-md-4", apex_height = "16rem"),
       apex_summary_ui(id = "donut_revenue", div_class = "col-md-4", apex_height = "16rem"),
       apex_summary_ui(id = "donut_fish", div_class = "col-md-4", apex_height = "16rem"),

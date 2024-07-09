@@ -16,7 +16,6 @@ RUN install2.r --error --skipinstalled -n 2 \
     V8 \
     shinyjs \
     shiny.i18n \
-    leaflet \
     sf \
     logger \
     dplyr \
@@ -24,7 +23,9 @@ RUN install2.r --error --skipinstalled -n 2 \
     tidyr \
     reactablefmtr \
     purrr \
-    stringr
+    stringr \
+    deckgl \
+    htmlwidgets
 
 RUN Rscript -e 'remotes::install_github(c( \
     "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \

@@ -14,6 +14,7 @@ app_server <- function(input, output, session) {
 
   # Home
   mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r)
+  fishing_map_server(id = "fishing_map")
   apex_donut_server(
     id = "donut_trips",
     data = peskas.timor.portal::summary_data$n_surveys,
