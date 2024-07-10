@@ -581,7 +581,7 @@ fishing_map_ui <- function(id) {
       ),
       div(
         style = "margin-top: 15px;",
-        span(class = "bold-label", "Hexagon Radius:"),
+        span(class = "bold-label", "Radius (meters):"),
         sliderInput(ns("radius"), NULL, min = 500, max = 3000, value = 500, step = 500, ticks = FALSE)
       ),
       p(
