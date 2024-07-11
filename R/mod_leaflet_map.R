@@ -496,35 +496,35 @@ fishing_map_ui <- function(id) {
     tags$head(
       tags$style(shiny::HTML("
         .legend {
-        margin-top: 15px;;
-        display: flex;
+          margin-top: 15px;
+          display: flex;
         }
         .legend-item {
-        flex-grow: 1;
-        height: 20px;
-        min-width: 45px;
+          flex-grow: 1;
+          height: 20px;
+          min-width: 45px;
         }
         .panel {
-        background: rgba(255,255,255,0.8);
-        padding: 20px;
-        border-radius: 5px;
-        max-width: 300px;
-        z-index: 1000;
+          background: rgba(255,255,255,0.8);
+          padding: 20px;
+          border-radius: 5px;
+          max-width: 300px;
+          z-index: 1000;
         }
         .panel h2, .panel p {
-        margin: 0;
-        padding: 0;
-        color: black;
+          margin: 0;
+          padding: 0;
+          color: black;
         }
         .legend span {
-        color: black;
+          color: black;
         }
         .checkbox-inline {
-        display: block;
-        margin-top: 10px;
+          display: block;
+          margin-top: 10px;
         }
         .bold-label {
-        font-weight: bold;
+          font-weight: bold;
         }
         .checkbox-inline input[type='checkbox'] {
           accent-color: #0073b7;
@@ -533,6 +533,42 @@ fishing_map_ui <- function(id) {
           background-color: #0073b7;
           border-color: #0073b7;
         }
+        .info-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: #0073b7;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  cursor: help;
+  margin-left: 5px;
+  position: relative;
+}
+.info-icon::after {
+  content: attr(data-tooltip);
+  display: block;
+  opacity: 0;
+  position: absolute;
+  background-color: #2c353c;
+  border: 1px solid #f9f9f9;
+  padding: 8px;
+  border-radius: 5px;
+  z-index: 1001;
+  width: 200px;
+  font-size: 0.9em;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  transition: opacity 0.4s ease;
+  pointer-events: none; /* Prevents hover issues */
+}
+
+.info-icon:hover::after {
+  opacity: 0.9;
+}
       "))
     ),
     deckgl::deckglOutput(ns("map"), height = "100%"),
@@ -540,7 +576,14 @@ fishing_map_ui <- function(id) {
       class = "panel panel-default",
       style = "position: absolute; top: 20px; right: 20px;",
       h2("Fishing Activity Heatmap"),
-      p("Visualizing fishing vessel density in Timor-Leste waters"),
+      p(
+        "Visualizing fishing vessel density in Timor-Leste waters",
+        span(
+          class = "info-icon",
+          "ℹ",
+          `data-tooltip` = "This heatmap shows the fishing vessel density along the Timor-Leste coasts. The data is based on a sample of 440 vessels equipped with GPS trackers, representing a subset of the total fishery. The gear type was predicted using a machine learning model analyzing the vessels' movement patterns."
+        )
+      ),
       div(
         class = "legend",
         lapply(1:6, function(i) {
@@ -562,21 +605,21 @@ fishing_map_ui <- function(id) {
         style = "margin-top: 15px;",
         span(class = "bold-label", "Gear Types:"),
         checkboxGroupInput(ns("Gear"), NULL,
-                           choices = unique(peskas.timor.portal::predicted_tracks$Gear),
-                           selected = unique(peskas.timor.portal::predicted_tracks$Gear),
-                           inline = TRUE
+          choices = unique(peskas.timor.portal::predicted_tracks$Gear),
+          selected = unique(peskas.timor.portal::predicted_tracks$Gear),
+          inline = TRUE
         )
       ),
       div(
         style = "margin-top: 15px;",
         span(class = "bold-label", "Time Range:"),
         sliderInput(ns("year_range"), NULL,
-                    min = min(peskas.timor.portal::predicted_tracks$year),
-                    max = max(peskas.timor.portal::predicted_tracks$year),
-                    value = c(min(peskas.timor.portal::predicted_tracks$year), max(peskas.timor.portal::predicted_tracks$year)),
-                    step = 1,
-                    sep = "",
-                    ticks = FALSE
+          min = min(peskas.timor.portal::predicted_tracks$year),
+          max = max(peskas.timor.portal::predicted_tracks$year),
+          value = c(min(peskas.timor.portal::predicted_tracks$year), max(peskas.timor.portal::predicted_tracks$year)),
+          step = 1,
+          sep = "",
+          ticks = FALSE
         )
       ),
       div(
