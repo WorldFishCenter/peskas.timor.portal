@@ -1,12 +1,14 @@
-FROM rocker/shiny:4.1.0
+FROM rocker/shiny:4
 
-# Install system dependencies and clean up
+# install R package dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
     libv8-dev \
+    ## clean up
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/downloaded_packages/ /tmp/*.rds
+    && rm -rf /var/lib/apt/lists/ \
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-# Install R packages that are less likely to change
+# Extra R packages
 RUN install2.r --error --skipinstalled -n 2 \
     remotes \
     config \
@@ -23,28 +25,28 @@ RUN install2.r --error --skipinstalled -n 2 \
     purrr \
     stringr \
     deckgl \
-    htmlwidgets \
-    && Rscript -e 'remotes::install_github(c("dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6"))' \
-    && Rscript -e 'remotes::install_github("timelyportfolio/dataui")' \
-    && Rscript -e 'remotes::install_version("apexcharter", version = "0.4.2")'
+    htmlwidgets
 
-# Copy application dependencies and install local package
-COPY DESCRIPTION /srv/shiny-server/DESCRIPTION
-COPY NAMESPACE /srv/shiny-server/NAMESPACE
-RUN Rscript -e 'remotes::install_local("/srv/shiny-server", dependencies = FALSE)'
+RUN Rscript -e 'remotes::install_github(c( \
+    "dreamRs/d3.format@0a7656f36e4425c0da09802961cf95855b4b85e6" \
+    ))'
+RUN Rscript -e 'remotes::install_github("timelyportfolio/dataui")'
+RUN Rscript -e 'remotes::install_version("apexcharter", version = "0.4.2")'
 
-# Copy remaining application files
+
 COPY inst /srv/shiny-server/inst
 COPY R /srv/shiny-server/R
+COPY DESCRIPTION /srv/shiny-server/DESCRIPTION
+COPY NAMESPACE /srv/shiny-server/NAMESPACE
 COPY data /srv/shiny-server/data
+
+RUN Rscript -e 'remotes::install_local("/srv/shiny-server", dependencies = FALSE)'
+
 COPY shiny.config /etc/shiny-server/shiny-server.conf
 COPY app.R /srv/shiny-server/app.R
 
-# Expose port 8080
 EXPOSE 8080
 
-# Use shiny user
 USER shiny
 
-# Start the Shiny server
 CMD ["/usr/bin/shiny-server"]
