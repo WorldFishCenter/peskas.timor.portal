@@ -808,68 +808,68 @@ tet:
       format: ","
     revenue:
       short_name: Estimasaun rendimentu
-      description: "Total estimasaun rendimentu husi viagem peska. Atu hili susar ba estimasaun ida ne'e, valór balu rónde ba digitu rua ne'ebé signifikante."
+      description: "Total estimasaun rendimentu husi viajen peska. Atu ilustra inserteja iha estimasaun ida ne’e, valor sira halo redonda ba díjitu signifikante rua"
       problems: Labele avalia
-      methods: "Valór hotu-hotu estimadu husi múltiplikasaun husi estimasaun valór ba kada viagem ho númeru média ba viagem iha barku no númeru barku."
+      methods: "Total valor halo estimasaun liu husi multiplika estimasaun valor ba viajen ho numeru mediu ba viajen kada ró ho total ró"
       format: "$,.2r"
     recorded_revenue:
       short_name: Rendimentu rejistadu
       format: "$,.2r"
-      description: "Valór hotu-hotu rejistadu husi viagem peska. Atu hili susar ba estimasaun ida ne'e, valór balu rónde ba digitu rua ne'ebé signifikante."
-      methods: "Valór rejistadu ne'e kalkula husi ajregasaun valór kapasidadu ne'ebé reporta husi pescador sira iha formuláriu peskiza."
+      description: "Total rendimentu rejistadu husi viajen peska. Atu ilustra inserteja iha estimasaun ida ne’e, valor sira halo redonda ba díjitu signifikante rua."
+      methods: "Rendimentu rejistadu ne’e kalkula husi agregasaun valor kaptura ne’ebé relata husi peskador sira iha survey."
       quality: "ki'ik"
     catch:
-      short_name: Estimasaun tanis
+      short_name: Estimasaun kaptura
       format: ",.2r"
-      description: "Total estimasaun tanis husi viagem peska. Atu hili susar ba estimasaun ida ne'e, valór balu rónde ba digitu rua ne'ebé signifikante."
-      methods: "Tanis hotu-hotu estimadu husi múltiplikasaun husi estimasaun tanis ba kada viagem (nasionálmente ka taxa-idak ne'ebé) ho númeru média ba viagem iha barku no númeru barku."
+      description: "Total estimasaun kaptura husi viajen peska. Atu ilustra inserteja iha estimasaun ida ne’e, valor sira halo redonda ba díjitu signifikante rua"
+      methods: "Kaptura hotu-hotu halo estimasaun liu husi multiplika estimasaun kaptura ba viajen (nasionalmente ka per taxa) ho numeru mediu ba viajen kada ró ho total ró"
       multiplier: 0.001
       suffix: "\u00A0t"
     recorded_catch:
-      short_name: Captura rejistadu
+      short_name: Kaptura rejistadu
       format: "$,.2r"
       suffix: "\u00A0t"
       multiplier: 0.001
-      description: "Total captura rejistadu husi nia kavaloada peska. Atu ilustra inkerteza kona-ba estimativa ne'e, valor sira sei arredonda ba digitus signifikante rua."
-      methods: "Captura rejistadu ne'e kalkula liu husi agregasaun ne'ebe peso apanha estimadu ba kada kavaloada peska."
+      description: "Total kaptura rejistadu husi viajen peska. Atu ilustra inserteja iha estimasaun ida ne’e, valor sira halo redonda ba díjitu signifikante rua."
+      methods: "Kaptura rejistadu ne’e kalkula husi agregasaun todan kaptura estimadu ba kada viajen peska."
       quality: "ki'ik"
     price_kg:
-      short_name: Preju husi kilograma
+      short_name: Presu kada kilograma
       format: "$,.2r"
-      description: "Preju estimadu husi kilograma peska. Atu ilustra inkerteza kona-ba estimativa ne'e, valor sira sei arredonda ba digitus signifikante rua."
-      methods: "Preju husi kilograma ne'e estimadu liu husi dividir estimativa rekadu ho estimativa apanha iha kilograma."
+      description: "Estimasaun presu kada kilograma husi viajen peskas sira. Atu ilustra inserteja iha estimasaun ida ne’e, valor sira halo redonda ba díjitu signifikante rua."
+      methods: "Presu kada kilograma ne’e halo estimasaun liu husi divide rendimentu estimadu ho kaptura estimadu iha kg."
     landing_revenue:
-      short_name: Valor média ba viájen
+      short_name: Valor média kada viajen
       format: "$,.2r"
       description: "Valor média ba viájen ne'ebe hetan husi súrvei ba tempu iha nasaun hotu-hotu. Pescador sira sei pergunta kona-ba preju estimadu ba sira nia peska iha área desembarke, independentemente se sira nia peska sei fahe ka konsumu. Preju bele muda liu-liu iha loron ida-idak no iha área desembarke ida-idak. Ita depois hetan estimativa mensal liu husi modelu estadístika efetu ho efeitu aleatóriu."
       problems: "Iha momentu ida-idak, liu-liu dalaruma to'o tinan 2019, valor ba sira nia peska ne'ebe venda hotu ona rejistadu inkorektamente. Problema ne'e bele akontese bainhira valor ba sira nia peska ne'ebe venda ho presu hodi entra ba sistema. Bele iha ka'as bainhira presu ne'ebe rejista ho kada ikun ba peska ka karik rejista ba parte husi peska. Bele iha ka'as atrasu tinan barak, hodi fo informasaun ba sitema."
       methods: "Resposta husi súrvei ne'ebe sei filtra ba outlier. Ita konsidera outlier sira valor ne'ebe hela liu husi 3 beses median absolute deviation ba valor ne'ebe transforma ba logaritmu ba presu rejista iha desembarke."
       quality: mediu
     landing_weight:
-      short_name: Kaptura Media ba Fulan
+      short_name: Kaptura média kada viajen
       format: ",.3r"
-      description: "Kaptura Media ba fulan ida-ne'e hetan husi survey sira iha fatin barak liu husi rai. Enemadores observa kaptura no regista distribuisaun makas ba kada takson hodi kaptura. Kuandu ne'e uza dadus distribuisaun ne'e hodi estimativu husi peso hanesan kuivalenti ne'ebe iha koefisiente relasaun peso-taman publika. Finalmente, hetan estimativu mensal uza modelu estatistiku efeitu aleatoriu."
-      problems: "Taman no numeru individu sira ne'ebe kaptura bele imprecisamente. Takson la loos identifika liu husi enumeradores. Iha dadus distribuisaun tamaun hodi grupu takson sira iha familia ka genus nian, wainhira koefisiente peso-taman iha geralmente iha nivel espesies nian. Ne'e maka reduz kualidade koefisiente peso-taman ne'ebe uza ba espesies sira nian."
-      methods: "Taman kaptura no numeru individu sira ne'ebe kaptura hetan filtru ba outliers. Ami konsidera outliers sira ne'ebe iha valor ida-ne'ebe iha raihan 3 no 7 hosi median absolute deviation hosi distribuisaun taman no numeru individu sira ne'ebe iha log-transformed. Koefisiente peso-taman hetan husi [FishBase](https://www.fishbase.de/). Ba kada takson, ami uza media ba espesies hotu iha Timor Leste ka Indonesia nian."
+      description: "Valor médiu ba viajen ne’e hetan husi survey iha fatin barak iha nasaun laran. Peskador sira hetan pergunta atu fo presu estimadu ba sira nia kaptura iha sentru peskas sira la haree ba kaptura ne’e atu faan ka konsumu. Presu bele muda husi tinan ba tinan husi sentru peskas ka lokalidade oin-oin. Hafoin, ita hetan estimasaun mensal uza modelu estatistika efeitu-aleatória."
+      problems: "Naruk no númeru individiu kapturadu bele la exatu. Taxa la sempre identifika koretamente husi enumerador sira. Ho tan, taxa jeralmente agrupa iha nível familia ka jéneru, iha ne’ebé koefisiente naruk-no-todan jeralmente disponível iha nível espésie. Ida ne’e bele redús númeru exatu ba uzu koefisiente naruk-no-todan bazeia ba espésie sira."
+      methods: "Naruk husi kaptura no númeru individiu sira filtra atu hatene valor extremu. Ita konsidera valor extremu ne’e ba sira ne’ebé liu 3 no 7 ho deviasaun absoluta mediana ba log- transformadu no númeru individiu respetivamente. Relasaun entre naruk-no-todan ita hetan husi FishBase. Ba kada taxa, ita uza média ba espesie hotu-hotu ne’ebé prezente iha Timor-Leste no Indonesia."
       suffix: "\u00A0kg"
     n_landings_per_boat:
-      short_name: Viagen ba fatin kaptura
+      short_name: Viajen kada ró
       format: ",.3r"
       quality: kiik
-      description: "Numeru viagen ba fatin kaptura ne'ebe nain hetan husi dadus rai tasi husi [Pelagic Data Systems](https://www.pelagicdata.com/). Movimentu ba nain ne'ebe hetan rekolla, no algoritmo propriedade ne'ebe uza hodi determina kada viagen mosu. Estimativu hetan husi mediu numeru viagen ne'ebe nain halo durante fulan ida."
-      problems: "Iha problema ne'ebé mak hatene ho algoritmu Pelagic Data Systems nian. Iha loron balu, dalan seidauk deteta ba viajen sira, viajen barak mak juntar iha viajen ida, ka viajen ida mak divide iha viajen barak. Ida ne'e, falta kovaridu rede bele atraza ka prevene informasaun atu transfere husi aparelhu rastreiu. Ema la hatene ne'ebé mak grau no gravidade husi problema sira ne'e. Iha momentu ne'e, laiha posibilidade atu distingui viajen peskiza (ne'ebé resulta iha deit) husi viajen seluk."
-      methods: "Viajen sira sei filtra atu detecta outlier sira no erro algoritmu potensial sira. Espesifikamente, ami la konta viajen sira ne'ebé durasaun presumidu liu ba 18 oras ka husiudan ne'ebé mak liu ba 60km."
+      description: "Númeru viajen ró hetan husi dadus lokalizasaun Pelagic Data System nian. Movimentu ró sira rejistradu, no algoritmu ne’ebé uza atu determina wainhira viajen sira akontese. Estimasaun sira hetan husi númeru mediu viajen ba ró ida hetan ba fulan ida."
+      problems: "Iha mos problema balun ne’ebé hetan husi algoritmu Pelagic Data System nian. Iha okaziaun balun, viajen sira labele detekta husi sistema, viajen barak hamutuk sai ida, ka viajen ida de’it bele fahe an sai barak. Ida tan, rede internet ne’ebé fraku bele akontese atrazu ka impede informasaun atu transfere husi ekipamentu rastreador. Problema ne’e nia severidade seidauk hatene. Atualmente, ida ne’e la posível atu distinge viajen peskas (ne’ebé rezulta iha landing) husi viajen la’os ba peskas."
+      methods: "Viajen sira filtradu ba valor extremu sira no algoritmu erru ne’ebé potensial. Espesialmente, ita la konta nia iha viajen sira ne’ebé presumidu katak durasaun labele liu oras 18 ka kobre distansia 60 km."
     n_boats:
-      short_name: Númeru eskolan
+      short_name: Númeru ró
       format: ","
-      description: "Númeru kais ne'e deriva husi sensu iha Timor-Leste nian iha tinan 2021. Númeru kais iha kada nivel munisipal sei hala'o ajuntu atu forma total nasionál."
+      description: "Númeru ró hetan husi Sensus Timor-Leste 2021. Númeru ró iha kada nível munisipiu sira tau hamutuk atu bele hetan nia total iha nível nasional."
       methods: La boot
     taxa:
       short_name: "Taxa (espésie)"
       format: ""
-      description: "Enumeradór sira rejista taxa (espésie ka grupu espésie) iha fatin desizaun."
-      problems: "Kategorizasaun taxa sira muda iha tempu ida ne'ebe lalais tebes. Antes de Abríl 2019, taxa sira rejistu ba nivel espésie. Hafoin ne'e, taxa sira grupu hamutuk kedas, no hanesan espésie família ka genus. La hatene kona ba efetu ne'ebe mudansa ne'e bele hadia ba estimativa sira."
-      methods: "Ita kalkula kapasidade tama nasaun ba taxa ona-rua-nulu ida ne'ebe komúm liu husi dalan halai."
+      description: "Taxa (espesies ka grupu ikan) rejista husi enumerador sira iha sentru peskas."
+      problems: "Kategorizasaun taxa muda tuir tempu. Liu-liu iha Abril 2019, taxa rejista iha nível espesies. Hafoin, taxa agrupa ba iha kategoria 60 ne’ebé ladún korresponde ba espesies, familia, no jéneru. Ida ne’e la hatene oinsa mak mudansa ida ne’e afeta ba estimasaun."
+      methods: "Ita kalkula todan husi kaptura nasional ba taxa sanulu resin ida ne’ebé komún liu."
     prop_landings_woman:
       short_name: "Vijéns ho feto"
       format: ".1%"
@@ -899,7 +899,7 @@ tet:
       suffix: "\u00A0Kg"
       description: "Valores nutrisaun hetan husi estimasaun peso ba grupu ikus ho koncentrasaun modelu ba 7 nutrientes liu husi [Hicks et al., (2019)](https://www.nature.com/articles/s41586-019-1592-6)."
     nut_rdi:
-      short_name: "Emar di'ak ne'ebé tuir rekolla di'aria nian"
+      short_name: "Númeru ema ne’ebe hetan rekomendasaun ba konsumu diária"
       format: ",.2r"
       multiplier: 0.000001
       suffix: "\u00A0MM"
@@ -939,7 +939,7 @@ tet:
         short_name: Seluk
 
   conservation:
-    names: ["Kaixa", "Kaixa ais", "Abertu", "Iha mahon"]
+    names: ["Kaixa", "Kaixa ho jelu", "Abertu", "Iha mahon"]
 
   header:
     subtitle:
@@ -982,8 +982,8 @@ tet:
     report:
       text: Download relatóriu kompletu
     intro:
-      title: Sistema analiza automatiku ba peska iha eskala kiik iha Timor-Leste.
-      content: "Peskas mak plataforma web aberta ne'ebé fó dadus no informasaun kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus kaptura ne'ebé koleta husi enumeradór lokal sira no dadus rastreamentu embarkasun sira atu haforsa tendénsia peska iha tempu no espasu. Projeto ne'e hetan iniciativa iha tinan 2016 iha parseria ho Ministériu Agrikultura no Peska Timor-Leste nian no hetan finansiamentu husi organizasaun sira ne'ebé mak diferenti. Peskas mak sistema monitorizasaun karik, hamenus kustu no asesu abertu, ho enfoke ba peska iha eskala kiik. Aplikasaun husi peskas ne'e iha peskiza no jestaun peska dokumenta iha publikasaun sira ne'ebé barak."
+      title: Sistema análize automátiku ba peska eskala ki’ik iha Timor-Leste
+      content: "Peskas mak plataforma web aberta ne'ebé fó dadus no informasaun kona-ba peska iha Timor-Leste. Plataforma ne'e utiliza dadus kaptura ne'ebé kolekta husi enumeradór lokal sira no dadus rastreamentu embarkasun sira atu haforsa tendénsia peska husi tempu no espasu. Projetu ne'e inisia iha tinan 2016 parseria ho Ministériu Agrikultura no Peskas Timor-Leste nian no hetan finansiamentu husi organizasaun oin-oin. Peskas mak sistema monitorizasaun ida kuaze tempu real ho kustu ki’ik no asesu abertu, ho enfoke ba peska eskala ki’ik. Nia aplikasaun iha peskiza no jestaun peskas dokumenta ona iha publikasaun barak."
     table:
       title: Estatístika jerál peska
       caption: "Eskola indikadór prinsipál peska iha Timor-Leste. Tabela ne'e aprezenta valór agregadu husi estimasaun rendimentu no kaptura, hamutuk ho valór medianu husi desembarke ba liur sira, rendimentu husi viagen, kaptura husi viagen no prezú husi kg."
@@ -1003,40 +1003,40 @@ tet:
     area_dropdown:
       text: Hili área
     treemap:
-      title: Taxa rendimentu husi habitat no tipo ekipamentu
-      description: Kada kaixa reprezenta rendimentu mediu kada oras ba pescador ida-idak ba kada habitat no tipo equipamento.
+      title: Taxa rendimentu husi habitat no tipu ekipamentu
+      description: Kada kaixa reprezenta rendimentu médiu ba kada oras ba peskador ida ba kada habitat no tipu ekipamentu
     table:
       heading:
-        text: Rezumu tinan-anual
+        text: Sumáriu anuál
       period_col:
-        text: periodu
+        text: períodu
     description:
       heading:
         text: Kona-ba dadus
       subheading:
         text: Informasaun kona-ba indikadór
       content:
-        text: "Estimativa ne'ebe la'ós validadu kompletamente no bele la'os precizu. Iha kualker inkertesa iha dadus hotu ne'ebé uza iha kalkulasaun. Estimativa, inklui tinan-tinan liu ba, bele atualiza dala-ruma bainhira dadus foun iha. Indikadór sira ne'ebe iha, inklui deit dadus peska artesanal no subsisténsia."
+        text: "Estimasaun ida ne’e seidauk halo validasaun no karik seidauk exatu. Iha mos inserteja balun ba dadus hotu ne’ebé uza iha kalkulasaun. Estimasaun bele halo maski dadus husi tinan kotuk, no bele atualiza wainhira dadus foun disponível. Indikador sira inklui dadus husi peska eskala ki’ik no subsistente sira."
   catch:
     subtitle:
       text: Peskas iha peskaria kiik
     treemap:
-      title: Taxa kaptura husi habitat no tipo ekipamentu
-      description: Kada kaixa reprezenta kaptura mediu kada oras ba pescador ida-idak ba kada habitat no tipo equipamento.
+      title: Taxa kaptura husi habitat no tipu ekipamentu
+      description: Kada kaixa reprezenta kaptura média kada oras ba peskador ida ba kada habitat no tipu ekipamentu
   composition:
     title:
-      text: Kompozisaun kapitura
+      text: Kompozisaun kaptura
     subtitle:
       text: Peskaria kiik
     highlight:
       heading:
-        text: Kapitura hotu
+        text: Total kaptura
     percent:
       heading:
         text: Kompozisaun relativa
     table:
       heading:
-        text: Kapitura hotu
+        text: Total kaptura
   market:
     title:
       text: Merkadu
@@ -1047,8 +1047,8 @@ tet:
         text: "*Foto husi FAO"
     conservation:
       region_barplot:
-        title: Prátika preservasaun hasai ikan
-        description: Distribuisaun husi métodu sira atu rai ikan iha boto sira nian liuliu iha município sira Timor-Leste
+        title: Prátika prezervasaun ikan
+        description: Distribuisaun métodu prezervasaun ikan iha ró iha munisipiu sira iha Timor-Leste
   pds_tracks:
     description:
       content:
@@ -1074,13 +1074,13 @@ tet:
       vitaminA:
         short_name: "Vitamina A"
     title:
-      text: Metrica nutrisaun
+      text: Métrika nutrisaun nian
     treemap_average:
-      title: Inan nutrisaun husi kaptura média
-      description: Kada kixa mosu konta ema ne'ebé hetan rekomendasaun konsumu nutrisaun loron husi kaptura média iha Timor-Leste.
+      title: Konsumu nutriente husi kaptura média
+      description: Kada kaixa aprezenta númeru ema ne’ebe hetan rekomendasaun ba konsumu diária husi kaptura média iha Timor-Leste.
     treemap_kg:
-      title: Inan nutrisaun husi 1 Kg kaptura iha Habitats
-      description: Kada kixa mosu konta ema ne'ebé hetan rekomendasaun konsumu nutrisaun loron husi 1 Kg kaptura iha kada habitat ba kada nutrisaun.
+      title: Deskrisaun konsumu nutriente husi kaptura 1kg
+      description: "Kada kaixa aprezenta númeru ema ne’ebe hetan rekomendasaun ba konsumu diária husi kaptura 1kg iha kada habitat no kada nutriente."
 
   indicators:
     processing:
