@@ -70,6 +70,6 @@ jobs:
           service: ${{ env.SERVICE }}
           image: ${{ env.CONTAINER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }}
           region: ${{ env.REGION }}
-          flags: "--cpu=4 --memory=8192M --concurrency=1 --max-instances=20"
+          flags: "--cpu=4 --memory=8192M --concurrency=5 --max-instances=20"
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
