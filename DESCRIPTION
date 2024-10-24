@@ -35,7 +35,7 @@ Imports:
     deckgl
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Suggests: 
     dplyr,
     googleAuthR (>= 1.4.0),
