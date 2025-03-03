@@ -66,11 +66,11 @@ jobs:
           image: asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/peskas-timor-shiny/${{ github.sha }}
           region: ${{ env.REGION }}
           flags: >-
-             --cpu=4
-             --memory=4Gi
+             --cpu=2
+             --memory=2Gi
              --concurrency=10
              --max-instances=20
-             --min-instances=2
+             --min-instances=1
              --timeout=300
              --cpu-boost
              --no-cpu-throttling
