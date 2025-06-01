@@ -71,8 +71,8 @@ mod_taxa_bar_highlight_server <- function(id, var, colors, i18n_r = reactive(lis
           peskas.timor.portal::municipal_taxa[region %in% input$r]
         }
 
-      from <- as.Date(paste0(input$y, "-01-01"))
-      to <- as.Date(paste0(input$y, "-12-01"))
+      from <- as.POSIXct(paste0(input$y, "-01-01"))
+      to <- as.POSIXct(paste0(input$y, "-12-01"))
       x <- dat[date_bin_start >= from & date_bin_start <= to]
       x <- x[grouped_taxa %in% peskas.timor.portal::taxa_names$grouped_taxa]
       x <- x[, .(catch = sum(catch)), by = "grouped_taxa"]

@@ -335,6 +335,8 @@ summary_data <-
     timor_boundaries = summary_data$timor_shape
   )
 
+#exclude latest month
+aggregated$month <- aggregated$month[-1]
 
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
