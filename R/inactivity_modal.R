@@ -23,7 +23,7 @@ inactivity_modal <- function(timeout_seconds = 5 * 60) {
   )
 }
 
-inactivity_modal_ui <- function(..., header = NULL, footer = NULL, timeoutSeconds = 10) {
+inactivity_modal_ui <- function(..., header = NULL, footer = NULL, timeoutSeconds = 600) {
   tagList(
     modal_dialog_ui(
       ...,
