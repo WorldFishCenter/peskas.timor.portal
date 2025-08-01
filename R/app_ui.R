@@ -65,13 +65,13 @@ app_ui <- function(request) {
         ),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$nutrients$text),
+            i18n$t(pars$header$nav$nutrients$text)
           ),
           id = "nutrients", icon_nutrients()
         ),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$about$text),
+            i18n$t(pars$header$nav$about$text)
           ),
           id = "about", icon_info_circle()
         )

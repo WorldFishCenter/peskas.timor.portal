@@ -13,7 +13,8 @@
 safe_reactive <- function(expr, validators = list(), fallback_value = NULL, label = "Safe reactive") {
   reactive({
     tryCatch({
-      result <- expr
+      # Evaluate the expression
+      result <- eval(substitute(expr), parent.frame())
       
       # Run validators
       for (validator in validators) {

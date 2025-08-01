@@ -47,7 +47,7 @@ mod_language_server <- function(id, this_session = NULL) {
 
       if (length(selected) > 0 && selected %in% i18n$get_languages()) {
         # For translationsin the browser
-        this_session$sendInputMessage("i18n-state", list(lang = selected))
+        this_session$sendInputMessage("i18n-state", selected)
         # For translations made in the server (e.g. inside modules with reactive
         # outputs)
         i18n$set_translation_language(selected)

@@ -67,7 +67,7 @@ app_server <- function(input, output, session) {
 
 
   # Home
-  mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r, municipal_data = shared_data$municipal_aggregated)
+  mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r, municipal_data = reactive(shared_data$municipal_aggregated))
   fishing_map_server(id = "fishing_map")
   
   # Progressive loading of donut charts - only after essential data is ready
