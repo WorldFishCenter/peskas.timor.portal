@@ -24,11 +24,7 @@ apex_spider <- function(data = NULL, cols = NULL) {
     apexcharter::ax_chart(
       toolbar = list(show = FALSE),
       animations = list(
-        enabled = TRUE,
-        speed = 800,
-        animateGradually = list(enabled = TRUE),
-        offsetX = 0,
-        offsetY = 0
+        enabled = FALSE  # Disable animations for better performance
       )
     ) %>%
     apexcharter::ax_yaxis(
@@ -339,11 +335,7 @@ apex_bar_stacked <- function(plot_data = NULL,
     apexcharter::ax_chart(
       toolbar = list(show = FALSE),
       animations = list(
-        enabled = TRUE,
-        speed = 800,
-        animateGradually = list(enabled = TRUE),
-        offsetX = 0,
-        offsetY = 0
+        enabled = FALSE  # Disable animations for better performance
       )
     ) %>%
     apexcharter::ax_yaxis(

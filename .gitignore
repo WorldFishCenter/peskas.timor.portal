@@ -13,3 +13,25 @@ auth/**
 load_tests/
 
 Rplots.pdf
+
+# Additional cleanup patterns
+*.tmp
+*.temp
+*.log
+*.cache
+*~
+*.swp
+*.orig
+*.bak
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Node modules (if any)
+node_modules/
+
+# Package build artifacts
+*.tar.gz
+*.zip

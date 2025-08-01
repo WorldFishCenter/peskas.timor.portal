@@ -16,7 +16,7 @@ mod_table_react_ui <- function(id, ...) {
 #' home_table Server Functions
 #'
 #' @noRd
-mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t = function(x) x))) {
+mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t = function(x) x)), municipal_data = NULL) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -26,54 +26,68 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
     }
 
     good_color <- make_color_pal(color_pal, bias = 2)
+    
+    # Cache the heavy computation with validation and safety checks
+    municipal_summary <- safe_reactive({
+      req(municipal_data)
+      
+      data_source <- municipal_data
+      
+      tab <- data_source %>%
+        dplyr::group_by(region) %>%
+        dplyr::summarise(
+          landing_revenue = stats::median(landing_revenue, na.rm = TRUE),
+          landing_weight = stats::median(landing_weight, na.rm = TRUE),
+          n_landings_per_boat = stats::median(n_landings_per_boat, na.rm = TRUE),
+          revenue = sum(revenue, na.rm = TRUE) / 1000000,
+          catch = sum(catch, na.rm = TRUE) / 1000,
+          price_kg = mean(price_kg, na.rm = TRUE)
+        ) %>%
+        dplyr::ungroup() %>%
+        dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ round(., 2)))
+      
+      return(tab)
+    }, 
+    validators = list(
+      validate_data_frame(required_cols = c("region", "landing_revenue", "catch"), min_rows = 1)
+    ),
+    fallback_value = data.frame(
+      region = "No Data",
+      landing_revenue = 0,
+      landing_weight = 0,
+      n_landings_per_boat = 0,
+      revenue = 0,
+      catch = 0,
+      price_kg = 0
+    ),
+    label = "Municipal summary") %>% 
+    bindCache("municipal_summary")
 
-    output$o <- renderUI({
-      output$t <- reactable::renderReactable({
-        tab <-
-          peskas.timor.portal::municipal_aggregated %>%
-          dplyr::group_by(region) %>%
-          dplyr::summarise(
-            landing_revenue = stats::median(landing_revenue),
-            landing_weight = stats::median(landing_weight),
-            n_landings_per_boat = stats::median(n_landings_per_boat),
-            revenue = sum(revenue) / 1000000,
-            catch = sum(catch) / 1000,
-            price_kg = mean(price_kg)
-          ) %>%
-          dplyr::ungroup()
+    output$t <- reactable::renderReactable({
+      tab <- municipal_summary()
+      
+      if (nrow(tab) == 0) {
+        return(reactable::reactable(data.frame(Message = "No data available")))
+      }
+      
+      # Optimize data for display
+      tab <- optimize_dataframe(tab, precision = 2, max_rows = 50)
 
-        tot_row <-
-          tab %>%
-          dplyr::summarise(
-            region = "Total",
-            landing_revenue = stats::median(landing_revenue),
-            landing_weight = stats::median(landing_weight),
-            n_landings_per_boat = stats::median(n_landings_per_boat),
-            revenue = sum(revenue),
-            catch = sum(catch),
-            price_kg = mean(price_kg)
-          )
-
-        tab <-
-          tab %>%
-          # dplyr::bind_rows(tab, tot_row) %>%
-          dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ round(., 2)))
-
-        tbl <-
-          reactable::reactable(
-            tab,
-            theme = reactablefmtr::fivethirtyeight(centered = TRUE),
-            pagination = FALSE,
-            compact = FALSE,
-            borderless = FALSE,
-            striped = FALSE,
-            fullWidth = TRUE,
-            sortable = TRUE,
-            defaultSorted = "region",
-            defaultColDef = reactable::colDef(
-              align = "center",
-              minWidth = 100
-            ),
+      tbl <-
+        reactable::reactable(
+          tab,
+          theme = reactablefmtr::fivethirtyeight(centered = TRUE),
+          pagination = FALSE,
+          compact = FALSE,
+          borderless = FALSE,
+          striped = FALSE,
+          fullWidth = TRUE,
+          sortable = TRUE,
+          defaultSorted = "region",
+          defaultColDef = reactable::colDef(
+            align = "center",
+            minWidth = 100
+          ),
             columns = list(
               region = reactable::colDef(
                 name = "Municipality",
@@ -147,9 +161,10 @@ mod_home_table_server <- function(id, color_pal = NULL, i18n_r = reactive(list(t
               )
             )
           )
-        tbl
-      })
+      tbl
+    })
 
+    output$o <- renderUI({
       tagList(
         div(
           class = "title",

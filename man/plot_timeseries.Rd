@@ -11,7 +11,8 @@ plot_timeseries(
   type = "bar",
   sparkline = F,
   colors = NULL,
-  stacked = F
+  stacked = F,
+  enable_animations = FALSE
 )
 }
 \arguments{

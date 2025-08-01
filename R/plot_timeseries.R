@@ -7,23 +7,31 @@
 #' @param sparkline Enable sparkiline
 #' @param colors Plot colors
 #' @param stacked Enable stacked plot
+#' @param enable_animations Enable chart animations (default FALSE for performance)
 #'
 #' @return An apexcharter timeseries
 #' @export
 #'
-plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function(x) {return x}"), type = "bar", sparkline = F, colors = NULL, stacked = F) {
+plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function(x) {return x}"), type = "bar", sparkline = F, colors = NULL, stacked = F, enable_animations = FALSE) {
   if (is.null(colors)) colors <- c("#206bc4", "#aaaaaa")
+
+  # Optimize animations - disable by default for better performance
+  animation_config <- if (enable_animations) {
+    list(
+      enabled = TRUE,
+      speed = 400,  # Reduced from 800ms
+      animateGradually = list(enabled = FALSE)  # Disable gradual animations
+    )
+  } else {
+    list(enabled = FALSE)
+  }
 
   a <- apexcharter::apexchart() %>%
     apexcharter::ax_chart(
       type = type,
       toolbar = list(show = FALSE),
       sparkline = list(enabled = sparkline),
-      animations = list(
-        enabled = TRUE,
-        speed = 800,
-        animateGradually = list(enabled = TRUE)
-      ),
+      animations = animation_config,
       stacked = stacked,
       selection = list(enabled = FALSE),
       zoom = list(enabled = FALSE)

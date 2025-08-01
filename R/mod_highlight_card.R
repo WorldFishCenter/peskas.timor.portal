@@ -176,8 +176,13 @@ mod_highlight_mun_server <- function(id,
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
+    # Add debouncing to prevent excessive reactive updates
+    muni_debounced <- reactive({
+      input$muni
+    }) %>% debounce(500)  # 500ms delay
+
     dat <- reactive({
-      d <- get_series_info(var, period, region = input$muni)
+      d <- get_series_info(var, period, region = muni_debounced())
 
       list(
         data = data.frame(
