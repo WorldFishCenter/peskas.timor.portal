@@ -1,32 +1,77 @@
 #' @import data.table
-get_series_info <- function(vars,
+#' @importFrom memoise memoise
+get_series_info_uncached <- function(vars,
                             period = "month",
                             n = NULL,
                             year = NULL,
                             region = "National",
                             ...) {
-  # Get a clean frame with only the variables required and relevant time-frames
-  x <- lapply(vars, get_summary_frame_var, period, region, ...)
-  full_merge <- function(x, y) merge(x, y, all.y = TRUE)
-  summary_frame <- Reduce(full_merge, x)
-
-  if (!is.null(year)) {
-    summary_frame <-
-      summary_frame[format(as.Date(date_bin_start), "%Y") == year, ]
+  # Error handling for invalid inputs
+  if (length(vars) == 0 || is.null(vars)) {
+    stop("vars parameter cannot be empty or NULL")
   }
-
-  if (!is.null(n)) {
-    summary_frame <-
-      summary_frame[(nrow(summary_frame) - n):nrow(summary_frame), ]
+  
+  if (!period %in% c("month", "year", "week")) {
+    warning("Invalid period specified, defaulting to 'month'")
+    period <- "month"
   }
+  
+  tryCatch({
+    # Get a clean frame with only the variables required and relevant time-frames
+    x <- lapply(vars, function(var) {
+      tryCatch(
+        get_summary_frame_var(var, period, region, ...),
+        error = function(e) {
+          warning(paste("Failed to get data for variable:", var, "Error:", e$message))
+          return(NULL)
+        }
+      )
+    })
+    
+    # Remove NULL entries from failed operations
+    x <- x[!sapply(x, is.null)]
+    
+    if (length(x) == 0) {
+      stop("No valid data could be retrieved for any variable")
+    }
+    
+    full_merge <- function(x, y) merge(x, y, all.y = TRUE)
+    summary_frame <- Reduce(full_merge, x)
 
-  series_info <- lapply(vars, extract_series_info, summary_frame, period, ...)
+    if (!is.null(year)) {
+      summary_frame <-
+        summary_frame[format(as.Date(date_bin_start), "%Y") == year, ]
+    }
 
-  list(
-    x_categories = summary_frame[, ..period, ][[1]],
-    x_datetime = summary_frame[, date_bin_start, ],
-    series = series_info
-  )
+    if (!is.null(n)) {
+      summary_frame <-
+        summary_frame[(nrow(summary_frame) - n):nrow(summary_frame), ]
+    }
+
+    series_info <- lapply(vars[vars %in% names(summary_frame)], extract_series_info, summary_frame, period, ...)
+
+    list(
+      x_categories = summary_frame[, ..period, ][[1]],
+      x_datetime = summary_frame[, date_bin_start, ],
+      series = series_info
+    )
+  }, error = function(e) {
+    warning(paste("Error in get_series_info:", e$message))
+    # Return empty but valid structure
+    list(
+      x_categories = character(0),
+      x_datetime = as.Date(character(0)),
+      series = list()
+    )
+  })
+}
+
+# Create memoised version for caching
+get_series_info <- memoise::memoise(get_series_info_uncached)
+
+# Function to clear cache when data updates
+clear_series_cache <- function() {
+  memoise::forget(get_series_info)
 }
 
 #' @import data.table

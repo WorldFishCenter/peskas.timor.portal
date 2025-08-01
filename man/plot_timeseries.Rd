@@ -11,7 +11,8 @@ plot_timeseries(
   type = "bar",
   sparkline = F,
   colors = NULL,
-  stacked = F
+  stacked = F,
+  enable_animations = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ plot_timeseries(
 \item{colors}{Plot colors}
 
 \item{stacked}{Enable stacked plot}
+
+\item{enable_animations}{Enable chart animations (default FALSE for performance)}
 }
 \value{
 An apexcharter timeseries

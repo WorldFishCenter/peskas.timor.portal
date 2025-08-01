@@ -1,6 +1,6 @@
 Package: peskas.timor.portal
 Title: Peskas timor portal
-Version: 0.2.0
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Lorenzo",
              family = "Longobardi",
@@ -32,7 +32,15 @@ Imports:
     sf,
     purrr,
     stringr,
-    deckgl
+    deckgl,
+    memoise,
+    logger,
+    promises,
+    future,
+    later,
+    jsonlite,
+    R.utils,
+    digest
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

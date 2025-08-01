@@ -24,7 +24,14 @@ RUN install2.r --error --skipinstalled \
     tidyr \
     reactablefmtr \
     purrr \
-    stringr
+    stringr \
+    memoise \
+    promises \
+    future \
+    later \
+    jsonlite \
+    R.utils \
+    digest
 
 
 RUN Rscript -e 'remotes::install_version("apexcharter", version = "0.4.2")'

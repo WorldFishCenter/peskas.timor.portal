@@ -10,6 +10,8 @@ app_ui <- function(request) {
     jquery_dep(),
     google_analytics(),
     shiny.i18n::usei18n(i18n),
+    error_recovery_js(),
+    client_cache_js(),
     tabler_page(
       title = "Peskas | East Timor",
       header(
@@ -63,13 +65,13 @@ app_ui <- function(request) {
         ),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$nutrients$text),
+            i18n$t(pars$header$nav$nutrients$text)
           ),
           id = "nutrients", icon_nutrients()
         ),
         tab_menu_item(
           label = tagList(
-            i18n$t(pars$header$nav$about$text),
+            i18n$t(pars$header$nav$about$text)
           ),
           id = "about", icon_info_circle()
         )
@@ -164,16 +166,115 @@ apexchart_dep <- function() {
     name = "apexcharts",
     version = "3.26.2",
     src = c(href = "https://cdn.jsdelivr.net/npm/apexcharts@3.26.2/dist/"),
-    script = "apexcharts.min.js"
+    script = "apexcharts.min.js",
+    # Add cache control headers
+    meta = list(
+      "Cache-Control" = "public, max-age=31536000",  # 1 year
+      "Expires" = format(Sys.Date() + 365, "%a, %d %b %Y %H:%M:%S GMT")
+    )
   )
 }
-
 
 jquery_dep <- function() {
   htmltools::htmlDependency(
     name = "jquery",
     version = "3.6.0",
     src = c(href = "https://code.jquery.com/"),
-    script = "jquery-3.6.0.min.js"
+    script = "jquery-3.6.0.min.js",
+    # Add cache control headers
+    meta = list(
+      "Cache-Control" = "public, max-age=31536000",  # 1 year
+      "Expires" = format(Sys.Date() + 365, "%a, %d %b %Y %H:%M:%S GMT")
+    )
   )
+}
+
+#' Add client-side caching JavaScript utilities
+client_cache_js <- function() {
+  tags$script("
+    // Client-side data caching utilities
+    window.PeskasCache = {
+      storage: window.sessionStorage || {},
+      prefix: 'peskas_',
+      
+      set: function(key, data, ttl) {
+        ttl = ttl || 300000; // 5 minutes default
+        var item = {
+          data: data,
+          timestamp: Date.now(),
+          ttl: ttl
+        };
+        try {
+          this.storage.setItem(this.prefix + key, JSON.stringify(item));
+        } catch(e) {
+          console.warn('Cache storage failed:', e);
+        }
+      },
+      
+      get: function(key) {
+        try {
+          var item = this.storage.getItem(this.prefix + key);
+          if (!item) return null;
+          
+          item = JSON.parse(item);
+          if (Date.now() - item.timestamp > item.ttl) {
+            this.remove(key);
+            return null;
+          }
+          
+          return item.data;
+        } catch(e) {
+          console.warn('Cache retrieval failed:', e);
+          return null;
+        }
+      },
+      
+      remove: function(key) {
+        try {
+          this.storage.removeItem(this.prefix + key);
+        } catch(e) {
+          console.warn('Cache removal failed:', e);
+        }
+      },
+      
+      clear: function() {
+        try {
+          var keys = Object.keys(this.storage);
+          for (var i = 0; i < keys.length; i++) {
+            if (keys[i].startsWith(this.prefix)) {
+              this.storage.removeItem(keys[i]);
+            }
+          }
+        } catch(e) {
+          console.warn('Cache clear failed:', e);
+        }
+      }
+    };
+    
+    // Preload critical resources
+    window.addEventListener('load', function() {
+      // Preload common chart configurations
+      var commonChartConfig = {
+        chart: { animations: { enabled: false } },
+        toolbar: { show: false },
+        dataLabels: { enabled: false }
+      };
+      
+      PeskasCache.set('chart_config_base', commonChartConfig, 3600000); // 1 hour
+      
+      // Prefetch critical API endpoints (if any)
+      console.log('Peskas client cache initialized');
+    });
+    
+    // Service Worker registration for advanced caching
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          console.log('SW registered: ', registration);
+        }).catch(function(registrationError) {
+          console.log('SW registration failed: ', registrationError);
+        });
+      });
+    }
+  ")
 }

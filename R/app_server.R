@@ -5,48 +5,112 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
+  # Initialize performance monitoring
+  init_performance_monitoring(session)
+  
+  # Setup global error handling
+  setup_global_error_handler(session)
+  
+  # Monitor JavaScript errors
+  observe({
+    if (!is.null(input$js_error)) {
+      logger::log_error("JavaScript error: {input$js_error$message} at {input$js_error$filename}:{input$js_error$lineno}")
+    }
+  })
+  
   i18n_r <- mod_language_server("lang", session)
 
   habitat_palette <- c("#440154", "#30678D", "#35B778", "#FDE725", "#FCA35D", "#D32F2F", "#67001F")
   habitat_colors <- habitat_palette %>% strtrim(width = 7)
   tab_palette <- c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab")
+  
+  # Create shared data objects to avoid repeated package namespace calls
+  shared_data <- reactiveValues(
+    municipal_aggregated = NULL,
+    summary_data = NULL,
+    taxa_aggregated = NULL,
+    municipal_taxa = NULL,
+    nutrients_aggregated = NULL,
+    taxa_names = NULL
+  )
+  
+  # Initialize shared data with progressive loading
+  data_loading_status <- reactiveVal("loading")
+  
+  # Progressive data loading to prevent blocking the UI
+  observe({
+    logger::log_info("Starting progressive data loading")
+    data_loading_status("loading")
+    
+    # Load critical data first
+    shared_data$municipal_aggregated <- peskas.timor.portal::municipal_aggregated
+    shared_data$summary_data <- peskas.timor.portal::summary_data
+    
+    # Mark essential data as ready
+    data_loading_status("essential_ready")
+    
+    # Load remaining data asynchronously
+    later::later(function() {
+      tryCatch({
+        shared_data$taxa_aggregated <- peskas.timor.portal::taxa_aggregated
+        shared_data$municipal_taxa <- peskas.timor.portal::municipal_taxa
+        shared_data$nutrients_aggregated <- peskas.timor.portal::nutrients_aggregated  
+        shared_data$taxa_names <- peskas.timor.portal::taxa_names
+        data_loading_status("complete")
+        logger::log_info("All data loaded successfully")
+      }, error = function(e) {
+        logger::log_error("Failed to load secondary data: {e$message}")
+        data_loading_status("partial")
+      })
+    }, delay = 0.1)  # 100ms delay
+  }, priority = 1000)
 
 
   # Home
-  mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r)
+  mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r, municipal_data = reactive(shared_data$municipal_aggregated))
   fishing_map_server(id = "fishing_map")
-  apex_donut_server(
-    id = "donut_trips",
-    data = peskas.timor.portal::summary_data$n_surveys,
-    center_label = "Submitted surveys",
-    cols = c("#d7eaf3", "#77b5d9", "#14397d"),
-    sparkline = F,
-    show_total = T,
-    tooltip_formatter = V8::JS("function(x) {return (x).toLocaleString('en-US')}"),
-    total_formatter = V8::JS("function (x) {return (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)).toLocaleString('en-US')}")
-  )
+  
+  # Progressive loading of donut charts - only after essential data is ready
+  observe({
+    req(data_loading_status() %in% c("essential_ready", "complete"))
+    
+    if (!is.null(shared_data$summary_data)) {
+      logger::log_info("Loading home dashboard charts")
+      
+      apex_donut_server(
+        id = "donut_trips",
+        data = shared_data$summary_data$n_surveys,
+        center_label = "Submitted surveys",
+        cols = c("#d7eaf3", "#77b5d9", "#14397d"),
+        sparkline = F,
+        show_total = T,
+        tooltip_formatter = V8::JS("function(x) {return (x).toLocaleString('en-US')}"),
+        total_formatter = V8::JS("function (x) {return (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)).toLocaleString('en-US')}")
+      )
 
-  apex_donut_server(
-    id = "donut_revenue",
-    data = peskas.timor.portal::summary_data$estimated_revenue,
-    center_label = "Estimated revenue",
-    cols = c("#d7eaf3", "#77b5d9", "#14397d"),
-    sparkline = F,
-    show_total = T,
-    tooltip_formatter = V8::JS("function(x) {return '$' + (x / 1000000).toFixed(2) + ' M'}"),
-    total_formatter = V8::JS("function (x) {return '$' + (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0) / 1000000).toFixed(2) + ' M'}")
-  )
+      apex_donut_server(
+        id = "donut_revenue",
+        data = shared_data$summary_data$estimated_revenue,
+        center_label = "Estimated revenue",
+        cols = c("#d7eaf3", "#77b5d9", "#14397d"),
+        sparkline = F,
+        show_total = T,
+        tooltip_formatter = V8::JS("function(x) {return '$' + (x / 1000000).toFixed(2) + ' M'}"),
+        total_formatter = V8::JS("function (x) {return '$' + (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0) / 1000000).toFixed(2) + ' M'}")
+      )
 
-  apex_donut_server(
-    id = "donut_fish",
-    data = peskas.timor.portal::summary_data$estimated_tons,
-    center_label = "Estimated catch",
-    cols = viridisLite::viridis(5, alpha = 0.75),
-    show_total = T,
-    sparkline = F,
-    tooltip_formatter = V8::JS("function(x) {return (x).toLocaleString('en-US') + ' t'}"),
-    total_formatter = V8::JS("function (x) {return (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)).toLocaleString('en-US') + ' t'}")
-  )
+      apex_donut_server(
+        id = "donut_fish",
+        data = shared_data$summary_data$estimated_tons,
+        center_label = "Estimated catch",
+        cols = viridisLite::viridis(5, alpha = 0.75),
+        show_total = T,
+        sparkline = F,
+        tooltip_formatter = V8::JS("function(x) {return (x).toLocaleString('en-US') + ' t'}"),
+        total_formatter = V8::JS("function (x) {return (x.globals.seriesTotals.reduce((a, b) => {return a + b}, 0)).toLocaleString('en-US') + ' t'}")
+      )
+    }
+  })
 
 
   # Revenue tab
@@ -56,13 +120,17 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "revenue-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "revenue-card-mun", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "revenue-info", vars = c("revenue", "recorded_revenue", "landing_revenue", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
-  mod_normalized_treemap_server(
-    data = peskas.timor.portal::summary_data$revenue_habitat,
-    id = "habitat-revenue",
-    colors = habitat_colors,
-    y_formatter = apexcharter::format_num("$,.2f"),
-    label_formatter = V8::JS("function (text, op) {return [text, '$' + op.value.toFixed(2)]}")
-  )
+  observe({
+    if (!is.null(shared_data$summary_data)) {
+      mod_normalized_treemap_server(
+        data = shared_data$summary_data$revenue_habitat,
+        id = "habitat-revenue",
+        colors = habitat_colors,
+        y_formatter = apexcharter::format_num("$,.2f"),
+        label_formatter = V8::JS("function (text, op) {return [text, '$' + op.value.toFixed(2)]}")
+      )
+    }
+  })
 
 
   # Catch tab
