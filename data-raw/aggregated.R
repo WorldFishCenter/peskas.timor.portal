@@ -107,8 +107,14 @@ cloud_storage_authenticate <- function(provider, options) {
 #' )
 #' }
 #'
-cloud_object_name <- function(prefix, version = "latest", extension = "",
-                              provider, exact_match = FALSE, options) {
+cloud_object_name <- function(
+  prefix,
+  version = "latest",
+  extension = "",
+  provider,
+  exact_match = FALSE,
+  options
+) {
   cloud_storage_authenticate(provider, options)
 
   if ("gcs" %in% provider) {
@@ -186,7 +192,8 @@ download_cloud_file <- function(name, provider, options, file = name) {
 
   if ("gcs" %in% provider) {
     purrr::map2(
-      name, file,
+      name,
+      file,
       ~ googleCloudStorageR::gcs_get_object(
         object_name = .x,
         bucket = options$bucket,
@@ -215,13 +222,20 @@ get_file <- function(prefix) {
 
   x <- readRDS(filename)
   file.remove(filename)
-  date_modified <- strptime(strsplit(filename, "_")[[1]][4], format = "%Y%m%d%H%M")
+  date_modified <- strptime(
+    strsplit(filename, "_")[[1]][4],
+    format = "%Y%m%d%H%M"
+  )
 
   attr(x, "data_last_updated") <- date_modified
   x
 }
 
-format_aggregated_data <- function(aggregated, municipal = FALSE, national_boats = NULL) {
+format_aggregated_data <- function(
+  aggregated,
+  municipal = FALSE,
+  national_boats = NULL
+) {
   if (isTRUE(municipal)) {
     aggregated <- data.table::as.data.table(aggregated)
     aggregated$month <- format(aggregated$date_bin_start, format = "%B %Y")
@@ -229,10 +243,18 @@ format_aggregated_data <- function(aggregated, municipal = FALSE, national_boats
   } else {
     aggregated <- lapply(aggregated, data.table::as.data.table)
     aggregated <- lapply(aggregated, function(x) x[, n_boats := national_boats])
-    aggregated$day <- aggregated$day[, day := format(date_bin_start, format = "%d %b %y")]
-    aggregated$week <- aggregated$week[, week := format(date_bin_start, format = "%d %b %y")]
-    aggregated$month <- aggregated$month[, month := format(date_bin_start, format = "%B %Y")][, year := format(date_bin_start, format = "%Y")]
-    aggregated$year <- aggregated$year[, year := format(date_bin_start, format = "%Y")]
+    aggregated$day <- aggregated$day[,
+      day := format(date_bin_start, format = "%d %b %y")
+    ]
+    aggregated$week <- aggregated$week[,
+      week := format(date_bin_start, format = "%d %b %y")
+    ]
+    aggregated$month <- aggregated$month[,
+      month := format(date_bin_start, format = "%B %Y")
+    ][, year := format(date_bin_start, format = "%Y")]
+    aggregated$year <- aggregated$year[,
+      year := format(date_bin_start, format = "%Y")
+    ]
   }
   aggregated
 }
@@ -262,21 +284,34 @@ pars <- config::get(file = "inst/golem-config.yml")
 aggregated <- get_file("timor_aggregated")
 data_last_updated <- attr(aggregated, "data_last_updated")
 aggregated <- aggregated %>% purrr::map(rename_ontology)
-municipal_aggregated <- get_file("timor_municipal_aggregated") %>% rename_ontology()
-taxa_aggregated <- get_file("timor_taxa_aggregated") %>% purrr::map(rename_ontology)
+municipal_aggregated <- get_file("timor_municipal_aggregated") %>%
+  rename_ontology()
+taxa_aggregated <- get_file("timor_taxa_aggregated") %>%
+  purrr::map(rename_ontology)
 municipal_taxa <- get_file("timor_municipal_taxa") %>% rename_ontology()
-nutrients_aggregated <- get_file("timor_nutrients_aggregated") %>% purrr::map(., ~ dplyr::filter(.x, !nutrient == "selenium"))
+nutrients_aggregated <- get_file("timor_nutrients_aggregated") %>%
+  purrr::map(., ~ dplyr::filter(.x, !nutrient == "selenium"))
 summary_data <- get_file("summary_data")
 
-indicators_grid <- get_file("indicators_gridded") %>% data.table::as.data.table()
+indicators_grid <- get_file("indicators_gridded") %>%
+  data.table::as.data.table()
 label_groups_list <- label_taxa_groups(indicators_grid)
 
 boats <- sum(unique(municipal_aggregated$n_boats))
 
 aggregated <- format_aggregated_data(aggregated, national_boats = boats)
-municipal_aggregated <- format_aggregated_data(municipal_aggregated, municipal = TRUE)
-taxa_aggregated <- format_aggregated_data(taxa_aggregated, national_boats = boats)
-nutrients_aggregated <- format_aggregated_data(nutrients_aggregated, national_boats = boats)
+municipal_aggregated <- format_aggregated_data(
+  municipal_aggregated,
+  municipal = TRUE
+)
+taxa_aggregated <- format_aggregated_data(
+  taxa_aggregated,
+  national_boats = boats
+)
+nutrients_aggregated <- format_aggregated_data(
+  nutrients_aggregated,
+  national_boats = boats
+)
 municipal_taxa <- format_aggregated_data(municipal_taxa, municipal = TRUE)
 
 # download kepler map and move to www folder
@@ -292,19 +327,72 @@ file.remove(kepler_map)
 
 estimated_tons <-
   taxa_aggregated$month %>%
-  dplyr::mutate(fish_group = dplyr::case_when(
-    grouped_taxa %in% c("COZ") ~ "Molluscs",
-    grouped_taxa %in% c("PEZ") ~ "Shrimps",
-    grouped_taxa %in% c("MZZ") ~ "Other",
-    grouped_taxa %in% c("SLV", "CRA") ~ "Crustaceans",
-    grouped_taxa %in% c("OCZ", "IAX") ~ "Cephalopods",
-    grouped_taxa %in% c("SKH", "SRX") ~ "Sharks and rays",
-    grouped_taxa %in% c("SNA", "GPX", "PWT", "GRX", "MUI", "BGX") ~ "Large demersals",
-    grouped_taxa %in% c("CGX", "TUN", "BEN", "LWX", "BAR", "SFA", "CBA", "DOX", "ECN", "DOS") ~ "Large pelagics",
-    grouped_taxa %in% c("YDX", "SPI", "EMP", "SUR", "TRI", "MOJ", "WRA", "MOO", "BWH", "LGE", "MOB", "MHL", "GOX", "THO", "IHX", "APO", "IHX", "PUX", "DRZ") ~ "Small demersals",
-    grouped_taxa %in% c("RAX", "SDX", "CJX", "CLP", "GZP", "FLY", "KYX", "CLP", "MUL", "DSF", "MIL", "THF") ~ "Small pelagics",
-    TRUE ~ NA_character_
-  )) %>%
+  dplyr::mutate(
+    fish_group = dplyr::case_when(
+      grouped_taxa %in% c("COZ") ~ "Molluscs",
+      grouped_taxa %in% c("PEZ") ~ "Shrimps",
+      grouped_taxa %in% c("MZZ") ~ "Other",
+      grouped_taxa %in% c("SLV", "CRA") ~ "Crustaceans",
+      grouped_taxa %in% c("OCZ", "IAX") ~ "Cephalopods",
+      grouped_taxa %in% c("SKH", "SRX") ~ "Sharks and rays",
+      grouped_taxa %in% c("SNA", "GPX", "PWT", "GRX", "MUI", "BGX") ~
+        "Large demersals",
+      grouped_taxa %in%
+        c(
+          "CGX",
+          "TUN",
+          "BEN",
+          "LWX",
+          "BAR",
+          "SFA",
+          "CBA",
+          "DOX",
+          "ECN",
+          "DOS"
+        ) ~
+        "Large pelagics",
+      grouped_taxa %in%
+        c(
+          "YDX",
+          "SPI",
+          "EMP",
+          "SUR",
+          "TRI",
+          "MOJ",
+          "WRA",
+          "MOO",
+          "BWH",
+          "LGE",
+          "MOB",
+          "MHL",
+          "GOX",
+          "THO",
+          "IHX",
+          "APO",
+          "IHX",
+          "PUX",
+          "DRZ"
+        ) ~
+        "Small demersals",
+      grouped_taxa %in%
+        c(
+          "RAX",
+          "SDX",
+          "CJX",
+          "CLP",
+          "GZP",
+          "FLY",
+          "KYX",
+          "CLP",
+          "MUL",
+          "DSF",
+          "MIL",
+          "THF"
+        ) ~
+        "Small pelagics",
+      TRUE ~ NA_character_
+    )
+  ) %>%
   dplyr::group_by(.data$fish_group) %>%
   dplyr::summarise(tons = sum(.data$catch, na.rm = T) / 1000) %>%
   dplyr::mutate(tons = round(.data$tons, 0)) %>%
@@ -312,11 +400,15 @@ estimated_tons <-
 
 estimated_revenue <-
   municipal_aggregated %>%
-  dplyr::mutate(Area = dplyr::case_when(
-    .data$region %in% c("Oecusse", "Bobonaro", "Liquica", "Dili", "Manatuto", "Baucau") ~ "North Coast",
-    .data$region == "Atauro" ~ "Atauro island",
-    TRUE ~ "South Coast"
-  )) %>%
+  dplyr::mutate(
+    Area = dplyr::case_when(
+      .data$region %in%
+        c("Oecusse", "Bobonaro", "Liquica", "Dili", "Manatuto", "Baucau") ~
+        "North Coast",
+      .data$region == "Atauro" ~ "Atauro island",
+      TRUE ~ "South Coast"
+    )
+  ) %>%
   dplyr::group_by(.data$Area) %>%
   dplyr::summarise(`Estimated revenue` = sum(.data$revenue, na.rm = T)) %>%
   dplyr::mutate(`Estimated revenue` = round(`Estimated revenue`, 0))
@@ -334,9 +426,6 @@ summary_data <-
     region_cpue = summary_data$cpue_df,
     timor_boundaries = summary_data$timor_shape
   )
-
-#exclude latest month
-aggregated$month <- aggregated$month[-1]
 
 usethis::use_data(aggregated, overwrite = TRUE)
 usethis::use_data(taxa_aggregated, overwrite = TRUE)
