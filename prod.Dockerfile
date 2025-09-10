@@ -43,6 +43,13 @@ RUN Rscript -e 'remotes::install_version("apexcharter", version = "0.4.2")'
 # Final stage
 FROM rocker/shiny:4
 
+# Install runtime dependencies for V8
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    libv8-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/
+
+
 # Copy installed R packages from builder
 COPY --from=builder /usr/local/lib/R /usr/local/lib/R
 
