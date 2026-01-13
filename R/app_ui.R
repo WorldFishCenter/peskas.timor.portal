@@ -169,7 +169,7 @@ apexchart_dep <- function() {
     script = "apexcharts.min.js",
     # Add cache control headers
     meta = list(
-      "Cache-Control" = "public, max-age=31536000",  # 1 year
+      "Cache-Control" = "public, max-age=31536000", # 1 year
       "Expires" = format(Sys.Date() + 365, "%a, %d %b %Y %H:%M:%S GMT")
     )
   )
@@ -183,7 +183,7 @@ jquery_dep <- function() {
     script = "jquery-3.6.0.min.js",
     # Add cache control headers
     meta = list(
-      "Cache-Control" = "public, max-age=31536000",  # 1 year
+      "Cache-Control" = "public, max-age=31536000", # 1 year
       "Expires" = format(Sys.Date() + 365, "%a, %d %b %Y %H:%M:%S GMT")
     )
   )
@@ -196,7 +196,7 @@ client_cache_js <- function() {
     window.PeskasCache = {
       storage: window.sessionStorage || {},
       prefix: 'peskas_',
-      
+
       set: function(key, data, ttl) {
         ttl = ttl || 300000; // 5 minutes default
         var item = {
@@ -210,25 +210,25 @@ client_cache_js <- function() {
           console.warn('Cache storage failed:', e);
         }
       },
-      
+
       get: function(key) {
         try {
           var item = this.storage.getItem(this.prefix + key);
           if (!item) return null;
-          
+
           item = JSON.parse(item);
           if (Date.now() - item.timestamp > item.ttl) {
             this.remove(key);
             return null;
           }
-          
+
           return item.data;
         } catch(e) {
           console.warn('Cache retrieval failed:', e);
           return null;
         }
       },
-      
+
       remove: function(key) {
         try {
           this.storage.removeItem(this.prefix + key);
@@ -236,7 +236,7 @@ client_cache_js <- function() {
           console.warn('Cache removal failed:', e);
         }
       },
-      
+
       clear: function() {
         try {
           var keys = Object.keys(this.storage);
@@ -250,7 +250,7 @@ client_cache_js <- function() {
         }
       }
     };
-    
+
     // Preload critical resources
     window.addEventListener('load', function() {
       // Preload common chart configurations
@@ -259,13 +259,13 @@ client_cache_js <- function() {
         toolbar: { show: false },
         dataLabels: { enabled: false }
       };
-      
+
       PeskasCache.set('chart_config_base', commonChartConfig, 3600000); // 1 hour
-      
+
       // Prefetch critical API endpoints (if any)
       console.log('Peskas client cache initialized');
     });
-    
+
     // Service Worker registration for advanced caching
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {

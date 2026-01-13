@@ -19,8 +19,8 @@ plot_timeseries <- function(x_categories, series, y_formatter = V8::JS("function
   animation_config <- if (enable_animations) {
     list(
       enabled = TRUE,
-      speed = 400,  # Reduced from 800ms
-      animateGradually = list(enabled = FALSE)  # Disable gradual animations
+      speed = 400, # Reduced from 800ms
+      animateGradually = list(enabled = FALSE) # Disable gradual animations
     )
   } else {
     list(enabled = FALSE)

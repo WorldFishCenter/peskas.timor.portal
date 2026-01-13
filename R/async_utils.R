@@ -15,17 +15,17 @@
 async_reactive <- function(expr, initial_value = NULL, label = "Async computation") {
   result <- reactiveVal(initial_value)
   computing <- reactiveVal(FALSE)
-  
+
   # Function to trigger async computation
   compute <- function() {
     if (computing()) {
       logger::log_info("{label}: Already computing, skipping")
       return()
     }
-    
+
     computing(TRUE)
     logger::log_info("{label}: Starting async computation")
-    
+
     future_promise <- future::future({
       expr
     }) %...>% (function(computed_result) {
@@ -36,10 +36,10 @@ async_reactive <- function(expr, initial_value = NULL, label = "Async computatio
       logger::log_error("{label}: Async computation failed: {error$message}")
       computing(FALSE)
     })
-    
+
     return(future_promise)
   }
-  
+
   list(
     result = result,
     computing = computing,
@@ -54,19 +54,23 @@ async_reactive <- function(expr, initial_value = NULL, label = "Async computatio
 #' @param label Label for logging
 #' @export
 async_data_aggregation <- function(data, group_vars, summary_vars, label = "Data aggregation") {
-  async_reactive({
-    logger::log_info("{label}: Processing {nrow(data)} rows")
-    
-    result <- data %>%
-      dplyr::group_by(!!!rlang::syms(group_vars)) %>%
-      dplyr::summarise(
-        !!!purrr::map(summary_vars, ~ rlang::expr(mean(!!rlang::sym(.x), na.rm = TRUE))),
-        .groups = "drop"
-      )
-    
-    logger::log_info("{label}: Aggregated to {nrow(result)} rows")
-    return(result)
-  }, initial_value = data.frame(), label = label)
+  async_reactive(
+    {
+      logger::log_info("{label}: Processing {nrow(data)} rows")
+
+      result <- data %>%
+        dplyr::group_by(!!!rlang::syms(group_vars)) %>%
+        dplyr::summarise(
+          !!!purrr::map(summary_vars, ~ rlang::expr(mean(!!rlang::sym(.x), na.rm = TRUE))),
+          .groups = "drop"
+        )
+
+      logger::log_info("{label}: Aggregated to {nrow(result)} rows")
+      return(result)
+    },
+    initial_value = data.frame(),
+    label = label
+  )
 }
 
 #' Create a progressive loader for heavy modules
@@ -76,33 +80,36 @@ async_data_aggregation <- function(data, group_vars, summary_vars, label = "Data
 progressive_module_loader <- function(module_loaders, load_delay_ms = 500) {
   loaded_modules <- reactiveVal(character(0))
   loading_progress <- reactiveVal(0)
-  
+
   load_next <- function() {
     current_loaded <- isolate(loaded_modules())
     remaining <- setdiff(names(module_loaders), current_loaded)
-    
+
     if (length(remaining) == 0) {
       logger::log_info("All modules loaded")
       return()
     }
-    
+
     next_module <- remaining[1]
     logger::log_info("Loading module: {next_module}")
-    
-    tryCatch({
-      module_loaders[[next_module]]()
-      loaded_modules(c(current_loaded, next_module))
-      loading_progress(length(current_loaded + 1) / length(module_loaders))
-      
-      # Schedule next module load
-      if (length(remaining) > 1) {
-        later::later(load_next, delay = load_delay_ms / 1000)
+
+    tryCatch(
+      {
+        module_loaders[[next_module]]()
+        loaded_modules(c(current_loaded, next_module))
+        loading_progress(length(current_loaded + 1) / length(module_loaders))
+
+        # Schedule next module load
+        if (length(remaining) > 1) {
+          later::later(load_next, delay = load_delay_ms / 1000)
+        }
+      },
+      error = function(e) {
+        logger::log_error("Failed to load module {next_module}: {e$message}")
       }
-    }, error = function(e) {
-      logger::log_error("Failed to load module {next_module}: {e$message}")
-    })
+    )
   }
-  
+
   list(
     start_loading = load_next,
     loaded_modules = loaded_modules,
@@ -120,23 +127,29 @@ background_processor <- function(data_source, processing_fn, update_interval_ms 
   processed_data <- reactiveVal()
   last_processed <- reactiveVal(Sys.time())
   processing <- reactiveVal(FALSE)
-  
+
   # Background processing loop
   observe({
     invalidateLater(update_interval_ms)
-    
-    if (processing()) return()
-    
+
+    if (processing()) {
+      return()
+    }
+
     current_data <- data_source()
-    if (is.null(current_data)) return()
-    
+    if (is.null(current_data)) {
+      return()
+    }
+
     # Check if data has changed (simple hash comparison)
     current_hash <- digest::digest(current_data)
-    if (exists("last_hash") && current_hash == last_hash) return()
-    
+    if (exists("last_hash") && current_hash == last_hash) {
+      return()
+    }
+
     processing(TRUE)
     logger::log_info("{label}: Starting background processing")
-    
+
     future::future({
       processing_fn(current_data)
     }) %...>% (function(result) {
@@ -150,7 +163,7 @@ background_processor <- function(data_source, processing_fn, update_interval_ms 
       processing(FALSE)
     })
   })
-  
+
   list(
     data = processed_data,
     processing = processing,

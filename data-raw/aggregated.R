@@ -108,13 +108,12 @@ cloud_storage_authenticate <- function(provider, options) {
 #' }
 #'
 cloud_object_name <- function(
-  prefix,
-  version = "latest",
-  extension = "",
-  provider,
-  exact_match = FALSE,
-  options
-) {
+    prefix,
+    version = "latest",
+    extension = "",
+    provider,
+    exact_match = FALSE,
+    options) {
   cloud_storage_authenticate(provider, options)
 
   if ("gcs" %in% provider) {
@@ -232,10 +231,9 @@ get_file <- function(prefix) {
 }
 
 format_aggregated_data <- function(
-  aggregated,
-  municipal = FALSE,
-  national_boats = NULL
-) {
+    aggregated,
+    municipal = FALSE,
+    national_boats = NULL) {
   if (isTRUE(municipal)) {
     aggregated <- data.table::as.data.table(aggregated)
     aggregated$month <- format(aggregated$date_bin_start, format = "%B %Y")
@@ -243,16 +241,20 @@ format_aggregated_data <- function(
   } else {
     aggregated <- lapply(aggregated, data.table::as.data.table)
     aggregated <- lapply(aggregated, function(x) x[, n_boats := national_boats])
-    aggregated$day <- aggregated$day[,
+    aggregated$day <- aggregated$day[
+      ,
       day := format(date_bin_start, format = "%d %b %y")
     ]
-    aggregated$week <- aggregated$week[,
+    aggregated$week <- aggregated$week[
+      ,
       week := format(date_bin_start, format = "%d %b %y")
     ]
-    aggregated$month <- aggregated$month[,
+    aggregated$month <- aggregated$month[
+      ,
       month := format(date_bin_start, format = "%B %Y")
     ][, year := format(date_bin_start, format = "%Y")]
-    aggregated$year <- aggregated$year[,
+    aggregated$year <- aggregated$year[
+      ,
       year := format(date_bin_start, format = "%Y")
     ]
   }

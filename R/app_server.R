@@ -7,23 +7,23 @@
 app_server <- function(input, output, session) {
   # Initialize performance monitoring
   init_performance_monitoring(session)
-  
+
   # Setup global error handling
   setup_global_error_handler(session)
-  
+
   # Monitor JavaScript errors
   observe({
     if (!is.null(input$js_error)) {
       logger::log_error("JavaScript error: {input$js_error$message} at {input$js_error$filename}:{input$js_error$lineno}")
     }
   })
-  
+
   i18n_r <- mod_language_server("lang", session)
 
   habitat_palette <- c("#440154", "#30678D", "#35B778", "#FDE725", "#FCA35D", "#D32F2F", "#67001F")
   habitat_colors <- habitat_palette %>% strtrim(width = 7)
   tab_palette <- c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab")
-  
+
   # Create shared data objects to avoid repeated package namespace calls
   shared_data <- reactiveValues(
     municipal_aggregated = NULL,
@@ -33,50 +33,56 @@ app_server <- function(input, output, session) {
     nutrients_aggregated = NULL,
     taxa_names = NULL
   )
-  
+
   # Initialize shared data with progressive loading
   data_loading_status <- reactiveVal("loading")
-  
+
   # Progressive data loading to prevent blocking the UI
-  observe({
-    logger::log_info("Starting progressive data loading")
-    data_loading_status("loading")
-    
-    # Load critical data first
-    shared_data$municipal_aggregated <- peskas.timor.portal::municipal_aggregated
-    shared_data$summary_data <- peskas.timor.portal::summary_data
-    
-    # Mark essential data as ready
-    data_loading_status("essential_ready")
-    
-    # Load remaining data asynchronously
-    later::later(function() {
-      tryCatch({
-        shared_data$taxa_aggregated <- peskas.timor.portal::taxa_aggregated
-        shared_data$municipal_taxa <- peskas.timor.portal::municipal_taxa
-        shared_data$nutrients_aggregated <- peskas.timor.portal::nutrients_aggregated  
-        shared_data$taxa_names <- peskas.timor.portal::taxa_names
-        data_loading_status("complete")
-        logger::log_info("All data loaded successfully")
-      }, error = function(e) {
-        logger::log_error("Failed to load secondary data: {e$message}")
-        data_loading_status("partial")
-      })
-    }, delay = 0.1)  # 100ms delay
-  }, priority = 1000)
+  observe(
+    {
+      logger::log_info("Starting progressive data loading")
+      data_loading_status("loading")
+
+      # Load critical data first
+      shared_data$municipal_aggregated <- peskas.timor.portal::municipal_aggregated
+      shared_data$summary_data <- peskas.timor.portal::summary_data
+
+      # Mark essential data as ready
+      data_loading_status("essential_ready")
+
+      # Load remaining data asynchronously
+      later::later(function() {
+        tryCatch(
+          {
+            shared_data$taxa_aggregated <- peskas.timor.portal::taxa_aggregated
+            shared_data$municipal_taxa <- peskas.timor.portal::municipal_taxa
+            shared_data$nutrients_aggregated <- peskas.timor.portal::nutrients_aggregated
+            shared_data$taxa_names <- peskas.timor.portal::taxa_names
+            data_loading_status("complete")
+            logger::log_info("All data loaded successfully")
+          },
+          error = function(e) {
+            logger::log_error("Failed to load secondary data: {e$message}")
+            data_loading_status("partial")
+          }
+        )
+      }, delay = 0.1) # 100ms delay
+    },
+    priority = 1000
+  )
 
 
   # Home
   mod_home_table_server(id = "home_table", color_pal = tab_palette, i18n_r = i18n_r, municipal_data = reactive(shared_data$municipal_aggregated))
   fishing_map_server(id = "fishing_map")
-  
+
   # Progressive loading of donut charts - only after essential data is ready
   observe({
     req(data_loading_status() %in% c("essential_ready", "complete"))
-    
+
     if (!is.null(shared_data$summary_data)) {
       logger::log_info("Loading home dashboard charts")
-      
+
       apex_donut_server(
         id = "donut_trips",
         data = shared_data$summary_data$n_surveys,
@@ -140,7 +146,7 @@ app_server <- function(input, output, session) {
   mod_simple_summary_card_server(id = "catch-card-mun", var = "n_boats", period = "month", i18n_r = i18n_r)
   mod_summary_table_server(id = "catch-card-mun", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat"), i18n_r = i18n_r)
   mod_var_descriptions_server(id = "catch-info", vars = c("catch", "recorded_catch", "landing_weight", "n_landings_per_boat", "n_boats"), i18n_r = i18n_r)
-  #leaflet_cpue_server(id = "catch-map", zoom = 8)
+  # leaflet_cpue_server(id = "catch-map", zoom = 8)
   mod_normalized_treemap_server(
     data = peskas.timor.portal::summary_data$catch_habitat,
     id = "habitat-catch",
@@ -176,7 +182,7 @@ app_server <- function(input, output, session) {
   # mod_var_descriptions_server(id = "map-info", vars = c("pds_tracks_trips", "pds_tracks_cpe", "pds_tracks_rpe"), i18n_r = i18n_r)
 
   # Nutrition tab
- #nutrients_colors <- c("#8f7489", "#81B29A", "#c1a372","#0a9396", "#E07A5F", "#3D405B")
+  # nutrients_colors <- c("#8f7489", "#81B29A", "#c1a372","#0a9396", "#E07A5F", "#3D405B")
   # nutrients_colors <- viridisLite::viridis(length(pars$nutrients$to_display)) %>% strtrim(width = 7)
   mod_nutrients_highlight_card_server("nutrients-highlight", var = "nut_rdi", period = "month", n = 25, colors = habitat_palette)
   mod_nutrient_treemap_server(

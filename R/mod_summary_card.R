@@ -38,8 +38,8 @@ mod_summary_card_server <- function(id, var, period = "month", n = NULL,
     # Add debouncing for region input
     muni_debounced <- reactive({
       input$muni
-    }) %>% debounce(300)  # 300ms delay for summary cards
-    
+    }) %>% debounce(300) # 300ms delay for summary cards
+
     data <- reactive(get_series_info(var, period, n, region = muni_debounced(), ...))
 
     output$o <- renderUI({

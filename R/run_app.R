@@ -49,10 +49,10 @@ with_golem_options <- function(app, golem_opts, print = FALSE) {
 #' @export
 start_fun <- function(global_pars = TRUE) {
   logger::log_info("Running start_fun")
-  
+
   # Setup async processing environment
   setup_async_environment(max_workers = 2)
-  
+
   translation_file <- system.file("translation.json", package = "peskas.timor.portal")
   logger::log_info("Creating translator object")
   i18n <<- shiny.i18n::Translator$new(
