@@ -23,10 +23,13 @@ mod_composition_table_ui <- function(id, ...) {
 #' composition_table Server Functions
 #'
 #' @noRd
-mod_composition_table_server <- function(id, var = "catch", i18n_r = reactive(list(t = function(x) x))) {
+mod_composition_table_server <- function(
+  id,
+  var = "catch",
+  i18n_r = reactive(list(t = function(x) x))
+) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
 
     output$t <- renderUI({
       var_info <- get_var_info(var)
@@ -37,16 +40,27 @@ mod_composition_table_server <- function(id, var = "catch", i18n_r = reactive(li
       x <- x[, (var) := get(var) * multiplier]
       x <- x[, (var) := d3.format::d3_format(format)(get(var))]
       x <- x[grouped_taxa %in% peskas.timor.portal::pars$taxa$to_display]
-      x <- x[, grouped_taxa := factor(grouped_taxa, peskas.timor.portal::pars$taxa$to_display)]
+      x <- x[,
+        grouped_taxa := factor(
+          grouped_taxa,
+          peskas.timor.portal::pars$taxa$to_display
+        )
+      ]
       x <- dcast(x, grouped_taxa ~ year, value.var = var)
       x <- merge(x[order(grouped_taxa)], peskas.timor.portal::taxa_names)
       x <- setcolorder(x, c("grouped_taxa_names", "grouped_taxa"))
-      table <- setnames(x, old = c("grouped_taxa", "grouped_taxa_names"), new = c("code", "name"))
+      table <- setnames(
+        x,
+        old = c("grouped_taxa", "grouped_taxa_names"),
+        new = c("code", "name")
+      )
       table$name <- i18n_r()$t(table$name)
       alignment <- c("l", rep("r", ncol(table) - 1))
       alignment <- paste(alignment, collapse = "")
-      output$table <- renderTable(table,
-        spacing = "m", width = "100%",
+      output$table <- renderTable(
+        table,
+        spacing = "m",
+        width = "100%",
         align = alignment,
         na = "\u2013",
         class = "table-responsive"
@@ -57,7 +71,12 @@ mod_composition_table_server <- function(id, var = "catch", i18n_r = reactive(li
 }
 
 
-mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i18n_r = reactive(list(t = function(x) x))) {
+mod_composition_table_react_server <- function(
+  id,
+  cols = NULL,
+  var = "catch",
+  i18n_r = reactive(list(t = function(x) x))
+) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -86,9 +105,12 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       dplyr::ungroup() %>%
       tidyr::complete(grouped_taxa) %>%
       dplyr::left_join(peskas.timor.portal::taxa_names, by = "grouped_taxa") %>%
-      dplyr::mutate(grouped_taxa_names = factor(grouped_taxa_names,
-        levels = peskas.timor.portal::taxa_names$grouped_taxa_names,
-      )) %>%
+      dplyr::mutate(
+        grouped_taxa_names = factor(
+          grouped_taxa_names,
+          levels = peskas.timor.portal::taxa_names$grouped_taxa_names,
+        )
+      ) %>%
       dplyr::select(year, catch, grouped_taxa_names) %>%
       dplyr::arrange(grouped_taxa_names) %>%
       dplyr::ungroup() %>%
@@ -96,7 +118,19 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
       dplyr::filter(!is.na(year)) %>%
       tidyr::pivot_wider(names_from = year, values_from = catch) %>%
       dplyr::rowwise() %>%
-      dplyr::mutate(ts = list(c(`2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`))) %>%
+      dplyr::mutate(
+        ts = list(c(
+          `2018`,
+          `2019`,
+          `2020`,
+          `2021`,
+          `2022`,
+          `2023`,
+          `2024`,
+          `2025`,
+          `2026`
+        ))
+      ) %>%
       dplyr::ungroup() %>%
       dplyr::mutate(
         urls = images,
@@ -114,7 +148,10 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
         tab %>%
           dplyr::select(-.data$ts) %>%
           reactable::reactable(
-            theme = reactablefmtr::fivethirtyeight(centered = T, cell_padding = 0),
+            theme = reactablefmtr::fivethirtyeight(
+              centered = T,
+              cell_padding = 0
+            ),
             pagination = FALSE,
             compact = FALSE,
             borderless = TRUE,
@@ -133,49 +170,91 @@ mod_composition_table_react_server <- function(id, cols = NULL, var = "catch", i
               "2018" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2019" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2020" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2021" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2022" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2023" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2024" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               "2025" = reactable::colDef(
                 minWidth = 90,
                 format = reactable::colFormat(separators = TRUE),
-                style = reactablefmtr::color_scales(., colors = cols, opacity = 0.75),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
+                cell = t_format
+              ),
+              "2026" = reactable::colDef(
+                minWidth = 90,
+                format = reactable::colFormat(separators = TRUE),
+                style = reactablefmtr::color_scales(
+                  .,
+                  colors = cols,
+                  opacity = 0.75
+                ),
                 cell = t_format
               ),
               urls = reactable::colDef(
